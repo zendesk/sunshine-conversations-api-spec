@@ -1,0 +1,5 @@
+name: webhookId
+in: path
+description: Identifies the webhook.
+required: true
+type: string

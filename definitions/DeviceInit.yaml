@@ -1,0 +1,15 @@
+required:
+  - id
+  - platform
+type: object
+properties:
+  id:
+    type: string
+  platform:
+    type: string
+  pushNotificationToken:
+    type: string
+  appVersion:
+    type: string
+  info:
+    $ref: ./ClientInfo.yaml

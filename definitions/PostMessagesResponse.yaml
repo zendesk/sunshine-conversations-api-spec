@@ -1,0 +1,8 @@
+type: object
+properties:
+  conversation:
+    $ref: ./Conversation.yaml
+  messages:
+    type: array
+    items:
+      $ref: ./Message.yaml

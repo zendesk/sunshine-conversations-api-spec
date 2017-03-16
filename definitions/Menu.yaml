@@ -1,0 +1,12 @@
+type: object
+required:
+  - items
+properties:
+  name:
+    type: string
+    description: The name of the menu.
+  items:
+    type: array
+    description: A list of menu items.
+    items:
+      $ref: ./MenuItem.yaml

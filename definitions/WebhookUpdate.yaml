@@ -1,0 +1,8 @@
+type: object
+properties:
+  target:
+    type: string
+  triggers:
+    type: array
+    items:
+      type: string

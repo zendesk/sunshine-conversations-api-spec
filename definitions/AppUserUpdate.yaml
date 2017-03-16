@@ -1,0 +1,12 @@
+type: object
+properties:
+  givenName:
+    type: string
+  surname:
+    type: string
+  email:
+    type: string
+  signedUpAt:
+    type: string
+  properties:
+    type: object

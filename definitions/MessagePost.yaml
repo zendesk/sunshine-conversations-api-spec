@@ -1,0 +1,39 @@
+type: object
+required:
+  - role
+  - type
+properties:
+  role:
+    type: string
+  type:
+    type: string
+  name:
+    type: string
+  email:
+    type: string
+  avatarUrl:
+    type: string
+  metadata:
+    type: object
+  payload:
+    type: string
+  text:
+    type: string
+  mediaUrl:
+    type: string
+  mediaType:
+    type: string
+  items:
+    type: array
+    items:
+      $ref: ./MessageItem.yaml
+  actions:
+    type: array
+    items:
+      $ref: ./Action.yaml
+  destination:
+    $ref: ./Destination.yaml
+    description: >-
+      Specifies which channel to deliver a message to. See [list
+      integrations](https://docs.smooch.io/rest/#list-integrations) to get
+      integration ID and type.

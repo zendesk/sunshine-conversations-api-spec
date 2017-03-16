@@ -1,0 +1,6 @@
+name: appCreateBody
+in: body
+required: true
+description: Body for a createApp request.
+schema:
+  $ref: ./definitions/AppCreate.yaml

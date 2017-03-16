@@ -1,0 +1,36 @@
+type: object
+required:
+  - type
+properties:
+  type:
+    type: string
+  pageAccessToken:
+    type: string
+  appId:
+    type: string
+  appSecret:
+    type: string
+  accountSid:
+    type: string
+  authToken:
+    type: string
+  phoneNumberSid:
+    type: string
+  token:
+    type: string
+  channelAccessToken:
+    type: string
+  encodingAesKey:
+    type: string
+  fromAddress:
+    type: string
+  certificate:
+    type: string
+  password:
+    type: string
+  autoUpdateBadge:
+    type: boolean
+  serverKey:
+    type: string
+  senderId:
+    type: string

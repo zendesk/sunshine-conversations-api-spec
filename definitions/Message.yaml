@@ -1,0 +1,84 @@
+type: object
+required:
+  - _id
+  - authorId
+  - role
+  - name
+  - text
+  - received
+  - avatarUrl
+  - type
+properties:
+  _id:
+    type: string
+    description: 'The message ID, generated automatically.'
+  authorId:
+    type: string
+    description: The ID of the message's author.
+  role:
+    type: string
+    description: >-
+      The role of the individual posting the message. Can be either *appUser* or
+      *appMaker*.
+  type:
+    type: string
+    description: The message type.
+    enum:
+      - text
+      - image
+      - carousel
+      - list
+  name:
+    type: string
+    description: The display name of the message author.
+  text:
+    type: string
+    description: |
+      The message text.
+      Required for text messages.
+  email:
+    type: string
+    description: The email address of the message author.
+  avatarUrl:
+    type: string
+    description: The URL of the desired message avatar image.
+  received:
+    type: number
+    format: float
+    description: The unix timestamp of the moment the message was received.
+  mediaUrl:
+    type: string
+    format: uri
+    description: |
+      The mediaUrl for the image.
+      Required for image messages.
+  mediaType:
+    type: string
+    description: |
+      The mediaType for the image.
+      Required for image messages.
+  metadata:
+    type: object
+    description: >-
+      Flat JSON object containing any custom properties associated with the
+      message.
+  items:
+    type: array
+    items:
+      $ref: ./MessageItem.yaml
+    description: |
+      The items in the message list.
+      Required for carousel and list messages.
+  actions:
+    type: array
+    items:
+      $ref: ./Action.yaml
+    description: The actions in the message.
+  payload:
+    type: string
+    description: 'The payload of a reply action, if applicable.'
+  displaySettings:
+    $ref: ./DisplaySettings.yaml
+    description: >-
+      Settings to adjust the carousel layout. See [Display
+      Settings](https://docs.smooch.io/rest/#display-settings).

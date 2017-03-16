@@ -1,0 +1,31 @@
+type: object
+required:
+  - _id
+  - properties
+  - conversationStarted
+properties:
+  _id:
+    type: string
+    description: 'The app user''s ID, generated automatically.'
+  userId:
+    type: string
+    description: |
+      The app user's userId.
+      This ID is specified by the appMaker.
+  givenName:
+    type: string
+    description: The app user's given name.
+  surname:
+    type: string
+    description: The app user's surname.
+  properties:
+    type: object
+    description: Custom properties for the app user.
+  conversationStarted:
+    type: boolean
+    description: Flag indicating if the conversation has started for the app user.
+  clients:
+    type: array
+    description: List of clients associated with the app user.
+    items:
+      $ref: ./Client.yaml

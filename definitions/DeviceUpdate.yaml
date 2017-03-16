@@ -1,0 +1,8 @@
+type: object
+properties:
+  pushNotificationToken:
+    type: string
+  appVersion:
+    type: string
+  info:
+    $ref: ./ClientInfo.yaml

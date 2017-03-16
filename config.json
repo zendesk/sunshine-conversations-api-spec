@@ -1,0 +1,17 @@
+{
+    "appVersion": "1",
+    "projectName": "smooch",
+    "packageName": "smooch",
+    "gemName": "rainbow-submarine-test-3356",
+    "appName": "smooch",
+    "gemAuthor": "Smooch",
+    "infoEmail": "hello@smooch.io",
+    "gemHomepage": "https://github.com/smooch/smooch-ruby",
+    "gemLicense": "https://smooch.io/terms/",
+    "artifactId": "io.smooch",
+    "projectVersion": "1.2.2",
+    "packageVersion": "1.2.2",
+    "gemVersion": "1.2.2",
+    "artifactVersion": "1.2.2",
+    "specificationUrl": "https://github.com/smooch/smooch-api-specification"
+}

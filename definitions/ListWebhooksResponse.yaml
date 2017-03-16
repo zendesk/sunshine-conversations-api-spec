@@ -1,0 +1,8 @@
+type: object
+required:
+  - webhooks
+properties:
+  webhooks:
+    type: array
+    items:
+      $ref: ./Webhook.yaml

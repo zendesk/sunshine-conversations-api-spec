@@ -1,0 +1,18 @@
+required:
+  - userId
+type: object
+properties:
+  userId:
+    type: string
+  credentialRequired:
+    type: boolean
+  givenName:
+    type: string
+  surname:
+    type: string
+  email:
+    type: string
+  signedUpAt:
+    type: string
+  properties:
+    type: object

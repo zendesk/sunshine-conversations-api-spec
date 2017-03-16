@@ -1,0 +1,11 @@
+type: object
+required:
+  - _id
+  - unreadCount
+properties:
+  _id:
+    type: string
+    description: 'The conversation ID, generated automatically.'
+  unreadCount:
+    type: integer
+    description: The number of unread messages in the conversation.

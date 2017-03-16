@@ -1,0 +1,9 @@
+type: object
+required:
+  - appUser
+  - app
+properties:
+  appUser:
+    $ref: ./AppUser.yaml
+  app:
+    $ref: ./App.yaml
