@@ -4,3 +4,4 @@ properties:
     type: array
     items:
       $ref: ./Integration.yaml
+    description: The list of integrations.

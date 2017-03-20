@@ -4,33 +4,79 @@ required:
 properties:
   type:
     type: string
+    description: The integration type.
   pageAccessToken:
     type: string
+    description: |
+      Facebook Page Access Token.
+      Required for *messenger* integrations.
   appId:
     type: string
+    description: |
+      Facebook App ID OR WeChat App ID.
+      Required for *messenger* and *wechat* integrations.
   appSecret:
     type: string
+    description: |
+      Facebook Page App Secret OR WeChat App Secret.
+      Required for *messenger* and *wechat* integrations.
   accountSid:
     type: string
+    description: |
+      Twilio Account SID.
+      Required for *twilio* integrations.
   authToken:
     type: string
+    description: |
+      Twilio Auth Token.
+      Required for *twilio* integrations.
   phoneNumberSid:
     type: string
+    description: |
+      SID for specific phone number.
+      Required for *twilio* integrations.
   token:
     type: string
+    description: |
+      Telegram Bot Token OR Viber Public Account token.
+      Required for *twilio* and *viber* integrations.
   channelAccessToken:
     type: string
+    description: |
+      LINE Channel Access Token.
+      Required for *line* integrations.
   encodingAesKey:
     type: string
+    description: |
+      AES Encoding Key.
+      (Optional) Used for *wechat* integrations.
   fromAddress:
     type: string
+    description: |
+      Email will display as coming from this address.
+      (Optional) Used for *frontendEmail* integrations.
   certificate:
     type: string
+    description: |
+      The binary of your APN certificate base64 encoded.
+      Required for *apn* integrations.
   password:
     type: string
+    description: |
+      The password for your APN certificate.
+      (Optional) Used for *apn* integrations.
   autoUpdateBadge:
     type: boolean
+    description: |
+      Use the unread count of the conversation as the application badge.
+      (Optional) Used for *apn* integrations.
   serverKey:
     type: string
+    description: |
+      Your server key from the fcm console.
+      Required for *fcm* integrations.
   senderId:
     type: string
+    description: |
+      Your sender id from the fcm console.
+      Required for *fcm* integrations.

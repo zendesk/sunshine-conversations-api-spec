@@ -5,5 +5,7 @@ required:
 properties:
   appUser:
     $ref: ./AppUser.yaml
+    description: The app user.
   app:
     $ref: ./App.yaml
+    description: The app.

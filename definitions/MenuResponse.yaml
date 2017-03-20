@@ -4,3 +4,4 @@ required:
 properties:
   menu:
     $ref: ./Menu.yaml
+    description: The menu.

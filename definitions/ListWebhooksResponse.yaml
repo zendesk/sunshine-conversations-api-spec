@@ -6,3 +6,4 @@ properties:
     type: array
     items:
       $ref: ./Webhook.yaml
+    description: The list of webhooks.

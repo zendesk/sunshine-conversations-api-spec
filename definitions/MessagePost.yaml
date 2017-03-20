@@ -5,32 +5,62 @@ required:
 properties:
   role:
     type: string
+    description: >-
+      The role of the individual posting the message. Can be either *appUser* or
+      *appMaker*.
   type:
     type: string
+    description: The message type.
+    enum:
+      - text
+      - image
+      - carousel
+      - list
   name:
     type: string
+    description: The display name of the message author.
   email:
     type: string
+    description: The email address of the message author.
   avatarUrl:
     type: string
+    description: The URL of the desired message avatar image.
   metadata:
     type: object
+    description: >-
+      Flat JSON object containing any custom properties associated with the
+      message.
   payload:
     type: string
+    description: 'The payload of a reply action, if applicable.'
   text:
     type: string
+    description: |
+      The message text.
+      Required for text messages.
   mediaUrl:
     type: string
+    format: uri
+    description: |
+      The mediaUrl for the image.
+      Required for image messages.
   mediaType:
     type: string
+    description: |
+      The mediaType for the image.
+      Required for image messages.
   items:
     type: array
     items:
       $ref: ./MessageItem.yaml
+    description: |
+      The items in the message list.
+      Required for carousel and list messages.
   actions:
     type: array
     items:
       $ref: ./Action.yaml
+    description: The actions in the message.
   destination:
     $ref: ./Destination.yaml
     description: >-

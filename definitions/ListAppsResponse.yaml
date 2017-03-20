@@ -4,6 +4,7 @@ properties:
     type: array
     items:
       $ref: ./App.yaml
+    description: The list of apps.
   hasMore:
     type: boolean
     description: >-

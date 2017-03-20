@@ -2,7 +2,9 @@ type: object
 properties:
   conversation:
     $ref: ./Conversation.yaml
+    description: The conversation.
   messages:
     type: array
     items:
       $ref: ./Message.yaml
+    description: The messages.

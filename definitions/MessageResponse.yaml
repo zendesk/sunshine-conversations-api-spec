@@ -7,5 +7,7 @@ properties:
     type: object
     items:
       $ref: ./Message.yaml
+    description: The message.
   conversation:
     $ref: ./Conversation.yaml
+    description: The conversation.
