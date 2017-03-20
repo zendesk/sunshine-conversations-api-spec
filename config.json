@@ -1,7 +1,7 @@
 {
     "projectName": "smooch",
     "packageName": "smooch",
-    "gemName": "smooch",
+    "gemName": "smooch-api",
     "appName": "smooch",
     "gemAuthor": "Smooch",
     "infoEmail": "hello@smooch.io",
