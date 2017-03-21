@@ -1,0 +1,49 @@
+type: object
+required:
+  - _id
+  - properties
+  - conversationStarted
+properties:
+  _id:
+    type: string
+    description: 'The app user''s ID, generated automatically.'
+  userId:
+    type: string
+    description: |
+      The app user's userId.
+      This ID is specified by the appMaker.
+  givenName:
+    type: string
+    description: The app user's given name.
+  surname:
+    type: string
+    description: The app user's surname.
+  email:
+    type: string
+    description: The app user's email.
+  signedUpAt:
+    type: string
+    description: >-
+      A datetime string with the format *yyyy-mm-ddThh:mm:ssZ* representing the
+      moment an appUser was created.
+  properties:
+    type: object
+    description: Custom properties for the app user.
+  conversationStarted:
+    type: boolean
+    description: Flag indicating if the conversation has started for the app user.
+  credentialRequired:
+    type: boolean
+    description: Flag indicating if the appUser is secured by a JSON Web Token or not.
+  clients:
+    type: array
+    description: List of clients associated with the app user.
+    items:
+      $ref: ./Client.yaml
+  pendingClients:
+    type: array
+    description: >-
+      As clients, but containing linked clients which have not been confirmed
+      yet (i.e. Twilio SMS).
+    items:
+      $ref: ./Client.yaml

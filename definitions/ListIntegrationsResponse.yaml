@@ -1,0 +1,7 @@
+type: object
+properties:
+  integrations:
+    type: array
+    items:
+      $ref: ./Integration.yaml
+    description: The list of integrations.

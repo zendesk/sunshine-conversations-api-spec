@@ -1,0 +1,7 @@
+type: object
+required:
+  - webhook
+properties:
+  webhook:
+    $ref: ./Webhook.yaml
+    description: The webhook.

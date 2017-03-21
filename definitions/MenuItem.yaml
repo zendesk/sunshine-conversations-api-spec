@@ -1,0 +1,21 @@
+type: object
+required:
+  - type
+  - text
+properties:
+  text:
+    type: string
+    description: The button text of the menu item.
+  uri:
+    type: string
+    description: 'A valid address, like http://smooch.io. Required for a *link* type item.'
+  type:
+    type: string
+    description: >-
+      Can either be [link](https://docs.smooch.io/javascript/#links) or
+      [postback](https://docs.smooch.io/javascript/#postbacks), which correspond
+      to Smooch’s [link and postback
+      actions]((https://docs.smooch.io/javascript/#action-buttons).
+  postback:
+    type: string
+    description: A payload for a postback. Required for a *postback* type item.

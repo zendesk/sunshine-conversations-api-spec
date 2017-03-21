@@ -1,0 +1,13 @@
+type: object
+required:
+  - message
+  - conversation
+properties:
+  message:
+    type: object
+    items:
+      $ref: ./Message.yaml
+    description: The message.
+  conversation:
+    $ref: ./Conversation.yaml
+    description: The conversation.

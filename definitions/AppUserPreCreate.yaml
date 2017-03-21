@@ -1,0 +1,29 @@
+required:
+  - userId
+type: object
+properties:
+  userId:
+    type: string
+    description: |
+      The app user's userId.
+      This ID is specified by the appMaker.
+  credentialRequired:
+    type: boolean
+    description: Flag indicating if the appUser is secured by a JSON Web Token or not.
+  givenName:
+    type: string
+    description: The app user's given name.
+  surname:
+    type: string
+    description: The app user's surname.
+  email:
+    type: string
+    description: The app user's email.
+  signedUpAt:
+    type: string
+    description: >-
+      A datetime string with the format *yyyy-mm-ddThh:mm:ssZ* representing the
+      moment an appUser was created.
+  properties:
+    type: object
+    description: Custom properties for the app user.

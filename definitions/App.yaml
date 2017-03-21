@@ -1,0 +1,17 @@
+required:
+  - _id
+  - appToken
+  - name
+type: object
+properties:
+  _id:
+    type: string
+    description: The app's ID.
+  appToken:
+    type: string
+    description: >-
+      The appToken, used to initialize the Web, iOS and Android clients and to
+      make calls to the app user facing API.
+  name:
+    type: string
+    description: The app's name.

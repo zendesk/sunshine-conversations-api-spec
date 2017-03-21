@@ -1,0 +1,16 @@
+type: object
+properties:
+  pushNotificationToken:
+    type: string
+    description: >
+      The GCM or APN token to be used for sending push notifications to the
+      device.
+
+      Applies to only *android* and *ios* clients.
+  appVersion:
+    type: string
+    description: >-
+      A reserved string field for reporting the app version running on the
+      device.
+  info:
+    $ref: ./ClientInfo.yaml

@@ -1,0 +1,5 @@
+name: deviceId
+in: path
+description: Identifies the device.
+required: true
+type: string

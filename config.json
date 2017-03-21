@@ -1,0 +1,17 @@
+{
+    "projectName": "smooch",
+    "packageName": "smooch",
+    "gemName": "smooch-api",
+    "appName": "smooch",
+    "gemAuthor": "Smooch",
+    "infoEmail": "hello@smooch.io",
+    "gemHomepage": "https://github.com/smooch/smooch-ruby",
+    "gemLicense": "https://smooch.io/terms/",
+    "artifactId": "api",
+    "groupId": "io.smooch",
+    "projectVersion": "1.0.0",
+    "packageVersion": "1.0.0",
+    "gemVersion": "1.0.0",
+    "artifactVersion": "1.0.0",
+    "specificationUrl": "https://github.com/smooch/smooch-api-specification"
+}

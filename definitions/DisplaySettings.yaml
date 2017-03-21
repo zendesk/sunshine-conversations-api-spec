@@ -1,0 +1,7 @@
+type: object
+properties:
+  imageAspectRatio:
+    type: string
+    description: >-
+      Specifies how to display all carousel images. Valid values are
+      *horizontal* (default) and *square*.

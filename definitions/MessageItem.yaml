@@ -1,0 +1,31 @@
+required:
+  - title
+  - actions
+properties:
+  title:
+    type: string
+    description: The title of the message item.
+  description:
+    type: string
+    description: 'The text description, or subtitle.'
+  mediaUrl:
+    type: string
+    description: The image URL to be shown in the carousel/list item.
+  size:
+    type: string
+    description: |
+      The size of the image to be shown in the carousel/list item.
+      Only top item of Facebook Messenger carousel supported.
+      Choose from *compact* and *large*.
+  mediaType:
+    type: string
+    description: >-
+      If a *mediaUrl* was specified, the media type is defined here, for example
+      *image/jpeg*.
+  actions:
+    type: array
+    description: >-
+      Array of [action buttons](https://docs.smooch.io/rest/#action-buttons). At
+      least 1 is required, a maximum of 3 are allowed.
+    items:
+      $ref: ./Action.yaml

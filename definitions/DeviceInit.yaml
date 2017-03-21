@@ -1,0 +1,30 @@
+required:
+  - id
+  - platform
+type: object
+properties:
+  id:
+    type: string
+    description: An identifier for the client. Must be globally unique.
+  platform:
+    type: string
+    description: The client's platform.
+    enum:
+      - ios
+      - android
+      - web
+      - other
+  pushNotificationToken:
+    type: string
+    description: >
+      The GCM or APN token to be used for sending push notifications to the
+      device.
+
+      Applies to only *android* and *ios* clients.
+  appVersion:
+    type: string
+    description: >-
+      A reserved string field for reporting the app version running on the
+      device.
+  info:
+    $ref: ./ClientInfo.yaml

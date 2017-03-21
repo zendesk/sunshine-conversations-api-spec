@@ -1,0 +1,5 @@
+type: object
+properties:
+  device:
+    $ref: ./Client.yaml
+    description: The device.

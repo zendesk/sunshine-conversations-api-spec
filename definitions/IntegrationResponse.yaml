@@ -1,0 +1,5 @@
+type: object
+properties:
+  integration:
+    $ref: ./Integration.yaml
+    description: The integration.

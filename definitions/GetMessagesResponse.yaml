@@ -1,0 +1,13 @@
+type: object
+properties:
+  conversation:
+    $ref: ./Conversation.yaml
+    description: The conversation.
+  messages:
+    type: array
+    items:
+      $ref: ./Message.yaml
+    description: The messages.
+  next:
+    type: string
+    description: The URI for the next set of messages in the conversation.
