@@ -51,3 +51,8 @@ properties:
       clicking the button.
 
       Required for *link* actions.
+  extraChannelOptions:
+    type: object
+    description: >-
+      Extra options to pass directly to the channel API. See [Extra Channel
+      Options](https://docs.smooch.io/rest#extra-channel-options-schema)

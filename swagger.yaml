@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 1
+  version: 1.1
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -434,7 +434,7 @@ paths:
       - $ref: ./parameters/IntegrationId.yaml
     get:
       tags:
-        - App
+        - Integration
       description: Get the specified integration.
       operationId: getIntegration
       responses:
@@ -444,9 +444,57 @@ paths:
             $ref: ./definitions/IntegrationResponse.yaml
     delete:
       tags:
-        - App
+        - Integration
       description: Delete the specified integration.
       operationId: deleteIntegration
+      responses:
+        '200':
+          description: Ok
+  '/apps/{appId}/integrations/{integrationId}/menu':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/IntegrationId.yaml
+    get:
+      tags:
+        - Integration
+      description: Get the specified integration's menu.
+      operationId: getIntegrationMenu
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+    post:
+      tags:
+        - Integration
+      description: >-
+        Create the specified integration’s menu, overriding the app menu if
+        configured.
+      operationId: createIntegrationMenu
+      parameters:
+        - $ref: ./parameters/MenuCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+    put:
+      tags:
+        - Integration
+      description: Update the specified integration’s menu.
+      operationId: updateIntegrationMenu
+      parameters:
+        - $ref: ./parameters/MenuUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+    delete:
+      tags:
+        - Integration
+      description: Delete the specified integration’s menu.
+      operationId: deleteIntegrationMenu
       responses:
         '200':
           description: Ok

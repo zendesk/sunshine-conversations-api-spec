@@ -16,6 +16,6 @@ properties:
       [postback](https://docs.smooch.io/javascript/#postbacks), which correspond
       to Smooch’s [link and postback
       actions]((https://docs.smooch.io/javascript/#action-buttons).
-  postback:
+  payload:
     type: string
     description: A payload for a postback. Required for a *postback* type item.
