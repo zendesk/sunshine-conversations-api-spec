@@ -40,7 +40,6 @@ properties:
       Required for text messages.
   mediaUrl:
     type: string
-    format: uri
     description: |
       The mediaUrl for the image.
       Required for image messages.

@@ -48,7 +48,6 @@ properties:
     description: The unix timestamp of the moment the message was received.
   mediaUrl:
     type: string
-    format: uri
     description: |
       The mediaUrl for the image.
       Required for image messages.
