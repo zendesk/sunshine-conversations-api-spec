@@ -15,3 +15,12 @@ properties:
   name:
     type: string
     description: The app's name.
+  settings:
+    type: object
+    description: Customizable app settings.
+    properties:
+      maskCreditCardNumbers:
+        type: boolean
+        description: >-
+          Flag specifying whether credit card numbers will be automatically
+          masked if sent through Smooch.

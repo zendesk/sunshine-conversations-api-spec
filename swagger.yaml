@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 1.2
+  version: 1.3
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -322,6 +322,18 @@ paths:
         - App
       description: Get the specified app.
       operationId: getApp
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AppResponse.yaml
+    put:
+      tags:
+        - App
+      description: Update the specified app.
+      operationId: updateApp
+      parameters:
+        - $ref: ./parameters/AppUpdate.yaml
       responses:
         '200':
           description: Ok
