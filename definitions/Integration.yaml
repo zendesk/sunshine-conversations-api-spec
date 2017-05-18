@@ -84,3 +84,23 @@ properties:
     description: |
       Your sender id from the fcm console.
       Required for *fcm* integrations.
+  consumerKey:
+    type: string
+    description: |
+      The consumer key for your Twitter app.
+      Required for *twitter* integrations.
+  consumerSecret:
+    type: string
+    description: |
+      The consumer secret for your Twitter app.
+      Required for *twitter* integrations.
+  accessTokenKey:
+    type: string
+    description: |
+      The access token key obtained from your user via oauth.
+      Required for *twitter* integrations.
+  accessTokenSecret:
+    type: string
+    description: |
+      The access token secret obtained from your user via oauth.
+      Required for *twitter* integrations.
