@@ -3,24 +3,36 @@ properties:
   appName:
     type: string
     description: Name of the app associated with the client.
+  carrier:
+    type: string
+    description: The client's carrier.
+  city:
+    type: string
+    description: The client's city.
+  country:
+    type: string
+    description: The client's country.
   deviceModel:
     type: string
     description: The client's device model.
+  devicePlatform:
+    type: string
+    description: The client's device platform.
   os:
     type: string
     description: The client's OS.
   osVersion:
     type: string
     description: The client's OS version.
+  phoneNumber:
+    type: string
+    description: The client's phone number.
   radioAccessTechnology:
     type: string
     description: The client's radioAccessTechnology (Ex. HSDPA).
-  carrier:
+  state:
     type: string
-    description: The client's carrier.
-  devicePlatform:
-    type: string
-    description: The client's device platform.
+    description: The client's state or province.
   wifi:
     type: string
     description: Whether or not the client has wifi.
