@@ -10,8 +10,9 @@ properties:
     type: string
     description: The client's platform.
     enum:
-      - ios
       - android
+      - ios
+      - twilio
       - web
       - other
   pushNotificationToken:
