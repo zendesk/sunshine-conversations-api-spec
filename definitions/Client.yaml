@@ -19,6 +19,7 @@ properties:
     enum:
       - android
       - ios
+      - messenger
       - twilio
       - web
       - other
