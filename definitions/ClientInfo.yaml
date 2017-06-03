@@ -3,6 +3,9 @@ properties:
   appName:
     type: string
     description: Name of the app associated with the client.
+  avatarUrl:
+    type: string
+    description: The client's avatar URL.
   carrier:
     type: string
     description: The client's carrier.
@@ -18,6 +21,15 @@ properties:
   devicePlatform:
     type: string
     description: The client's device platform.
+  gender:
+    type: string
+    description: The client user's gender.
+  isPaymentEnabled:
+    type:boolean
+    description: Whether or not payment is enabled for client.
+  locale:
+    type: string
+    description: The client's locale.
   os:
     type: string
     description: The client's OS.
@@ -33,6 +45,9 @@ properties:
   state:
     type: string
     description: The client's state or province.
+  timezone:
+    type: integer
+    description: The client's timezone offset.
   wifi:
     type: string
     description: Whether or not the client has wifi.
