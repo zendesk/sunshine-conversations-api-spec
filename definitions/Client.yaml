@@ -18,10 +18,17 @@ properties:
     description: The client's platform.
     enum:
       - android
+      - frontendEmail
       - ios
+      - line
+      - mailgun
       - messenger
+      - telegram
       - twilio
+      - twitter
+      - viber
       - web
+      - wechat
       - other
   pushNotificationToken:
     type: string
