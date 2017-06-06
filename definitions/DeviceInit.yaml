@@ -13,6 +13,15 @@ properties:
       - ios
       - android
       - web
+      - twilio
+      - telegram
+      - messenger
+      - frontendEmail
+      - line
+      - wechat
+      - viber
+      - twitter
+      - mailgun
       - other
   pushNotificationToken:
     type: string

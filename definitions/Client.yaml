@@ -20,6 +20,15 @@ properties:
       - ios
       - android
       - web
+      - twilio
+      - telegram
+      - messenger
+      - frontendEmail
+      - line
+      - wechat
+      - viber
+      - twitter
+      - mailgun
       - other
   pushNotificationToken:
     type: string
@@ -33,5 +42,8 @@ properties:
     description: >-
       A reserved string field for reporting the app version running on the
       device.
+  displayName:
+    type: string
+    description: The client's display name.
   info:
     $ref: ./ClientInfo.yaml
