@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 1.5
+  version: 1.6
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -208,7 +208,7 @@ paths:
         '201':
           description: Created
           schema:
-            $ref: ./definitions/PostMessagesResponse.yaml
+            $ref: ./definitions/MessageResponse.yaml
     delete:
       tags:
         - Conversation
