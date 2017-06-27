@@ -24,6 +24,16 @@ properties:
     description: |
       Facebook Page App Secret OR WeChat App Secret.
       Required for *messenger* and *wechat* integrations.
+  webhookSecret:
+    type: string
+    description: |
+      Secret to verify webhooks.
+      Returned on successful *wechat* and *messagebird* integrations.
+  pageId:
+    type: string
+    description: |
+      Facebook Page App ID.
+      Returned on successful *messenger* integrations.
   accountSid:
     type: string
     description: |
@@ -39,16 +49,36 @@ properties:
     description: |
       SID for specific phone number.
       Required for *twilio* integrations.
+  phoneNumber:
+    type: string
+    description: |
+      Smooch will receive all messages sent to this phone number.
+      Returned on successful *twilio* integrations.
+  name:
+    type: string
+    description: |
+      Name on the account.
+      Returned on successful *twilio* integrations.
   token:
     type: string
     description: |
       Telegram Bot Token OR Viber Public Account token.
       Required for *twilio* and *viber* integrations.
+  uri:
+    type: string
+    description: |
+      The viber URI to find the account.
+      Returned on successful *viber* integrations.
   channelAccessToken:
     type: string
     description: |
       LINE Channel Access Token.
       Required for *line* integrations.
+  botName:
+    type: string
+    description: |
+      The bot's name.
+      Returned on successful *line* integrations.
   encodingAesKey:
     type: string
     description: |
@@ -74,6 +104,11 @@ properties:
     description: |
       Use the unread count of the conversation as the application badge.
       (Optional) Used for *apn* integrations.
+  production:
+    type: boolean
+    description: |
+      Flag specifying whether the certificate is production.
+      Returned on successful *apn* integrations.
   serverKey:
     type: string
     description: |
@@ -104,3 +139,38 @@ properties:
     description: |
       The access token secret obtained from your user via oauth.
       Required for *twitter* integrations.
+  userId:
+    type: string
+    description: |
+      The twitter userId.
+      Returned on successful *twitter* integrations.
+  username:
+    type: string
+    description: |
+      The username for the account.
+      Returned on successful *twitter* and *telegram* integrations.
+  apiKey:
+    type: string
+    description: |
+      The public API key of your Mailgun account.
+      Required for *mailgun* integrations.
+  domain:
+    type: string
+    description: |
+      The domain used to relay email.
+      Required for *mailgun* integrations.
+  incomingAddress:
+    type: string
+    description: |
+      Smooch will receive all emails sent to this address.
+      Required for *mailgun* integrations.
+  accessKey:
+    type: string
+    description: |
+      The public API key of your MessageBird account.
+      Required for *messagebird* integrations.
+  originator:
+    type: string
+    description: |
+      Smooch will receive all messages sent to this phone number.
+      Required for *messagebird* integrations.
