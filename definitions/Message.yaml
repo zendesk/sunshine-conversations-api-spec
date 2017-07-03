@@ -28,6 +28,7 @@ properties:
       - image
       - carousel
       - list
+      - file
   name:
     type: string
     description: The display name of the message author.
@@ -49,13 +50,13 @@ properties:
   mediaUrl:
     type: string
     description: |
-      The mediaUrl for the image.
-      Required for image messages.
+      The mediaUrl for the message.
+      Required for image/file messages.
   mediaType:
     type: string
     description: |
-      The mediaType for the image.
-      Required for image messages.
+      The mediaType for the message.
+      Required for image/file messages.
   metadata:
     type: object
     description: >-

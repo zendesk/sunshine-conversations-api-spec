@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 1.8
+  version: 1.9
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -592,3 +592,29 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/InitResponse.yaml
+  '/apps/{appId}/attachments':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Attachments
+      description: Upload an attachment to Smooch to use in future messages.
+      operationId: uploadAttachment
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: source
+          in: formData
+          description: File to be uploaded
+          required: true
+          type: file
+        - name: access
+          in: query
+          description: Access level for the resulting file
+          required: true
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/AttachmentResponse.yaml
