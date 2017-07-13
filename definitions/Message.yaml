@@ -29,6 +29,9 @@ properties:
       - carousel
       - list
       - file
+  source:
+    $ref: ./Source.yaml
+    description: The source of the message.
   name:
     type: string
     description: The display name of the message author.

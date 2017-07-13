@@ -1,0 +1,8 @@
+type: object
+properties:
+  id:
+    type: string
+    description: An identifier used by Smooch for internal purposes.
+  type:
+    type: string
+    description: An identifier for the channel from which a message originated.
