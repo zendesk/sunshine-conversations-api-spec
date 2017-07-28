@@ -1,5 +1,0 @@
-type: object
-properties:
-  conversationUpdated:
-    type: boolean
-    description: Flag indicating if the conversation was updated.

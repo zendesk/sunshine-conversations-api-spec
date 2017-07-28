@@ -1,6 +1,0 @@
-name: trackEventBody
-in: body
-required: true
-description: Body for a trackEvent request.
-schema:
-  $ref: ./definitions/Event.yaml

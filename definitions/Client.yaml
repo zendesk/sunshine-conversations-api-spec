@@ -16,20 +16,6 @@ properties:
   platform:
     type: string
     description: The client's platform.
-    enum:
-      - ios
-      - android
-      - web
-      - twilio
-      - telegram
-      - messenger
-      - frontendEmail
-      - line
-      - wechat
-      - viber
-      - twitter
-      - mailgun
-      - other
   pushNotificationToken:
     type: string
     description: >

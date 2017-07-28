@@ -12,15 +12,3 @@ properties:
       unspecified the default trigger is *message*.
     items:
       type: string
-      enum:
-        - message
-        - 'message:appUser'
-        - 'message:appMaker'
-        - 'conversation:start'
-        - 'conversation:read'
-        - postback
-        - 'merge:appUser'
-        - 'delivery:success'
-        - 'delivery:failure'
-        - 'payment:success'
-        - '*'

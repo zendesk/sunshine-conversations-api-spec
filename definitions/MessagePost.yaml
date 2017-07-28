@@ -11,12 +11,6 @@ properties:
   type:
     type: string
     description: The message type.
-    enum:
-      - text
-      - image
-      - carousel
-      - list
-      - file
   name:
     type: string
     description: The display name of the message author.

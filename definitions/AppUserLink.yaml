@@ -6,11 +6,6 @@ properties:
   type:
     type: string
     description: The type of the channel to link.
-    enum:
-      - twilio
-      - messagebird
-      - messenger
-      - mailgun
   phoneNumber:
     type: string
     description: >

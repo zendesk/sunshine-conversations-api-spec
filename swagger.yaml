@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 1.12
+  version: 2
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -24,8 +24,9 @@ securityDefinitions:
     name: Authorization
     in: header
 paths:
-  '/appusers/{userId}':
+  '/apps/{appId}/appusers/{userId}':
     parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
     get:
       tags:
@@ -49,7 +50,9 @@ paths:
           description: Success
           schema:
             $ref: ./definitions/AppUserResponse.yaml
-  /appusers:
+  '/apps/{appId}/appusers':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
     post:
       tags:
         - AppUser
@@ -62,8 +65,9 @@ paths:
           description: Created
           schema:
             $ref: ./definitions/AppUserResponse.yaml
-  '/appusers/{userId}/images':
+  '/apps/{appId}/appusers/{userId}/images':
     parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
     post:
       tags:
@@ -88,8 +92,9 @@ paths:
           description: Created
           schema:
             $ref: ./definitions/MessageResponse.yaml
-  '/appusers/{userId}/profile':
+  '/apps/{appId}/appusers/{userId}/profile':
     parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
     delete:
       tags:
@@ -101,8 +106,9 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/AppUserResponse.yaml
-  '/appusers/{userId}/channels':
+  '/apps/{appId}/appusers/{userId}/channels':
     parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
     get:
       tags:
@@ -126,8 +132,9 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/AppUserResponse.yaml
-  '/appusers/{userId}/channels/{channel}':
+  '/apps/{appId}/appusers/{userId}/channels/{channel}':
     parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
       - $ref: ./parameters/Channel.yaml
     delete:
@@ -138,8 +145,9 @@ paths:
       responses:
         '200':
           description: Ok
-  '/appusers/{userId}/devices/{deviceId}':
+  '/apps/{appId}/appusers/{userId}/devices/{deviceId}':
     parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
       - $ref: ./parameters/DeviceId.yaml
     put:
@@ -154,23 +162,9 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/DeviceResponse.yaml
-  '/appusers/{userId}/events':
+  '/apps/{appId}/appusers/{userId}/messages':
     parameters:
-      - $ref: ./parameters/UserId.yaml
-    post:
-      tags:
-        - AppUser
-      description: Track an event for the given app user.
-      operationId: trackEvent
-      parameters:
-        - $ref: ./parameters/TrackEvent.yaml
-      responses:
-        '201':
-          description: Created
-          schema:
-            $ref: ./definitions/TrackEventResponse.yaml
-  '/appusers/{userId}/messages':
-    parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
     get:
       tags:
@@ -221,8 +215,9 @@ paths:
       responses:
         '200':
           description: Ok
-  '/appusers/{userId}/conversation/read':
+  '/apps/{appId}/appusers/{userId}/conversation/read':
     parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
     post:
       tags:
@@ -232,8 +227,9 @@ paths:
       responses:
         '200':
           description: Ok
-  '/appusers/{userId}/conversation/activity':
+  '/apps/{appId}/appusers/{userId}/conversation/activity':
     parameters:
+      - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
     post:
       tags:
@@ -245,7 +241,9 @@ paths:
       responses:
         '200':
           description: Ok
-  /menu:
+  '/apps/{appId}/menu':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
     get:
       tags:
         - Menu
@@ -571,27 +569,6 @@ paths:
       responses:
         '200':
           description: Ok
-  /init:
-    post:
-      tags:
-        - Init
-      description: >
-        This API is called by an iOS, Android, or browser client when the app is
-        first loaded. It serves a number of purposes.
-
-        1. Initializes a new *appUser* and *client* if they don’t yet exist.
-
-        2. Updates an existing app user’s profile and client information.
-
-        3. Authenticates the *appUser* if *jwt* credentials are provided.
-      operationId: init
-      parameters:
-        - $ref: ./parameters/Init.yaml
-      responses:
-        '200':
-          description: Ok
-          schema:
-            $ref: ./definitions/InitResponse.yaml
   '/apps/{appId}/attachments':
     parameters:
       - $ref: ./parameters/AppId.yaml

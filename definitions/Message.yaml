@@ -23,12 +23,6 @@ properties:
   type:
     type: string
     description: The message type.
-    enum:
-      - text
-      - image
-      - carousel
-      - list
-      - file
   source:
     $ref: ./Source.yaml
     description: The source of the message.

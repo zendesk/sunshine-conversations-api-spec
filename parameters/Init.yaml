@@ -1,6 +1,0 @@
-name: initBody
-in: body
-required: true
-description: Body for an init request.
-schema:
-  $ref: ./definitions/Init.yaml
