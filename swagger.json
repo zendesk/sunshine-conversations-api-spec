@@ -2,7 +2,7 @@
   "swagger" : "2",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "2",
+    "version" : "2.1",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -264,48 +264,6 @@
         "responses" : {
           "200" : {
             "description" : "Ok"
-          }
-        }
-      }
-    },
-    "/apps/{appId}/appusers/{userId}/devices/{deviceId}" : {
-      "put" : {
-        "tags" : [ "AppUser" ],
-        "description" : "Update specified device information.",
-        "operationId" : "appUserDeviceUpdate",
-        "parameters" : [ {
-          "name" : "appId",
-          "in" : "path",
-          "description" : "Identifies the app.",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "userId",
-          "in" : "path",
-          "description" : "Identifies the user. Can be either the smoochId or the userId.",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "deviceId",
-          "in" : "path",
-          "description" : "Identifies the device.",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "appUserDeviceUpdateBody",
-          "description" : "Body for an updateAppUserDevice request.",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/DeviceUpdate"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "schema" : {
-              "$ref" : "#/definitions/DeviceResponse"
-            }
           }
         }
       }
@@ -1687,31 +1645,6 @@
         "message" : {
           "description" : "The message used to reach out to the user. Must be a valid message object as per the post message API.",
           "$ref" : "#/definitions/Message"
-        }
-      }
-    },
-    "DeviceUpdate" : {
-      "type" : "object",
-      "properties" : {
-        "pushNotificationToken" : {
-          "type" : "string",
-          "description" : "The GCM or APN token to be used for sending push notifications to the device.\nApplies to only *android* and *ios* clients.\n"
-        },
-        "appVersion" : {
-          "type" : "string",
-          "description" : "A reserved string field for reporting the app version running on the device."
-        },
-        "info" : {
-          "$ref" : "#/definitions/ClientInfo"
-        }
-      }
-    },
-    "DeviceResponse" : {
-      "type" : "object",
-      "properties" : {
-        "device" : {
-          "description" : "The device.",
-          "$ref" : "#/definitions/Client"
         }
       }
     },

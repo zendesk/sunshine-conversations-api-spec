@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 2
+  version: 2.1
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -145,23 +145,6 @@ paths:
       responses:
         '200':
           description: Ok
-  '/apps/{appId}/appusers/{userId}/devices/{deviceId}':
-    parameters:
-      - $ref: ./parameters/AppId.yaml
-      - $ref: ./parameters/UserId.yaml
-      - $ref: ./parameters/DeviceId.yaml
-    put:
-      tags:
-        - AppUser
-      description: Update specified device information.
-      operationId: appUserDeviceUpdate
-      parameters:
-        - $ref: ./parameters/DeviceUpdate.yaml
-      responses:
-        '200':
-          description: Ok
-          schema:
-            $ref: ./definitions/DeviceResponse.yaml
   '/apps/{appId}/appusers/{userId}/messages':
     parameters:
       - $ref: ./parameters/AppId.yaml

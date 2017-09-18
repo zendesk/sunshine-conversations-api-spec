@@ -1,6 +1,0 @@
-name: appUserDeviceUpdateBody
-in: body
-required: true
-description: Body for an updateAppUserDevice request.
-schema:
-  $ref: ./definitions/DeviceUpdate.yaml
