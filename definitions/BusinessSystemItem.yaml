@@ -1,0 +1,19 @@
+type: object
+required:
+  - type
+properties:
+  type:
+    type: string
+    description: 'The type of business system (ex. slack, hipchat, zendesk etc...)'
+  channelId:
+    type: string
+    description: The channel id for a *slack* integration
+  ticketId:
+    type: string
+    description: The ticket id for a *zendesk* integration
+  roomId:
+    type: integer
+    description: The room id for a *hipchat* integration
+  conversationId:
+    type: string
+    description: The conversation id for a *helpscout* integration

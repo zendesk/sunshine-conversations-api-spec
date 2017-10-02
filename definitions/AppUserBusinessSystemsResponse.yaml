@@ -1,0 +1,9 @@
+type: object
+required:
+  - businessSystems
+properties:
+  businessSystems:
+    type: array
+    description: An array of objects containing the business system type and the id.
+    items:
+      $ref: ./BusinessSystemItem.yaml

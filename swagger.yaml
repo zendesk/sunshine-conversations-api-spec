@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 2.1
+  version: 2.2
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -119,7 +119,7 @@ paths:
         '200':
           description: Ok
           schema:
-            $ref: ./definitions/AppUserResponse.yaml
+            $ref: ./definitions/AppUserChannelsResponse.yaml
     post:
       tags:
         - AppUser
@@ -132,6 +132,20 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/AppUserResponse.yaml
+  '/apps/{appId}/appusers/{userId}/businesssystems':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    get:
+      tags:
+        - AppUser
+      description: Get specified app user's business system IDs.
+      operationId: getAppUserBusinessSystemIds
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AppUserBusinessSystemsResponse.yaml
   '/apps/{appId}/appusers/{userId}/channels/{channel}':
     parameters:
       - $ref: ./parameters/AppId.yaml

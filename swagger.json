@@ -2,7 +2,7 @@
   "swagger" : "2",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "2.1",
+    "version" : "2.2",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -197,7 +197,7 @@
           "200" : {
             "description" : "Ok",
             "schema" : {
-              "$ref" : "#/definitions/AppUserResponse"
+              "$ref" : "#/definitions/AppUserChannelsResponse"
             }
           }
         }
@@ -232,6 +232,34 @@
             "description" : "Ok",
             "schema" : {
               "$ref" : "#/definitions/AppUserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/appusers/{userId}/businesssystems" : {
+      "get" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Get specified app user's business system IDs.",
+        "operationId" : "getAppUserBusinessSystemIds",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AppUserBusinessSystemsResponse"
             }
           }
         }
@@ -1596,6 +1624,45 @@
         }
       }
     },
+    "AppUserChannelsResponse" : {
+      "type" : "object",
+      "required" : [ "channels" ],
+      "properties" : {
+        "channels" : {
+          "type" : "array",
+          "description" : "An array of objects containing the channel type and the entity id.",
+          "items" : {
+            "$ref" : "#/definitions/ChannelEntityItem"
+          }
+        }
+      }
+    },
+    "ChannelEntityItem" : {
+      "type" : "object",
+      "required" : [ "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The type of channel (ex. messenger, viber, twilio etc...)"
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "The phone number for a *twilio*, *messageBird* integration"
+        },
+        "userId" : {
+          "type" : "string",
+          "description" : "The userId for a *messenger*, *viber*, *line*, *wechat* integration"
+        },
+        "address" : {
+          "type" : "string",
+          "description" : "The email address for a *frontendEmail*, *mailgun* integration"
+        },
+        "chatId" : {
+          "type" : "string",
+          "description" : "The chat id for a *telegram* integration"
+        }
+      }
+    },
     "AppUserLink" : {
       "type" : "object",
       "required" : [ "confirmation", "type" ],
@@ -1645,6 +1712,45 @@
         "message" : {
           "description" : "The message used to reach out to the user. Must be a valid message object as per the post message API.",
           "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "AppUserBusinessSystemsResponse" : {
+      "type" : "object",
+      "required" : [ "businessSystems" ],
+      "properties" : {
+        "businessSystems" : {
+          "type" : "array",
+          "description" : "An array of objects containing the business system type and the id.",
+          "items" : {
+            "$ref" : "#/definitions/BusinessSystemItem"
+          }
+        }
+      }
+    },
+    "BusinessSystemItem" : {
+      "type" : "object",
+      "required" : [ "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The type of business system (ex. slack, hipchat, zendesk etc...)"
+        },
+        "channelId" : {
+          "type" : "string",
+          "description" : "The channel id for a *slack* integration"
+        },
+        "ticketId" : {
+          "type" : "string",
+          "description" : "The ticket id for a *zendesk* integration"
+        },
+        "roomId" : {
+          "type" : "integer",
+          "description" : "The room id for a *hipchat* integration"
+        },
+        "conversationId" : {
+          "type" : "string",
+          "description" : "The conversation id for a *helpscout* integration"
         }
       }
     },

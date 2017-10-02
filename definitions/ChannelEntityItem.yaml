@@ -1,0 +1,19 @@
+type: object
+required:
+  - type
+properties:
+  type:
+    type: string
+    description: 'The type of channel (ex. messenger, viber, twilio etc...)'
+  phoneNumber:
+    type: string
+    description: 'The phone number for a *twilio*, *messageBird* integration'
+  userId:
+    type: string
+    description: 'The userId for a *messenger*, *viber*, *line*, *wechat* integration'
+  address:
+    type: string
+    description: 'The email address for a *frontendEmail*, *mailgun* integration'
+  chatId:
+    type: string
+    description: The chat id for a *telegram* integration
