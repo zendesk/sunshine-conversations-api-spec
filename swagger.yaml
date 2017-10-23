@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 2.2
+  version: 2.3
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -106,6 +106,20 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/AppUserResponse.yaml
+  '/apps/{appId}/appusers/{userId}/authcode':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    get:
+      tags:
+        - AppUser
+      description: Get an auth code for facilitating a channel transfer
+      operationId: getAppUserAuthCode
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AuthCodeResponse.yaml
   '/apps/{appId}/appusers/{userId}/channels':
     parameters:
       - $ref: ./parameters/AppId.yaml

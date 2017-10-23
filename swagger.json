@@ -2,7 +2,7 @@
   "swagger" : "2",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "2.2",
+    "version" : "2.3",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -170,6 +170,34 @@
             "description" : "Ok",
             "schema" : {
               "$ref" : "#/definitions/AppUserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/appusers/{userId}/authcode" : {
+      "get" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Get an auth code for facilitating a channel transfer",
+        "operationId" : "getAppUserAuthCode",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AuthCodeResponse"
             }
           }
         }
@@ -1621,6 +1649,16 @@
         "unreadCount" : {
           "type" : "integer",
           "description" : "The number of unread messages in the conversation."
+        }
+      }
+    },
+    "AuthCodeResponse" : {
+      "type" : "object",
+      "required" : [ "authCode" ],
+      "properties" : {
+        "authCode" : {
+          "type" : "string",
+          "description" : "The auth code"
         }
       }
     },
