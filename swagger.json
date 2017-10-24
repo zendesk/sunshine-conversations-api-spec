@@ -2,7 +2,7 @@
   "swagger" : "2",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "2.3",
+    "version" : "2.4",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1620,7 +1620,15 @@
         },
         "uri" : {
           "type" : "string",
-          "description" : "The action URI. This is the link that will be used in the clients when clicking the button.\nRequired for *link* actions.\n"
+          "description" : "The action URI. This is the link that will be used in the clients when clicking the button.\nRequired for *link* and *webview* actions.\n"
+        },
+        "fallback" : {
+          "type" : "string",
+          "description" : "The webview action fallback uri. This is the link that will be used in clients that do not support webviews.\nRequired for *webview* actions.\n"
+        },
+        "size" : {
+          "type" : "string",
+          "description" : "The size used to display the webview. Allowed values are [\"compact\", \"tall\", \"full\"].\n(Optional) Used for *webview* actions.\n"
         },
         "extraChannelOptions" : {
           "type" : "object",
