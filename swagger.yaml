@@ -1,6 +1,6 @@
 swagger: 2
 info:
-  version: 2.4
+  version: 2.5
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -173,6 +173,31 @@ paths:
       responses:
         '200':
           description: Ok
+  '/apps/{appId}/appusers/{userId}/linkrequest':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+      - in: query
+        name: integrationIds
+        required: true
+        description: Comma separated list of integration IDs
+        schema:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          style: form
+          explode: false
+    get:
+      tags:
+        - AppUser
+      description: Fetch link requests for the specified app user.
+      operationId: getLinkRequests
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/LinkRequestResponse.yaml
   '/apps/{appId}/appusers/{userId}/messages':
     parameters:
       - $ref: ./parameters/AppId.yaml

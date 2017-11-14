@@ -2,7 +2,7 @@
   "swagger" : "2",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "2.4",
+    "version" : "2.5",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -320,6 +320,39 @@
         "responses" : {
           "200" : {
             "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/appusers/{userId}/linkrequest" : {
+      "get" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Fetch link requests for the specified app user.",
+        "operationId" : "getLinkRequests",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationIds",
+          "in" : "query",
+          "description" : "Comma separated list of integration IDs",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/LinkRequestResponse"
+            }
           }
         }
       }
@@ -1800,6 +1833,18 @@
         }
       }
     },
+    "LinkRequestResponse" : {
+      "type" : "object",
+      "properties" : {
+        "linkRequests" : {
+          "type" : "array",
+          "description" : "The list of link requests.",
+          "items" : {
+            "$ref" : "#/definitions/LinkRequestResponse_linkRequests"
+          }
+        }
+      }
+    },
     "GetMessagesResponse" : {
       "type" : "object",
       "properties" : {
@@ -2444,6 +2489,27 @@
         "mediaType" : {
           "type" : "string",
           "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
+        }
+      }
+    },
+    "LinkRequestResponse_linkRequests" : {
+      "required" : [ "code", "integrationId", "type", "url" ],
+      "properties" : {
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The integration ID."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The integration type."
+        },
+        "code" : {
+          "type" : "string",
+          "description" : "The link request code."
+        },
+        "url" : {
+          "type" : "string",
+          "description" : "The link request url."
         }
       }
     },
