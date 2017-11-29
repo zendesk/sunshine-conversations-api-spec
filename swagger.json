@@ -2,7 +2,7 @@
   "swagger" : "2",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "2.5",
+    "version" : "2.6",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2385,6 +2385,14 @@
         "accessTokenSecret" : {
           "type" : "string",
           "description" : "The access token secret obtained from your user via oauth.\nRequired for *twitter* integrations.\n"
+        },
+        "accessKey" : {
+          "type" : "string",
+          "description" : "The public API key of your MessageBird account.\nRequired for *messagebird* integrations.\n"
+        },
+        "originator" : {
+          "type" : "string",
+          "description" : "Smooch will receive all messages sent to this phone number.\nRequired for *messagebird* integrations.\n"
         }
       }
     },

@@ -100,3 +100,13 @@ properties:
     description: |
       The access token secret obtained from your user via oauth.
       Required for *twitter* integrations.
+  accessKey:
+    type: string
+    description: |
+      The public API key of your MessageBird account.
+      Required for *messagebird* integrations.
+  originator:
+    type: string
+    description: |
+      Smooch will receive all messages sent to this phone number.
+      Required for *messagebird* integrations.
