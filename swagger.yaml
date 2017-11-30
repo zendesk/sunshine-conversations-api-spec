@@ -490,6 +490,18 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/IntegrationResponse.yaml
+    put:
+      tags:
+        - Integration
+      description: Update the specified integration.
+      operationId: updateIntegration
+      parameters:
+        - $ref: ./parameters/IntegrationUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/IntegrationResponse.yaml
     delete:
       tags:
         - Integration

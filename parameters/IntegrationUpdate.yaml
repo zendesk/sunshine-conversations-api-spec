@@ -1,0 +1,11 @@
+name: integrationUpdateBody
+in: body
+required: true
+description: >
+  Body for a updateIntegration request.
+
+  Additional arguments are necessary based on integration type. For detailed
+  instructions, visit our [official
+  docs](https://docs.smooch.io/rest/#create-integration)
+schema:
+  $ref: ./definitions/IntegrationUpdate.yaml
