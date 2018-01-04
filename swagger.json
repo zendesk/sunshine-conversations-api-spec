@@ -44,6 +44,7 @@
       },
       "put" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Update app user",
         "description" : "Update the specified app user.",
         "operationId" : "updateAppUser",
         "parameters" : [ {
@@ -80,6 +81,7 @@
     "/apps/{appId}/appusers" : {
       "post" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Pre-create app user",
         "description" : "Pre-create an app user.",
         "operationId" : "preCreateAppUser",
         "parameters" : [ {
@@ -110,6 +112,7 @@
     "/apps/{appId}/appusers/{userId}/images" : {
       "post" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Send image",
         "description" : "Send an image message to the conversation.",
         "operationId" : "postImageMessage",
         "consumes" : [ "multipart/form-data" ],
@@ -151,6 +154,7 @@
     "/apps/{appId}/appusers/{userId}/profile" : {
       "delete" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Delete app user profile",
         "description" : "Delete specified app user's profile.",
         "operationId" : "deleteAppUserProfile",
         "parameters" : [ {
@@ -179,6 +183,7 @@
     "/apps/{appId}/appusers/{userId}/authcode" : {
       "get" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Get app user auth code",
         "description" : "Get an auth code for facilitating a channel transfer",
         "operationId" : "getAppUserAuthCode",
         "parameters" : [ {
@@ -207,6 +212,7 @@
     "/apps/{appId}/appusers/{userId}/channels" : {
       "get" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Get app user entity IDs",
         "description" : "Get specified app user's channel entity IDs.",
         "operationId" : "getAppUserEntityIds",
         "parameters" : [ {
@@ -233,6 +239,7 @@
       },
       "post" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Link app user",
         "description" : "Link specified app user to given channel.",
         "operationId" : "linkAppUser",
         "parameters" : [ {
@@ -269,6 +276,7 @@
     "/apps/{appId}/appusers/{userId}/businesssystems" : {
       "get" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Get app user business system IDs",
         "description" : "Get specified app user's business system IDs.",
         "operationId" : "getAppUserBusinessSystemIds",
         "parameters" : [ {
@@ -297,6 +305,7 @@
     "/apps/{appId}/appusers/{userId}/channels/{channel}" : {
       "delete" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Unlink app user",
         "description" : "Unlink specified app user from given channel.",
         "operationId" : "unlinkAppUser",
         "parameters" : [ {
@@ -328,6 +337,7 @@
     "/apps/{appId}/appusers/{userId}/linkrequest" : {
       "get" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Get link requests",
         "description" : "Fetch link requests for the specified app user.",
         "operationId" : "getLinkRequests",
         "parameters" : [ {
@@ -366,6 +376,7 @@
     "/apps/{appId}/appusers/{userId}/messages" : {
       "get" : {
         "tags" : [ "Conversation" ],
+        "summary" : "Get messages",
         "description" : "Get the specified app user's messages.",
         "operationId" : "getMessages",
         "parameters" : [ {
@@ -404,6 +415,7 @@
       },
       "post" : {
         "tags" : [ "Conversation" ],
+        "summary" : "Post message",
         "description" : "Post a message to or from the app user.",
         "operationId" : "postMessage",
         "parameters" : [ {
@@ -438,6 +450,7 @@
       },
       "delete" : {
         "tags" : [ "Conversation" ],
+        "summary" : "Delete messages",
         "description" : "Clears the message history for a user, permanently deleting all messages, but leaving any connections to Messaging Channels and Business Systems intact. These connections allow for the conversation to continue in the future, while still being associated to the same appUser.\n",
         "operationId" : "deleteMessages",
         "parameters" : [ {
@@ -463,6 +476,7 @@
     "/apps/{appId}/appusers/{userId}/conversation/read" : {
       "post" : {
         "tags" : [ "Conversation" ],
+        "summary" : "Reset unread count",
         "description" : "Reset the unread count of the conversation to 0.",
         "operationId" : "resetUnreadCount",
         "parameters" : [ {
@@ -488,6 +502,7 @@
     "/apps/{appId}/appusers/{userId}/conversation/activity" : {
       "post" : {
         "tags" : [ "Conversation" ],
+        "summary" : "Trigger typing activity",
         "description" : "Notify Smooch when an app maker starts or stops typing a response.",
         "operationId" : "triggerTypingActivity",
         "parameters" : [ {
@@ -521,6 +536,7 @@
     "/apps/{appId}/menu" : {
       "get" : {
         "tags" : [ "Menu" ],
+        "summary" : "Get menu",
         "description" : "Get the specified app’s menu.",
         "operationId" : "getMenu",
         "parameters" : [ {
@@ -541,6 +557,7 @@
       },
       "put" : {
         "tags" : [ "Menu" ],
+        "summary" : "Update menu",
         "description" : "Configure the specified app’s menu.",
         "operationId" : "updateMenu",
         "parameters" : [ {
@@ -569,6 +586,7 @@
       },
       "delete" : {
         "tags" : [ "Menu" ],
+        "summary" : "Delete menu",
         "description" : "Remove the specified app’s menu.",
         "operationId" : "deleteMenu",
         "parameters" : [ {
@@ -591,6 +609,7 @@
     "/apps" : {
       "get" : {
         "tags" : [ "App" ],
+        "summary" : "List apps",
         "description" : "List all apps configured.",
         "operationId" : "listApps",
         "parameters" : [ {
@@ -619,6 +638,7 @@
       },
       "post" : {
         "tags" : [ "App" ],
+        "summary" : "Create app",
         "description" : "Create a new app.",
         "operationId" : "createApp",
         "parameters" : [ {
@@ -643,6 +663,7 @@
     "/apps/{appId}" : {
       "get" : {
         "tags" : [ "App" ],
+        "summary" : "Get app",
         "description" : "Get the specified app.",
         "operationId" : "getApp",
         "parameters" : [ {
@@ -663,6 +684,7 @@
       },
       "put" : {
         "tags" : [ "App" ],
+        "summary" : "Update app",
         "description" : "Update the specified app.",
         "operationId" : "updateApp",
         "parameters" : [ {
@@ -691,6 +713,7 @@
       },
       "delete" : {
         "tags" : [ "App" ],
+        "summary" : "Delete app",
         "description" : "Delete the specified app.",
         "operationId" : "deleteApp",
         "parameters" : [ {
@@ -710,6 +733,7 @@
     "/apps/{appId}/keys" : {
       "get" : {
         "tags" : [ "App" ],
+        "summary" : "List secret keys",
         "description" : "List the secret keys for the specified app.",
         "operationId" : "listSecretKeys",
         "parameters" : [ {
@@ -730,6 +754,7 @@
       },
       "post" : {
         "tags" : [ "App" ],
+        "summary" : "Create secret key",
         "description" : "Create a secret key for the specified app.",
         "operationId" : "createSecretKey",
         "parameters" : [ {
@@ -760,6 +785,7 @@
     "/apps/{appId}/keys/{keyId}" : {
       "get" : {
         "tags" : [ "App" ],
+        "summary" : "Get secret key",
         "description" : "Get the specified secret key.",
         "operationId" : "getSecretKey",
         "parameters" : [ {
@@ -786,6 +812,7 @@
       },
       "delete" : {
         "tags" : [ "App" ],
+        "summary" : "Delete secret key",
         "description" : "Delete the specified secret key.",
         "operationId" : "deleteSecretKey",
         "parameters" : [ {
@@ -811,6 +838,7 @@
     "/apps/{appId}/keys/{keyId}/jwt" : {
       "get" : {
         "tags" : [ "App" ],
+        "summary" : "Get app jwt",
         "description" : "Get an app-scoped JWT for the specified secret key.",
         "operationId" : "getAppJwt",
         "parameters" : [ {
@@ -839,6 +867,7 @@
     "/apps/{appId}/integrations" : {
       "get" : {
         "tags" : [ "Integration" ],
+        "summary" : "List integrations",
         "description" : "List integrations for the specified app.",
         "operationId" : "listIntegrations",
         "parameters" : [ {
@@ -865,6 +894,7 @@
       },
       "post" : {
         "tags" : [ "Integration" ],
+        "summary" : "Create integration",
         "description" : "Create an integration for the specified app.",
         "operationId" : "createIntegration",
         "parameters" : [ {
@@ -895,6 +925,7 @@
     "/apps/{appId}/integrations/{integrationId}" : {
       "get" : {
         "tags" : [ "Integration" ],
+        "summary" : "Get integration",
         "description" : "Get the specified integration.",
         "operationId" : "getIntegration",
         "parameters" : [ {
@@ -921,6 +952,7 @@
       },
       "put" : {
         "tags" : [ "Integration" ],
+        "summary" : "Update integration",
         "description" : "Update the specified integration.",
         "operationId" : "updateIntegration",
         "parameters" : [ {
@@ -955,6 +987,7 @@
       },
       "delete" : {
         "tags" : [ "Integration" ],
+        "summary" : "Delete integration",
         "description" : "Delete the specified integration.",
         "operationId" : "deleteIntegration",
         "parameters" : [ {
@@ -980,6 +1013,7 @@
     "/apps/{appId}/integrations/{integrationId}/menu" : {
       "get" : {
         "tags" : [ "Integration" ],
+        "summary" : "Get menu",
         "description" : "Get the specified integration's menu.",
         "operationId" : "getIntegrationMenu",
         "parameters" : [ {
@@ -1006,6 +1040,7 @@
       },
       "post" : {
         "tags" : [ "Integration" ],
+        "summary" : "Create menu",
         "description" : "Create the specified integration’s menu, overriding the app menu if configured.",
         "operationId" : "createIntegrationMenu",
         "parameters" : [ {
@@ -1040,6 +1075,7 @@
       },
       "put" : {
         "tags" : [ "Integration" ],
+        "summary" : "Update menu",
         "description" : "Update the specified integration’s menu.",
         "operationId" : "updateIntegrationMenu",
         "parameters" : [ {
@@ -1074,6 +1110,7 @@
       },
       "delete" : {
         "tags" : [ "Integration" ],
+        "summary" : "Delete menu",
         "description" : "Delete the specified integration’s menu.",
         "operationId" : "deleteIntegrationMenu",
         "parameters" : [ {
@@ -1099,6 +1136,7 @@
     "/apps/{appId}/webhooks" : {
       "get" : {
         "tags" : [ "Webhook" ],
+        "summary" : "List webhooks",
         "description" : "List webhooks for the specified app.",
         "operationId" : "listWebhooks",
         "parameters" : [ {
@@ -1119,6 +1157,7 @@
       },
       "post" : {
         "tags" : [ "Webhook" ],
+        "summary" : "Create webhook",
         "description" : "Create a webhook for the specified app.",
         "operationId" : "createWebhook",
         "parameters" : [ {
@@ -1149,6 +1188,7 @@
     "/apps/{appId}/webhooks/{webhookId}" : {
       "get" : {
         "tags" : [ "Webhook" ],
+        "summary" : "Get webhook",
         "description" : "Get the specified webhook.",
         "operationId" : "getWebhook",
         "parameters" : [ {
@@ -1175,6 +1215,7 @@
       },
       "put" : {
         "tags" : [ "Webhook" ],
+        "summary" : "Update webhook",
         "description" : "Update the specified webhook.",
         "operationId" : "updateWebhook",
         "parameters" : [ {
@@ -1209,6 +1250,7 @@
       },
       "delete" : {
         "tags" : [ "Webhook" ],
+        "summary" : "Delete webhook",
         "description" : "Delete the specified webhook.",
         "operationId" : "deleteWebhook",
         "parameters" : [ {
@@ -1234,6 +1276,7 @@
     "/apps/{appId}/attachments" : {
       "post" : {
         "tags" : [ "Attachments" ],
+        "summary" : "Upload attachment",
         "description" : "Upload an attachment to Smooch to use in future messages.",
         "operationId" : "uploadAttachment",
         "consumes" : [ "multipart/form-data" ],
