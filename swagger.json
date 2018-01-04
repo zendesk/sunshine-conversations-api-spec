@@ -345,7 +345,12 @@
           "name" : "integrationIds",
           "in" : "query",
           "description" : "Comma separated list of integration IDs",
-          "required" : true
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "minItems" : 1
         } ],
         "responses" : {
           "200" : {
