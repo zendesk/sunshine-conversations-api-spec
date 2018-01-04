@@ -17,6 +17,7 @@
     "/apps/{appId}/appusers/{userId}" : {
       "get" : {
         "tags" : [ "AppUser" ],
+        "summary" : "Get app user.",
         "description" : "Get the specified app user.",
         "operationId" : "getAppUser",
         "parameters" : [ {
