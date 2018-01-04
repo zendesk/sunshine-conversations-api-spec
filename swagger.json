@@ -1277,6 +1277,129 @@
           "description" : "The app user.",
           "$ref" : "#/definitions/AppUser"
         }
+      },
+      "example" : {
+        "appUser" : {
+          "signedUpAt" : "signedUpAt",
+          "clients" : [ {
+            "pushNotificationToken" : "pushNotificationToken",
+            "appVersion" : "appVersion",
+            "lastSeen" : "lastSeen",
+            "displayName" : "displayName",
+            "active" : true,
+            "id" : "id",
+            "platform" : "platform",
+            "info" : {
+              "country" : "country",
+              "wifi" : "wifi",
+              "gender" : "gender",
+              "os" : "os",
+              "avatarUrl" : "avatarUrl",
+              "city" : "city",
+              "appName" : "appName",
+              "timezone" : 0,
+              "isPaymentEnabled" : true,
+              "devicePlatform" : "devicePlatform",
+              "locale" : "locale",
+              "carrier" : "carrier",
+              "phoneNumber" : "phoneNumber",
+              "osVersion" : "osVersion",
+              "deviceModel" : "deviceModel",
+              "state" : "state",
+              "radioAccessTechnology" : "radioAccessTechnology"
+            }
+          }, {
+            "pushNotificationToken" : "pushNotificationToken",
+            "appVersion" : "appVersion",
+            "lastSeen" : "lastSeen",
+            "displayName" : "displayName",
+            "active" : true,
+            "id" : "id",
+            "platform" : "platform",
+            "info" : {
+              "country" : "country",
+              "wifi" : "wifi",
+              "gender" : "gender",
+              "os" : "os",
+              "avatarUrl" : "avatarUrl",
+              "city" : "city",
+              "appName" : "appName",
+              "timezone" : 0,
+              "isPaymentEnabled" : true,
+              "devicePlatform" : "devicePlatform",
+              "locale" : "locale",
+              "carrier" : "carrier",
+              "phoneNumber" : "phoneNumber",
+              "osVersion" : "osVersion",
+              "deviceModel" : "deviceModel",
+              "state" : "state",
+              "radioAccessTechnology" : "radioAccessTechnology"
+            }
+          } ],
+          "surname" : "surname",
+          "givenName" : "givenName",
+          "pendingClients" : [ {
+            "pushNotificationToken" : "pushNotificationToken",
+            "appVersion" : "appVersion",
+            "lastSeen" : "lastSeen",
+            "displayName" : "displayName",
+            "active" : true,
+            "id" : "id",
+            "platform" : "platform",
+            "info" : {
+              "country" : "country",
+              "wifi" : "wifi",
+              "gender" : "gender",
+              "os" : "os",
+              "avatarUrl" : "avatarUrl",
+              "city" : "city",
+              "appName" : "appName",
+              "timezone" : 0,
+              "isPaymentEnabled" : true,
+              "devicePlatform" : "devicePlatform",
+              "locale" : "locale",
+              "carrier" : "carrier",
+              "phoneNumber" : "phoneNumber",
+              "osVersion" : "osVersion",
+              "deviceModel" : "deviceModel",
+              "state" : "state",
+              "radioAccessTechnology" : "radioAccessTechnology"
+            }
+          }, {
+            "pushNotificationToken" : "pushNotificationToken",
+            "appVersion" : "appVersion",
+            "lastSeen" : "lastSeen",
+            "displayName" : "displayName",
+            "active" : true,
+            "id" : "id",
+            "platform" : "platform",
+            "info" : {
+              "country" : "country",
+              "wifi" : "wifi",
+              "gender" : "gender",
+              "os" : "os",
+              "avatarUrl" : "avatarUrl",
+              "city" : "city",
+              "appName" : "appName",
+              "timezone" : 0,
+              "isPaymentEnabled" : true,
+              "devicePlatform" : "devicePlatform",
+              "locale" : "locale",
+              "carrier" : "carrier",
+              "phoneNumber" : "phoneNumber",
+              "osVersion" : "osVersion",
+              "deviceModel" : "deviceModel",
+              "state" : "state",
+              "radioAccessTechnology" : "radioAccessTechnology"
+            }
+          } ],
+          "_id" : "_id",
+          "userId" : "userId",
+          "email" : "email",
+          "properties" : "{}",
+          "conversationStarted" : true,
+          "credentialRequired" : true
+        }
       }
     },
     "AppUser" : {
@@ -1334,6 +1457,127 @@
             "$ref" : "#/definitions/Client"
           }
         }
+      },
+      "example" : {
+        "signedUpAt" : "signedUpAt",
+        "clients" : [ {
+          "pushNotificationToken" : "pushNotificationToken",
+          "appVersion" : "appVersion",
+          "lastSeen" : "lastSeen",
+          "displayName" : "displayName",
+          "active" : true,
+          "id" : "id",
+          "platform" : "platform",
+          "info" : {
+            "country" : "country",
+            "wifi" : "wifi",
+            "gender" : "gender",
+            "os" : "os",
+            "avatarUrl" : "avatarUrl",
+            "city" : "city",
+            "appName" : "appName",
+            "timezone" : 0,
+            "isPaymentEnabled" : true,
+            "devicePlatform" : "devicePlatform",
+            "locale" : "locale",
+            "carrier" : "carrier",
+            "phoneNumber" : "phoneNumber",
+            "osVersion" : "osVersion",
+            "deviceModel" : "deviceModel",
+            "state" : "state",
+            "radioAccessTechnology" : "radioAccessTechnology"
+          }
+        }, {
+          "pushNotificationToken" : "pushNotificationToken",
+          "appVersion" : "appVersion",
+          "lastSeen" : "lastSeen",
+          "displayName" : "displayName",
+          "active" : true,
+          "id" : "id",
+          "platform" : "platform",
+          "info" : {
+            "country" : "country",
+            "wifi" : "wifi",
+            "gender" : "gender",
+            "os" : "os",
+            "avatarUrl" : "avatarUrl",
+            "city" : "city",
+            "appName" : "appName",
+            "timezone" : 0,
+            "isPaymentEnabled" : true,
+            "devicePlatform" : "devicePlatform",
+            "locale" : "locale",
+            "carrier" : "carrier",
+            "phoneNumber" : "phoneNumber",
+            "osVersion" : "osVersion",
+            "deviceModel" : "deviceModel",
+            "state" : "state",
+            "radioAccessTechnology" : "radioAccessTechnology"
+          }
+        } ],
+        "surname" : "surname",
+        "givenName" : "givenName",
+        "pendingClients" : [ {
+          "pushNotificationToken" : "pushNotificationToken",
+          "appVersion" : "appVersion",
+          "lastSeen" : "lastSeen",
+          "displayName" : "displayName",
+          "active" : true,
+          "id" : "id",
+          "platform" : "platform",
+          "info" : {
+            "country" : "country",
+            "wifi" : "wifi",
+            "gender" : "gender",
+            "os" : "os",
+            "avatarUrl" : "avatarUrl",
+            "city" : "city",
+            "appName" : "appName",
+            "timezone" : 0,
+            "isPaymentEnabled" : true,
+            "devicePlatform" : "devicePlatform",
+            "locale" : "locale",
+            "carrier" : "carrier",
+            "phoneNumber" : "phoneNumber",
+            "osVersion" : "osVersion",
+            "deviceModel" : "deviceModel",
+            "state" : "state",
+            "radioAccessTechnology" : "radioAccessTechnology"
+          }
+        }, {
+          "pushNotificationToken" : "pushNotificationToken",
+          "appVersion" : "appVersion",
+          "lastSeen" : "lastSeen",
+          "displayName" : "displayName",
+          "active" : true,
+          "id" : "id",
+          "platform" : "platform",
+          "info" : {
+            "country" : "country",
+            "wifi" : "wifi",
+            "gender" : "gender",
+            "os" : "os",
+            "avatarUrl" : "avatarUrl",
+            "city" : "city",
+            "appName" : "appName",
+            "timezone" : 0,
+            "isPaymentEnabled" : true,
+            "devicePlatform" : "devicePlatform",
+            "locale" : "locale",
+            "carrier" : "carrier",
+            "phoneNumber" : "phoneNumber",
+            "osVersion" : "osVersion",
+            "deviceModel" : "deviceModel",
+            "state" : "state",
+            "radioAccessTechnology" : "radioAccessTechnology"
+          }
+        } ],
+        "_id" : "_id",
+        "userId" : "userId",
+        "email" : "email",
+        "properties" : "{}",
+        "conversationStarted" : true,
+        "credentialRequired" : true
       }
     },
     "Client" : {
@@ -1371,6 +1615,34 @@
         },
         "info" : {
           "$ref" : "#/definitions/ClientInfo"
+        }
+      },
+      "example" : {
+        "pushNotificationToken" : "pushNotificationToken",
+        "appVersion" : "appVersion",
+        "lastSeen" : "lastSeen",
+        "displayName" : "displayName",
+        "active" : true,
+        "id" : "id",
+        "platform" : "platform",
+        "info" : {
+          "country" : "country",
+          "wifi" : "wifi",
+          "gender" : "gender",
+          "os" : "os",
+          "avatarUrl" : "avatarUrl",
+          "city" : "city",
+          "appName" : "appName",
+          "timezone" : 0,
+          "isPaymentEnabled" : true,
+          "devicePlatform" : "devicePlatform",
+          "locale" : "locale",
+          "carrier" : "carrier",
+          "phoneNumber" : "phoneNumber",
+          "osVersion" : "osVersion",
+          "deviceModel" : "deviceModel",
+          "state" : "state",
+          "radioAccessTechnology" : "radioAccessTechnology"
         }
       }
     },
@@ -1445,6 +1717,25 @@
           "type" : "string",
           "description" : "Whether or not the client has wifi."
         }
+      },
+      "example" : {
+        "country" : "country",
+        "wifi" : "wifi",
+        "gender" : "gender",
+        "os" : "os",
+        "avatarUrl" : "avatarUrl",
+        "city" : "city",
+        "appName" : "appName",
+        "timezone" : 0,
+        "isPaymentEnabled" : true,
+        "devicePlatform" : "devicePlatform",
+        "locale" : "locale",
+        "carrier" : "carrier",
+        "phoneNumber" : "phoneNumber",
+        "osVersion" : "osVersion",
+        "deviceModel" : "deviceModel",
+        "state" : "state",
+        "radioAccessTechnology" : "radioAccessTechnology"
       }
     },
     "AppUserUpdate" : {
@@ -1471,6 +1762,13 @@
           "description" : "Custom properties for the app user.",
           "properties" : { }
         }
+      },
+      "example" : {
+        "signedUpAt" : "signedUpAt",
+        "surname" : "surname",
+        "givenName" : "givenName",
+        "email" : "email",
+        "properties" : "{}"
       }
     },
     "AppUserPreCreate" : {
@@ -1506,6 +1804,15 @@
           "description" : "Custom properties for the app user.",
           "properties" : { }
         }
+      },
+      "example" : {
+        "signedUpAt" : "signedUpAt",
+        "surname" : "surname",
+        "givenName" : "givenName",
+        "userId" : "userId",
+        "email" : "email",
+        "properties" : "{}",
+        "credentialRequired" : true
       }
     },
     "MessageResponse" : {
@@ -1519,6 +1826,128 @@
         "conversation" : {
           "description" : "The conversation.",
           "$ref" : "#/definitions/Conversation"
+        }
+      },
+      "example" : {
+        "message" : {
+          "metadata" : "{}",
+          "role" : "role",
+          "displaySettings" : {
+            "imageAspectRatio" : "imageAspectRatio"
+          },
+          "mediaUrl" : "mediaUrl",
+          "avatarUrl" : "avatarUrl",
+          "received" : 0.8008282,
+          "mediaType" : "mediaType",
+          "source" : {
+            "id" : "id",
+            "type" : "type"
+          },
+          "authorId" : "authorId",
+          "type" : "type",
+          "payload" : "payload",
+          "name" : "name",
+          "_id" : "_id",
+          "text" : "text",
+          "items" : [ {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          }, {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          } ],
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ],
+          "email" : "email"
+        },
+        "conversation" : {
+          "unreadCount" : 1,
+          "_id" : "_id"
         }
       }
     },
@@ -1602,6 +2031,122 @@
           "description" : "Settings to adjust the carousel layout. See [Display Settings](https://docs.smooch.io/rest/#display-settings).",
           "$ref" : "#/definitions/DisplaySettings"
         }
+      },
+      "example" : {
+        "metadata" : "{}",
+        "role" : "role",
+        "displaySettings" : {
+          "imageAspectRatio" : "imageAspectRatio"
+        },
+        "mediaUrl" : "mediaUrl",
+        "avatarUrl" : "avatarUrl",
+        "received" : 0.8008282,
+        "mediaType" : "mediaType",
+        "source" : {
+          "id" : "id",
+          "type" : "type"
+        },
+        "authorId" : "authorId",
+        "type" : "type",
+        "payload" : "payload",
+        "name" : "name",
+        "_id" : "_id",
+        "text" : "text",
+        "items" : [ {
+          "mediaUrl" : "mediaUrl",
+          "size" : "size",
+          "description" : "description",
+          "mediaType" : "mediaType",
+          "title" : "title",
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ]
+        }, {
+          "mediaUrl" : "mediaUrl",
+          "size" : "size",
+          "description" : "description",
+          "mediaType" : "mediaType",
+          "title" : "title",
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ]
+        } ],
+        "actions" : [ {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        }, {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        } ],
+        "email" : "email"
       }
     },
     "Source" : {
@@ -1615,6 +2160,10 @@
           "type" : "string",
           "description" : "An identifier for the channel from which a message originated."
         }
+      },
+      "example" : {
+        "id" : "id",
+        "type" : "type"
       }
     },
     "MessageItem" : {
@@ -1647,6 +2196,40 @@
             "$ref" : "#/definitions/Action"
           }
         }
+      },
+      "example" : {
+        "mediaUrl" : "mediaUrl",
+        "size" : "size",
+        "description" : "description",
+        "mediaType" : "mediaType",
+        "title" : "title",
+        "actions" : [ {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        }, {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        } ]
       }
     },
     "Action" : {
@@ -1702,6 +2285,20 @@
           "description" : "Extra options to pass directly to the channel API. See [Extra Channel Options](https://docs.smooch.io/rest#extra-channel-options-schema)",
           "properties" : { }
         }
+      },
+      "example" : {
+        "metadata" : "{}",
+        "amount" : 6,
+        "default" : true,
+        "size" : "size",
+        "payload" : "payload",
+        "extraChannelOptions" : "{}",
+        "currency" : "currency",
+        "text" : "text",
+        "iconUrl" : "iconUrl",
+        "type" : "type",
+        "uri" : "uri",
+        "fallback" : "fallback"
       }
     },
     "DisplaySettings" : {
@@ -1711,6 +2308,9 @@
           "type" : "string",
           "description" : "Specifies how to display all carousel images. Valid values are *horizontal* (default) and *square*."
         }
+      },
+      "example" : {
+        "imageAspectRatio" : "imageAspectRatio"
       }
     },
     "Conversation" : {
@@ -1725,6 +2325,10 @@
           "type" : "integer",
           "description" : "The number of unread messages in the conversation."
         }
+      },
+      "example" : {
+        "unreadCount" : 1,
+        "_id" : "_id"
       }
     },
     "AuthCodeResponse" : {
@@ -1735,6 +2339,9 @@
           "type" : "string",
           "description" : "The auth code"
         }
+      },
+      "example" : {
+        "authCode" : "authCode"
       }
     },
     "AppUserChannelsResponse" : {
@@ -1748,6 +2355,21 @@
             "$ref" : "#/definitions/ChannelEntityItem"
           }
         }
+      },
+      "example" : {
+        "channels" : [ {
+          "phoneNumber" : "phoneNumber",
+          "address" : "address",
+          "chatId" : "chatId",
+          "type" : "type",
+          "userId" : "userId"
+        }, {
+          "phoneNumber" : "phoneNumber",
+          "address" : "address",
+          "chatId" : "chatId",
+          "type" : "type",
+          "userId" : "userId"
+        } ]
       }
     },
     "ChannelEntityItem" : {
@@ -1774,6 +2396,13 @@
           "type" : "string",
           "description" : "The chat id for a *telegram* integration"
         }
+      },
+      "example" : {
+        "phoneNumber" : "phoneNumber",
+        "address" : "address",
+        "chatId" : "chatId",
+        "type" : "type",
+        "userId" : "userId"
       }
     },
     "AppUserLink" : {
@@ -1812,6 +2441,134 @@
           "description" : "Allows you to specify the strategy used to initiate a link with the target user.",
           "$ref" : "#/definitions/Confirmation"
         }
+      },
+      "example" : {
+        "phoneNumber" : "phoneNumber",
+        "address" : "address",
+        "skipConfirmation" : "skipConfirmation",
+        "surname" : "surname",
+        "subject" : "subject",
+        "givenName" : "givenName",
+        "confirmation" : {
+          "type" : "type",
+          "message" : {
+            "metadata" : "{}",
+            "role" : "role",
+            "displaySettings" : {
+              "imageAspectRatio" : "imageAspectRatio"
+            },
+            "mediaUrl" : "mediaUrl",
+            "avatarUrl" : "avatarUrl",
+            "received" : 0.8008282,
+            "mediaType" : "mediaType",
+            "source" : {
+              "id" : "id",
+              "type" : "type"
+            },
+            "authorId" : "authorId",
+            "type" : "type",
+            "payload" : "payload",
+            "name" : "name",
+            "_id" : "_id",
+            "text" : "text",
+            "items" : [ {
+              "mediaUrl" : "mediaUrl",
+              "size" : "size",
+              "description" : "description",
+              "mediaType" : "mediaType",
+              "title" : "title",
+              "actions" : [ {
+                "metadata" : "{}",
+                "amount" : 6,
+                "default" : true,
+                "size" : "size",
+                "payload" : "payload",
+                "extraChannelOptions" : "{}",
+                "currency" : "currency",
+                "text" : "text",
+                "iconUrl" : "iconUrl",
+                "type" : "type",
+                "uri" : "uri",
+                "fallback" : "fallback"
+              }, {
+                "metadata" : "{}",
+                "amount" : 6,
+                "default" : true,
+                "size" : "size",
+                "payload" : "payload",
+                "extraChannelOptions" : "{}",
+                "currency" : "currency",
+                "text" : "text",
+                "iconUrl" : "iconUrl",
+                "type" : "type",
+                "uri" : "uri",
+                "fallback" : "fallback"
+              } ]
+            }, {
+              "mediaUrl" : "mediaUrl",
+              "size" : "size",
+              "description" : "description",
+              "mediaType" : "mediaType",
+              "title" : "title",
+              "actions" : [ {
+                "metadata" : "{}",
+                "amount" : 6,
+                "default" : true,
+                "size" : "size",
+                "payload" : "payload",
+                "extraChannelOptions" : "{}",
+                "currency" : "currency",
+                "text" : "text",
+                "iconUrl" : "iconUrl",
+                "type" : "type",
+                "uri" : "uri",
+                "fallback" : "fallback"
+              }, {
+                "metadata" : "{}",
+                "amount" : 6,
+                "default" : true,
+                "size" : "size",
+                "payload" : "payload",
+                "extraChannelOptions" : "{}",
+                "currency" : "currency",
+                "text" : "text",
+                "iconUrl" : "iconUrl",
+                "type" : "type",
+                "uri" : "uri",
+                "fallback" : "fallback"
+              } ]
+            } ],
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ],
+            "email" : "email"
+          }
+        },
+        "type" : "type"
       }
     },
     "Confirmation" : {
@@ -1826,6 +2583,125 @@
           "description" : "The message used to reach out to the user. Must be a valid message object as per the post message API.",
           "$ref" : "#/definitions/Message"
         }
+      },
+      "example" : {
+        "type" : "type",
+        "message" : {
+          "metadata" : "{}",
+          "role" : "role",
+          "displaySettings" : {
+            "imageAspectRatio" : "imageAspectRatio"
+          },
+          "mediaUrl" : "mediaUrl",
+          "avatarUrl" : "avatarUrl",
+          "received" : 0.8008282,
+          "mediaType" : "mediaType",
+          "source" : {
+            "id" : "id",
+            "type" : "type"
+          },
+          "authorId" : "authorId",
+          "type" : "type",
+          "payload" : "payload",
+          "name" : "name",
+          "_id" : "_id",
+          "text" : "text",
+          "items" : [ {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          }, {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          } ],
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ],
+          "email" : "email"
+        }
       }
     },
     "AppUserBusinessSystemsResponse" : {
@@ -1839,6 +2715,21 @@
             "$ref" : "#/definitions/BusinessSystemItem"
           }
         }
+      },
+      "example" : {
+        "businessSystems" : [ {
+          "conversationId" : "conversationId",
+          "type" : "type",
+          "channelId" : "channelId",
+          "ticketId" : "ticketId",
+          "roomId" : 0
+        }, {
+          "conversationId" : "conversationId",
+          "type" : "type",
+          "channelId" : "channelId",
+          "ticketId" : "ticketId",
+          "roomId" : 0
+        } ]
       }
     },
     "BusinessSystemItem" : {
@@ -1865,6 +2756,13 @@
           "type" : "string",
           "description" : "The conversation id for a *helpscout* integration"
         }
+      },
+      "example" : {
+        "conversationId" : "conversationId",
+        "type" : "type",
+        "channelId" : "channelId",
+        "ticketId" : "ticketId",
+        "roomId" : 0
       }
     },
     "LinkRequestResponse" : {
@@ -1877,6 +2775,19 @@
             "$ref" : "#/definitions/LinkRequestResponse_linkRequests"
           }
         }
+      },
+      "example" : {
+        "linkRequests" : [ {
+          "code" : "code",
+          "integrationId" : "integrationId",
+          "type" : "type",
+          "url" : "url"
+        }, {
+          "code" : "code",
+          "integrationId" : "integrationId",
+          "type" : "type",
+          "url" : "url"
+        } ]
       }
     },
     "GetMessagesResponse" : {
@@ -1896,6 +2807,244 @@
         "next" : {
           "type" : "string",
           "description" : "The URI for the next set of messages in the conversation."
+        }
+      },
+      "example" : {
+        "next" : "next",
+        "messages" : [ {
+          "metadata" : "{}",
+          "role" : "role",
+          "displaySettings" : {
+            "imageAspectRatio" : "imageAspectRatio"
+          },
+          "mediaUrl" : "mediaUrl",
+          "avatarUrl" : "avatarUrl",
+          "received" : 0.8008282,
+          "mediaType" : "mediaType",
+          "source" : {
+            "id" : "id",
+            "type" : "type"
+          },
+          "authorId" : "authorId",
+          "type" : "type",
+          "payload" : "payload",
+          "name" : "name",
+          "_id" : "_id",
+          "text" : "text",
+          "items" : [ {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          }, {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          } ],
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ],
+          "email" : "email"
+        }, {
+          "metadata" : "{}",
+          "role" : "role",
+          "displaySettings" : {
+            "imageAspectRatio" : "imageAspectRatio"
+          },
+          "mediaUrl" : "mediaUrl",
+          "avatarUrl" : "avatarUrl",
+          "received" : 0.8008282,
+          "mediaType" : "mediaType",
+          "source" : {
+            "id" : "id",
+            "type" : "type"
+          },
+          "authorId" : "authorId",
+          "type" : "type",
+          "payload" : "payload",
+          "name" : "name",
+          "_id" : "_id",
+          "text" : "text",
+          "items" : [ {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          }, {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          } ],
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ],
+          "email" : "email"
+        } ],
+        "conversation" : {
+          "unreadCount" : 1,
+          "_id" : "_id"
         }
       }
     },
@@ -1962,6 +3111,116 @@
           "description" : "Specifies which channel to deliver a message to. See [list integrations](https://docs.smooch.io/rest/#list-integrations) to get integration ID and type.",
           "$ref" : "#/definitions/Destination"
         }
+      },
+      "example" : {
+        "metadata" : "{}",
+        "role" : "role",
+        "mediaUrl" : "mediaUrl",
+        "avatarUrl" : "avatarUrl",
+        "destination" : {
+          "integrationType" : "integrationType",
+          "integrationId" : "integrationId"
+        },
+        "mediaType" : "mediaType",
+        "type" : "type",
+        "payload" : "payload",
+        "name" : "name",
+        "text" : "text",
+        "items" : [ {
+          "mediaUrl" : "mediaUrl",
+          "size" : "size",
+          "description" : "description",
+          "mediaType" : "mediaType",
+          "title" : "title",
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ]
+        }, {
+          "mediaUrl" : "mediaUrl",
+          "size" : "size",
+          "description" : "description",
+          "mediaType" : "mediaType",
+          "title" : "title",
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ]
+        } ],
+        "actions" : [ {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        }, {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        } ],
+        "email" : "email"
       }
     },
     "Destination" : {
@@ -1975,6 +3234,10 @@
           "type" : "string",
           "description" : "The type of the target integration."
         }
+      },
+      "example" : {
+        "integrationType" : "integrationType",
+        "integrationId" : "integrationId"
       }
     },
     "TypingActivityTrigger" : {
@@ -1997,6 +3260,12 @@
           "type" : "string",
           "description" : "The avatar URL of the app maker that starts typing a response."
         }
+      },
+      "example" : {
+        "role" : "role",
+        "avatarUrl" : "avatarUrl",
+        "name" : "name",
+        "type" : "type"
       }
     },
     "MenuResponse" : {
@@ -2006,6 +3275,21 @@
         "menu" : {
           "description" : "The menu.",
           "$ref" : "#/definitions/Menu"
+        }
+      },
+      "example" : {
+        "menu" : {
+          "items" : [ {
+            "payload" : "payload",
+            "text" : "text",
+            "type" : "type",
+            "uri" : "uri"
+          }, {
+            "payload" : "payload",
+            "text" : "text",
+            "type" : "type",
+            "uri" : "uri"
+          } ]
         }
       }
     },
@@ -2020,6 +3304,19 @@
             "$ref" : "#/definitions/MenuItem"
           }
         }
+      },
+      "example" : {
+        "items" : [ {
+          "payload" : "payload",
+          "text" : "text",
+          "type" : "type",
+          "uri" : "uri"
+        }, {
+          "payload" : "payload",
+          "text" : "text",
+          "type" : "type",
+          "uri" : "uri"
+        } ]
       }
     },
     "MenuItem" : {
@@ -2042,6 +3339,12 @@
           "type" : "string",
           "description" : "A payload for a postback. Required for a *postback* type item."
         }
+      },
+      "example" : {
+        "payload" : "payload",
+        "text" : "text",
+        "type" : "type",
+        "uri" : "uri"
       }
     },
     "ListAppsResponse" : {
@@ -2062,6 +3365,25 @@
           "type" : "integer",
           "description" : "The number of app records skipped in the returned list."
         }
+      },
+      "example" : {
+        "offset" : 0,
+        "hasMore" : true,
+        "apps" : [ {
+          "settings" : {
+            "maskCreditCardNumbers" : true
+          },
+          "appToken" : "appToken",
+          "name" : "name",
+          "_id" : "_id"
+        }, {
+          "settings" : {
+            "maskCreditCardNumbers" : true
+          },
+          "appToken" : "appToken",
+          "name" : "name",
+          "_id" : "_id"
+        } ]
       }
     },
     "App" : {
@@ -2083,6 +3405,14 @@
         "settings" : {
           "$ref" : "#/definitions/App_settings"
         }
+      },
+      "example" : {
+        "settings" : {
+          "maskCreditCardNumbers" : true
+        },
+        "appToken" : "appToken",
+        "name" : "name",
+        "_id" : "_id"
       }
     },
     "AppCreate" : {
@@ -2096,6 +3426,12 @@
         "settings" : {
           "$ref" : "#/definitions/App_settings"
         }
+      },
+      "example" : {
+        "settings" : {
+          "maskCreditCardNumbers" : true
+        },
+        "name" : "name"
       }
     },
     "AppResponse" : {
@@ -2104,6 +3440,16 @@
         "app" : {
           "description" : "The app.",
           "$ref" : "#/definitions/App"
+        }
+      },
+      "example" : {
+        "app" : {
+          "settings" : {
+            "maskCreditCardNumbers" : true
+          },
+          "appToken" : "appToken",
+          "name" : "name",
+          "_id" : "_id"
         }
       }
     },
@@ -2118,6 +3464,12 @@
         "settings" : {
           "$ref" : "#/definitions/App_settings"
         }
+      },
+      "example" : {
+        "settings" : {
+          "maskCreditCardNumbers" : true
+        },
+        "name" : "name"
       }
     },
     "ListSecretKeysResponse" : {
@@ -2130,6 +3482,17 @@
             "$ref" : "#/definitions/SecretKey"
           }
         }
+      },
+      "example" : {
+        "keys" : [ {
+          "name" : "name",
+          "_id" : "_id",
+          "secret" : "secret"
+        }, {
+          "name" : "name",
+          "_id" : "_id",
+          "secret" : "secret"
+        } ]
       }
     },
     "SecretKey" : {
@@ -2148,6 +3511,11 @@
           "type" : "string",
           "description" : "A friendly identifier for the secret key."
         }
+      },
+      "example" : {
+        "name" : "name",
+        "_id" : "_id",
+        "secret" : "secret"
       }
     },
     "SecretKeyCreate" : {
@@ -2158,6 +3526,9 @@
           "type" : "string",
           "description" : "A friendly identifier for the secret key."
         }
+      },
+      "example" : {
+        "name" : "name"
       }
     },
     "SecretKeyResponse" : {
@@ -2166,6 +3537,13 @@
         "key" : {
           "description" : "The secret key.",
           "$ref" : "#/definitions/SecretKey"
+        }
+      },
+      "example" : {
+        "key" : {
+          "name" : "name",
+          "_id" : "_id",
+          "secret" : "secret"
         }
       }
     },
@@ -2176,6 +3554,9 @@
           "type" : "string",
           "description" : "The JWT."
         }
+      },
+      "example" : {
+        "jwt" : "jwt"
       }
     },
     "ListIntegrationsResponse" : {
@@ -2188,6 +3569,97 @@
             "$ref" : "#/definitions/Integration"
           }
         }
+      },
+      "example" : {
+        "integrations" : [ {
+          "brandColor" : "brandColor",
+          "apiKey" : "apiKey",
+          "production" : true,
+          "authToken" : "authToken",
+          "accessTokenKey" : "accessTokenKey",
+          "certificate" : "certificate",
+          "businessName" : "businessName",
+          "businessIconUrl" : "businessIconUrl",
+          "originator" : "originator",
+          "type" : "type",
+          "webhookSecret" : "webhookSecret",
+          "consumerSecret" : "consumerSecret",
+          "displayStyle" : "displayStyle",
+          "password" : "password",
+          "senderId" : "senderId",
+          "actionColor" : "actionColor",
+          "appId" : "appId",
+          "fromAddress" : "fromAddress",
+          "consumerKey" : "consumerKey",
+          "channelAccessToken" : "channelAccessToken",
+          "incomingAddress" : "incomingAddress",
+          "phoneNumberSid" : "phoneNumberSid",
+          "botName" : "botName",
+          "serverKey" : "serverKey",
+          "autoUpdateBadge" : true,
+          "pageId" : "pageId",
+          "uri" : "uri",
+          "userId" : "userId",
+          "accessTokenSecret" : "accessTokenSecret",
+          "token" : "token",
+          "buttonIconUrl" : "buttonIconUrl",
+          "phoneNumber" : "phoneNumber",
+          "accessKey" : "accessKey",
+          "domain" : "domain",
+          "name" : "name",
+          "appSecret" : "appSecret",
+          "conversationColor" : "conversationColor",
+          "_id" : "_id",
+          "accountSid" : "accountSid",
+          "integrationOrder" : [ "integrationOrder", "integrationOrder" ],
+          "encodingAesKey" : "encodingAesKey",
+          "pageAccessToken" : "pageAccessToken",
+          "username" : "username"
+        }, {
+          "brandColor" : "brandColor",
+          "apiKey" : "apiKey",
+          "production" : true,
+          "authToken" : "authToken",
+          "accessTokenKey" : "accessTokenKey",
+          "certificate" : "certificate",
+          "businessName" : "businessName",
+          "businessIconUrl" : "businessIconUrl",
+          "originator" : "originator",
+          "type" : "type",
+          "webhookSecret" : "webhookSecret",
+          "consumerSecret" : "consumerSecret",
+          "displayStyle" : "displayStyle",
+          "password" : "password",
+          "senderId" : "senderId",
+          "actionColor" : "actionColor",
+          "appId" : "appId",
+          "fromAddress" : "fromAddress",
+          "consumerKey" : "consumerKey",
+          "channelAccessToken" : "channelAccessToken",
+          "incomingAddress" : "incomingAddress",
+          "phoneNumberSid" : "phoneNumberSid",
+          "botName" : "botName",
+          "serverKey" : "serverKey",
+          "autoUpdateBadge" : true,
+          "pageId" : "pageId",
+          "uri" : "uri",
+          "userId" : "userId",
+          "accessTokenSecret" : "accessTokenSecret",
+          "token" : "token",
+          "buttonIconUrl" : "buttonIconUrl",
+          "phoneNumber" : "phoneNumber",
+          "accessKey" : "accessKey",
+          "domain" : "domain",
+          "name" : "name",
+          "appSecret" : "appSecret",
+          "conversationColor" : "conversationColor",
+          "_id" : "_id",
+          "accountSid" : "accountSid",
+          "integrationOrder" : [ "integrationOrder", "integrationOrder" ],
+          "encodingAesKey" : "encodingAesKey",
+          "pageAccessToken" : "pageAccessToken",
+          "username" : "username"
+        } ]
       }
     },
     "Integration" : {
@@ -2369,6 +3841,51 @@
           "type" : "string",
           "description" : "A custom business icon url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
         }
+      },
+      "example" : {
+        "brandColor" : "brandColor",
+        "apiKey" : "apiKey",
+        "production" : true,
+        "authToken" : "authToken",
+        "accessTokenKey" : "accessTokenKey",
+        "certificate" : "certificate",
+        "businessName" : "businessName",
+        "businessIconUrl" : "businessIconUrl",
+        "originator" : "originator",
+        "type" : "type",
+        "webhookSecret" : "webhookSecret",
+        "consumerSecret" : "consumerSecret",
+        "displayStyle" : "displayStyle",
+        "password" : "password",
+        "senderId" : "senderId",
+        "actionColor" : "actionColor",
+        "appId" : "appId",
+        "fromAddress" : "fromAddress",
+        "consumerKey" : "consumerKey",
+        "channelAccessToken" : "channelAccessToken",
+        "incomingAddress" : "incomingAddress",
+        "phoneNumberSid" : "phoneNumberSid",
+        "botName" : "botName",
+        "serverKey" : "serverKey",
+        "autoUpdateBadge" : true,
+        "pageId" : "pageId",
+        "uri" : "uri",
+        "userId" : "userId",
+        "accessTokenSecret" : "accessTokenSecret",
+        "token" : "token",
+        "buttonIconUrl" : "buttonIconUrl",
+        "phoneNumber" : "phoneNumber",
+        "accessKey" : "accessKey",
+        "domain" : "domain",
+        "name" : "name",
+        "appSecret" : "appSecret",
+        "conversationColor" : "conversationColor",
+        "_id" : "_id",
+        "accountSid" : "accountSid",
+        "integrationOrder" : [ "integrationOrder", "integrationOrder" ],
+        "encodingAesKey" : "encodingAesKey",
+        "pageAccessToken" : "pageAccessToken",
+        "username" : "username"
       }
     },
     "IntegrationCreate" : {
@@ -2463,6 +3980,30 @@
           "type" : "string",
           "description" : "Smooch will receive all messages sent to this phone number.\nRequired for *messagebird* integrations.\n"
         }
+      },
+      "example" : {
+        "phoneNumberSid" : "phoneNumberSid",
+        "authToken" : "authToken",
+        "serverKey" : "serverKey",
+        "accessTokenKey" : "accessTokenKey",
+        "certificate" : "certificate",
+        "autoUpdateBadge" : true,
+        "originator" : "originator",
+        "type" : "type",
+        "accessTokenSecret" : "accessTokenSecret",
+        "token" : "token",
+        "consumerSecret" : "consumerSecret",
+        "password" : "password",
+        "senderId" : "senderId",
+        "accessKey" : "accessKey",
+        "appId" : "appId",
+        "appSecret" : "appSecret",
+        "fromAddress" : "fromAddress",
+        "accountSid" : "accountSid",
+        "consumerKey" : "consumerKey",
+        "encodingAesKey" : "encodingAesKey",
+        "channelAccessToken" : "channelAccessToken",
+        "pageAccessToken" : "pageAccessToken"
       }
     },
     "IntegrationResponse" : {
@@ -2471,6 +4012,53 @@
         "integration" : {
           "description" : "The integration.",
           "$ref" : "#/definitions/Integration"
+        }
+      },
+      "example" : {
+        "integration" : {
+          "brandColor" : "brandColor",
+          "apiKey" : "apiKey",
+          "production" : true,
+          "authToken" : "authToken",
+          "accessTokenKey" : "accessTokenKey",
+          "certificate" : "certificate",
+          "businessName" : "businessName",
+          "businessIconUrl" : "businessIconUrl",
+          "originator" : "originator",
+          "type" : "type",
+          "webhookSecret" : "webhookSecret",
+          "consumerSecret" : "consumerSecret",
+          "displayStyle" : "displayStyle",
+          "password" : "password",
+          "senderId" : "senderId",
+          "actionColor" : "actionColor",
+          "appId" : "appId",
+          "fromAddress" : "fromAddress",
+          "consumerKey" : "consumerKey",
+          "channelAccessToken" : "channelAccessToken",
+          "incomingAddress" : "incomingAddress",
+          "phoneNumberSid" : "phoneNumberSid",
+          "botName" : "botName",
+          "serverKey" : "serverKey",
+          "autoUpdateBadge" : true,
+          "pageId" : "pageId",
+          "uri" : "uri",
+          "userId" : "userId",
+          "accessTokenSecret" : "accessTokenSecret",
+          "token" : "token",
+          "buttonIconUrl" : "buttonIconUrl",
+          "phoneNumber" : "phoneNumber",
+          "accessKey" : "accessKey",
+          "domain" : "domain",
+          "name" : "name",
+          "appSecret" : "appSecret",
+          "conversationColor" : "conversationColor",
+          "_id" : "_id",
+          "accountSid" : "accountSid",
+          "integrationOrder" : [ "integrationOrder", "integrationOrder" ],
+          "encodingAesKey" : "encodingAesKey",
+          "pageAccessToken" : "pageAccessToken",
+          "username" : "username"
         }
       }
     },
@@ -2512,6 +4100,16 @@
           "type" : "string",
           "description" : "A custom business icon url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
         }
+      },
+      "example" : {
+        "buttonIconUrl" : "buttonIconUrl",
+        "displayStyle" : "displayStyle",
+        "brandColor" : "brandColor",
+        "actionColor" : "actionColor",
+        "businessName" : "businessName",
+        "businessIconUrl" : "businessIconUrl",
+        "conversationColor" : "conversationColor",
+        "integrationOrder" : [ "integrationOrder", "integrationOrder" ]
       }
     },
     "ListWebhooksResponse" : {
@@ -2525,6 +4123,19 @@
             "$ref" : "#/definitions/Webhook"
           }
         }
+      },
+      "example" : {
+        "webhooks" : [ {
+          "_id" : "_id",
+          "secret" : "secret",
+          "triggers" : [ "triggers", "triggers" ],
+          "target" : "target"
+        }, {
+          "_id" : "_id",
+          "secret" : "secret",
+          "triggers" : [ "triggers", "triggers" ],
+          "target" : "target"
+        } ]
       }
     },
     "Webhook" : {
@@ -2550,6 +4161,12 @@
           "type" : "string",
           "description" : "Secret which will be transmitted with each webhook invocation and can be used to verify the authenticity of the caller."
         }
+      },
+      "example" : {
+        "_id" : "_id",
+        "secret" : "secret",
+        "triggers" : [ "triggers", "triggers" ],
+        "target" : "target"
       }
     },
     "WebhookCreate" : {
@@ -2567,6 +4184,10 @@
             "type" : "string"
           }
         }
+      },
+      "example" : {
+        "triggers" : [ "triggers", "triggers" ],
+        "target" : "target"
       }
     },
     "WebhookResponse" : {
@@ -2576,6 +4197,14 @@
         "webhook" : {
           "description" : "The webhook.",
           "$ref" : "#/definitions/Webhook"
+        }
+      },
+      "example" : {
+        "webhook" : {
+          "_id" : "_id",
+          "secret" : "secret",
+          "triggers" : [ "triggers", "triggers" ],
+          "target" : "target"
         }
       }
     },
@@ -2593,6 +4222,10 @@
             "type" : "string"
           }
         }
+      },
+      "example" : {
+        "triggers" : [ "triggers", "triggers" ],
+        "target" : "target"
       }
     },
     "AttachmentResponse" : {
@@ -2607,6 +4240,10 @@
           "type" : "string",
           "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
         }
+      },
+      "example" : {
+        "mediaUrl" : "mediaUrl",
+        "mediaType" : "mediaType"
       }
     },
     "LinkRequestResponse_linkRequests" : {
@@ -2628,6 +4265,12 @@
           "type" : "string",
           "description" : "The link request url."
         }
+      },
+      "example" : {
+        "code" : "code",
+        "integrationId" : "integrationId",
+        "type" : "type",
+        "url" : "url"
       }
     },
     "App_settings" : {
@@ -2637,7 +4280,10 @@
           "description" : "Flag specifying whether credit card numbers will be automatically masked if sent through Smooch."
         }
       },
-      "description" : "Customizable app settings."
+      "description" : "Customizable app settings.",
+      "example" : {
+        "maskCreditCardNumbers" : true
+      }
     }
   }
 }
