@@ -18,7 +18,7 @@
       "get" : {
         "tags" : [ "AppUser" ],
         "summary" : "Get app user",
-        "description" : "Get the specified app user.",
+        "description" : "Retrieve a specific app user. Like all other `/v1/apps/{appId}/appusers/` paths, an app user can be identified using either the smoochId or the userId.",
         "operationId" : "getAppUser",
         "parameters" : [ {
           "name" : "appId",
@@ -45,7 +45,7 @@
       "put" : {
         "tags" : [ "AppUser" ],
         "summary" : "Update app user",
-        "description" : "Update the specified app user.",
+        "description" : "Update an app user’s basic profile information and specify custom profile data via `properties`. This API is additive; only the specific fields specified in the request body, and only the specific JSON sub-fields included in the `properties` field will be updated. In other words, omitting a field will not delete that field.",
         "operationId" : "updateAppUser",
         "parameters" : [ {
           "name" : "appId",
@@ -82,7 +82,7 @@
       "post" : {
         "tags" : [ "AppUser" ],
         "summary" : "Pre-create app user",
-        "description" : "Pre-create an app user.",
+        "description" : "In the vast majority of cases app users will be automatically created by the Smooch SDKs or Messaging Channel integrations. In some cases however it might be necessary to pre-create an app user object before that user runs your app for the first time. This API facilitates this scenario. A `userId` must be specified so that a future `login` call made from a device can use the same `userId` to link the device to the pre-created app user.\nSuppose for example you begin a conversation with an end user `bob@example.com` over email and you wish to transfer this conversation history over into Smooch once that user logs in to your app. To facilitate this, you can call `POST /v1/apps/{appId}/appusers` to pre-create a Smooch identity with `userId` `bob@example.com`, to which you can import that existing conversation history. After Bob signs in to your app and your app calls `login` with the same `userId`, they will see their conversation history.\n",
         "operationId" : "preCreateAppUser",
         "parameters" : [ {
           "name" : "appId",
@@ -109,53 +109,11 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/images" : {
-      "post" : {
-        "tags" : [ "AppUser" ],
-        "summary" : "Send image",
-        "description" : "Send an image message to the conversation.",
-        "operationId" : "postImageMessage",
-        "consumes" : [ "multipart/form-data" ],
-        "parameters" : [ {
-          "name" : "appId",
-          "in" : "path",
-          "description" : "Identifies the app.",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "userId",
-          "in" : "path",
-          "description" : "Identifies the user. Can be either the smoochId or the userId.",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "source",
-          "in" : "formData",
-          "description" : "Image to be uploaded",
-          "required" : true,
-          "type" : "file"
-        }, {
-          "name" : "role",
-          "in" : "formData",
-          "description" : "Role of the sender",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "Created",
-            "schema" : {
-              "$ref" : "#/definitions/MessageResponse"
-            }
-          }
-        }
-      }
-    },
     "/apps/{appId}/appusers/{userId}/profile" : {
       "delete" : {
         "tags" : [ "AppUser" ],
         "summary" : "Delete app user profile",
-        "description" : "Delete specified app user's profile.",
+        "description" : "Delete a user’s profile. Calling this API will clear `givenName`, `surname`, `email` and every custom property for the specified user.\nFor every client owned by the user, it will also clear `displayName`, `avatarUrl` and any channel specific information stored in the `info` field.\n",
         "operationId" : "deleteAppUserProfile",
         "parameters" : [ {
           "name" : "appId",
@@ -184,7 +142,7 @@
       "get" : {
         "tags" : [ "AppUser" ],
         "summary" : "Get app user auth code",
-        "description" : "Get an auth code for facilitating a channel transfer",
+        "description" : "Users can begin their communication over a third party channel such as Facebook Messenger. Using an auth code, you can transfer such users' conversations over to an SDK channel hosted on your website or mobile app. The user can then continue their conversation in a medium that offers more freedom for the business to customize the user’s experience.\n*Auth codes expire after 7 days. Auth codes are one time use and only one auth code can be active at a time per appUser. Generating a new auth code will invalidate any existing auth code that has not yet been consumed.*\n",
         "operationId" : "getAppUserAuthCode",
         "parameters" : [ {
           "name" : "appId",
@@ -213,7 +171,7 @@
       "get" : {
         "tags" : [ "AppUser" ],
         "summary" : "Get app user entity IDs",
-        "description" : "Get specified app user's channel entity IDs.",
+        "description" : "App users may be created with an optional `userId` parameter. This is a unique identifier that is chosen by the API consumer and it can be used to associate Smooch users with an external user directory, and to synchronize a single conversation across multiple clients. To understand how this works, see the section covering user authentication.\n*If a userId has been specified for a given app user, it can be used in place of the appUser._id in any /v1/apps/{appId}/appusers/ API path.*\n",
         "operationId" : "getAppUserEntityIds",
         "parameters" : [ {
           "name" : "appId",
@@ -240,7 +198,7 @@
       "post" : {
         "tags" : [ "AppUser" ],
         "summary" : "Link app user",
-        "description" : "Link specified app user to given channel.",
+        "description" : "Some extra arguments are supported depending on the selected type.\nLinking allows users to continue conversations on their preferred channels. An appUser’s linked channels will be found in the `clients` field.\nWhen a link request is first made, the channel will be added to the `pendingClients` field. At this point, the API call will be considered a success and a response will be returned. Future updates on the status of the link request can be tracked by listening to the link:match, link:success and link:failure webhooks.\n* The skipConfirmation flag is still supported to preserve backwards compatibility, but will only be accepted for twilio linking.*\n",
         "operationId" : "linkAppUser",
         "parameters" : [ {
           "name" : "appId",
@@ -277,7 +235,7 @@
       "get" : {
         "tags" : [ "AppUser" ],
         "summary" : "Get app user business system IDs",
-        "description" : "Get specified app user's business system IDs.",
+        "description" : "Retrieves all the business systems an appUser’s conversation is connected to.",
         "operationId" : "getAppUserBusinessSystemIds",
         "parameters" : [ {
           "name" : "appId",
@@ -306,7 +264,7 @@
       "delete" : {
         "tags" : [ "AppUser" ],
         "summary" : "Unlink app user",
-        "description" : "Unlink specified app user from given channel.",
+        "description" : "Removes the specified channel from the appUser’s clients.",
         "operationId" : "unlinkAppUser",
         "parameters" : [ {
           "name" : "appId",
@@ -338,7 +296,7 @@
       "get" : {
         "tags" : [ "AppUser" ],
         "summary" : "Get link requests",
-        "description" : "Fetch link requests for the specified app user.",
+        "description" : "A user who begins their conversation via one of the Smooch SDKs may wish to transfer the conversation to a different preferred channel. For example, a user may leave you a message on your website and ask to be notified by Facebook as soon as you respond.\nThe link request API facilitates this transfer. The API will generate a transfer URL designed to work for a given channel type. When a user clicks or taps this link they will be connected to your business presence on the given channel. Smooch embeds a one time code in the URL that allows the channel to be securely linked to the user’s existing Smooch identity. Messages sent over this new channel will also be synchronized with the user’s existing conversation.\nMultiple link requests can be made at once so that you may render them as a list of options for the user to choose from.\n*A link request code and url is only valid for 1 month. Only one pending link request can be active per appUser per integration. Generating a new link request will invalidate any existing pending link request issued for that appUser and integration.*\n",
         "operationId" : "getLinkRequests",
         "parameters" : [ {
           "name" : "appId",
@@ -377,7 +335,7 @@
       "get" : {
         "tags" : [ "Conversation" ],
         "summary" : "Get messages",
-        "description" : "Get the specified app user's messages.",
+        "description" : "Get the specified app user’s conversation history with a limit of 100 messages, if it exists. If a conversation has not yet been created for the specified app user, 404 will be returned.",
         "operationId" : "getMessages",
         "parameters" : [ {
           "name" : "appId",
@@ -416,7 +374,7 @@
       "post" : {
         "tags" : [ "Conversation" ],
         "summary" : "Post message",
-        "description" : "Post a message to or from the app user.",
+        "description" : "Post a message to or from the app user. If the app user does not yet have a conversation, one will be created automatically. Messages must have a `role` of either `appUser` or `appMaker`.\nA message must also have a `type` specifying the type of message you’re trying to send.\nImages can be posted by URL using this API via the `image` type. Alternatively, you may also upload images to the conversation directly using the /images endpoint.\n",
         "operationId" : "postMessage",
         "parameters" : [ {
           "name" : "appId",
@@ -451,7 +409,7 @@
       "delete" : {
         "tags" : [ "Conversation" ],
         "summary" : "Delete messages",
-        "description" : "Clears the message history for a user, permanently deleting all messages, but leaving any connections to Messaging Channels and Business Systems intact. These connections allow for the conversation to continue in the future, while still being associated to the same appUser.\n",
+        "description" : "Clears the message history for a user, permanently deleting all messages, but leaving any connections to Messaging Channels and Business Systems intact.\nThese connections allow for the conversation to continue in the future, while still being associated to the same appUser.\n",
         "operationId" : "deleteMessages",
         "parameters" : [ {
           "name" : "appId",
@@ -477,7 +435,7 @@
       "post" : {
         "tags" : [ "Conversation" ],
         "summary" : "Reset unread count",
-        "description" : "Reset the unread count of the conversation to 0.",
+        "description" : "Reset the unread count of the conversation to 0. If the conversation has not yet been created for the specified app user 404 will be returned.",
         "operationId" : "resetUnreadCount",
         "parameters" : [ {
           "name" : "appId",
@@ -558,7 +516,7 @@
       "put" : {
         "tags" : [ "Menu" ],
         "summary" : "Update menu",
-        "description" : "Configure the specified app’s menu.",
+        "description" : "Configure the specified app’s menu. See the persistent menu schema for possible options.",
         "operationId" : "updateMenu",
         "parameters" : [ {
           "name" : "appId",
@@ -610,7 +568,7 @@
       "get" : {
         "tags" : [ "App" ],
         "summary" : "List apps",
-        "description" : "List all apps configured.",
+        "description" : "Lists all apps configured. This API is paginated. It returns a max of 25 apps by default, and accepts offset and limit query parameters. The max limit is 100.",
         "operationId" : "listApps",
         "parameters" : [ {
           "name" : "limit",
@@ -639,7 +597,7 @@
       "post" : {
         "tags" : [ "App" ],
         "summary" : "Create app",
-        "description" : "Create a new app.",
+        "description" : "Creates a new app. The response body will include the app’s _id, which can be used to initialize the Web, iOS and Android clients.",
         "operationId" : "createApp",
         "parameters" : [ {
           "in" : "body",
@@ -664,7 +622,7 @@
       "get" : {
         "tags" : [ "App" ],
         "summary" : "Get app",
-        "description" : "Get the specified app.",
+        "description" : "Fetches an individual app.",
         "operationId" : "getApp",
         "parameters" : [ {
           "name" : "appId",
@@ -685,7 +643,7 @@
       "put" : {
         "tags" : [ "App" ],
         "summary" : "Update app",
-        "description" : "Update the specified app.",
+        "description" : "Updates an app.",
         "operationId" : "updateApp",
         "parameters" : [ {
           "name" : "appId",
@@ -714,7 +672,7 @@
       "delete" : {
         "tags" : [ "App" ],
         "summary" : "Delete app",
-        "description" : "Delete the specified app.",
+        "description" : "Removes the specified app, including all its enabled integrations.",
         "operationId" : "deleteApp",
         "parameters" : [ {
           "name" : "appId",
@@ -734,7 +692,7 @@
       "get" : {
         "tags" : [ "App" ],
         "summary" : "List secret keys",
-        "description" : "List the secret keys for the specified app.",
+        "description" : "Lists all secret keys for a given app.",
         "operationId" : "listSecretKeys",
         "parameters" : [ {
           "name" : "appId",
@@ -755,7 +713,7 @@
       "post" : {
         "tags" : [ "App" ],
         "summary" : "Create secret key",
-        "description" : "Create a secret key for the specified app.",
+        "description" : "Creates a secret key for the specified app. The response body will include a secret as well it’s corresponding id, which you can use to generate JSON Web Tokens to securely make API calls on behalf of the app.",
         "operationId" : "createSecretKey",
         "parameters" : [ {
           "name" : "appId",
@@ -786,7 +744,7 @@
       "get" : {
         "tags" : [ "App" ],
         "summary" : "Get secret key",
-        "description" : "Get the specified secret key.",
+        "description" : "Returns a secret key.",
         "operationId" : "getSecretKey",
         "parameters" : [ {
           "name" : "appId",
@@ -813,7 +771,7 @@
       "delete" : {
         "tags" : [ "App" ],
         "summary" : "Delete secret key",
-        "description" : "Delete the specified secret key.",
+        "description" : "Removes a secret key.",
         "operationId" : "deleteSecretKey",
         "parameters" : [ {
           "name" : "appId",
@@ -839,7 +797,7 @@
       "get" : {
         "tags" : [ "App" ],
         "summary" : "Get app jwt",
-        "description" : "Get an app-scoped JWT for the specified secret key.",
+        "description" : "Returns an app-scoped JWT signed using the requested keyId/secret pair.",
         "operationId" : "getAppJwt",
         "parameters" : [ {
           "name" : "appId",
@@ -868,7 +826,7 @@
       "get" : {
         "tags" : [ "Integration" ],
         "summary" : "List integrations",
-        "description" : "List integrations for the specified app.",
+        "description" : "Lists all integrations for a given app.",
         "operationId" : "listIntegrations",
         "parameters" : [ {
           "name" : "appId",
@@ -895,7 +853,7 @@
       "post" : {
         "tags" : [ "Integration" ],
         "summary" : "Create integration",
-        "description" : "Create an integration for the specified app.",
+        "description" : "The Create Integration endpoint allows you to provision apps with front-end messaging channels. See the sections below for channel specific instructions.",
         "operationId" : "createIntegration",
         "parameters" : [ {
           "name" : "appId",
@@ -953,7 +911,7 @@
       "put" : {
         "tags" : [ "Integration" ],
         "summary" : "Update integration",
-        "description" : "Update the specified integration.",
+        "description" : "The Update Integration endpoint allows you to update active integrations. See the sections below for channel specific instructions.\n*The Update Integration endpoint is currently only available for the Web Messenger integration. To update other integration types, you must instead delete the integration and re-create it with the new data.*\n",
         "operationId" : "updateIntegration",
         "parameters" : [ {
           "name" : "appId",
@@ -988,7 +946,7 @@
       "delete" : {
         "tags" : [ "Integration" ],
         "summary" : "Delete integration",
-        "description" : "Delete the specified integration.",
+        "description" : "Removes the specified integration.",
         "operationId" : "deleteIntegration",
         "parameters" : [ {
           "name" : "appId",
@@ -1137,7 +1095,7 @@
       "get" : {
         "tags" : [ "Webhook" ],
         "summary" : "List webhooks",
-        "description" : "List webhooks for the specified app.",
+        "description" : "List all webhooks configured for a given app.",
         "operationId" : "listWebhooks",
         "parameters" : [ {
           "name" : "appId",
@@ -1158,7 +1116,7 @@
       "post" : {
         "tags" : [ "Webhook" ],
         "summary" : "Create webhook",
-        "description" : "Create a webhook for the specified app.",
+        "description" : "Create a webhook for the specified app. The response body will include a secret which will be transmitted with each webhook invocation and can be used to verify the authenticity of the caller.\nAlternatively, you can use the Webhooks integration in the Smooch dashboard to easily create a webhook.\n",
         "operationId" : "createWebhook",
         "parameters" : [ {
           "name" : "appId",
@@ -1189,7 +1147,7 @@
       "get" : {
         "tags" : [ "Webhook" ],
         "summary" : "Get webhook",
-        "description" : "Get the specified webhook.",
+        "description" : "Individual webhooks can be fetched using this API.",
         "operationId" : "getWebhook",
         "parameters" : [ {
           "name" : "appId",
@@ -1216,7 +1174,7 @@
       "put" : {
         "tags" : [ "Webhook" ],
         "summary" : "Update webhook",
-        "description" : "Update the specified webhook.",
+        "description" : "Use this API to update your existing webhooks.",
         "operationId" : "updateWebhook",
         "parameters" : [ {
           "name" : "appId",
@@ -1251,7 +1209,7 @@
       "delete" : {
         "tags" : [ "Webhook" ],
         "summary" : "Delete webhook",
-        "description" : "Delete the specified webhook.",
+        "description" : "Deletes the specified webhook.",
         "operationId" : "deleteWebhook",
         "parameters" : [ {
           "name" : "appId",
@@ -1864,522 +1822,6 @@
         "credentialRequired" : true
       }
     },
-    "MessageResponse" : {
-      "type" : "object",
-      "required" : [ "conversation", "message" ],
-      "properties" : {
-        "message" : {
-          "description" : "The message.",
-          "$ref" : "#/definitions/Message"
-        },
-        "conversation" : {
-          "description" : "The conversation.",
-          "$ref" : "#/definitions/Conversation"
-        }
-      },
-      "example" : {
-        "message" : {
-          "metadata" : "{}",
-          "role" : "role",
-          "displaySettings" : {
-            "imageAspectRatio" : "imageAspectRatio"
-          },
-          "mediaUrl" : "mediaUrl",
-          "avatarUrl" : "avatarUrl",
-          "received" : 0.8008282,
-          "mediaType" : "mediaType",
-          "source" : {
-            "id" : "id",
-            "type" : "type"
-          },
-          "authorId" : "authorId",
-          "type" : "type",
-          "payload" : "payload",
-          "name" : "name",
-          "_id" : "_id",
-          "text" : "text",
-          "items" : [ {
-            "mediaUrl" : "mediaUrl",
-            "size" : "size",
-            "description" : "description",
-            "mediaType" : "mediaType",
-            "title" : "title",
-            "actions" : [ {
-              "metadata" : "{}",
-              "amount" : 6,
-              "default" : true,
-              "size" : "size",
-              "payload" : "payload",
-              "extraChannelOptions" : "{}",
-              "currency" : "currency",
-              "text" : "text",
-              "iconUrl" : "iconUrl",
-              "type" : "type",
-              "uri" : "uri",
-              "fallback" : "fallback"
-            }, {
-              "metadata" : "{}",
-              "amount" : 6,
-              "default" : true,
-              "size" : "size",
-              "payload" : "payload",
-              "extraChannelOptions" : "{}",
-              "currency" : "currency",
-              "text" : "text",
-              "iconUrl" : "iconUrl",
-              "type" : "type",
-              "uri" : "uri",
-              "fallback" : "fallback"
-            } ]
-          }, {
-            "mediaUrl" : "mediaUrl",
-            "size" : "size",
-            "description" : "description",
-            "mediaType" : "mediaType",
-            "title" : "title",
-            "actions" : [ {
-              "metadata" : "{}",
-              "amount" : 6,
-              "default" : true,
-              "size" : "size",
-              "payload" : "payload",
-              "extraChannelOptions" : "{}",
-              "currency" : "currency",
-              "text" : "text",
-              "iconUrl" : "iconUrl",
-              "type" : "type",
-              "uri" : "uri",
-              "fallback" : "fallback"
-            }, {
-              "metadata" : "{}",
-              "amount" : 6,
-              "default" : true,
-              "size" : "size",
-              "payload" : "payload",
-              "extraChannelOptions" : "{}",
-              "currency" : "currency",
-              "text" : "text",
-              "iconUrl" : "iconUrl",
-              "type" : "type",
-              "uri" : "uri",
-              "fallback" : "fallback"
-            } ]
-          } ],
-          "actions" : [ {
-            "metadata" : "{}",
-            "amount" : 6,
-            "default" : true,
-            "size" : "size",
-            "payload" : "payload",
-            "extraChannelOptions" : "{}",
-            "currency" : "currency",
-            "text" : "text",
-            "iconUrl" : "iconUrl",
-            "type" : "type",
-            "uri" : "uri",
-            "fallback" : "fallback"
-          }, {
-            "metadata" : "{}",
-            "amount" : 6,
-            "default" : true,
-            "size" : "size",
-            "payload" : "payload",
-            "extraChannelOptions" : "{}",
-            "currency" : "currency",
-            "text" : "text",
-            "iconUrl" : "iconUrl",
-            "type" : "type",
-            "uri" : "uri",
-            "fallback" : "fallback"
-          } ],
-          "email" : "email"
-        },
-        "conversation" : {
-          "unreadCount" : 1,
-          "_id" : "_id"
-        }
-      }
-    },
-    "Message" : {
-      "type" : "object",
-      "required" : [ "_id", "authorId", "avatarUrl", "name", "received", "role", "text", "type" ],
-      "properties" : {
-        "_id" : {
-          "type" : "string",
-          "description" : "The message ID, generated automatically."
-        },
-        "authorId" : {
-          "type" : "string",
-          "description" : "The ID of the message's author."
-        },
-        "role" : {
-          "type" : "string",
-          "description" : "The role of the individual posting the message. Can be either *appUser* or *appMaker*."
-        },
-        "type" : {
-          "type" : "string",
-          "description" : "The message type."
-        },
-        "source" : {
-          "description" : "The source of the message.",
-          "$ref" : "#/definitions/Source"
-        },
-        "name" : {
-          "type" : "string",
-          "description" : "The display name of the message author."
-        },
-        "text" : {
-          "type" : "string",
-          "description" : "The message text.\nRequired for text messages.\n"
-        },
-        "email" : {
-          "type" : "string",
-          "description" : "The email address of the message author."
-        },
-        "avatarUrl" : {
-          "type" : "string",
-          "description" : "The URL of the desired message avatar image."
-        },
-        "received" : {
-          "type" : "number",
-          "format" : "float",
-          "description" : "The unix timestamp of the moment the message was received."
-        },
-        "mediaUrl" : {
-          "type" : "string",
-          "description" : "The mediaUrl for the message.\nRequired for image/file messages.\n"
-        },
-        "mediaType" : {
-          "type" : "string",
-          "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
-        },
-        "metadata" : {
-          "type" : "object",
-          "description" : "Flat JSON object containing any custom properties associated with the message.",
-          "properties" : { }
-        },
-        "items" : {
-          "type" : "array",
-          "description" : "The items in the message list.\nRequired for carousel and list messages.\n",
-          "items" : {
-            "$ref" : "#/definitions/MessageItem"
-          }
-        },
-        "actions" : {
-          "type" : "array",
-          "description" : "The actions in the message.",
-          "items" : {
-            "$ref" : "#/definitions/Action"
-          }
-        },
-        "payload" : {
-          "type" : "string",
-          "description" : "The payload of a reply action, if applicable."
-        },
-        "displaySettings" : {
-          "description" : "Settings to adjust the carousel layout. See [Display Settings](https://docs.smooch.io/rest/#display-settings).",
-          "$ref" : "#/definitions/DisplaySettings"
-        }
-      },
-      "example" : {
-        "metadata" : "{}",
-        "role" : "role",
-        "displaySettings" : {
-          "imageAspectRatio" : "imageAspectRatio"
-        },
-        "mediaUrl" : "mediaUrl",
-        "avatarUrl" : "avatarUrl",
-        "received" : 0.8008282,
-        "mediaType" : "mediaType",
-        "source" : {
-          "id" : "id",
-          "type" : "type"
-        },
-        "authorId" : "authorId",
-        "type" : "type",
-        "payload" : "payload",
-        "name" : "name",
-        "_id" : "_id",
-        "text" : "text",
-        "items" : [ {
-          "mediaUrl" : "mediaUrl",
-          "size" : "size",
-          "description" : "description",
-          "mediaType" : "mediaType",
-          "title" : "title",
-          "actions" : [ {
-            "metadata" : "{}",
-            "amount" : 6,
-            "default" : true,
-            "size" : "size",
-            "payload" : "payload",
-            "extraChannelOptions" : "{}",
-            "currency" : "currency",
-            "text" : "text",
-            "iconUrl" : "iconUrl",
-            "type" : "type",
-            "uri" : "uri",
-            "fallback" : "fallback"
-          }, {
-            "metadata" : "{}",
-            "amount" : 6,
-            "default" : true,
-            "size" : "size",
-            "payload" : "payload",
-            "extraChannelOptions" : "{}",
-            "currency" : "currency",
-            "text" : "text",
-            "iconUrl" : "iconUrl",
-            "type" : "type",
-            "uri" : "uri",
-            "fallback" : "fallback"
-          } ]
-        }, {
-          "mediaUrl" : "mediaUrl",
-          "size" : "size",
-          "description" : "description",
-          "mediaType" : "mediaType",
-          "title" : "title",
-          "actions" : [ {
-            "metadata" : "{}",
-            "amount" : 6,
-            "default" : true,
-            "size" : "size",
-            "payload" : "payload",
-            "extraChannelOptions" : "{}",
-            "currency" : "currency",
-            "text" : "text",
-            "iconUrl" : "iconUrl",
-            "type" : "type",
-            "uri" : "uri",
-            "fallback" : "fallback"
-          }, {
-            "metadata" : "{}",
-            "amount" : 6,
-            "default" : true,
-            "size" : "size",
-            "payload" : "payload",
-            "extraChannelOptions" : "{}",
-            "currency" : "currency",
-            "text" : "text",
-            "iconUrl" : "iconUrl",
-            "type" : "type",
-            "uri" : "uri",
-            "fallback" : "fallback"
-          } ]
-        } ],
-        "actions" : [ {
-          "metadata" : "{}",
-          "amount" : 6,
-          "default" : true,
-          "size" : "size",
-          "payload" : "payload",
-          "extraChannelOptions" : "{}",
-          "currency" : "currency",
-          "text" : "text",
-          "iconUrl" : "iconUrl",
-          "type" : "type",
-          "uri" : "uri",
-          "fallback" : "fallback"
-        }, {
-          "metadata" : "{}",
-          "amount" : 6,
-          "default" : true,
-          "size" : "size",
-          "payload" : "payload",
-          "extraChannelOptions" : "{}",
-          "currency" : "currency",
-          "text" : "text",
-          "iconUrl" : "iconUrl",
-          "type" : "type",
-          "uri" : "uri",
-          "fallback" : "fallback"
-        } ],
-        "email" : "email"
-      }
-    },
-    "Source" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "An identifier used by Smooch for internal purposes."
-        },
-        "type" : {
-          "type" : "string",
-          "description" : "An identifier for the channel from which a message originated."
-        }
-      },
-      "example" : {
-        "id" : "id",
-        "type" : "type"
-      }
-    },
-    "MessageItem" : {
-      "required" : [ "actions", "title" ],
-      "properties" : {
-        "title" : {
-          "type" : "string",
-          "description" : "The title of the message item."
-        },
-        "description" : {
-          "type" : "string",
-          "description" : "The text description, or subtitle."
-        },
-        "mediaUrl" : {
-          "type" : "string",
-          "description" : "The image URL to be shown in the carousel/list item."
-        },
-        "size" : {
-          "type" : "string",
-          "description" : "The size of the image to be shown in the carousel/list item.\nOnly top item of Facebook Messenger carousel supported.\nChoose from *compact* and *large*.\n"
-        },
-        "mediaType" : {
-          "type" : "string",
-          "description" : "If a *mediaUrl* was specified, the media type is defined here, for example *image/jpeg*."
-        },
-        "actions" : {
-          "type" : "array",
-          "description" : "Array of [action buttons](https://docs.smooch.io/rest/#action-buttons). At least 1 is required, a maximum of 3 are allowed.",
-          "items" : {
-            "$ref" : "#/definitions/Action"
-          }
-        }
-      },
-      "example" : {
-        "mediaUrl" : "mediaUrl",
-        "size" : "size",
-        "description" : "description",
-        "mediaType" : "mediaType",
-        "title" : "title",
-        "actions" : [ {
-          "metadata" : "{}",
-          "amount" : 6,
-          "default" : true,
-          "size" : "size",
-          "payload" : "payload",
-          "extraChannelOptions" : "{}",
-          "currency" : "currency",
-          "text" : "text",
-          "iconUrl" : "iconUrl",
-          "type" : "type",
-          "uri" : "uri",
-          "fallback" : "fallback"
-        }, {
-          "metadata" : "{}",
-          "amount" : 6,
-          "default" : true,
-          "size" : "size",
-          "payload" : "payload",
-          "extraChannelOptions" : "{}",
-          "currency" : "currency",
-          "text" : "text",
-          "iconUrl" : "iconUrl",
-          "type" : "type",
-          "uri" : "uri",
-          "fallback" : "fallback"
-        } ]
-      }
-    },
-    "Action" : {
-      "required" : [ "text", "type" ],
-      "properties" : {
-        "type" : {
-          "type" : "string",
-          "description" : "The action type."
-        },
-        "text" : {
-          "type" : "string",
-          "description" : "The button text."
-        },
-        "payload" : {
-          "type" : "string",
-          "description" : "The payload to be sent with the resulting webhook.\nRequired for *postback* and *reply* actions.\n"
-        },
-        "metadata" : {
-          "type" : "object",
-          "description" : "Flat JSON object containing any custom properties associated with the action.",
-          "properties" : { }
-        },
-        "amount" : {
-          "type" : "integer",
-          "description" : "The amount being charged. It needs to be specified in cents and is an integer.\nRequired for *buy* actions.\n"
-        },
-        "currency" : {
-          "type" : "string",
-          "description" : "The currency of the amount being charged (USD, CAD, etc.)."
-        },
-        "default" : {
-          "type" : "boolean",
-          "description" : "Flag indicating if the message action is the default for a message item in Facebook Messenger."
-        },
-        "iconUrl" : {
-          "type" : "string",
-          "description" : "An icon to render next to the reply option (Facebook Messenger and Web Messenger only)."
-        },
-        "uri" : {
-          "type" : "string",
-          "description" : "The action URI. This is the link that will be used in the clients when clicking the button.\nRequired for *link* and *webview* actions.\n"
-        },
-        "fallback" : {
-          "type" : "string",
-          "description" : "The webview action fallback uri. This is the link that will be used in clients that do not support webviews.\nRequired for *webview* actions.\n"
-        },
-        "size" : {
-          "type" : "string",
-          "description" : "The size used to display the webview. Allowed values are [\"compact\", \"tall\", \"full\"].\n(Optional) Used for *webview* actions.\n"
-        },
-        "extraChannelOptions" : {
-          "type" : "object",
-          "description" : "Extra options to pass directly to the channel API. See [Extra Channel Options](https://docs.smooch.io/rest#extra-channel-options-schema)",
-          "properties" : { }
-        }
-      },
-      "example" : {
-        "metadata" : "{}",
-        "amount" : 6,
-        "default" : true,
-        "size" : "size",
-        "payload" : "payload",
-        "extraChannelOptions" : "{}",
-        "currency" : "currency",
-        "text" : "text",
-        "iconUrl" : "iconUrl",
-        "type" : "type",
-        "uri" : "uri",
-        "fallback" : "fallback"
-      }
-    },
-    "DisplaySettings" : {
-      "type" : "object",
-      "properties" : {
-        "imageAspectRatio" : {
-          "type" : "string",
-          "description" : "Specifies how to display all carousel images. Valid values are *horizontal* (default) and *square*."
-        }
-      },
-      "example" : {
-        "imageAspectRatio" : "imageAspectRatio"
-      }
-    },
-    "Conversation" : {
-      "type" : "object",
-      "required" : [ "_id", "unreadCount" ],
-      "properties" : {
-        "_id" : {
-          "type" : "string",
-          "description" : "The conversation ID, generated automatically."
-        },
-        "unreadCount" : {
-          "type" : "integer",
-          "description" : "The number of unread messages in the conversation."
-        }
-      },
-      "example" : {
-        "unreadCount" : 1,
-        "_id" : "_id"
-      }
-    },
     "AuthCodeResponse" : {
       "type" : "object",
       "required" : [ "authCode" ],
@@ -2753,6 +2195,368 @@
         }
       }
     },
+    "Message" : {
+      "type" : "object",
+      "required" : [ "_id", "authorId", "avatarUrl", "name", "received", "role", "text", "type" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The message ID, generated automatically."
+        },
+        "authorId" : {
+          "type" : "string",
+          "description" : "The ID of the message's author."
+        },
+        "role" : {
+          "type" : "string",
+          "description" : "The role of the individual posting the message. Can be either *appUser* or *appMaker*."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The message type."
+        },
+        "source" : {
+          "description" : "The source of the message.",
+          "$ref" : "#/definitions/Source"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The display name of the message author."
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The message text.\nRequired for text messages.\n"
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The email address of the message author."
+        },
+        "avatarUrl" : {
+          "type" : "string",
+          "description" : "The URL of the desired message avatar image."
+        },
+        "received" : {
+          "type" : "number",
+          "format" : "float",
+          "description" : "The unix timestamp of the moment the message was received."
+        },
+        "mediaUrl" : {
+          "type" : "string",
+          "description" : "The mediaUrl for the message.\nRequired for image/file messages.\n"
+        },
+        "mediaType" : {
+          "type" : "string",
+          "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the message.",
+          "properties" : { }
+        },
+        "items" : {
+          "type" : "array",
+          "description" : "The items in the message list.\nRequired for carousel and list messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/MessageItem"
+          }
+        },
+        "actions" : {
+          "type" : "array",
+          "description" : "The actions in the message.",
+          "items" : {
+            "$ref" : "#/definitions/Action"
+          }
+        },
+        "payload" : {
+          "type" : "string",
+          "description" : "The payload of a reply action, if applicable."
+        },
+        "displaySettings" : {
+          "description" : "Settings to adjust the carousel layout. See [Display Settings](https://docs.smooch.io/rest/#display-settings).",
+          "$ref" : "#/definitions/DisplaySettings"
+        }
+      },
+      "example" : {
+        "metadata" : "{}",
+        "role" : "role",
+        "displaySettings" : {
+          "imageAspectRatio" : "imageAspectRatio"
+        },
+        "mediaUrl" : "mediaUrl",
+        "avatarUrl" : "avatarUrl",
+        "received" : 0.8008282,
+        "mediaType" : "mediaType",
+        "source" : {
+          "id" : "id",
+          "type" : "type"
+        },
+        "authorId" : "authorId",
+        "type" : "type",
+        "payload" : "payload",
+        "name" : "name",
+        "_id" : "_id",
+        "text" : "text",
+        "items" : [ {
+          "mediaUrl" : "mediaUrl",
+          "size" : "size",
+          "description" : "description",
+          "mediaType" : "mediaType",
+          "title" : "title",
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ]
+        }, {
+          "mediaUrl" : "mediaUrl",
+          "size" : "size",
+          "description" : "description",
+          "mediaType" : "mediaType",
+          "title" : "title",
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ]
+        } ],
+        "actions" : [ {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        }, {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        } ],
+        "email" : "email"
+      }
+    },
+    "Source" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identifier used by Smooch for internal purposes."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "An identifier for the channel from which a message originated."
+        }
+      },
+      "example" : {
+        "id" : "id",
+        "type" : "type"
+      }
+    },
+    "MessageItem" : {
+      "required" : [ "actions", "title" ],
+      "properties" : {
+        "title" : {
+          "type" : "string",
+          "description" : "The title of the message item."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "The text description, or subtitle."
+        },
+        "mediaUrl" : {
+          "type" : "string",
+          "description" : "The image URL to be shown in the carousel/list item."
+        },
+        "size" : {
+          "type" : "string",
+          "description" : "The size of the image to be shown in the carousel/list item.\nOnly top item of Facebook Messenger carousel supported.\nChoose from *compact* and *large*.\n"
+        },
+        "mediaType" : {
+          "type" : "string",
+          "description" : "If a *mediaUrl* was specified, the media type is defined here, for example *image/jpeg*."
+        },
+        "actions" : {
+          "type" : "array",
+          "description" : "Array of [action buttons](https://docs.smooch.io/rest/#action-buttons). At least 1 is required, a maximum of 3 are allowed.",
+          "items" : {
+            "$ref" : "#/definitions/Action"
+          }
+        }
+      },
+      "example" : {
+        "mediaUrl" : "mediaUrl",
+        "size" : "size",
+        "description" : "description",
+        "mediaType" : "mediaType",
+        "title" : "title",
+        "actions" : [ {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        }, {
+          "metadata" : "{}",
+          "amount" : 6,
+          "default" : true,
+          "size" : "size",
+          "payload" : "payload",
+          "extraChannelOptions" : "{}",
+          "currency" : "currency",
+          "text" : "text",
+          "iconUrl" : "iconUrl",
+          "type" : "type",
+          "uri" : "uri",
+          "fallback" : "fallback"
+        } ]
+      }
+    },
+    "Action" : {
+      "required" : [ "text", "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The action type."
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The button text."
+        },
+        "payload" : {
+          "type" : "string",
+          "description" : "The payload to be sent with the resulting webhook.\nRequired for *postback* and *reply* actions.\n"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the action.",
+          "properties" : { }
+        },
+        "amount" : {
+          "type" : "integer",
+          "description" : "The amount being charged. It needs to be specified in cents and is an integer.\nRequired for *buy* actions.\n"
+        },
+        "currency" : {
+          "type" : "string",
+          "description" : "The currency of the amount being charged (USD, CAD, etc.)."
+        },
+        "default" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if the message action is the default for a message item in Facebook Messenger."
+        },
+        "iconUrl" : {
+          "type" : "string",
+          "description" : "An icon to render next to the reply option (Facebook Messenger and Web Messenger only)."
+        },
+        "uri" : {
+          "type" : "string",
+          "description" : "The action URI. This is the link that will be used in the clients when clicking the button.\nRequired for *link* and *webview* actions.\n"
+        },
+        "fallback" : {
+          "type" : "string",
+          "description" : "The webview action fallback uri. This is the link that will be used in clients that do not support webviews.\nRequired for *webview* actions.\n"
+        },
+        "size" : {
+          "type" : "string",
+          "description" : "The size used to display the webview. Allowed values are [\"compact\", \"tall\", \"full\"].\n(Optional) Used for *webview* actions.\n"
+        },
+        "extraChannelOptions" : {
+          "type" : "object",
+          "description" : "Extra options to pass directly to the channel API. See [Extra Channel Options](https://docs.smooch.io/rest#extra-channel-options-schema)",
+          "properties" : { }
+        }
+      },
+      "example" : {
+        "metadata" : "{}",
+        "amount" : 6,
+        "default" : true,
+        "size" : "size",
+        "payload" : "payload",
+        "extraChannelOptions" : "{}",
+        "currency" : "currency",
+        "text" : "text",
+        "iconUrl" : "iconUrl",
+        "type" : "type",
+        "uri" : "uri",
+        "fallback" : "fallback"
+      }
+    },
+    "DisplaySettings" : {
+      "type" : "object",
+      "properties" : {
+        "imageAspectRatio" : {
+          "type" : "string",
+          "description" : "Specifies how to display all carousel images. Valid values are *horizontal* (default) and *square*."
+        }
+      },
+      "example" : {
+        "imageAspectRatio" : "imageAspectRatio"
+      }
+    },
     "AppUserBusinessSystemsResponse" : {
       "type" : "object",
       "required" : [ "businessSystems" ],
@@ -3092,9 +2896,27 @@
           "email" : "email"
         } ],
         "conversation" : {
-          "unreadCount" : 1,
+          "unreadCount" : 0,
           "_id" : "_id"
         }
+      }
+    },
+    "Conversation" : {
+      "type" : "object",
+      "required" : [ "_id", "unreadCount" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The conversation ID, generated automatically."
+        },
+        "unreadCount" : {
+          "type" : "integer",
+          "description" : "The number of unread messages in the conversation."
+        }
+      },
+      "example" : {
+        "unreadCount" : 0,
+        "_id" : "_id"
       }
     },
     "MessagePost" : {
@@ -3287,6 +3109,142 @@
       "example" : {
         "integrationType" : "integrationType",
         "integrationId" : "integrationId"
+      }
+    },
+    "MessageResponse" : {
+      "type" : "object",
+      "required" : [ "conversation", "message" ],
+      "properties" : {
+        "message" : {
+          "description" : "The message.",
+          "$ref" : "#/definitions/Message"
+        },
+        "conversation" : {
+          "description" : "The conversation.",
+          "$ref" : "#/definitions/Conversation"
+        }
+      },
+      "example" : {
+        "message" : {
+          "metadata" : "{}",
+          "role" : "role",
+          "displaySettings" : {
+            "imageAspectRatio" : "imageAspectRatio"
+          },
+          "mediaUrl" : "mediaUrl",
+          "avatarUrl" : "avatarUrl",
+          "received" : 0.8008282,
+          "mediaType" : "mediaType",
+          "source" : {
+            "id" : "id",
+            "type" : "type"
+          },
+          "authorId" : "authorId",
+          "type" : "type",
+          "payload" : "payload",
+          "name" : "name",
+          "_id" : "_id",
+          "text" : "text",
+          "items" : [ {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          }, {
+            "mediaUrl" : "mediaUrl",
+            "size" : "size",
+            "description" : "description",
+            "mediaType" : "mediaType",
+            "title" : "title",
+            "actions" : [ {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            }, {
+              "metadata" : "{}",
+              "amount" : 6,
+              "default" : true,
+              "size" : "size",
+              "payload" : "payload",
+              "extraChannelOptions" : "{}",
+              "currency" : "currency",
+              "text" : "text",
+              "iconUrl" : "iconUrl",
+              "type" : "type",
+              "uri" : "uri",
+              "fallback" : "fallback"
+            } ]
+          } ],
+          "actions" : [ {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          }, {
+            "metadata" : "{}",
+            "amount" : 6,
+            "default" : true,
+            "size" : "size",
+            "payload" : "payload",
+            "extraChannelOptions" : "{}",
+            "currency" : "currency",
+            "text" : "text",
+            "iconUrl" : "iconUrl",
+            "type" : "type",
+            "uri" : "uri",
+            "fallback" : "fallback"
+          } ],
+          "email" : "email"
+        },
+        "conversation" : {
+          "unreadCount" : 0,
+          "_id" : "_id"
+        }
       }
     },
     "TypingActivityTrigger" : {
