@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "2.8",
+    "version" : "2.9",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -587,6 +587,254 @@
         }
       }
     },
+    "/serviceaccounts" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "List all service accounts configured.",
+        "operationId" : "listServiceAccounts",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "The number of records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 25
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "The number of initial records to skip before picking records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 0
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListServiceAccountsResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Create a new service account.",
+        "operationId" : "createServiceAccount",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "serviceAccountCreateBody",
+          "description" : "Body for a createServiceAccount request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ServiceAccountCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceAccountResponse"
+            }
+          }
+        }
+      }
+    },
+    "/serviceaccounts/{serviceAccountId}" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Get the specified service account.",
+        "operationId" : "getServiceAccount",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceAccountResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Update the specified service account.",
+        "operationId" : "updateServiceAccount",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "serviceAccountUpdateBody",
+          "description" : "Body for an updateServiceAccount request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ServiceAccountUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceAccountResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Delete the specified service account.",
+        "operationId" : "deleteServiceAccount",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/serviceaccounts/{serviceAccountId}/keys" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "List the secret keys for the specified service account.",
+        "operationId" : "listSecretKeys",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListSecretKeysResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Create a secret key for the specified service account.",
+        "operationId" : "createSecretKey",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "secretKeyCreateBody",
+          "description" : "Body for a createSecretKey request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SecretKeyCreate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/SecretKeyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/serviceaccounts/{serviceAccountId}/keys/{keyId}" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Get the specified service account secret key.",
+        "operationId" : "getSecretKey",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/SecretKeyResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Delete the specified service account secret key.",
+        "operationId" : "deleteSecretKey",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Get an account-scoped JWT for the specified service account secret key.",
+        "operationId" : "getJwt",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/JwtResponse"
+            }
+          }
+        }
+      }
+    },
     "/apps" : {
       "get" : {
         "tags" : [ "App" ],
@@ -598,7 +846,7 @@
           "description" : "The number of records to return.",
           "required" : false,
           "type" : "integer",
-          "default" : 0
+          "default" : 25
         }, {
           "name" : "offset",
           "in" : "query",
@@ -606,6 +854,12 @@
           "required" : false,
           "type" : "integer",
           "default" : 0
+        }, {
+          "name" : "serviceAccountId",
+          "in" : "query",
+          "description" : "The service account ID for which to list apps.",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
@@ -2049,6 +2303,127 @@
         }
       }
     },
+    "ListServiceAccountsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "serviceAccounts" : {
+          "type" : "array",
+          "description" : "The list of service accounts.",
+          "items" : {
+            "$ref" : "#/definitions/ServiceAccount"
+          }
+        },
+        "hasMore" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if there are more service accounts that are not present in the response."
+        },
+        "offset" : {
+          "type" : "integer",
+          "description" : "The number of service account records skipped in the returned list."
+        }
+      }
+    },
+    "ServiceAccount" : {
+      "type" : "object",
+      "required" : [ "_id", "name" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The service account's ID."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The service account's name."
+        }
+      }
+    },
+    "ServiceAccountCreate" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The service account's name."
+        }
+      }
+    },
+    "ServiceAccountResponse" : {
+      "type" : "object",
+      "properties" : {
+        "serviceAccount" : {
+          "description" : "The service account.",
+          "$ref" : "#/definitions/ServiceAccount"
+        }
+      }
+    },
+    "ServiceAccountUpdate" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The service account's name."
+        }
+      }
+    },
+    "ListSecretKeysResponse" : {
+      "type" : "object",
+      "properties" : {
+        "keys" : {
+          "type" : "array",
+          "description" : "The list of secret keys.",
+          "items" : {
+            "$ref" : "#/definitions/SecretKey"
+          }
+        }
+      }
+    },
+    "SecretKey" : {
+      "type" : "object",
+      "required" : [ "_id", "name", "secret" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The secret key ID, generated automatically."
+        },
+        "secret" : {
+          "type" : "string",
+          "description" : "The secret itself."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "A friendly identifier for the secret key."
+        }
+      }
+    },
+    "SecretKeyCreate" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "A friendly identifier for the secret key."
+        }
+      }
+    },
+    "SecretKeyResponse" : {
+      "type" : "object",
+      "properties" : {
+        "key" : {
+          "description" : "The secret key.",
+          "$ref" : "#/definitions/SecretKey"
+        }
+      }
+    },
+    "JwtResponse" : {
+      "type" : "object",
+      "properties" : {
+        "jwt" : {
+          "type" : "string",
+          "description" : "The JWT."
+        }
+      }
+    },
     "ListAppsResponse" : {
       "type" : "object",
       "properties" : {
@@ -2122,64 +2497,6 @@
         },
         "settings" : {
           "$ref" : "#/definitions/App_settings"
-        }
-      }
-    },
-    "ListSecretKeysResponse" : {
-      "type" : "object",
-      "properties" : {
-        "keys" : {
-          "type" : "array",
-          "description" : "The list of secret keys.",
-          "items" : {
-            "$ref" : "#/definitions/SecretKey"
-          }
-        }
-      }
-    },
-    "SecretKey" : {
-      "type" : "object",
-      "required" : [ "_id", "name", "secret" ],
-      "properties" : {
-        "_id" : {
-          "type" : "string",
-          "description" : "The secret key ID, generated automatically."
-        },
-        "secret" : {
-          "type" : "string",
-          "description" : "The secret itself."
-        },
-        "name" : {
-          "type" : "string",
-          "description" : "A friendly identifier for the secret key."
-        }
-      }
-    },
-    "SecretKeyCreate" : {
-      "type" : "object",
-      "required" : [ "name" ],
-      "properties" : {
-        "name" : {
-          "type" : "string",
-          "description" : "A friendly identifier for the secret key."
-        }
-      }
-    },
-    "SecretKeyResponse" : {
-      "type" : "object",
-      "properties" : {
-        "key" : {
-          "description" : "The secret key.",
-          "$ref" : "#/definitions/SecretKey"
-        }
-      }
-    },
-    "JwtResponse" : {
-      "type" : "object",
-      "properties" : {
-        "jwt" : {
-          "type" : "string",
-          "description" : "The JWT."
         }
       }
     },

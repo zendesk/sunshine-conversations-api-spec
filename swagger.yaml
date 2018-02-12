@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '2.8'
+  version: '2.9'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -311,6 +311,136 @@ paths:
           description: Success
           schema:
             $ref: ./definitions/MenuResponse.yaml
+  /serviceaccounts:
+    post:
+      tags:
+        - ServiceAccount
+      description: Create a new service account.
+      operationId: createServiceAccount
+      parameters:
+        - $ref: ./parameters/ServiceAccountCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/ServiceAccountResponse.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: List all service accounts configured.
+      operationId: listServiceAccounts
+      parameters:
+        - name: limit
+          in: query
+          description: The number of records to return.
+          type: integer
+          default: 25
+        - name: offset
+          in: query
+          description: >-
+            The number of initial records to skip before picking records to
+            return.
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListServiceAccountsResponse.yaml
+  '/serviceaccounts/{serviceAccountId}':
+    parameters:
+      - $ref: ./parameters/ServiceAccountId.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: Get the specified service account.
+      operationId: getServiceAccount
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ServiceAccountResponse.yaml
+    put:
+      tags:
+        - ServiceAccount
+      description: Update the specified service account.
+      operationId: updateServiceAccount
+      parameters:
+        - $ref: ./parameters/ServiceAccountUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ServiceAccountResponse.yaml
+    delete:
+      tags:
+        - ServiceAccount
+      description: Delete the specified service account.
+      operationId: deleteServiceAccount
+      responses:
+        '200':
+          description: Ok
+  '/serviceaccounts/{serviceAccountId}/keys':
+    parameters:
+      - $ref: ./parameters/ServiceAccountId.yaml
+    post:
+      tags:
+        - ServiceAccount
+      description: Create a secret key for the specified service account.
+      operationId: createSecretKey
+      parameters:
+        - $ref: ./parameters/SecretKeyCreate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/SecretKeyResponse.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: List the secret keys for the specified service account.
+      operationId: listSecretKeys
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListSecretKeysResponse.yaml
+  '/serviceaccounts/{serviceAccountId}/keys/{keyId}':
+    parameters:
+      - $ref: ./parameters/ServiceAccountId.yaml
+      - $ref: ./parameters/KeyId.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: Get the specified service account secret key.
+      operationId: getSecretKey
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/SecretKeyResponse.yaml
+    delete:
+      tags:
+        - ServiceAccount
+      description: Delete the specified service account secret key.
+      operationId: deleteSecretKey
+      responses:
+        '200':
+          description: Ok
+  '/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt':
+    parameters:
+      - $ref: ./parameters/ServiceAccountId.yaml
+      - $ref: ./parameters/KeyId.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: Get an account-scoped JWT for the specified service account secret key.
+      operationId: getJwt
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/JwtResponse.yaml
   /apps:
     post:
       tags:
@@ -334,7 +464,7 @@ paths:
           in: query
           description: The number of records to return.
           type: integer
-          default: 0
+          default: 25
         - name: offset
           in: query
           description: >-
@@ -342,6 +472,11 @@ paths:
             return.
           type: integer
           default: 0
+        - name: serviceAccountId
+          in: query
+          description: The service account ID for which to list apps.
+          type: string
+          default: ''
       responses:
         '200':
           description: Ok
