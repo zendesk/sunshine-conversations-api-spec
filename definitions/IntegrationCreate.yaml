@@ -160,3 +160,8 @@ properties:
     description: |
       A custom business icon url for the Web Messenger.
       (Optional) Used for *Web Messenger* integrations.
+  backgroundImageUrl:
+    type: string
+    description: |
+      A custom background url for the Web Messenger.
+      (Optional) Used for *Web Messenger* integrations.
