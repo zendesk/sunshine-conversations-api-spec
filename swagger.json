@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "2.10",
+    "version" : "2.11",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2676,6 +2676,14 @@
           "type" : "string",
           "description" : "With the button style Web Messenger, you have the option of selecting your own button icon.\n(Optional) Used for *Web Messenger* integrations.\n"
         },
+        "buttonWidth" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its width.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonHeight" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its height.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
         "integrationOrder" : {
           "type" : "array",
           "description" : "A custom business name for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n",
@@ -2809,6 +2817,14 @@
           "type" : "string",
           "description" : "With the button style Web Messenger, you have the option of selecting your own button icon.\n(Optional) Used for *Web Messenger* integrations.\n"
         },
+        "buttonWidth" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its width.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonHeight" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its height.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
         "integrationOrder" : {
           "type" : "array",
           "description" : "A custom business name for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n",
@@ -2861,6 +2877,14 @@
         "buttonIconUrl" : {
           "type" : "string",
           "description" : "With the button style Web Messenger, you have the option of selecting your own button icon.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonWidth" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its width.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonHeight" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its height.\n(Optional) Used for *Web Messenger* integrations.\n"
         },
         "integrationOrder" : {
           "type" : "array",

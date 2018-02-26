@@ -33,6 +33,20 @@ properties:
       own button icon.
 
       (Optional) Used for *Web Messenger* integrations.
+  buttonWidth:
+    type: string
+    description: >
+      With the button style Web Messenger, you have the option of specifying its
+      width.
+
+      (Optional) Used for *Web Messenger* integrations.
+  buttonHeight:
+    type: string
+    description: >
+      With the button style Web Messenger, you have the option of specifying its
+      height.
+
+      (Optional) Used for *Web Messenger* integrations.
   integrationOrder:
     type: array
     items:
