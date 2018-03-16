@@ -42,7 +42,7 @@ properties:
     description: The URL of the desired message avatar image.
   received:
     type: number
-    format: float
+    format: double
     description: The unix timestamp of the moment the message was received.
   mediaUrl:
     type: string
