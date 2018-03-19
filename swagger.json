@@ -2,11 +2,10 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.0",
+    "version" : "3.1",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
-  "basePath" : "/v1",
   "schemes" : [ "https" ],
   "consumes" : [ "application/json" ],
   "produces" : [ "application/json" ],
@@ -14,7 +13,7 @@
     "jwt" : [ ]
   } ],
   "paths" : {
-    "/apps/{appId}/appusers/{userId}" : {
+    "/v1/apps/{appId}/appusers/{userId}" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Get the specified app user.",
@@ -76,7 +75,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers" : {
+    "/v1/apps/{appId}/appusers" : {
       "post" : {
         "tags" : [ "AppUser" ],
         "description" : "Pre-create an app user.",
@@ -106,7 +105,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/images" : {
+    "/v1/apps/{appId}/appusers/{userId}/images" : {
       "post" : {
         "tags" : [ "AppUser" ],
         "description" : "Send an image message to the conversation.",
@@ -147,7 +146,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/profile" : {
+    "/v1/apps/{appId}/appusers/{userId}/profile" : {
       "delete" : {
         "tags" : [ "AppUser" ],
         "description" : "Delete specified app user's profile.",
@@ -175,7 +174,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/authcode" : {
+    "/v1/apps/{appId}/appusers/{userId}/authcode" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Get an auth code for facilitating a channel transfer",
@@ -203,7 +202,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/channels" : {
+    "/v1/apps/{appId}/appusers/{userId}/channels" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Get specified app user's channel entity IDs.",
@@ -265,7 +264,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/businesssystems" : {
+    "/v1/apps/{appId}/appusers/{userId}/businesssystems" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Get specified app user's business system IDs.",
@@ -293,7 +292,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/channels/{channel}" : {
+    "/v1/apps/{appId}/appusers/{userId}/channels/{channel}" : {
       "delete" : {
         "tags" : [ "AppUser" ],
         "description" : "Unlink specified app user from given channel.",
@@ -324,7 +323,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/linkrequest" : {
+    "/v1/apps/{appId}/appusers/{userId}/linkrequest" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Fetch link requests for the specified app user.",
@@ -362,7 +361,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/messages" : {
+    "/v1/apps/{appId}/appusers/{userId}/messages" : {
       "get" : {
         "tags" : [ "Conversation" ],
         "description" : "Get the specified app user's messages.",
@@ -459,7 +458,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/conversation/read" : {
+    "/v1/apps/{appId}/appusers/{userId}/conversation/read" : {
       "post" : {
         "tags" : [ "Conversation" ],
         "description" : "Reset the unread count of the conversation to 0.",
@@ -484,7 +483,7 @@
         }
       }
     },
-    "/apps/{appId}/appusers/{userId}/conversation/activity" : {
+    "/v1/apps/{appId}/appusers/{userId}/conversation/activity" : {
       "post" : {
         "tags" : [ "Conversation" ],
         "description" : "Notify Smooch when an app maker starts or stops typing a response.",
@@ -517,7 +516,7 @@
         }
       }
     },
-    "/apps/{appId}/menu" : {
+    "/v1/apps/{appId}/menu" : {
       "get" : {
         "tags" : [ "Menu" ],
         "description" : "Get the specified app’s menu.",
@@ -587,7 +586,7 @@
         }
       }
     },
-    "/serviceaccounts" : {
+    "/v1/serviceaccounts" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "List all service accounts configured.",
@@ -639,7 +638,7 @@
         }
       }
     },
-    "/serviceaccounts/{serviceAccountId}" : {
+    "/v1/serviceaccounts/{serviceAccountId}" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "Get the specified service account.",
@@ -706,7 +705,7 @@
         }
       }
     },
-    "/serviceaccounts/{serviceAccountId}/keys" : {
+    "/v1/serviceaccounts/{serviceAccountId}/keys" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "List the secret keys for the specified service account.",
@@ -756,7 +755,7 @@
         }
       }
     },
-    "/serviceaccounts/{serviceAccountId}/keys/{keyId}" : {
+    "/v1/serviceaccounts/{serviceAccountId}/keys/{keyId}" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "Get the specified service account secret key.",
@@ -807,7 +806,7 @@
         }
       }
     },
-    "/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt" : {
+    "/v1/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "Get an account-scoped JWT for the specified service account secret key.",
@@ -835,7 +834,7 @@
         }
       }
     },
-    "/apps" : {
+    "/v1/apps" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "List all apps configured.",
@@ -893,7 +892,7 @@
         }
       }
     },
-    "/apps/{appId}" : {
+    "/v1/apps/{appId}" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "Get the specified app.",
@@ -960,7 +959,7 @@
         }
       }
     },
-    "/apps/{appId}/keys" : {
+    "/v1/apps/{appId}/keys" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "List the secret keys for the specified app.",
@@ -1010,7 +1009,7 @@
         }
       }
     },
-    "/apps/{appId}/keys/{keyId}" : {
+    "/v1/apps/{appId}/keys/{keyId}" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "Get the specified secret key.",
@@ -1061,7 +1060,7 @@
         }
       }
     },
-    "/apps/{appId}/keys/{keyId}/jwt" : {
+    "/v1/apps/{appId}/keys/{keyId}/jwt" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "Get an app-scoped JWT for the specified secret key.",
@@ -1089,7 +1088,7 @@
         }
       }
     },
-    "/apps/{appId}/integrations" : {
+    "/v1/apps/{appId}/integrations" : {
       "get" : {
         "tags" : [ "Integration" ],
         "description" : "List integrations for the specified app.",
@@ -1145,7 +1144,7 @@
         }
       }
     },
-    "/apps/{appId}/integrations/{integrationId}" : {
+    "/v1/apps/{appId}/integrations/{integrationId}" : {
       "get" : {
         "tags" : [ "Integration" ],
         "description" : "Get the specified integration.",
@@ -1230,7 +1229,7 @@
         }
       }
     },
-    "/apps/{appId}/integrations/{integrationId}/menu" : {
+    "/v1/apps/{appId}/integrations/{integrationId}/menu" : {
       "get" : {
         "tags" : [ "Integration" ],
         "description" : "Get the specified integration's menu.",
@@ -1349,7 +1348,7 @@
         }
       }
     },
-    "/apps/{appId}/webhooks" : {
+    "/v1/apps/{appId}/webhooks" : {
       "get" : {
         "tags" : [ "Webhook" ],
         "description" : "List webhooks for the specified app.",
@@ -1399,7 +1398,7 @@
         }
       }
     },
-    "/apps/{appId}/webhooks/{webhookId}" : {
+    "/v1/apps/{appId}/webhooks/{webhookId}" : {
       "get" : {
         "tags" : [ "Webhook" ],
         "description" : "Get the specified webhook.",
@@ -1484,7 +1483,7 @@
         }
       }
     },
-    "/apps/{appId}/attachments" : {
+    "/v1/apps/{appId}/attachments" : {
       "post" : {
         "tags" : [ "Attachments" ],
         "description" : "Upload an attachment to Smooch to use in future messages.",

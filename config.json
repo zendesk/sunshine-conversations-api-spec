@@ -9,9 +9,9 @@
     "gemLicense": "https://smooch.io/terms/",
     "artifactId": "api",
     "groupId": "io.smooch",
-    "projectVersion": "3.0.0",
-    "packageVersion": "3.0.0",
-    "gemVersion": "3.0.0",
-    "artifactVersion": "3.0.0",
+    "projectVersion": "3.1.0",
+    "packageVersion": "3.1.0",
+    "gemVersion": "3.1.0",
+    "artifactVersion": "3.1.0",
     "specificationUrl": "https://github.com/smooch/smooch-api-specification"
 }
