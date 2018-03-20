@@ -69,6 +69,16 @@ properties:
     description: |
       The viber URI to find the account.
       Returned on successful *viber* integrations.
+  channelId:
+    type: string
+    description: |
+      LINE Channel ID.
+      Required for *line* integrations.
+  channelSecret:
+    type: string
+    description: |
+      LINE Channel Secret.
+      Required for *line* integrations.
   channelAccessToken:
     type: string
     description: |

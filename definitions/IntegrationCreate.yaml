@@ -40,6 +40,16 @@ properties:
     description: |
       Telegram Bot Token OR Viber Public Account token.
       Required for *twilio* and *viber* integrations.
+  channelId:
+    type: string
+    description: |
+      LINE Channel ID.
+      Required for *line* integrations.
+  channelSecret:
+    type: string
+    description: |
+      LINE Channel Secret.
+      Required for *line* integrations.
   channelAccessToken:
     type: string
     description: |

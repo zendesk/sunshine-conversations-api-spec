@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.1",
+    "version" : "3.2",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2571,6 +2571,14 @@
           "type" : "string",
           "description" : "The viber URI to find the account.\nReturned on successful *viber* integrations.\n"
         },
+        "channelId" : {
+          "type" : "string",
+          "description" : "LINE Channel ID.\nRequired for *line* integrations.\n"
+        },
+        "channelSecret" : {
+          "type" : "string",
+          "description" : "LINE Channel Secret.\nRequired for *line* integrations.\n"
+        },
         "channelAccessToken" : {
           "type" : "string",
           "description" : "LINE Channel Access Token.\nRequired for *line* integrations.\n"
@@ -2739,6 +2747,14 @@
         "token" : {
           "type" : "string",
           "description" : "Telegram Bot Token OR Viber Public Account token.\nRequired for *twilio* and *viber* integrations.\n"
+        },
+        "channelId" : {
+          "type" : "string",
+          "description" : "LINE Channel ID.\nRequired for *line* integrations.\n"
+        },
+        "channelSecret" : {
+          "type" : "string",
+          "description" : "LINE Channel Secret.\nRequired for *line* integrations.\n"
         },
         "channelAccessToken" : {
           "type" : "string",
