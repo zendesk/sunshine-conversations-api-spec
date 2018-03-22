@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.2",
+    "version" : "3.3",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2693,7 +2693,7 @@
         },
         "integrationOrder" : {
           "type" : "array",
-          "description" : "A custom business name for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "description" : "Array of integration IDs, order will be reflected in the Web Messenger.\nWhen set, only integrations from this list will be displayed in the Web Messenger.\nIf unset, all integrations will be displayed\n(Optional) Used for *Web Messenger* integrations.\n",
           "items" : {
             "type" : "string"
           }
@@ -2709,6 +2709,13 @@
         "backgroundImageUrl" : {
           "type" : "string",
           "description" : "A custom background url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "originWhitelist" : {
+          "type" : "array",
+          "description" : "A list of origins to whitelist.\nWhen set, only the origins from this list will be able to initialize the Web Messenger.\nIf unset, all origins are whitelisted.\nThe elements in the list should follow the serialized-origin format from RFC 6454 `scheme \"://\" host [ \":\" port ]`, where scheme is `http` or `https`.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -2842,7 +2849,7 @@
         },
         "integrationOrder" : {
           "type" : "array",
-          "description" : "A custom business name for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "description" : "Array of integration IDs, order will be reflected in the Web Messenger.\nWhen set, only integrations from this list will be displayed in the Web Messenger.\nIf unset, all integrations will be displayed\n(Optional) Used for *Web Messenger* integrations.\n",
           "items" : {
             "type" : "string"
           }
@@ -2858,6 +2865,13 @@
         "backgroundImageUrl" : {
           "type" : "string",
           "description" : "A custom background url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "originWhitelist" : {
+          "type" : "array",
+          "description" : "A list of origins to whitelist.\nWhen set, only the origins from this list will be able to initialize the Web Messenger.\nIf unset, all origins are whitelisted.\nThe elements in the list should follow the serialized-origin format from RFC 6454 `scheme \"://\" host [ \":\" port ]`, where scheme is `http` or `https`.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -2903,7 +2917,7 @@
         },
         "integrationOrder" : {
           "type" : "array",
-          "description" : "A custom business name for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "description" : "Array of integration IDs, order will be reflected in the Web Messenger.\nWhen set, only integrations from this list will be displayed in the Web Messenger.\nIf unset, all integrations will be displayed\n(Optional) Used for *Web Messenger* integrations.\n",
           "items" : {
             "type" : "string"
           }
@@ -2919,6 +2933,13 @@
         "backgroundImageUrl" : {
           "type" : "string",
           "description" : "A custom background url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "originWhitelist" : {
+          "type" : "array",
+          "description" : "A list of origins to whitelist.\nWhen set, only the origins from this list will be able to initialize the Web Messenger.\nIf unset, all origins are whitelisted.\nThe elements in the list should follow the serialized-origin format from RFC 6454 `scheme \"://\" host [ \":\" port ]`, where scheme is `http` or `https`.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
