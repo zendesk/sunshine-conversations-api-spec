@@ -1,5 +1,3 @@
-required:
-  - name
 type: object
 properties:
   name:
@@ -14,3 +12,6 @@ properties:
         description: >-
           Flag specifying whether credit card numbers will be automatically
           masked if sent through Smooch.
+  metadata:
+    type: object
+    description: Flat JSON object containing any custom properties associated with the app.

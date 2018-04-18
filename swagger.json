@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.3",
+    "version" : "3.4",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2461,6 +2461,11 @@
         },
         "settings" : {
           "$ref" : "#/definitions/App_settings"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the app.",
+          "properties" : { }
         }
       }
     },
@@ -2474,6 +2479,11 @@
         },
         "settings" : {
           "$ref" : "#/definitions/App_settings"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the app.",
+          "properties" : { }
         }
       }
     },
@@ -2488,7 +2498,6 @@
     },
     "AppUpdate" : {
       "type" : "object",
-      "required" : [ "name" ],
       "properties" : {
         "name" : {
           "type" : "string",
@@ -2496,6 +2505,11 @@
         },
         "settings" : {
           "$ref" : "#/definitions/App_settings"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the app.",
+          "properties" : { }
         }
       }
     },
