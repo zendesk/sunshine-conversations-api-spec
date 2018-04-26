@@ -1,0 +1,5 @@
+name: messageId
+in: path
+description: Identifies the message.
+required: true
+type: string

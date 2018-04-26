@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '3.4'
+  version: '3.5'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -246,6 +246,19 @@ paths:
         Systems intact. These connections allow for the conversation to continue
         in the future, while still being associated to the same appUser.
       operationId: deleteMessages
+      responses:
+        '200':
+          description: Ok
+  '/v1/apps/{appId}/appusers/{userId}/messages/{messageId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+      - $ref: ./parameters/MessageId.yaml
+    delete:
+      tags:
+        - Conversation
+      description: Deletes a single message.
+      operationId: deleteMessage
       responses:
         '200':
           description: Ok
