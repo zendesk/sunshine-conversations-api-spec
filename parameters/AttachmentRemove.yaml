@@ -1,0 +1,7 @@
+name: attachmentRemoveBody
+in: body
+required: true
+description: |
+  Body for a removeAttachment request.
+schema:
+  $ref: ./definitions/AttachmentRemove.yaml

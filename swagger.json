@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.5",
+    "version" : "3.6",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1548,6 +1548,33 @@
           }
         }
       }
+    },
+    "/v1/apps/{appId}/attachments/remove" : {
+      "post" : {
+        "tags" : [ "Attachments" ],
+        "description" : "Remove an attachment uploaded to Smooch.",
+        "operationId" : "removeAttachment",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "attachmentRemoveBody",
+          "description" : "Body for a removeAttachment request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AttachmentRemove"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
     }
   },
   "securityDefinitions" : {
@@ -3080,6 +3107,16 @@
         "mediaType" : {
           "type" : "string",
           "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
+        }
+      }
+    },
+    "AttachmentRemove" : {
+      "type" : "object",
+      "required" : [ "mediaUrl" ],
+      "properties" : {
+        "mediaUrl" : {
+          "type" : "string",
+          "description" : "The mediaUrl for the message.\nRequired for image/file messages.\n"
         }
       }
     },

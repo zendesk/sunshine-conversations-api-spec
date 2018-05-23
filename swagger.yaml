@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '3.5'
+  version: '3.6'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -789,3 +789,16 @@ paths:
           description: Created
           schema:
             $ref: ./definitions/AttachmentResponse.yaml
+  '/v1/apps/{appId}/attachments/remove':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Attachments
+      description: Remove an attachment uploaded to Smooch.
+      operationId: removeAttachment
+      parameters:
+        - $ref: ./parameters/AttachmentRemove.yaml
+      responses:
+        '200':
+          description: Ok
