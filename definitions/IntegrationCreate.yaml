@@ -127,6 +127,13 @@ properties:
       idle state.
 
       (Optional) Used for *Web Messenger* integrations.
+  fixedIntroPane:
+    type: boolean
+    description: >
+      When `true`, the introduction pane will be pinned at the top of the
+      conversation instead of scrolling with it. The default value is `false`.
+
+      (Optional) Used for *Web Messenger* integrations.
   conversationColor:
     type: string
     description: >

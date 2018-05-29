@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.6",
+    "version" : "3.7",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2739,6 +2739,10 @@
           "type" : "string",
           "description" : "This color will be used in the messenger header and the button or tab in idle state.\n(Optional) Used for *Web Messenger* integrations.\n"
         },
+        "fixedIntroPane" : {
+          "type" : "boolean",
+          "description" : "When `true`, the introduction pane will be pinned at the top of the conversation instead of scrolling with it. The default value is `false`.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
         "conversationColor" : {
           "type" : "string",
           "description" : "This color will be used for customer messages, quick replies and actions in the footer.\n(Optional) Used for *Web Messenger* integrations.\n"
@@ -2895,6 +2899,10 @@
           "type" : "string",
           "description" : "This color will be used in the messenger header and the button or tab in idle state.\n(Optional) Used for *Web Messenger* integrations.\n"
         },
+        "fixedIntroPane" : {
+          "type" : "boolean",
+          "description" : "When `true`, the introduction pane will be pinned at the top of the conversation instead of scrolling with it. The default value is `false`.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
         "conversationColor" : {
           "type" : "string",
           "description" : "This color will be used for customer messages, quick replies and actions in the footer.\n(Optional) Used for *Web Messenger* integrations.\n"
@@ -2962,6 +2970,10 @@
         "brandColor" : {
           "type" : "string",
           "description" : "This color will be used in the messenger header and the button or tab in idle state.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "fixedIntroPane" : {
+          "type" : "boolean",
+          "description" : "When `true`, the introduction pane will be pinned at the top of the conversation instead of scrolling with it. The default value is `false`.\n(Optional) Used for *Web Messenger* integrations.\n"
         },
         "conversationColor" : {
           "type" : "string",
