@@ -129,6 +129,15 @@ properties:
     description: |
       Your sender id from the fcm console.
       Required for *fcm* integrations.
+  tier:
+    type: string
+    description: |
+      Your Twitter app’s tier. Accepted values are enterprise or premium.
+  envName:
+    type: string
+    description: |
+      The Twitter environment name, e.g.: env-beta.
+      Required for *twitter* integrations with *premium* tier.
   consumerKey:
     type: string
     description: |

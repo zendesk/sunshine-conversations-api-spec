@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.8",
+    "version" : "3.9",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2708,6 +2708,14 @@
           "type" : "string",
           "description" : "Your sender id from the fcm console.\nRequired for *fcm* integrations.\n"
         },
+        "tier" : {
+          "type" : "string",
+          "description" : "Your Twitter app’s tier. Accepted values are enterprise or premium.\n"
+        },
+        "envName" : {
+          "type" : "string",
+          "description" : "The Twitter environment name, e.g.: env-beta.\nRequired for *twitter* integrations with *premium* tier.\n"
+        },
         "consumerKey" : {
           "type" : "string",
           "description" : "The consumer key for your Twitter app.\nRequired for *twitter* integrations.\n"
@@ -2887,6 +2895,14 @@
         "senderId" : {
           "type" : "string",
           "description" : "Your sender id from the fcm console.\nRequired for *fcm* integrations.\n"
+        },
+        "tier" : {
+          "type" : "string",
+          "description" : "Your Twitter app’s tier. Accepted values are enterprise or premium.\n"
+        },
+        "envName" : {
+          "type" : "string",
+          "description" : "The Twitter environment name, e.g.: env-beta.\nRequired for *twitter* integrations with *premium* tier.\n"
         },
         "consumerKey" : {
           "type" : "string",
