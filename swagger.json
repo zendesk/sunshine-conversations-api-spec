@@ -1555,6 +1555,24 @@
           "description" : "Access level for the resulting file",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "for",
+          "in" : "query",
+          "description" : "The intended container for the attachment",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "appUserId",
+          "in" : "query",
+          "description" : "The appUserId of the user that will receive the attachment\nUsed in attachments for messages\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "query",
+          "description" : "The userId of the user that will receive the attachment\nUsed in attachments for messages\n",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "201" : {
