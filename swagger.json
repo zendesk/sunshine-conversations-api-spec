@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.10",
+    "version" : "3.11",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -73,6 +73,29 @@
             }
           }
         }
+      },
+      "delete" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Delete specified app user.",
+        "operationId" : "deleteAppUser",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
       }
     },
     "/v1/apps/{appId}/appusers" : {
@@ -101,23 +124,6 @@
             "schema" : {
               "$ref" : "#/definitions/AppUserResponse"
             }
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "AppUser" ],
-        "description" : "Delete specified app user.",
-        "operationId" : "deleteAppUser",
-        "parameters" : [ {
-          "name" : "appId",
-          "in" : "path",
-          "description" : "Identifies the app.",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok"
           }
         }
       }

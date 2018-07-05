@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '3.10'
+  version: '3.11'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -49,6 +49,14 @@ paths:
           description: Success
           schema:
             $ref: ./definitions/AppUserResponse.yaml
+    delete:
+      tags:
+        - AppUser
+      description: Delete specified app user.
+      operationId: deleteAppUser
+      responses:
+        '200':
+          description: Ok
   '/v1/apps/{appId}/appusers':
     parameters:
       - $ref: ./parameters/AppId.yaml
@@ -64,14 +72,6 @@ paths:
           description: Created
           schema:
             $ref: ./definitions/AppUserResponse.yaml
-    delete:
-      tags:
-        - AppUser
-      description: Delete specified app user.
-      operationId: deleteAppUser
-      responses:
-        '200':
-          description: Ok
   '/v1/apps/{appId}/appusers/{userId}/images':
     parameters:
       - $ref: ./parameters/AppId.yaml
