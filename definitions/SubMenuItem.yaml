@@ -17,8 +17,3 @@ properties:
   payload:
     type: string
     description: A payload for a postback. Required for a postback type item.
-  items:
-    type: array
-    description: A list of menu items for a submenu.
-    items:
-      $ref: ./SubMenuItem.yaml

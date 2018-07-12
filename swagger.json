@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.11",
+    "version" : "3.12",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2394,15 +2394,44 @@
         },
         "uri" : {
           "type" : "string",
-          "description" : "A valid address, like http://smooch.io. Required for a *link* type item."
+          "description" : "A valid address, like http://smooch.io. Required for a link type item."
         },
         "type" : {
           "type" : "string",
-          "description" : "Can either be [link](https://docs.smooch.io/javascript/#links) or [postback](https://docs.smooch.io/javascript/#postbacks), which correspond to Smooch’s [link and postback actions]((https://docs.smooch.io/javascript/#action-buttons)."
+          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus."
         },
         "payload" : {
           "type" : "string",
-          "description" : "A payload for a postback. Required for a *postback* type item."
+          "description" : "A payload for a postback. Required for a postback type item."
+        },
+        "items" : {
+          "type" : "array",
+          "description" : "A list of menu items for a submenu.",
+          "items" : {
+            "$ref" : "#/definitions/SubMenuItem"
+          }
+        }
+      }
+    },
+    "SubMenuItem" : {
+      "type" : "object",
+      "required" : [ "text", "type" ],
+      "properties" : {
+        "text" : {
+          "type" : "string",
+          "description" : "The button text of the menu item."
+        },
+        "uri" : {
+          "type" : "string",
+          "description" : "A valid address, like http://smooch.io. Required for a link type item."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus."
+        },
+        "payload" : {
+          "type" : "string",
+          "description" : "A payload for a postback. Required for a postback type item."
         }
       }
     },
