@@ -292,3 +292,13 @@ properties:
       `https`.
 
       (Optional) Used for *Web Messenger* integrations.
+  status:
+    type: string
+    description: >-
+      The integration status. Possible values are active, inactive or error.
+      [More info](https://docs.smooch.io/#integration-status).
+  error:
+    type: string
+    description: >-
+      The error causing the integration to fail. Will be present when `status`
+      is 'error'.

@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.12",
+    "version" : "3.13",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1616,6 +1616,155 @@
           }
         }
       }
+    },
+    "/v1/apps/{appId}/templates" : {
+      "get" : {
+        "tags" : [ "Template" ],
+        "description" : "List templates for the specified app.",
+        "operationId" : "listTemplates",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "The number of records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 25
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "The number of initial records to skip before picking records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 0
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListTemplatesResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Template" ],
+        "description" : "Create a template for the specified app.",
+        "operationId" : "createTemplate",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "templateCreateBody",
+          "description" : "Body for a createTemplate request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TemplateCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/TemplateResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/apps/{appId}/templates/{templateId}" : {
+      "get" : {
+        "tags" : [ "Template" ],
+        "description" : "Get the specified template.",
+        "operationId" : "getTemplate",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "templateId",
+          "in" : "path",
+          "description" : "Identifies the template.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/TemplateResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Template" ],
+        "description" : "Update the specified template.",
+        "operationId" : "updateTemplate",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "templateId",
+          "in" : "path",
+          "description" : "Identifies the template.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "templateUpdateBody",
+          "description" : "Body for an updateTemplate request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TemplateUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/TemplateResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Template" ],
+        "description" : "Delete the specified template.",
+        "operationId" : "deleteTemplate",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "templateId",
+          "in" : "path",
+          "description" : "Identifies the template.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
     }
   },
   "securityDefinitions" : {
@@ -2875,6 +3024,14 @@
           "items" : {
             "type" : "string"
           }
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The integration status. Possible values are active, inactive or error. [More info](https://docs.smooch.io/#integration-status)."
+        },
+        "error" : {
+          "type" : "string",
+          "description" : "The error causing the integration to fail. Will be present when `status` is 'error'."
         }
       }
     },
@@ -3220,6 +3377,82 @@
         "mediaUrl" : {
           "type" : "string",
           "description" : "The mediaUrl for the message.\nRequired for image/file messages.\n"
+        }
+      }
+    },
+    "ListTemplatesResponse" : {
+      "type" : "object",
+      "required" : [ "templates" ],
+      "properties" : {
+        "templates" : {
+          "type" : "array",
+          "description" : "The list of templates.",
+          "items" : {
+            "$ref" : "#/definitions/Template"
+          }
+        },
+        "hasMore" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if there are more templates that are not present in the response."
+        },
+        "offset" : {
+          "type" : "integer",
+          "description" : "The number of template records skipped in the returned list."
+        }
+      }
+    },
+    "Template" : {
+      "type" : "object",
+      "required" : [ "_id", "message", "name" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The template ID, generated automatically."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name for the template, used when sending via [shorthand](https://docs.smooch.io/guide/shorthand/#sending-template-message-with-inline-syntax)."
+        },
+        "message" : {
+          "description" : "The message sent when referencing the template via syntax.",
+          "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "TemplateCreate" : {
+      "type" : "object",
+      "required" : [ "message", "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The name for the template, used when sending via [shorthand](https://docs.smooch.io/guide/shorthand/#sending-template-message-with-inline-syntax)."
+        },
+        "message" : {
+          "description" : "The message sent when referencing the template via syntax.",
+          "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "TemplateResponse" : {
+      "type" : "object",
+      "required" : [ "template" ],
+      "properties" : {
+        "template" : {
+          "description" : "The template.",
+          "$ref" : "#/definitions/Template"
+        }
+      }
+    },
+    "TemplateUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The name for the template, used when sending via [shorthand](https://docs.smooch.io/guide/shorthand/#sending-template-message-with-inline-syntax)."
+        },
+        "message" : {
+          "description" : "The message sent when referencing the template via syntax.",
+          "$ref" : "#/definitions/Message"
         }
       }
     },

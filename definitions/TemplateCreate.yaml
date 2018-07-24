@@ -1,0 +1,13 @@
+type: object
+required:
+  - name
+  - message
+properties:
+  name:
+    type: string
+    description: >-
+      The name for the template, used when sending via
+      [shorthand](https://docs.smooch.io/guide/shorthand/#sending-template-message-with-inline-syntax).
+  message:
+    $ref: ./Message.yaml
+    description: The message sent when referencing the template via syntax.

@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '3.12'
+  version: '3.13'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -826,6 +826,78 @@ paths:
       operationId: removeAttachment
       parameters:
         - $ref: ./parameters/AttachmentRemove.yaml
+      responses:
+        '200':
+          description: Ok
+  '/v1/apps/{appId}/templates':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Template
+      description: Create a template for the specified app.
+      operationId: createTemplate
+      parameters:
+        - $ref: ./parameters/TemplateCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/TemplateResponse.yaml
+    get:
+      tags:
+        - Template
+      description: List templates for the specified app.
+      operationId: listTemplates
+      parameters:
+        - name: limit
+          in: query
+          description: The number of records to return.
+          type: integer
+          default: 25
+        - name: offset
+          in: query
+          description: >-
+            The number of initial records to skip before picking records to
+            return.
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListTemplatesResponse.yaml
+  '/v1/apps/{appId}/templates/{templateId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/TemplateId.yaml
+    get:
+      tags:
+        - Template
+      description: Get the specified template.
+      operationId: getTemplate
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/TemplateResponse.yaml
+    put:
+      tags:
+        - Template
+      description: Update the specified template.
+      operationId: updateTemplate
+      parameters:
+        - $ref: ./parameters/TemplateUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/TemplateResponse.yaml
+    delete:
+      tags:
+        - Template
+      description: Delete the specified template.
+      operationId: deleteTemplate
       responses:
         '200':
           description: Ok
