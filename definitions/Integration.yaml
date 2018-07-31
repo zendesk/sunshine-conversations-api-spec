@@ -24,6 +24,11 @@ properties:
     description: |
       Facebook Page App Secret OR WeChat App Secret.
       Required for *messenger* and *wechat* integrations.
+  accessTokenUrl:
+    type: string
+    description: |
+      Optional endpoint to generate access tokens for WeChat.
+      Used to coordinate API access with third party systems.
   webhookSecret:
     type: string
     description: |
