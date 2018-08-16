@@ -99,3 +99,13 @@ properties:
       `https`.
 
       (Optional) Used for *Web Messenger* integrations.
+  channelId:
+    type: string
+    description: |
+      LINE Channel ID.
+      Required for *line* integrations.
+  channelSecret:
+    type: string
+    description: |
+      LINE Channel Secret.
+      Required for *line* integrations.
