@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.15",
+    "version" : "3.16",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3138,6 +3138,10 @@
         "accessTokenSecret" : {
           "type" : "string",
           "description" : "The access token secret obtained from your user via oauth.\nRequired for *twitter* integrations.\n"
+        },
+        "accessTokenUrl" : {
+          "type" : "string",
+          "description" : "Optional endpoint to generate access tokens for WeChat.\nUsed to coordinate API access with third party systems.\n"
         },
         "accessKey" : {
           "type" : "string",
