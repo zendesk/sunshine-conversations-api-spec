@@ -14,6 +14,11 @@ properties:
         description: >-
           Flag specifying whether credit card numbers will be automatically
           masked if sent through Smooch.
+      useAnimalNames:
+        type: boolean
+        description: >-
+          Flag specifying whether animal names should be used for anonymous
+          users.
   metadata:
     type: object
     description: Flat JSON object containing any custom properties associated with the app.
