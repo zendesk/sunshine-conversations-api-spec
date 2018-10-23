@@ -109,3 +109,8 @@ properties:
     description: |
       LINE Channel Secret.
       Required for *line* integrations.
+  hsmFallbackLanguage:
+    type: string
+    description: |
+      Specification of a fallback language.
+      (Optional) Used for *WhatsApp* integrations.

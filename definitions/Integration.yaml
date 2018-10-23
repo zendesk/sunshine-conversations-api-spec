@@ -109,10 +109,21 @@ properties:
     description: |
       The binary of your APN certificate base64 encoded.
       Required for *apn* integrations.
+  baseUrl:
+    type: string
+    description: |
+      Your WhatsApp API client's URL.
+      Required for *WhatsApp* integrations.
+  hsmFallbackLanguage:
+    type: string
+    description: |
+      Specification of a fallback language.
+      (Optional) Used for *WhatsApp* integrations.
   password:
     type: string
     description: |
-      The password for your APN certificate.
+      The password for your APN certificate or WhatsApp API client.
+      Required for *WhatsApp* integrations.
       (Optional) Used for *apn* integrations.
   autoUpdateBadge:
     type: boolean
@@ -172,6 +183,7 @@ properties:
     type: string
     description: |
       The username for the account.
+      Required for *WhatsApp* integrations.
       Returned on successful *twitter* and *telegram* integrations.
   apiKey:
     type: string

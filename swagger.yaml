@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '3.18'
+  version: '3.19'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -709,6 +709,20 @@ paths:
         - Integration
       description: Delete the specified integration’s menu.
       operationId: deleteIntegrationMenu
+      responses:
+        '200':
+          description: Ok
+  '/v1/apps/{appId}/integrations/{integrationId}/profile':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/IntegrationId.yaml
+    put:
+      tags:
+        - Integration
+      description: Update the specified integration’s profile.
+      operationId: updateIntegrationProfile
+      parameters:
+        - $ref: ./parameters/IntegrationProfileUpdate.yaml
       responses:
         '200':
           description: Ok

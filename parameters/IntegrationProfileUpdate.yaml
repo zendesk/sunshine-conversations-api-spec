@@ -1,0 +1,6 @@
+name: integrationProfileBody
+in: body
+required: true
+description: Body for a profileUpdate request.
+schema:
+  $ref: ./definitions/IntegrationProfileUpdate.yaml

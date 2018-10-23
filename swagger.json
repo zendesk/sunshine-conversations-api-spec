@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.18",
+    "version" : "3.19",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1394,6 +1394,39 @@
           "description" : "Identifies the integration.",
           "required" : true,
           "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1/apps/{appId}/integrations/{integrationId}/profile" : {
+      "put" : {
+        "tags" : [ "Integration" ],
+        "description" : "Update the specified integration’s profile.",
+        "operationId" : "updateIntegrationProfile",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "integrationProfileBody",
+          "description" : "Body for a profileUpdate request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/IntegrationProfileUpdate"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -2906,9 +2939,17 @@
           "type" : "string",
           "description" : "The binary of your APN certificate base64 encoded.\nRequired for *apn* integrations.\n"
         },
+        "baseUrl" : {
+          "type" : "string",
+          "description" : "Your WhatsApp API client's URL.\nRequired for *WhatsApp* integrations.\n"
+        },
+        "hsmFallbackLanguage" : {
+          "type" : "string",
+          "description" : "Specification of a fallback language.\n(Optional) Used for *WhatsApp* integrations.\n"
+        },
         "password" : {
           "type" : "string",
-          "description" : "The password for your APN certificate.\n(Optional) Used for *apn* integrations.\n"
+          "description" : "The password for your APN certificate or WhatsApp API client.\nRequired for *WhatsApp* integrations.\n(Optional) Used for *apn* integrations.\n"
         },
         "autoUpdateBadge" : {
           "type" : "boolean",
@@ -2956,7 +2997,7 @@
         },
         "username" : {
           "type" : "string",
-          "description" : "The username for the account.\nReturned on successful *twitter* and *telegram* integrations.\n"
+          "description" : "The username for the account.\nRequired for *WhatsApp* integrations.\nReturned on successful *twitter* and *telegram* integrations.\n"
         },
         "apiKey" : {
           "type" : "string",
@@ -3074,6 +3115,14 @@
           "type" : "string",
           "description" : "Twilio Auth Token.\nRequired for *twilio* integrations.\n"
         },
+        "baseUrl" : {
+          "type" : "string",
+          "description" : "Your WhatsApp API client's URL.\nRequired for *WhatsApp* integrations.\n"
+        },
+        "hsmFallbackLanguage" : {
+          "type" : "string",
+          "description" : "Specification of a fallback language.\n(Optional) Used for *WhatsApp* integrations.\n"
+        },
         "phoneNumberSid" : {
           "type" : "string",
           "description" : "SID for specific phone number.\nRequired for *twilio* integrations.\n"
@@ -3108,7 +3157,11 @@
         },
         "password" : {
           "type" : "string",
-          "description" : "The password for your APN certificate.\n(Optional) Used for *apn* integrations.\n"
+          "description" : "The password for your APN certificate or WhatsApp API client.\nRequired for *WhatsApp* integrations.\n(Optional) Used for *apn* integrations.\n"
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "The username for the account.\nRequired for *WhatsApp* integrations.\nReturned on successful *twitter* and *telegram* integrations.\n"
         },
         "autoUpdateBadge" : {
           "type" : "boolean",
@@ -3295,6 +3348,47 @@
         "channelSecret" : {
           "type" : "string",
           "description" : "LINE Channel Secret.\nRequired for *line* integrations.\n"
+        },
+        "hsmFallbackLanguage" : {
+          "type" : "string",
+          "description" : "Specification of a fallback language.\n(Optional) Used for *WhatsApp* integrations.\n"
+        }
+      }
+    },
+    "IntegrationProfileUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "about" : {
+          "type" : "string",
+          "description" : "Text to display in your profile's About section. Can be used as a status update. Maximum of 139 characters."
+        },
+        "address" : {
+          "type" : "string",
+          "description" : "Address of the business. Maximum of 256 characters."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of the business. Maximum of 256 characters."
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "Email address to contact the business. Maximum of 128 characters."
+        },
+        "photoUrl" : {
+          "type" : "string",
+          "description" : "URL where the business' profile photo is hosted. WhatsApp recommends an image with dimensions of 640x640 and max size of 63KB."
+        },
+        "vertical" : {
+          "type" : "string",
+          "description" : "Industry of the business. Maximum of 128 characters."
+        },
+        "websites" : {
+          "type" : "array",
+          "description" : "URLs associated with the business. Maximum of 2 websites.",
+          "items" : {
+            "type" : "string",
+            "description" : "URL associated with the business. Maximum of 256 characters."
+          }
         }
       }
     },
