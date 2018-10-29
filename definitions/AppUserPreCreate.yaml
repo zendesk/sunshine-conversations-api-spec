@@ -7,9 +7,6 @@ properties:
     description: |
       The app user's userId.
       This ID is specified by the appMaker.
-  credentialRequired:
-    type: boolean
-    description: Flag indicating if the appUser is secured by a JSON Web Token or not.
   givenName:
     type: string
     description: The app user's given name.

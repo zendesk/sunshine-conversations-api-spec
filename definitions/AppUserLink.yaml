@@ -37,11 +37,6 @@ properties:
     description: |
       Subject for the outgoing email.
       (Optional) Used for *mailgun* linking.
-  skipConfirmation:
-    type: string
-    description: >-
-      (Deprecated, use confirmation instead) Flag indicating if the linking
-      confirmation should be skipped.
   confirmation:
     $ref: ./Confirmation.yaml
     description: >-

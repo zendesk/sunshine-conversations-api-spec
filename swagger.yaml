@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '3.19'
+  version: '4.0'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -23,7 +23,7 @@ securityDefinitions:
     name: Authorization
     in: header
 paths:
-  '/v1/apps/{appId}/appusers/{userId}':
+  '/v1.1/apps/{appId}/appusers/{userId}':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -57,7 +57,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/appusers':
+  '/v1.1/apps/{appId}/appusers':
     parameters:
       - $ref: ./parameters/AppId.yaml
     post:
@@ -72,7 +72,7 @@ paths:
           description: Created
           schema:
             $ref: ./definitions/AppUserResponse.yaml
-  '/v1/apps/{appId}/appusers/{userId}/images':
+  '/v1.1/apps/{appId}/appusers/{userId}/images':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -99,7 +99,7 @@ paths:
           description: Created
           schema:
             $ref: ./definitions/MessageResponse.yaml
-  '/v1/apps/{appId}/appusers/{userId}/profile':
+  '/v1.1/apps/{appId}/appusers/{userId}/profile':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -113,7 +113,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/AppUserResponse.yaml
-  '/v1/apps/{appId}/appusers/{userId}/authcode':
+  '/v1.1/apps/{appId}/appusers/{userId}/authcode':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -127,7 +127,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/AuthCodeResponse.yaml
-  '/v1/apps/{appId}/appusers/{userId}/channels':
+  '/v1.1/apps/{appId}/appusers/{userId}/channels':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -153,7 +153,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/AppUserResponse.yaml
-  '/v1/apps/{appId}/appusers/{userId}/businesssystems':
+  '/v1.1/apps/{appId}/appusers/{userId}/businesssystems':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -167,7 +167,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/AppUserBusinessSystemsResponse.yaml
-  '/v1/apps/{appId}/appusers/{userId}/channels/{channel}':
+  '/v1.1/apps/{appId}/appusers/{userId}/channels/{channel}':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -180,7 +180,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/appusers/{userId}/linkrequest':
+  '/v1.1/apps/{appId}/appusers/{userId}/linkrequest':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -204,7 +204,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/LinkRequestResponse.yaml
-  '/v1/apps/{appId}/appusers/{userId}/messages':
+  '/v1.1/apps/{appId}/appusers/{userId}/messages':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -257,7 +257,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/appusers/{userId}/messages/{messageId}':
+  '/v1.1/apps/{appId}/appusers/{userId}/messages/{messageId}':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -270,7 +270,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/appusers/{userId}/conversation/read':
+  '/v1.1/apps/{appId}/appusers/{userId}/conversation/read':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -282,7 +282,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/appusers/{userId}/conversation/activity':
+  '/v1.1/apps/{appId}/appusers/{userId}/conversation/activity':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/UserId.yaml
@@ -296,7 +296,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/menu':
+  '/v1.1/apps/{appId}/menu':
     parameters:
       - $ref: ./parameters/AppId.yaml
     get:
@@ -331,7 +331,7 @@ paths:
           description: Success
           schema:
             $ref: ./definitions/MenuResponse.yaml
-  /v1/serviceaccounts:
+  /v1.1/serviceaccounts:
     post:
       tags:
         - ServiceAccount
@@ -367,7 +367,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/ListServiceAccountsResponse.yaml
-  '/v1/serviceaccounts/{serviceAccountId}':
+  '/v1.1/serviceaccounts/{serviceAccountId}':
     parameters:
       - $ref: ./parameters/ServiceAccountId.yaml
     get:
@@ -400,7 +400,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/serviceaccounts/{serviceAccountId}/keys':
+  '/v1.1/serviceaccounts/{serviceAccountId}/keys':
     parameters:
       - $ref: ./parameters/ServiceAccountId.yaml
     post:
@@ -425,7 +425,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/ListSecretKeysResponse.yaml
-  '/v1/serviceaccounts/{serviceAccountId}/keys/{keyId}':
+  '/v1.1/serviceaccounts/{serviceAccountId}/keys/{keyId}':
     parameters:
       - $ref: ./parameters/ServiceAccountId.yaml
       - $ref: ./parameters/KeyId.yaml
@@ -447,7 +447,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt':
+  '/v1.1/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt':
     parameters:
       - $ref: ./parameters/ServiceAccountId.yaml
       - $ref: ./parameters/KeyId.yaml
@@ -461,7 +461,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/JwtResponse.yaml
-  /v1/apps:
+  /v1.1/apps:
     post:
       tags:
         - App
@@ -502,7 +502,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/ListAppsResponse.yaml
-  '/v1/apps/{appId}':
+  '/v1.1/apps/{appId}':
     parameters:
       - $ref: ./parameters/AppId.yaml
     get:
@@ -535,7 +535,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/keys':
+  '/v1.1/apps/{appId}/keys':
     parameters:
       - $ref: ./parameters/AppId.yaml
     post:
@@ -560,7 +560,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/ListSecretKeysResponse.yaml
-  '/v1/apps/{appId}/keys/{keyId}':
+  '/v1.1/apps/{appId}/keys/{keyId}':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/KeyId.yaml
@@ -582,7 +582,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/keys/{keyId}/jwt':
+  '/v1.1/apps/{appId}/keys/{keyId}/jwt':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/KeyId.yaml
@@ -596,7 +596,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/JwtResponse.yaml
-  '/v1/apps/{appId}/integrations':
+  '/v1.1/apps/{appId}/integrations':
     parameters:
       - $ref: ./parameters/AppId.yaml
     post:
@@ -630,7 +630,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/ListIntegrationsResponse.yaml
-  '/v1/apps/{appId}/integrations/{integrationId}':
+  '/v1.1/apps/{appId}/integrations/{integrationId}':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/IntegrationId.yaml
@@ -664,7 +664,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/integrations/{integrationId}/menu':
+  '/v1.1/apps/{appId}/integrations/{integrationId}/menu':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/IntegrationId.yaml
@@ -712,7 +712,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/integrations/{integrationId}/profile':
+  '/v1.1/apps/{appId}/integrations/{integrationId}/profile':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/IntegrationId.yaml
@@ -726,7 +726,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/webhooks':
+  '/v1.1/apps/{appId}/webhooks':
     parameters:
       - $ref: ./parameters/AppId.yaml
     post:
@@ -751,7 +751,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/ListWebhooksResponse.yaml
-  '/v1/apps/{appId}/webhooks/{webhookId}':
+  '/v1.1/apps/{appId}/webhooks/{webhookId}':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/WebhookId.yaml
@@ -785,7 +785,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/attachments':
+  '/v1.1/apps/{appId}/attachments':
     parameters:
       - $ref: ./parameters/AppId.yaml
     post:
@@ -830,7 +830,7 @@ paths:
           description: Created
           schema:
             $ref: ./definitions/AttachmentResponse.yaml
-  '/v1/apps/{appId}/attachments/remove':
+  '/v1.1/apps/{appId}/attachments/remove':
     parameters:
       - $ref: ./parameters/AppId.yaml
     post:
@@ -843,7 +843,7 @@ paths:
       responses:
         '200':
           description: Ok
-  '/v1/apps/{appId}/templates':
+  '/v1.1/apps/{appId}/templates':
     parameters:
       - $ref: ./parameters/AppId.yaml
     post:
@@ -881,7 +881,7 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/ListTemplatesResponse.yaml
-  '/v1/apps/{appId}/templates/{templateId}':
+  '/v1.1/apps/{appId}/templates/{templateId}':
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/TemplateId.yaml

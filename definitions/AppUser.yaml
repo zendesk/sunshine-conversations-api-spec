@@ -32,9 +32,6 @@ properties:
   conversationStarted:
     type: boolean
     description: Flag indicating if the conversation has started for the app user.
-  credentialRequired:
-    type: boolean
-    description: Flag indicating if the appUser is secured by a JSON Web Token or not.
   clients:
     type: array
     description: List of clients associated with the app user.

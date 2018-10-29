@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "3.19",
+    "version" : "4.0",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -13,7 +13,7 @@
     "jwt" : [ ]
   } ],
   "paths" : {
-    "/v1/apps/{appId}/appusers/{userId}" : {
+    "/v1.1/apps/{appId}/appusers/{userId}" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Get the specified app user.",
@@ -98,7 +98,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers" : {
+    "/v1.1/apps/{appId}/appusers" : {
       "post" : {
         "tags" : [ "AppUser" ],
         "description" : "Pre-create an app user.",
@@ -128,7 +128,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/images" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/images" : {
       "post" : {
         "tags" : [ "AppUser" ],
         "description" : "Send an image message to the conversation.",
@@ -169,7 +169,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/profile" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/profile" : {
       "delete" : {
         "tags" : [ "AppUser" ],
         "description" : "Delete specified app user's profile.",
@@ -197,7 +197,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/authcode" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/authcode" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Get an auth code for facilitating a channel transfer",
@@ -225,7 +225,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/channels" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/channels" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Get specified app user's channel entity IDs.",
@@ -287,7 +287,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/businesssystems" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/businesssystems" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Get specified app user's business system IDs.",
@@ -315,7 +315,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/channels/{channel}" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/channels/{channel}" : {
       "delete" : {
         "tags" : [ "AppUser" ],
         "description" : "Unlink specified app user from given channel.",
@@ -346,7 +346,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/linkrequest" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/linkrequest" : {
       "get" : {
         "tags" : [ "AppUser" ],
         "description" : "Fetch link requests for the specified app user.",
@@ -384,7 +384,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/messages" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/messages" : {
       "get" : {
         "tags" : [ "Conversation" ],
         "description" : "Get the specified app user's messages.",
@@ -481,7 +481,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/messages/{messageId}" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/messages/{messageId}" : {
       "delete" : {
         "tags" : [ "Conversation" ],
         "description" : "Deletes a single message.",
@@ -512,7 +512,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/conversation/read" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/conversation/read" : {
       "post" : {
         "tags" : [ "Conversation" ],
         "description" : "Reset the unread count of the conversation to 0.",
@@ -537,7 +537,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/appusers/{userId}/conversation/activity" : {
+    "/v1.1/apps/{appId}/appusers/{userId}/conversation/activity" : {
       "post" : {
         "tags" : [ "Conversation" ],
         "description" : "Notify Smooch when an app maker starts or stops typing a response.",
@@ -570,7 +570,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/menu" : {
+    "/v1.1/apps/{appId}/menu" : {
       "get" : {
         "tags" : [ "Menu" ],
         "description" : "Get the specified app’s menu.",
@@ -640,7 +640,7 @@
         }
       }
     },
-    "/v1/serviceaccounts" : {
+    "/v1.1/serviceaccounts" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "List all service accounts configured.",
@@ -692,7 +692,7 @@
         }
       }
     },
-    "/v1/serviceaccounts/{serviceAccountId}" : {
+    "/v1.1/serviceaccounts/{serviceAccountId}" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "Get the specified service account.",
@@ -759,7 +759,7 @@
         }
       }
     },
-    "/v1/serviceaccounts/{serviceAccountId}/keys" : {
+    "/v1.1/serviceaccounts/{serviceAccountId}/keys" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "List the secret keys for the specified service account.",
@@ -809,7 +809,7 @@
         }
       }
     },
-    "/v1/serviceaccounts/{serviceAccountId}/keys/{keyId}" : {
+    "/v1.1/serviceaccounts/{serviceAccountId}/keys/{keyId}" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "Get the specified service account secret key.",
@@ -860,7 +860,7 @@
         }
       }
     },
-    "/v1/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt" : {
+    "/v1.1/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt" : {
       "get" : {
         "tags" : [ "ServiceAccount" ],
         "description" : "Get an account-scoped JWT for the specified service account secret key.",
@@ -888,7 +888,7 @@
         }
       }
     },
-    "/v1/apps" : {
+    "/v1.1/apps" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "List all apps configured.",
@@ -946,7 +946,7 @@
         }
       }
     },
-    "/v1/apps/{appId}" : {
+    "/v1.1/apps/{appId}" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "Get the specified app.",
@@ -1013,7 +1013,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/keys" : {
+    "/v1.1/apps/{appId}/keys" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "List the secret keys for the specified app.",
@@ -1063,7 +1063,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/keys/{keyId}" : {
+    "/v1.1/apps/{appId}/keys/{keyId}" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "Get the specified secret key.",
@@ -1114,7 +1114,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/keys/{keyId}/jwt" : {
+    "/v1.1/apps/{appId}/keys/{keyId}/jwt" : {
       "get" : {
         "tags" : [ "App" ],
         "description" : "Get an app-scoped JWT for the specified secret key.",
@@ -1142,7 +1142,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/integrations" : {
+    "/v1.1/apps/{appId}/integrations" : {
       "get" : {
         "tags" : [ "Integration" ],
         "description" : "List integrations for the specified app.",
@@ -1198,7 +1198,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/integrations/{integrationId}" : {
+    "/v1.1/apps/{appId}/integrations/{integrationId}" : {
       "get" : {
         "tags" : [ "Integration" ],
         "description" : "Get the specified integration.",
@@ -1283,7 +1283,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/integrations/{integrationId}/menu" : {
+    "/v1.1/apps/{appId}/integrations/{integrationId}/menu" : {
       "get" : {
         "tags" : [ "Integration" ],
         "description" : "Get the specified integration's menu.",
@@ -1402,7 +1402,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/integrations/{integrationId}/profile" : {
+    "/v1.1/apps/{appId}/integrations/{integrationId}/profile" : {
       "put" : {
         "tags" : [ "Integration" ],
         "description" : "Update the specified integration’s profile.",
@@ -1435,7 +1435,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/webhooks" : {
+    "/v1.1/apps/{appId}/webhooks" : {
       "get" : {
         "tags" : [ "Webhook" ],
         "description" : "List webhooks for the specified app.",
@@ -1485,7 +1485,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/webhooks/{webhookId}" : {
+    "/v1.1/apps/{appId}/webhooks/{webhookId}" : {
       "get" : {
         "tags" : [ "Webhook" ],
         "description" : "Get the specified webhook.",
@@ -1570,7 +1570,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/attachments" : {
+    "/v1.1/apps/{appId}/attachments" : {
       "post" : {
         "tags" : [ "Attachments" ],
         "description" : "Upload an attachment to Smooch to use in future messages.",
@@ -1623,7 +1623,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/attachments/remove" : {
+    "/v1.1/apps/{appId}/attachments/remove" : {
       "post" : {
         "tags" : [ "Attachments" ],
         "description" : "Remove an attachment uploaded to Smooch.",
@@ -1650,7 +1650,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/templates" : {
+    "/v1.1/apps/{appId}/templates" : {
       "get" : {
         "tags" : [ "Template" ],
         "description" : "List templates for the specified app.",
@@ -1714,7 +1714,7 @@
         }
       }
     },
-    "/v1/apps/{appId}/templates/{templateId}" : {
+    "/v1.1/apps/{appId}/templates/{templateId}" : {
       "get" : {
         "tags" : [ "Template" ],
         "description" : "Get the specified template.",
@@ -1854,10 +1854,6 @@
         "conversationStarted" : {
           "type" : "boolean",
           "description" : "Flag indicating if the conversation has started for the app user."
-        },
-        "credentialRequired" : {
-          "type" : "boolean",
-          "description" : "Flag indicating if the appUser is secured by a JSON Web Token or not."
         },
         "clients" : {
           "type" : "array",
@@ -2024,10 +2020,6 @@
         "userId" : {
           "type" : "string",
           "description" : "The app user's userId.\nThis ID is specified by the appMaker.\n"
-        },
-        "credentialRequired" : {
-          "type" : "boolean",
-          "description" : "Flag indicating if the appUser is secured by a JSON Web Token or not."
         },
         "givenName" : {
           "type" : "string",
@@ -2354,10 +2346,6 @@
         "subject" : {
           "type" : "string",
           "description" : "Subject for the outgoing email.\n(Optional) Used for *mailgun* linking.\n"
-        },
-        "skipConfirmation" : {
-          "type" : "string",
-          "description" : "(Deprecated, use confirmation instead) Flag indicating if the linking confirmation should be skipped."
         },
         "confirmation" : {
           "description" : "Allows you to specify the strategy used to initiate a link with the target user.",
