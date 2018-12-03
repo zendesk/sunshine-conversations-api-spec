@@ -23,3 +23,6 @@ properties:
     description: >-
       Secret which will be transmitted with each webhook invocation and can be
       used to verify the authenticity of the caller.
+  version:
+    type: string
+    description: The payload version of the webhook.

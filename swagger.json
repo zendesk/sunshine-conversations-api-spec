@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "4.0",
+    "version" : "4.1",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3415,6 +3415,10 @@
         "secret" : {
           "type" : "string",
           "description" : "Secret which will be transmitted with each webhook invocation and can be used to verify the authenticity of the caller."
+        },
+        "version" : {
+          "type" : "string",
+          "description" : "The payload version of the webhook."
         }
       }
     },
