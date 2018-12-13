@@ -1,0 +1,8 @@
+type: object
+properties:
+  whatsapp:
+    type: object
+    properties:
+      payload:
+        type: object
+        description: The exact payload to send to WhatsApp.

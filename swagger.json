@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "4.1",
+    "version" : "4.2",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2500,6 +2500,10 @@
         "destination" : {
           "description" : "Specifies which channel to deliver a message to. See [list integrations](https://docs.smooch.io/rest/#list-integrations) to get integration ID and type.",
           "$ref" : "#/definitions/Destination"
+        },
+        "override" : {
+          "description" : "Specifies channel-specific overrides to use in order to bypass Smooch's message translation logic.",
+          "$ref" : "#/definitions/MessageOverride"
         }
       }
     },
@@ -2513,6 +2517,14 @@
         "integrationType" : {
           "type" : "string",
           "description" : "The type of the target integration."
+        }
+      }
+    },
+    "MessageOverride" : {
+      "type" : "object",
+      "properties" : {
+        "whatsapp" : {
+          "$ref" : "#/definitions/MessageOverride_whatsapp"
         }
       }
     },
@@ -3583,6 +3595,15 @@
         "url" : {
           "type" : "string",
           "description" : "The link request url."
+        }
+      }
+    },
+    "MessageOverride_whatsapp" : {
+      "properties" : {
+        "payload" : {
+          "type" : "object",
+          "description" : "The exact payload to send to WhatsApp.",
+          "properties" : { }
         }
       }
     },

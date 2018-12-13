@@ -61,3 +61,8 @@ properties:
       Specifies which channel to deliver a message to. See [list
       integrations](https://docs.smooch.io/rest/#list-integrations) to get
       integration ID and type.
+  override:
+    $ref: ./MessageOverride.yaml
+    description: >-
+      Specifies channel-specific overrides to use in order to bypass Smooch's
+      message translation logic.
