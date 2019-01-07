@@ -4,7 +4,7 @@ required:
 properties:
   type:
     type: string
-    description: 'The type of channel (ex. messenger, viber, twilio etc...)'
+    description: The type of channel. See Enums.md for available values.
   phoneNumber:
     type: string
     description: 'The phone number for a *twilio*, *messageBird* integration'

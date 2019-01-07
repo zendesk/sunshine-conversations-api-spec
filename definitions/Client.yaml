@@ -15,7 +15,7 @@ properties:
     description: The date time the client was last seen.
   platform:
     type: string
-    description: The client's platform.
+    description: The client's platform. See Enums.md for available values.
   pushNotificationToken:
     type: string
     description: >

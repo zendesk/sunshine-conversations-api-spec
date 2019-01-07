@@ -5,4 +5,6 @@ properties:
     description: An identifier used by Smooch for internal purposes.
   type:
     type: string
-    description: An identifier for the channel from which a message originated.
+    description: >-
+      An identifier for the channel from which a message originated. See
+      Enums.md for available values.

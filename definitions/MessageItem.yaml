@@ -13,10 +13,11 @@ properties:
     description: The image URL to be shown in the carousel/list item.
   size:
     type: string
-    description: |
+    description: >
       The size of the image to be shown in the carousel/list item.
-      Only top item of Facebook Messenger carousel supported.
-      Choose from *compact* and *large*.
+
+      Only top item of Facebook Messenger carousel supported. See Enums.md for
+      available values.
   mediaType:
     type: string
     description: >-

@@ -4,7 +4,7 @@ required:
 properties:
   type:
     type: string
-    description: The action type.
+    description: The action type. See Enums.md for available values.
   text:
     type: string
     description: The button text.
@@ -58,7 +58,7 @@ properties:
       The size used to display the webview. Allowed values are ["compact",
       "tall", "full"].
 
-      (Optional) Used for *webview* actions.
+      (Optional) Used for *webview* actions. See Enums.md for available values.
   extraChannelOptions:
     type: object
     description: >-

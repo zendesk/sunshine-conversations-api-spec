@@ -1,6 +1,0 @@
-name: typingActivityTriggerBody
-in: body
-required: true
-description: Body for a triggerTypingActivity request.
-schema:
-  $ref: ./definitions/TypingActivityTrigger.yaml

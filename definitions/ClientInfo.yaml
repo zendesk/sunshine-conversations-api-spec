@@ -46,7 +46,8 @@ properties:
     type: string
     description: The client's state or province.
   timezone:
-    type: integer
+    type: number
+    format: double
     description: The client's timezone offset.
   wifi:
     type: string

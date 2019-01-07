@@ -1,0 +1,111 @@
+type: object
+properties:
+  ActionSize:
+    type: string
+    enum:
+      - compact
+      - full
+      - tall
+  ActionType:
+    type: string
+    enum:
+      - buy
+      - link
+      - locationRequest
+      - postback
+      - reply
+      - share
+      - webview
+  BusinessSystemType:
+    type: string
+    enum:
+      - helpscout
+      - slack
+      - zendesk
+  ConfirmationType:
+    type: string
+    enum:
+      - immediate
+      - userActivity
+      - prompt
+  ConversationActivityType:
+    type: string
+    enum:
+      - 'conversation:read'
+      - 'typing:start'
+      - 'typing:stop'
+  ImageAspectRatio:
+    type: string
+    enum:
+      - horizontal
+      - square
+  IntegrationStatus:
+    type: string
+    enum:
+      - active
+      - inactive
+      - error
+  IntegrationType:
+    type: string
+    enum:
+      - android
+      - api
+      - apn
+      - fcm
+      - ios
+      - line
+      - mailgun
+      - messagebird
+      - messenger
+      - telegram
+      - twilio
+      - twitter
+      - viber
+      - web
+      - wechat
+      - whatsapp
+  MenuItemType:
+    type: string
+    enum:
+      - link
+      - postback
+      - submenu
+  MessageItemSize:
+    type: string
+    enum:
+      - compact
+      - large
+  MessageType:
+    type: string
+    enum:
+      - carousel
+      - file
+      - image
+      - list
+      - location
+      - text
+  Role:
+    type: string
+    enum:
+      - appMaker
+      - appUser
+  WebhookTriggers:
+    type: string
+    enum:
+      - 'appUser:delete'
+      - 'client:add'
+      - 'client:remove'
+      - 'conversation:read'
+      - 'conversation:referral'
+      - 'link:failure'
+      - 'link:match'
+      - 'link:success'
+      - 'merge:appUser'
+      - 'message:appMaker'
+      - 'message:appUser'
+      - 'message:delivery:channel'
+      - 'message:delivery:failure'
+      - 'message:delivery:user'
+      - 'payment:success'
+      - postback
+      - 'typing:appUser'

@@ -4,7 +4,7 @@ required:
 properties:
   type:
     type: string
-    description: The integration type.
+    description: The integration type. See Enums.md for available values.
   pageAccessToken:
     type: string
     description: |

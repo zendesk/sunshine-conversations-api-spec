@@ -541,7 +541,7 @@
       "post" : {
         "tags" : [ "Conversation" ],
         "description" : "Notify Smooch when an app maker starts or stops typing a response.",
-        "operationId" : "triggerTypingActivity",
+        "operationId" : "conversationActivity",
         "parameters" : [ {
           "name" : "appId",
           "in" : "path",
@@ -556,11 +556,11 @@
           "type" : "string"
         }, {
           "in" : "body",
-          "name" : "typingActivityTriggerBody",
-          "description" : "Body for a triggerTypingActivity request.",
+          "name" : "conversationActivityBody",
+          "description" : "Body for a triggerConversationActivity request.",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/TypingActivityTrigger"
+            "$ref" : "#/definitions/ConversationActivity"
           }
         } ],
         "responses" : {
@@ -1808,6 +1808,63 @@
     }
   },
   "definitions" : {
+    "Enums" : {
+      "type" : "object",
+      "properties" : {
+        "ActionSize" : {
+          "type" : "string",
+          "enum" : [ "compact", "full", "tall" ]
+        },
+        "ActionType" : {
+          "type" : "string",
+          "enum" : [ "buy", "link", "locationRequest", "postback", "reply", "share", "webview" ]
+        },
+        "BusinessSystemType" : {
+          "type" : "string",
+          "enum" : [ "helpscout", "slack", "zendesk" ]
+        },
+        "ConfirmationType" : {
+          "type" : "string",
+          "enum" : [ "immediate", "userActivity", "prompt" ]
+        },
+        "ConversationActivityType" : {
+          "type" : "string",
+          "enum" : [ "conversation:read", "typing:start", "typing:stop" ]
+        },
+        "ImageAspectRatio" : {
+          "type" : "string",
+          "enum" : [ "horizontal", "square" ]
+        },
+        "IntegrationStatus" : {
+          "type" : "string",
+          "enum" : [ "active", "inactive", "error" ]
+        },
+        "IntegrationType" : {
+          "type" : "string",
+          "enum" : [ "android", "api", "apn", "fcm", "ios", "line", "mailgun", "messagebird", "messenger", "telegram", "twilio", "twitter", "viber", "web", "wechat", "whatsapp" ]
+        },
+        "MenuItemType" : {
+          "type" : "string",
+          "enum" : [ "link", "postback", "submenu" ]
+        },
+        "MessageItemSize" : {
+          "type" : "string",
+          "enum" : [ "compact", "large" ]
+        },
+        "MessageType" : {
+          "type" : "string",
+          "enum" : [ "carousel", "file", "image", "list", "location", "text" ]
+        },
+        "Role" : {
+          "type" : "string",
+          "enum" : [ "appMaker", "appUser" ]
+        },
+        "WebhookTriggers" : {
+          "type" : "string",
+          "enum" : [ "appUser:delete", "client:add", "client:remove", "conversation:read", "conversation:referral", "link:failure", "link:match", "link:success", "merge:appUser", "message:appMaker", "message:appUser", "message:delivery:channel", "message:delivery:failure", "message:delivery:user", "payment:success", "postback", "typing:appUser" ]
+        }
+      }
+    },
     "AppUserResponse" : {
       "type" : "object",
       "required" : [ "appUser" ],
@@ -1890,7 +1947,7 @@
         },
         "platform" : {
           "type" : "string",
-          "description" : "The client's platform."
+          "description" : "The client's platform. See Enums.md for available values."
         },
         "pushNotificationToken" : {
           "type" : "string",
@@ -1978,7 +2035,8 @@
           "description" : "The client's state or province."
         },
         "timezone" : {
-          "type" : "integer",
+          "type" : "number",
+          "format" : "double",
           "description" : "The client's timezone offset."
         },
         "wifi" : {
@@ -2079,11 +2137,11 @@
         },
         "role" : {
           "type" : "string",
-          "description" : "The role of the individual posting the message. Can be either *appUser* or *appMaker*."
+          "description" : "The role of the individual posting the message. See Enums.md for available values."
         },
         "type" : {
           "type" : "string",
-          "description" : "The message type."
+          "description" : "The message type. See Enums.md for available values."
         },
         "source" : {
           "description" : "The source of the message.",
@@ -2156,7 +2214,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "An identifier for the channel from which a message originated."
+          "description" : "An identifier for the channel from which a message originated. See Enums.md for available values."
         }
       }
     },
@@ -2177,7 +2235,7 @@
         },
         "size" : {
           "type" : "string",
-          "description" : "The size of the image to be shown in the carousel/list item.\nOnly top item of Facebook Messenger carousel supported.\nChoose from *compact* and *large*.\n"
+          "description" : "The size of the image to be shown in the carousel/list item.\nOnly top item of Facebook Messenger carousel supported. See Enums.md for available values.\n"
         },
         "mediaType" : {
           "type" : "string",
@@ -2197,7 +2255,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The action type."
+          "description" : "The action type. See Enums.md for available values."
         },
         "text" : {
           "type" : "string",
@@ -2238,7 +2296,7 @@
         },
         "size" : {
           "type" : "string",
-          "description" : "The size used to display the webview. Allowed values are [\"compact\", \"tall\", \"full\"].\n(Optional) Used for *webview* actions.\n"
+          "description" : "The size used to display the webview. Allowed values are [\"compact\", \"tall\", \"full\"].\n(Optional) Used for *webview* actions. See Enums.md for available values.\n"
         },
         "extraChannelOptions" : {
           "type" : "object",
@@ -2252,7 +2310,7 @@
       "properties" : {
         "imageAspectRatio" : {
           "type" : "string",
-          "description" : "Specifies how to display all carousel images. Valid values are *horizontal* (default) and *square*."
+          "description" : "Specifies how to display all carousel images. See Enums.md for available values."
         }
       }
     },
@@ -2299,7 +2357,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The type of channel (ex. messenger, viber, twilio etc...)"
+          "description" : "The type of channel. See Enums.md for available values."
         },
         "phoneNumber" : {
           "type" : "string",
@@ -2325,7 +2383,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The type of the channel to link."
+          "description" : "The type of the channel to link. See Enums.md for available values."
         },
         "phoneNumber" : {
           "type" : "string",
@@ -2359,7 +2417,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The confirmation type."
+          "description" : "The confirmation type. See Enums.md for available values."
         },
         "message" : {
           "description" : "The message used to reach out to the user. Must be a valid message object as per the post message API.",
@@ -2386,7 +2444,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The type of business system (ex. slack, hipchat, zendesk etc...)"
+          "description" : "The type of business system. See Enums.md for available values."
         },
         "channelId" : {
           "type" : "string",
@@ -2444,11 +2502,11 @@
       "properties" : {
         "role" : {
           "type" : "string",
-          "description" : "The role of the individual posting the message. Can be either *appUser* or *appMaker*."
+          "description" : "The role of the individual posting the message. See Enums.md for available values."
         },
         "type" : {
           "type" : "string",
-          "description" : "The message type."
+          "description" : "The message type. See Enums.md for available values."
         },
         "name" : {
           "type" : "string",
@@ -2516,7 +2574,7 @@
         },
         "integrationType" : {
           "type" : "string",
-          "description" : "The type of the target integration."
+          "description" : "The type of the target integration. See Enums.md for available values."
         }
       }
     },
@@ -2528,17 +2586,17 @@
         }
       }
     },
-    "TypingActivityTrigger" : {
+    "ConversationActivity" : {
       "type" : "object",
       "required" : [ "role", "type" ],
       "properties" : {
         "role" : {
           "type" : "string",
-          "description" : "The role of the actor. Must be *appMaker*."
+          "description" : "The role of the actor. Must be *appMaker*. See Enums.md for available values."
         },
         "type" : {
           "type" : "string",
-          "description" : "The type of activity to trigger. Must be either *typing:start* or *typing:stop*."
+          "description" : "The type of activity to trigger. Must be either *typing:start* or *typing:stop*. See Enums.md for available values."
         },
         "name" : {
           "type" : "string",
@@ -2587,7 +2645,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus."
+          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus. See Enums.md for available values."
         },
         "payload" : {
           "type" : "string",
@@ -2616,7 +2674,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus."
+          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus. See Enums.md for available values."
         },
         "payload" : {
           "type" : "string",
@@ -2857,7 +2915,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "The integration type."
+          "description" : "The integration type. See Enums.md for available values."
         },
         "pageAccessToken" : {
           "type" : "string",
@@ -3079,7 +3137,7 @@
         },
         "status" : {
           "type" : "string",
-          "description" : "The integration status. Possible values are active, inactive or error. [More info](https://docs.smooch.io/#integration-status)."
+          "description" : "The integration status. See Enums.md for available values. [More info](https://docs.smooch.io/#integration-status)."
         },
         "error" : {
           "type" : "string",
@@ -3093,7 +3151,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The integration type."
+          "description" : "The integration type. See Enums.md for available values."
         },
         "pageAccessToken" : {
           "type" : "string",
@@ -3419,7 +3477,7 @@
         },
         "triggers" : {
           "type" : "array",
-          "description" : "An array of triggers you wish to have the webhook listen to. If unspecified the default trigger is *message*.",
+          "description" : "An array of triggers you wish to have the webhook listen to. See Enums.md for available values.",
           "items" : {
             "type" : "string"
           }
@@ -3444,7 +3502,7 @@
         },
         "triggers" : {
           "type" : "array",
-          "description" : "An array of triggers you wish to have the webhook listen to. If unspecified the default trigger is *message*.",
+          "description" : "An array of triggers you wish to have the webhook listen to. See Enums.md for available values.",
           "items" : {
             "type" : "string"
           }
@@ -3470,7 +3528,7 @@
         },
         "triggers" : {
           "type" : "array",
-          "description" : "An array of triggers you wish to have the webhook listen to. If unspecified the default trigger is *message*.",
+          "description" : "An array of triggers you wish to have the webhook listen to. See Enums.md for available values.",
           "items" : {
             "type" : "string"
           }
@@ -3586,7 +3644,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "The integration type."
+          "description" : "The integration type. See Enums.md for available values."
         },
         "code" : {
           "type" : "string",

@@ -15,7 +15,7 @@ properties:
           description: The integration ID.
         type:
           type: string
-          description: The integration type.
+          description: The integration type. See Enums.md for available values.
         code:
           type: string
           description: The link request code.

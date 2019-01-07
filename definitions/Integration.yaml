@@ -8,7 +8,7 @@ properties:
     description: 'The integration ID, generated automatically.'
   type:
     type: string
-    description: The integration type.
+    description: The integration type. See Enums.md for available values.
   pageAccessToken:
     type: string
     description: |
@@ -312,8 +312,8 @@ properties:
   status:
     type: string
     description: >-
-      The integration status. Possible values are active, inactive or error.
-      [More info](https://docs.smooch.io/#integration-status).
+      The integration status. See Enums.md for available values. [More
+      info](https://docs.smooch.io/#integration-status).
   error:
     type: string
     description: >-

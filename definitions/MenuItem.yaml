@@ -13,7 +13,8 @@ properties:
     type: string
     description: >-
       Can either be link, postback, which correspond to Smooch’s link and
-      postback actions, or submenu for nested menus.
+      postback actions, or submenu for nested menus. See Enums.md for available
+      values.
   payload:
     type: string
     description: A payload for a postback. Required for a postback type item.

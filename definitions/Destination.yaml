@@ -7,4 +7,4 @@ properties:
     description: The ID of the target integration.
   integrationType:
     type: string
-    description: The type of the target integration.
+    description: The type of the target integration. See Enums.md for available values.

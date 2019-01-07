@@ -4,7 +4,7 @@ required:
 properties:
   type:
     type: string
-    description: 'The type of business system (ex. slack, hipchat, zendesk etc...)'
+    description: The type of business system. See Enums.md for available values.
   channelId:
     type: string
     description: The channel id for a *slack* integration

@@ -13,6 +13,9 @@ schemes:
   - https
 consumes:
   - application/json
+definitions:
+  Enums:
+    $ref: ./definitions/Enums.yaml
 produces:
   - application/json
 security:
@@ -290,9 +293,9 @@ paths:
       tags:
         - Conversation
       parameters:
-        - $ref: ./parameters/TypingActivityTrigger.yaml
+        - $ref: ./parameters/ConversationActivity.yaml
       description: Notify Smooch when an app maker starts or stops typing a response.
-      operationId: triggerTypingActivity
+      operationId: conversationActivity
       responses:
         '200':
           description: Ok

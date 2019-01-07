@@ -5,12 +5,14 @@ type: object
 properties:
   role:
     type: string
-    description: The role of the actor. Must be *appMaker*.
+    description: >-
+      The role of the actor. Must be *appMaker*. See Enums.md for available
+      values.
   type:
     type: string
     description: >-
       The type of activity to trigger. Must be either *typing:start* or
-      *typing:stop*.
+      *typing:stop*. See Enums.md for available values.
   name:
     type: string
     description: The name of the app maker that starts or stops typing a response.
