@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.1",
+    "version" : "5.2",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1949,6 +1949,10 @@
           "type" : "string",
           "description" : "The client's platform. See Enums.md for available values."
         },
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The ID of the integration that the client was created for."
+        },
         "pushNotificationToken" : {
           "type" : "string",
           "description" : "The GCM or APN token to be used for sending push notifications to the device.\nApplies to only *android* and *ios* clients.\n"
@@ -2359,17 +2363,25 @@
           "type" : "string",
           "description" : "The type of channel. See Enums.md for available values."
         },
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The ID of the integration."
+        },
         "phoneNumber" : {
           "type" : "string",
-          "description" : "The phone number for a *twilio*, *messageBird* integration"
+          "description" : "The phone number for a *twilio* or *messagebird* integration"
         },
         "userId" : {
           "type" : "string",
-          "description" : "The userId for a *messenger*, *viber*, *line*, *wechat* integration"
+          "description" : "The userId for a *messenger*, *viber*, *line*, *wechat* or *twitter* integration"
         },
         "address" : {
           "type" : "string",
-          "description" : "The email address for a *frontendEmail*, *mailgun* integration"
+          "description" : "The email address for a *mailgun* integration"
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "The username for a *whatsapp* integration"
         },
         "chatId" : {
           "type" : "string",

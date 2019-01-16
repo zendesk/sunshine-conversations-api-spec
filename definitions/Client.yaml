@@ -16,6 +16,9 @@ properties:
   platform:
     type: string
     description: The client's platform. See Enums.md for available values.
+  integrationId:
+    type: string
+    description: The ID of the integration that the client was created for.
   pushNotificationToken:
     type: string
     description: >

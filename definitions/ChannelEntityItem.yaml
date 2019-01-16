@@ -5,15 +5,23 @@ properties:
   type:
     type: string
     description: The type of channel. See Enums.md for available values.
+  integrationId:
+    type: string
+    description: The ID of the integration.
   phoneNumber:
     type: string
-    description: 'The phone number for a *twilio*, *messageBird* integration'
+    description: The phone number for a *twilio* or *messagebird* integration
   userId:
     type: string
-    description: 'The userId for a *messenger*, *viber*, *line*, *wechat* integration'
+    description: >-
+      The userId for a *messenger*, *viber*, *line*, *wechat* or *twitter*
+      integration
   address:
     type: string
-    description: 'The email address for a *frontendEmail*, *mailgun* integration'
+    description: The email address for a *mailgun* integration
+  username:
+    type: string
+    description: The username for a *whatsapp* integration
   chatId:
     type: string
     description: The chat id for a *telegram* integration
