@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.2",
+    "version" : "5.3",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1159,6 +1159,20 @@
           "description" : "List of types to filter the query by.\nMore than one value can be specified through comma separation e.g. ?types=*twilio*,*line*.\n",
           "required" : false,
           "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "The number of records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 25
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "The number of initial records to skip before picking records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 0
         } ],
         "responses" : {
           "200" : {
@@ -2914,6 +2928,14 @@
           "items" : {
             "$ref" : "#/definitions/Integration"
           }
+        },
+        "hasMore" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if there are more integrations that are not present in the response."
+        },
+        "offset" : {
+          "type" : "integer",
+          "description" : "The number of integration records skipped in the returned list."
         }
       }
     },

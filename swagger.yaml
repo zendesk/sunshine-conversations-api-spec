@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '5.2'
+  version: '5.3'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -628,6 +628,18 @@ paths:
             More than one value can be specified through comma separation e.g.
             ?types=*twilio*,*line*.
           type: string
+        - name: limit
+          in: query
+          description: The number of records to return.
+          type: integer
+          default: 25
+        - name: offset
+          in: query
+          description: >-
+            The number of initial records to skip before picking records to
+            return.
+          type: integer
+          default: 0
       responses:
         '200':
           description: Ok
