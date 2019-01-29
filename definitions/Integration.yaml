@@ -89,6 +89,14 @@ properties:
     description: |
       LINE Channel Access Token.
       Required for *line* integrations.
+  serviceCode:
+    type: string
+    description: |
+      LINE Service Code.
+  switcherSecret:
+    type: string
+    description: |
+      LINE Switcher Secret.
   botName:
     type: string
     description: |

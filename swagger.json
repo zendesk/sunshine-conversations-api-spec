@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.3",
+    "version" : "5.4",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3015,6 +3015,14 @@
           "type" : "string",
           "description" : "LINE Channel Access Token.\nRequired for *line* integrations.\n"
         },
+        "serviceCode" : {
+          "type" : "string",
+          "description" : "LINE Service Code.\n"
+        },
+        "switcherSecret" : {
+          "type" : "string",
+          "description" : "LINE Switcher Secret.\n"
+        },
         "botName" : {
           "type" : "string",
           "description" : "The bot's name.\nReturned on successful *line* integrations.\n"
@@ -3234,6 +3242,14 @@
         "channelAccessToken" : {
           "type" : "string",
           "description" : "LINE Channel Access Token.\nRequired for *line* integrations.\n"
+        },
+        "serviceCode" : {
+          "type" : "string",
+          "description" : "LINE Service Code.\n"
+        },
+        "switcherSecret" : {
+          "type" : "string",
+          "description" : "LINE Switcher Secret.\n"
         },
         "encodingAesKey" : {
           "type" : "string",
