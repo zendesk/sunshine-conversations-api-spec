@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.4",
+    "version" : "5.5",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1258,7 +1258,7 @@
         }, {
           "in" : "body",
           "name" : "integrationUpdateBody",
-          "description" : "Body for a updateIntegration request.\nAdditional arguments are necessary based on integration type. For detailed instructions, visit our [official docs](https://docs.smooch.io/rest/#create-integration)\n",
+          "description" : "Body for a updateIntegration request.\nAdditional arguments are necessary based on integration type. For detailed instructions, visit our [official docs](https://docs.smooch.io/rest/#update-integration)\n",
           "required" : true,
           "schema" : {
             "$ref" : "#/definitions/IntegrationUpdate"
@@ -2951,6 +2951,10 @@
           "type" : "string",
           "description" : "The integration type. See Enums.md for available values."
         },
+        "displayName" : {
+          "type" : "string",
+          "description" : "The integration display name.\nUsed to map a human-friendly name to an integration.\n"
+        },
         "pageAccessToken" : {
           "type" : "string",
           "description" : "Facebook Page Access Token.\nRequired for *messenger* integrations.\n"
@@ -3195,6 +3199,10 @@
           "type" : "string",
           "description" : "The integration type. See Enums.md for available values."
         },
+        "displayName" : {
+          "type" : "string",
+          "description" : "The integration display name.\nUsed to map a human-friendly name to an integration.\n"
+        },
         "pageAccessToken" : {
           "type" : "string",
           "description" : "Facebook Page Access Token.\nRequired for *messenger* integrations.\n"
@@ -3391,6 +3399,10 @@
     "IntegrationUpdate" : {
       "type" : "object",
       "properties" : {
+        "displayName" : {
+          "type" : "string",
+          "description" : "The integration display name.\nUsed to map a human-friendly name to an integration.\n"
+        },
         "brandColor" : {
           "type" : "string",
           "description" : "This color will be used in the messenger header and the button or tab in idle state.\n(Optional) Used for *Web Messenger* integrations.\n"

@@ -5,6 +5,11 @@ properties:
   type:
     type: string
     description: The integration type. See Enums.md for available values.
+  displayName:
+    type: string
+    description: |
+      The integration display name.
+      Used to map a human-friendly name to an integration.
   pageAccessToken:
     type: string
     description: |

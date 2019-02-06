@@ -1,5 +1,10 @@
 type: object
 properties:
+  displayName:
+    type: string
+    description: |
+      The integration display name.
+      Used to map a human-friendly name to an integration.
   brandColor:
     type: string
     description: >

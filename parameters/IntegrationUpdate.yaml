@@ -6,6 +6,6 @@ description: >
 
   Additional arguments are necessary based on integration type. For detailed
   instructions, visit our [official
-  docs](https://docs.smooch.io/rest/#create-integration)
+  docs](https://docs.smooch.io/rest/#update-integration)
 schema:
   $ref: ./definitions/IntegrationUpdate.yaml
