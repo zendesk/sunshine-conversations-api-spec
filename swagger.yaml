@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '5.5'
+  version: '5.6'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -731,6 +731,16 @@ paths:
     parameters:
       - $ref: ./parameters/AppId.yaml
       - $ref: ./parameters/IntegrationId.yaml
+    get:
+      tags:
+        - Integration
+      description: Get the specified integration’s profile.
+      operationId: getIntegrationProfile
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/GetIntegrationProfileResponse.yaml
     put:
       tags:
         - Integration
@@ -741,6 +751,28 @@ paths:
       responses:
         '200':
           description: Ok
+  '/v1.1/apps/{appId}/integrations/{integrationId}/profile/photo':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/IntegrationId.yaml
+    put:
+      tags:
+        - Integration
+      description: Upload a photo to be used for the the specified integration’s profile.
+      operationId: uploadIntegrationProfilePhoto
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: source
+          in: formData
+          description: Photo to be uploaded
+          required: true
+          type: file
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/UploadIntegrationProfilePhotoResponse.yaml
   '/v1.1/apps/{appId}/webhooks':
     parameters:
       - $ref: ./parameters/AppId.yaml

@@ -12,7 +12,7 @@ properties:
       A String of the appUser’s phone number. It must contain the + prefix and
       the country code.
 
-      Required for *messenger*, *twilio* and *messagebird* linking.
+      Required for *messenger*, *twilio*, *messagebird* and *whatsapp* linking.
   address:
     type: string
     description: |

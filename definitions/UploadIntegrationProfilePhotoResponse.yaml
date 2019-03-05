@@ -1,0 +1,7 @@
+type: object
+required:
+  - photoUrl
+properties:
+  photoUrl:
+    type: string
+    description: The photo URL after uploading.
