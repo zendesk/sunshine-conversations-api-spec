@@ -114,6 +114,14 @@ properties:
     description: |
       LINE Channel Secret.
       Required for *line* integrations.
+  serviceCode:
+    type: string
+    description: |
+      LINE Service Code.
+  switcherSecret:
+    type: string
+    description: |
+      LINE Switcher Secret.
   hsmFallbackLanguage:
     type: string
     description: |
