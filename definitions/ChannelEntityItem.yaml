@@ -4,7 +4,10 @@ required:
 properties:
   type:
     type: string
-    description: The type of channel. See Enums.md for available values.
+    description: >-
+      The type of channel. See
+      [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available
+      values.
   integrationId:
     type: string
     description: The ID of the integration.

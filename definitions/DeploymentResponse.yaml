@@ -1,0 +1,7 @@
+type: object
+required:
+  - deployment
+properties:
+  deployment:
+    $ref: ./Deployment.yaml
+    description: The deployment.

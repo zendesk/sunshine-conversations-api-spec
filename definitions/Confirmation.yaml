@@ -4,7 +4,10 @@ type: object
 properties:
   type:
     type: string
-    description: The confirmation type. See Enums.md for available values.
+    description: >-
+      The confirmation type. See
+      [**ConfirmationTypeEnum**](Enums.md#ConfirmationTypeEnum) for available
+      values.
   message:
     $ref: ./Message.yaml
     description: >-

@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.7",
+    "version" : "5.8",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1873,6 +1873,149 @@
           }
         }
       }
+    },
+    "/v1.1/whatsapp/deployments" : {
+      "get" : {
+        "tags" : [ "Deployment" ],
+        "description" : "List owned WhatsApp deployments.",
+        "operationId" : "listDeployments",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListDeploymentsResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Create a WhatsApp deployment.",
+        "operationId" : "createDeployment",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "deploymentCreateBody",
+          "description" : "Body for a createDeployment request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DeploymentCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/whatsapp/deployments/{deploymentId}" : {
+      "get" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Get the specified deployment.",
+        "operationId" : "getDeployment",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Identifies the deployment.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Delete the specified deployment.",
+        "operationId" : "deleteDeployment",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Identifies the deployment.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "202" : {
+            "description" : "Accepted",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/whatsapp/deployments/{deploymentId}/activate" : {
+      "post" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Activate a phone number on the specified deployment.",
+        "operationId" : "activatePhoneNumber",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Identifies the deployment.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "deploymentActivatePhoneNumberBody",
+          "description" : "Body for an activatePhoneNumber request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DeploymentActivatePhoneNumber"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/whatsapp/deployments/{deploymentId}/code/confirm" : {
+      "post" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Confirm code to complete phone number activation.",
+        "operationId" : "confirmCode",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Identifies the deployment.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "deploymentConfirmCode",
+          "description" : "Body for a confirmCode request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DeploymentConfirmCode"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions" : {
@@ -1937,6 +2080,18 @@
         "WebhookTriggers" : {
           "type" : "string",
           "enum" : [ "appUser:delete", "client:add", "client:remove", "conversation:read", "conversation:referral", "link:failure", "link:match", "link:success", "merge:appUser", "message:appMaker", "message:appUser", "message:delivery:channel", "message:delivery:failure", "message:delivery:user", "payment:success", "postback", "typing:appUser" ]
+        },
+        "DeploymentHosting" : {
+          "type" : "string",
+          "enum" : [ "self", "smooch" ]
+        },
+        "DeploymentStatus" : {
+          "type" : "string",
+          "enum" : [ "starting", "unregistered", "registered", "integrated", "pending", "deleting", "error" ]
+        },
+        "DeploymentActivationMethod" : {
+          "type" : "string",
+          "enum" : [ "voice", "sms" ]
         }
       }
     },
@@ -2022,7 +2177,7 @@
         },
         "platform" : {
           "type" : "string",
-          "description" : "The client's platform. See Enums.md for available values."
+          "description" : "The client's platform. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         },
         "integrationId" : {
           "type" : "string",
@@ -2216,11 +2371,11 @@
         },
         "role" : {
           "type" : "string",
-          "description" : "The role of the individual posting the message. See Enums.md for available values."
+          "description" : "The role of the individual posting the message. See [**RoleEnum**](Enums.md#RoleEnum) for available values."
         },
         "type" : {
           "type" : "string",
-          "description" : "The message type. See Enums.md for available values."
+          "description" : "The message type. See [**MessageTypeEnum**](Enums.md#MessageTypeEnum) for available values."
         },
         "source" : {
           "description" : "The source of the message.",
@@ -2293,7 +2448,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "An identifier for the channel from which a message originated. See Enums.md for available values."
+          "description" : "An identifier for the channel from which a message originated. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         }
       }
     },
@@ -2314,7 +2469,7 @@
         },
         "size" : {
           "type" : "string",
-          "description" : "The size of the image to be shown in the carousel/list item.\nOnly top item of Facebook Messenger carousel supported. See Enums.md for available values.\n"
+          "description" : "The size of the image to be shown in the carousel/list item.\nOnly top item of Facebook Messenger carousel supported. See [**MessageItemSizeEnum**](Enums.md#MessageItemSizeEnum) for available values.\n"
         },
         "mediaType" : {
           "type" : "string",
@@ -2334,7 +2489,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The action type. See Enums.md for available values."
+          "description" : "The action type. See [**ActionTypeEnum**](Enums.md#ActionTypeEnum) for available values."
         },
         "text" : {
           "type" : "string",
@@ -2375,7 +2530,7 @@
         },
         "size" : {
           "type" : "string",
-          "description" : "The size used to display the webview. Allowed values are [\"compact\", \"tall\", \"full\"].\n(Optional) Used for *webview* actions. See Enums.md for available values.\n"
+          "description" : "The size used to display the webview. Allowed values are [\"compact\", \"tall\", \"full\"].\n(Optional) Used for *webview* actions. See [**ActionSizeEnum**](Enums.md#ActionSizeEnum) for available values.\n"
         },
         "extraChannelOptions" : {
           "type" : "object",
@@ -2389,7 +2544,7 @@
       "properties" : {
         "imageAspectRatio" : {
           "type" : "string",
-          "description" : "Specifies how to display all carousel images. See Enums.md for available values."
+          "description" : "Specifies how to display all carousel images. See [**ImageAspectRatioEnum**](Enums.md#ImageAspectRatioEnum) for available values."
         }
       }
     },
@@ -2436,7 +2591,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The type of channel. See Enums.md for available values."
+          "description" : "The type of channel. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         },
         "integrationId" : {
           "type" : "string",
@@ -2470,7 +2625,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The type of the channel to link. See Enums.md for available values."
+          "description" : "The type of the channel to link. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         },
         "phoneNumber" : {
           "type" : "string",
@@ -2504,7 +2659,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The confirmation type. See Enums.md for available values."
+          "description" : "The confirmation type. See [**ConfirmationTypeEnum**](Enums.md#ConfirmationTypeEnum) for available values."
         },
         "message" : {
           "description" : "The message used to reach out to the user. Must be a valid message object as per the post message API.",
@@ -2531,7 +2686,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The type of business system. See Enums.md for available values."
+          "description" : "The type of business system. See [**BusinessSystemTypeEnum**](Enums.md#BusinessSystemTypeEnum) for available values."
         },
         "channelId" : {
           "type" : "string",
@@ -2589,11 +2744,11 @@
       "properties" : {
         "role" : {
           "type" : "string",
-          "description" : "The role of the individual posting the message. See Enums.md for available values."
+          "description" : "The role of the individual posting the message. See [**RoleEnum**](Enums.md#RoleEnum) for available values."
         },
         "type" : {
           "type" : "string",
-          "description" : "The message type. See Enums.md for available values."
+          "description" : "The message type. See [**MessageTypeEnum**](Enums.md#MessageTypeEnum) for available values."
         },
         "name" : {
           "type" : "string",
@@ -2661,7 +2816,7 @@
         },
         "integrationType" : {
           "type" : "string",
-          "description" : "The type of the target integration. See Enums.md for available values."
+          "description" : "The type of the target integration. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         }
       }
     },
@@ -2679,11 +2834,11 @@
       "properties" : {
         "role" : {
           "type" : "string",
-          "description" : "The role of the actor. Must be *appMaker*. See Enums.md for available values."
+          "description" : "The role of the actor. Must be *appMaker*. See [**RoleEnum**](Enums.md#RoleEnum) for available values."
         },
         "type" : {
           "type" : "string",
-          "description" : "The type of activity to trigger. Must be either *typing:start* or *typing:stop*. See Enums.md for available values."
+          "description" : "The type of activity to trigger. Must be either *typing:start* or *typing:stop*. See [**MessageTypeEnum**](Enums.md#MessageTypeEnum) for available values."
         },
         "name" : {
           "type" : "string",
@@ -2732,7 +2887,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus. See Enums.md for available values."
+          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus. See [**MenuItemTypeEnum**](Enums.md#MenuItemTypeEnum) for available values."
         },
         "payload" : {
           "type" : "string",
@@ -2761,7 +2916,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus. See Enums.md for available values."
+          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus. See [**MenuItemTypeEnum**](Enums.md#MenuItemTypeEnum) for available values."
         },
         "payload" : {
           "type" : "string",
@@ -3010,7 +3165,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "The integration type. See Enums.md for available values."
+          "description" : "The integration type. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         },
         "displayName" : {
           "type" : "string",
@@ -3104,9 +3259,13 @@
           "type" : "string",
           "description" : "The binary of your APN certificate base64 encoded.\nRequired for *apn* integrations.\n"
         },
+        "deploymentId" : {
+          "type" : "string",
+          "description" : "Your WhatsApp deployment ID.\nRequired for *WhatsApp* integrations.\n"
+        },
         "baseUrl" : {
           "type" : "string",
-          "description" : "Your WhatsApp API client's URL.\nRequired for *WhatsApp* integrations.\n"
+          "description" : "Your WhatsApp API client's URL.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
         },
         "hsmFallbackLanguage" : {
           "type" : "string",
@@ -3114,7 +3273,7 @@
         },
         "password" : {
           "type" : "string",
-          "description" : "The password for your APN certificate or WhatsApp API client.\nRequired for *WhatsApp* integrations.\n(Optional) Used for *apn* integrations.\n"
+          "description" : "The password for your APN certificate or WhatsApp API client.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n(Optional) Used for *apn* integrations.\n"
         },
         "autoUpdateBadge" : {
           "type" : "boolean",
@@ -3162,7 +3321,7 @@
         },
         "username" : {
           "type" : "string",
-          "description" : "The username for the account.\nRequired for *WhatsApp* integrations.\nReturned on successful *twitter* and *telegram* integrations.\n"
+          "description" : "The username for the account.\nReturned on successful *twitter* and *telegram* integrations.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
         },
         "apiKey" : {
           "type" : "string",
@@ -3244,7 +3403,7 @@
         },
         "status" : {
           "type" : "string",
-          "description" : "The integration status. See Enums.md for available values. [More info](https://docs.smooch.io/#integration-status)."
+          "description" : "The integration status. See [**IntegrationStatusEnum**](Enums.md#IntegrationStatusEnum) for available values. [More info](https://docs.smooch.io/#integration-status)."
         },
         "error" : {
           "type" : "string",
@@ -3258,7 +3417,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "description" : "The integration type. See Enums.md for available values."
+          "description" : "The integration type. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         },
         "displayName" : {
           "type" : "string",
@@ -3286,7 +3445,7 @@
         },
         "baseUrl" : {
           "type" : "string",
-          "description" : "Your WhatsApp API client's URL.\nRequired for *WhatsApp* integrations.\n"
+          "description" : "Your WhatsApp API client's URL.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
         },
         "hsmFallbackLanguage" : {
           "type" : "string",
@@ -3312,6 +3471,10 @@
           "type" : "string",
           "description" : "LINE Channel Access Token.\nRequired for *line* integrations.\n"
         },
+        "deploymentId" : {
+          "type" : "string",
+          "description" : "Your WhatsApp deployment ID.\nRequired for *WhatsApp* integrations.\n"
+        },
         "serviceCode" : {
           "type" : "string",
           "description" : "LINE Service Code.\n"
@@ -3334,11 +3497,11 @@
         },
         "password" : {
           "type" : "string",
-          "description" : "The password for your APN certificate or WhatsApp API client.\nRequired for *WhatsApp* integrations.\n(Optional) Used for *apn* integrations.\n"
+          "description" : "The password for your APN certificate or WhatsApp API client.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n(Optional) Used for *apn* integrations.\n"
         },
         "username" : {
           "type" : "string",
-          "description" : "The username for the account.\nRequired for *WhatsApp* integrations.\nReturned on successful *twitter* and *telegram* integrations.\n"
+          "description" : "The username for the account.\nReturned on successful *twitter* and *telegram* integrations.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
         },
         "autoUpdateBadge" : {
           "type" : "boolean",
@@ -3628,7 +3791,7 @@
         },
         "triggers" : {
           "type" : "array",
-          "description" : "An array of triggers you wish to have the webhook listen to. See Enums.md for available values.",
+          "description" : "An array of triggers you wish to have the webhook listen to. See [**WebhookTriggersEnum**](Enums.md#WebhookTriggersEnum) for available values.",
           "items" : {
             "type" : "string"
           }
@@ -3653,7 +3816,7 @@
         },
         "triggers" : {
           "type" : "array",
-          "description" : "An array of triggers you wish to have the webhook listen to. See Enums.md for available values.",
+          "description" : "An array of triggers you wish to have the webhook listen to. See [**WebhookTriggersEnum**](Enums.md#WebhookTriggersEnum) for available values.",
           "items" : {
             "type" : "string"
           }
@@ -3679,7 +3842,7 @@
         },
         "triggers" : {
           "type" : "array",
-          "description" : "An array of triggers you wish to have the webhook listen to. See Enums.md for available values.",
+          "description" : "An array of triggers you wish to have the webhook listen to. See [**WebhookTriggersEnum**](Enums.md#WebhookTriggersEnum) for available values.",
           "items" : {
             "type" : "string"
           }
@@ -3786,6 +3949,129 @@
         }
       }
     },
+    "ListDeploymentsResponse" : {
+      "type" : "object",
+      "required" : [ "deployments" ],
+      "properties" : {
+        "deployments" : {
+          "type" : "array",
+          "description" : "The list of deployments.",
+          "items" : {
+            "$ref" : "#/definitions/Deployment"
+          }
+        }
+      }
+    },
+    "Deployment" : {
+      "type" : "object",
+      "required" : [ "_id", "hosting", "status" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The deployment ID, generated automatically."
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The deployment status. See [**DeploymentStatusEnum**](Enums.md#DeploymentStatusEnum) for available values."
+        },
+        "hosting" : {
+          "type" : "string",
+          "description" : "The deployment hosting. See [**DeploymentHostingEnum**](Enums.md#DeploymentHostingEnum) for available values."
+        },
+        "baseUrl" : {
+          "type" : "string",
+          "description" : "The baseUrl of the deployment. Only present for `self` hosted deployments."
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "The username of the deployment. Only present for `self` hosted deployments."
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "The phoneNumber of the deployment. Only present once the deployment has been registered."
+        },
+        "callbackUrl" : {
+          "type" : "string",
+          "description" : "The URL to be called by Smooch when the status of the deployment changes."
+        },
+        "callbackSecret" : {
+          "type" : "string",
+          "description" : "The secret used to secure the callback."
+        },
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The integrationId of the integration using this deployment."
+        },
+        "appId" : {
+          "type" : "string",
+          "description" : "The appId of the integration using this deployment."
+        }
+      }
+    },
+    "DeploymentCreate" : {
+      "type" : "object",
+      "required" : [ "hosting" ],
+      "properties" : {
+        "hosting" : {
+          "type" : "string",
+          "description" : "The deployment hosting. See [**DeploymentHostingEnum**](Enums.md#DeploymentHostingEnum) for available values."
+        },
+        "baseUrl" : {
+          "type" : "string",
+          "description" : "The base URL to access your WhatsApp EC. Only provide for `self` hosted deployments."
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "The username to access your WhatsApp EC. Only provide for `self` hosted deployments."
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "The password to access your WhatsApp EC. Only provide for `self` hosted deployments."
+        },
+        "callbackUrl" : {
+          "type" : "string",
+          "description" : "The URL to be called by Smooch when the status of the deployment changes."
+        }
+      }
+    },
+    "DeploymentResponse" : {
+      "type" : "object",
+      "required" : [ "deployment" ],
+      "properties" : {
+        "deployment" : {
+          "description" : "The deployment.",
+          "$ref" : "#/definitions/Deployment"
+        }
+      }
+    },
+    "DeploymentActivatePhoneNumber" : {
+      "type" : "object",
+      "required" : [ "method", "phoneNumber", "verifiedNameCertificate" ],
+      "properties" : {
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "The phone number to send the activation code to."
+        },
+        "verifiedNameCertificate" : {
+          "type" : "string",
+          "description" : "The verified name certificate for the phone number."
+        },
+        "method" : {
+          "type" : "string",
+          "description" : "The method desired to receive the activation code. See [**DeploymentActivationMethodEnum**](Enums.md#DeploymentActivationMethodEnum) for available values."
+        }
+      }
+    },
+    "DeploymentConfirmCode" : {
+      "type" : "object",
+      "required" : [ "code" ],
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The code that was sent to you via SMS or phone call."
+        }
+      }
+    },
     "LinkRequestResponse_linkRequests" : {
       "required" : [ "code", "integrationId", "type", "url" ],
       "properties" : {
@@ -3795,7 +4081,7 @@
         },
         "type" : {
           "type" : "string",
-          "description" : "The integration type. See Enums.md for available values."
+          "description" : "The integration type. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         },
         "code" : {
           "type" : "string",

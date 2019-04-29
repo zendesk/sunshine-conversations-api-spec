@@ -3,5 +3,6 @@ properties:
   imageAspectRatio:
     type: string
     description: >-
-      Specifies how to display all carousel images. See Enums.md for available
+      Specifies how to display all carousel images. See
+      [**ImageAspectRatioEnum**](Enums.md#ImageAspectRatioEnum) for available
       values.

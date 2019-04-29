@@ -4,7 +4,10 @@ required:
 properties:
   type:
     type: string
-    description: The integration type. See Enums.md for available values.
+    description: >-
+      The integration type. See
+      [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available
+      values.
   displayName:
     type: string
     description: |
@@ -39,7 +42,7 @@ properties:
     type: string
     description: |
       Your WhatsApp API client's URL.
-      Required for *WhatsApp* integrations.
+      Required for *WhatsApp* integrations. (this usage is deprecated)
   hsmFallbackLanguage:
     type: string
     description: |
@@ -70,6 +73,11 @@ properties:
     description: |
       LINE Channel Access Token.
       Required for *line* integrations.
+  deploymentId:
+    type: string
+    description: |
+      Your WhatsApp deployment ID.
+      Required for *WhatsApp* integrations.
   serviceCode:
     type: string
     description: |
@@ -97,14 +105,14 @@ properties:
     type: string
     description: |
       The password for your APN certificate or WhatsApp API client.
-      Required for *WhatsApp* integrations.
+      Required for *WhatsApp* integrations. (this usage is deprecated)
       (Optional) Used for *apn* integrations.
   username:
     type: string
     description: |
       The username for the account.
-      Required for *WhatsApp* integrations.
       Returned on successful *twitter* and *telegram* integrations.
+      Required for *WhatsApp* integrations. (this usage is deprecated)
   autoUpdateBadge:
     type: boolean
     description: |

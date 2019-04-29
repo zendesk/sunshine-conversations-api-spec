@@ -8,7 +8,8 @@ properties:
   triggers:
     type: array
     description: >-
-      An array of triggers you wish to have the webhook listen to. See Enums.md
-      for available values.
+      An array of triggers you wish to have the webhook listen to. See
+      [**WebhookTriggersEnum**](Enums.md#WebhookTriggersEnum) for available
+      values.
     items:
       type: string

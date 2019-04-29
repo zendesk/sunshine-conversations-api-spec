@@ -16,8 +16,9 @@ properties:
     description: >
       The size of the image to be shown in the carousel/list item.
 
-      Only top item of Facebook Messenger carousel supported. See Enums.md for
-      available values.
+      Only top item of Facebook Messenger carousel supported. See
+      [**MessageItemSizeEnum**](Enums.md#MessageItemSizeEnum) for available
+      values.
   mediaType:
     type: string
     description: >-

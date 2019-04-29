@@ -8,7 +8,10 @@ properties:
     description: 'The integration ID, generated automatically.'
   type:
     type: string
-    description: The integration type. See Enums.md for available values.
+    description: >-
+      The integration type. See
+      [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available
+      values.
   displayName:
     type: string
     description: |
@@ -122,11 +125,16 @@ properties:
     description: |
       The binary of your APN certificate base64 encoded.
       Required for *apn* integrations.
+  deploymentId:
+    type: string
+    description: |
+      Your WhatsApp deployment ID.
+      Required for *WhatsApp* integrations.
   baseUrl:
     type: string
     description: |
       Your WhatsApp API client's URL.
-      Required for *WhatsApp* integrations.
+      Required for *WhatsApp* integrations. (this usage is deprecated)
   hsmFallbackLanguage:
     type: string
     description: |
@@ -136,7 +144,7 @@ properties:
     type: string
     description: |
       The password for your APN certificate or WhatsApp API client.
-      Required for *WhatsApp* integrations.
+      Required for *WhatsApp* integrations. (this usage is deprecated)
       (Optional) Used for *apn* integrations.
   autoUpdateBadge:
     type: boolean
@@ -196,8 +204,8 @@ properties:
     type: string
     description: |
       The username for the account.
-      Required for *WhatsApp* integrations.
       Returned on successful *twitter* and *telegram* integrations.
+      Required for *WhatsApp* integrations. (this usage is deprecated)
   apiKey:
     type: string
     description: |
@@ -325,8 +333,9 @@ properties:
   status:
     type: string
     description: >-
-      The integration status. See Enums.md for available values. [More
-      info](https://docs.smooch.io/#integration-status).
+      The integration status. See
+      [**IntegrationStatusEnum**](Enums.md#IntegrationStatusEnum) for available
+      values. [More info](https://docs.smooch.io/#integration-status).
   error:
     type: string
     description: >-

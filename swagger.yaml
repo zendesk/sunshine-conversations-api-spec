@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '5.7'
+  version: '5.8'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -962,3 +962,81 @@ paths:
       responses:
         '200':
           description: Ok
+  /v1.1/whatsapp/deployments:
+    post:
+      tags:
+        - Deployment
+      description: Create a WhatsApp deployment.
+      operationId: createDeployment
+      parameters:
+        - $ref: ./parameters/DeploymentCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml
+    get:
+      tags:
+        - Deployment
+      description: List owned WhatsApp deployments.
+      operationId: listDeployments
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListDeploymentsResponse.yaml
+  '/v1.1/whatsapp/deployments/{deploymentId}':
+    parameters:
+      - $ref: ./parameters/DeploymentId.yaml
+    get:
+      tags:
+        - Deployment
+      description: Get the specified deployment.
+      operationId: getDeployment
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml
+    delete:
+      tags:
+        - Deployment
+      description: Delete the specified deployment.
+      operationId: deleteDeployment
+      responses:
+        '200':
+          description: Ok
+        '202':
+          description: Accepted
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml
+  '/v1.1/whatsapp/deployments/{deploymentId}/activate':
+    parameters:
+      - $ref: ./parameters/DeploymentId.yaml
+    post:
+      tags:
+        - Deployment
+      description: Activate a phone number on the specified deployment.
+      operationId: activatePhoneNumber
+      parameters:
+        - $ref: ./parameters/DeploymentActivatePhoneNumber.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml
+  '/v1.1/whatsapp/deployments/{deploymentId}/code/confirm':
+    parameters:
+      - $ref: ./parameters/DeploymentId.yaml
+    post:
+      tags:
+        - Deployment
+      description: Confirm code to complete phone number activation.
+      operationId: confirmCode
+      parameters:
+        - $ref: ./parameters/DeploymentConfirmCode.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml

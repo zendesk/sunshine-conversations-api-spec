@@ -1,0 +1,9 @@
+type: object
+required:
+  - deployments
+properties:
+  deployments:
+    type: array
+    items:
+      $ref: ./Deployment.yaml
+    description: The list of deployments.

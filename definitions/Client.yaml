@@ -15,7 +15,10 @@ properties:
     description: The date time the client was last seen.
   platform:
     type: string
-    description: The client's platform. See Enums.md for available values.
+    description: >-
+      The client's platform. See
+      [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available
+      values.
   integrationId:
     type: string
     description: The ID of the integration that the client was created for.

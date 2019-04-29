@@ -109,3 +109,23 @@ properties:
       - 'payment:success'
       - postback
       - 'typing:appUser'
+  DeploymentHosting:
+    type: string
+    enum:
+      - self
+      - smooch
+  DeploymentStatus:
+    type: string
+    enum:
+      - starting
+      - unregistered
+      - registered
+      - integrated
+      - pending
+      - deleting
+      - error
+  DeploymentActivationMethod:
+    type: string
+    enum:
+      - voice
+      - sms
