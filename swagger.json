@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.8",
+    "version" : "5.9",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2041,6 +2041,10 @@
           "type" : "string",
           "enum" : [ "helpscout", "slack", "zendesk" ]
         },
+        "ClientStatus" : {
+          "type" : "string",
+          "enum" : [ "active", "blocked", "inactive", "pending" ]
+        },
         "ConfirmationType" : {
           "type" : "string",
           "enum" : [ "immediate", "userActivity", "prompt" ]
@@ -2048,6 +2052,18 @@
         "ConversationActivityType" : {
           "type" : "string",
           "enum" : [ "conversation:read", "typing:start", "typing:stop" ]
+        },
+        "DeploymentActivationMethod" : {
+          "type" : "string",
+          "enum" : [ "sms", "voice" ]
+        },
+        "DeploymentHosting" : {
+          "type" : "string",
+          "enum" : [ "self", "smooch" ]
+        },
+        "DeploymentStatus" : {
+          "type" : "string",
+          "enum" : [ "deleting", "error", "integrated", "pending", "registered", "starting", "unregistered" ]
         },
         "ImageAspectRatio" : {
           "type" : "string",
@@ -2080,18 +2096,6 @@
         "WebhookTriggers" : {
           "type" : "string",
           "enum" : [ "appUser:delete", "client:add", "client:remove", "conversation:read", "conversation:referral", "link:failure", "link:match", "link:success", "merge:appUser", "message:appMaker", "message:appUser", "message:delivery:channel", "message:delivery:failure", "message:delivery:user", "payment:success", "postback", "typing:appUser" ]
-        },
-        "DeploymentHosting" : {
-          "type" : "string",
-          "enum" : [ "self", "smooch" ]
-        },
-        "DeploymentStatus" : {
-          "type" : "string",
-          "enum" : [ "starting", "unregistered", "registered", "integrated", "pending", "deleting", "error" ]
-        },
-        "DeploymentActivationMethod" : {
-          "type" : "string",
-          "enum" : [ "voice", "sms" ]
         }
       }
     },
@@ -2166,9 +2170,17 @@
           "type" : "string",
           "description" : "An identifier for the client. Must be globally unique."
         },
+        "status" : {
+          "type" : "string",
+          "description" : "The client status. Indicates if the client is able to receive messages or not. See [**ClientStatusEnum**](Enums.md#ClientStatusEnum) for available values."
+        },
+        "externalId" : {
+          "type" : "string",
+          "description" : "The ID of the user on an external channel. For example, the user's phone number for Twilio, or their page-scoped user ID for Facebook Messenger. Applies only to non-SDK clients."
+        },
         "active" : {
           "type" : "boolean",
-          "description" : "Flag indicating if the client is active."
+          "description" : "Deprecated - use the status property instead."
         },
         "lastSeen" : {
           "type" : "string",
