@@ -11,3 +11,13 @@ properties:
       values.
     items:
       type: string
+  includeClient:
+    type: boolean
+    description: >-
+      Specifies whether webhook payloads should include the client information
+      associated with a conversation in webhook events.
+  includeFullAppUser:
+    type: boolean
+    description: >-
+      Specifies whether webhook payloads should include the complete appUser
+      schema for appUser events.

@@ -27,3 +27,13 @@ properties:
   version:
     type: string
     description: The payload version of the webhook.
+  includeClient:
+    type: boolean
+    description: >-
+      Specifies whether webhook payloads should include the client information
+      associated with a conversation in webhook events.
+  includeFullAppUser:
+    type: boolean
+    description: >-
+      Specifies whether webhook payloads should include the complete appUser
+      schema for appUser events.

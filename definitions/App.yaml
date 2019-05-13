@@ -29,6 +29,16 @@ properties:
         description: >-
           Flag specifying whether animal names should be used for anonymous
           users.
+      conversationRetentionSeconds:
+        type: integer
+        description: >-
+          Number of seconds of inactivity before a conversation’s messages will
+          be automatically deleted.
+      echoPostback:
+        type: boolean
+        description: >-
+          A boolean specifying whether a message should be added to the
+          conversation history when a postback button is clicked.
   metadata:
     type: object
     description: Flat JSON object containing any custom properties associated with the app.

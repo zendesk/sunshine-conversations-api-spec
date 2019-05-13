@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.9",
+    "version" : "5.10",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3815,6 +3815,14 @@
         "version" : {
           "type" : "string",
           "description" : "The payload version of the webhook."
+        },
+        "includeClient" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the client information associated with a conversation in webhook events."
+        },
+        "includeFullAppUser" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the complete appUser schema for appUser events."
         }
       }
     },
@@ -3832,6 +3840,14 @@
           "items" : {
             "type" : "string"
           }
+        },
+        "includeClient" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the client information associated with a conversation in webhook events."
+        },
+        "includeFullAppUser" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the complete appUser schema for appUser events."
         }
       }
     },
@@ -3858,6 +3874,14 @@
           "items" : {
             "type" : "string"
           }
+        },
+        "includeClient" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the client information associated with a conversation in webhook events."
+        },
+        "includeFullAppUser" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the complete appUser schema for appUser events."
         }
       }
     },
@@ -4123,6 +4147,14 @@
         "useAnimalNames" : {
           "type" : "boolean",
           "description" : "Flag specifying whether animal names should be used for anonymous users."
+        },
+        "conversationRetentionSeconds" : {
+          "type" : "integer",
+          "description" : "Number of seconds of inactivity before a conversation’s messages will be automatically deleted."
+        },
+        "echoPostback" : {
+          "type" : "boolean",
+          "description" : "A boolean specifying whether a message should be added to the conversation history when a postback button is clicked."
         }
       },
       "description" : "Customizable app settings."
