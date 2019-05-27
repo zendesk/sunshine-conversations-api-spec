@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.10",
+    "version" : "5.11",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -124,6 +124,33 @@
             "schema" : {
               "$ref" : "#/definitions/AppUserResponse"
             }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/merge" : {
+      "post" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Force the merge of two specific users, when the business has determined that they represent the same person.",
+        "operationId" : "mergeUsers",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "appUserMergeBody",
+          "description" : "Body for a mergeUsers request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppUserMerge"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
           }
         }
       }
@@ -2348,6 +2375,29 @@
         }
       }
     },
+    "AppUserMerge" : {
+      "type" : "object",
+      "required" : [ "discarded", "surviving" ],
+      "properties" : {
+        "surviving" : {
+          "description" : "Nested object representing the user that will survive at the end of the merge",
+          "$ref" : "#/definitions/MergedUser"
+        },
+        "discarded" : {
+          "description" : "Nested object representing the user to merge into the surviving user. This user will be deleted as part of the process.",
+          "$ref" : "#/definitions/MergedUser"
+        }
+      }
+    },
+    "MergedUser" : {
+      "type" : "object",
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The `_id` of the user to merge."
+        }
+      }
+    },
     "MessageResponse" : {
       "type" : "object",
       "required" : [ "conversation", "message" ],
@@ -2461,6 +2511,15 @@
         "type" : {
           "type" : "string",
           "description" : "An identifier for the channel from which a message originated. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        },
+        "originalMessageId" : {
+          "type" : "string",
+          "description" : "Message identifier assigned by the originating channel."
+        },
+        "originalMessageTimestamp" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Message timestamp assigned by the originating channel."
         }
       }
     },

@@ -9,3 +9,10 @@ properties:
       An identifier for the channel from which a message originated. See
       [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available
       values.
+  originalMessageId:
+    type: string
+    description: Message identifier assigned by the originating channel.
+  originalMessageTimestamp:
+    type: number
+    format: double
+    description: Message timestamp assigned by the originating channel.

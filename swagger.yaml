@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '5.10'
+  version: '5.11'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -75,6 +75,21 @@ paths:
           description: Created
           schema:
             $ref: ./definitions/AppUserResponse.yaml
+  '/v1.1/apps/{appId}/appusers/merge':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - AppUser
+      description: >-
+        Force the merge of two specific users, when the business has determined
+        that they represent the same person.
+      operationId: mergeUsers
+      parameters:
+        - $ref: ./parameters/AppUserMerge.yaml
+      responses:
+        '200':
+          description: Ok
   '/v1.1/apps/{appId}/appusers/{userId}/images':
     parameters:
       - $ref: ./parameters/AppId.yaml

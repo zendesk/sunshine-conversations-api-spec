@@ -1,0 +1,15 @@
+required:
+  - surviving
+  - discarded
+type: object
+properties:
+  surviving:
+    description: >-
+      Nested object representing the user that will survive at the end of the
+      merge
+    $ref: ./MergedUser.yaml
+  discarded:
+    description: >-
+      Nested object representing the user to merge into the surviving user. This
+      user will be deleted as part of the process.
+    $ref: ./MergedUser.yaml
