@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.11",
+    "version" : "5.12",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -592,7 +592,10 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Ok"
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ActivityResponse"
+            }
           }
         }
       }
@@ -2918,6 +2921,16 @@
         "avatarUrl" : {
           "type" : "string",
           "description" : "The avatar URL of the app maker that starts typing a response."
+        }
+      }
+    },
+    "ActivityResponse" : {
+      "type" : "object",
+      "required" : [ "conversation" ],
+      "properties" : {
+        "conversation" : {
+          "description" : "The conversation.",
+          "$ref" : "#/definitions/Conversation"
         }
       }
     },
