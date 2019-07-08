@@ -81,3 +81,28 @@ properties:
     description: >-
       Settings to adjust the carousel layout. See [Display
       Settings](https://docs.smooch.io/rest/#display-settings).
+  blockChatInput:
+    type: boolean
+    description: |
+      Indicates if the Web SDK chat input should be blocked. Defaults to false.
+      Only for form messages.
+  fields:
+    type: array
+    items:
+      $ref: ./Field.yaml
+    description: |
+      The fields in the form.
+      Required for form and formResponse messages.
+  submitted:
+    type: boolean
+    description: Indicates if the form was submitted. Generated automatically.
+  quotedMessage:
+    $ref: ./QuotedMessage.yaml
+    description: |
+      The form message a formResponse message responds to.
+      Required for formResponse messages.
+  textFallback:
+    type: string
+    description: |
+      The text fallback displayed in channels that do not support form messages.
+      Only for formResponse messages. Generated automatically.

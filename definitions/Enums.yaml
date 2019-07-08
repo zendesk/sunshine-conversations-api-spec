@@ -111,6 +111,19 @@ properties:
       - list
       - location
       - text
+      - form
+      - formResponse
+  FieldType:
+    type: string
+    enum:
+      - text
+      - email
+      - select
+  QuotedMessageType:
+    type: string
+    enum:
+      - message
+      - externalMessageId
   Role:
     type: string
     enum:

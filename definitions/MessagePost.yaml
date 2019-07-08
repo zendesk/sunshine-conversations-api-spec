@@ -57,6 +57,18 @@ properties:
     items:
       $ref: ./Action.yaml
     description: The actions in the message.
+  blockChatInput:
+    type: boolean
+    description: |
+      Indicates if the Web SDK chat input should be blocked. Defaults to false.
+      Only for form messages.
+  fields:
+    type: array
+    items:
+      $ref: ./FieldPost.yaml
+    description: |
+      The fields in the form.
+      Required for form messages.
   destination:
     $ref: ./Destination.yaml
     description: >-

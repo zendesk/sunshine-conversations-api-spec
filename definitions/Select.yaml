@@ -1,0 +1,14 @@
+type: object
+required:
+  - name
+  - label
+properties:
+  _id:
+    type: string
+    description: 'The select ID, generated automatically.'
+  name:
+    type: string
+    description: The name of the selected option.
+  label:
+    type: string
+    description: The label of the selected option.

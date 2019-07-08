@@ -5,9 +5,10 @@ description: >
   Body for a postMessage request.
 
   Additional arguments are necessary based on message type
-  ([text](https://docs.smooch.io/rest#text-message),
-  [image](https://docs.smooch.io/rest#image-message),
-  [carousel](https://docs.smooch.io/rest#carousel-message),
-  [list](https://docs.smooch.io/rest#list-message))
+  ([text](https://docs.smooch.io/rest/#text),
+  [image](https://docs.smooch.io/rest/#image),
+  [carousel](https://docs.smooch.io/rest/#carousel),
+  [list](https://docs.smooch.io/rest/#list),
+  [form](https://docs.smooch.io/rest/#form))
 schema:
   $ref: ./definitions/MessagePost.yaml

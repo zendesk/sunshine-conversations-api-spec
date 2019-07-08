@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.12",
+    "version" : "5.13",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -469,7 +469,7 @@
         }, {
           "in" : "body",
           "name" : "messagePostBody",
-          "description" : "Body for a postMessage request.\nAdditional arguments are necessary based on message type ([text](https://docs.smooch.io/rest#text-message), [image](https://docs.smooch.io/rest#image-message), [carousel](https://docs.smooch.io/rest#carousel-message), [list](https://docs.smooch.io/rest#list-message))\n",
+          "description" : "Body for a postMessage request.\nAdditional arguments are necessary based on message type ([text](https://docs.smooch.io/rest/#text), [image](https://docs.smooch.io/rest/#image), [carousel](https://docs.smooch.io/rest/#carousel), [list](https://docs.smooch.io/rest/#list), [form](https://docs.smooch.io/rest/#form))\n",
           "required" : true,
           "schema" : {
             "$ref" : "#/definitions/MessagePost"
@@ -2117,7 +2117,15 @@
         },
         "MessageType" : {
           "type" : "string",
-          "enum" : [ "carousel", "file", "image", "list", "location", "text" ]
+          "enum" : [ "carousel", "file", "image", "list", "location", "text", "form", "formResponse" ]
+        },
+        "FieldType" : {
+          "type" : "string",
+          "enum" : [ "text", "email", "select" ]
+        },
+        "QuotedMessageType" : {
+          "type" : "string",
+          "enum" : [ "message", "externalMessageId" ]
         },
         "Role" : {
           "type" : "string",
@@ -2501,6 +2509,29 @@
         "displaySettings" : {
           "description" : "Settings to adjust the carousel layout. See [Display Settings](https://docs.smooch.io/rest/#display-settings).",
           "$ref" : "#/definitions/DisplaySettings"
+        },
+        "blockChatInput" : {
+          "type" : "boolean",
+          "description" : "Indicates if the Web SDK chat input should be blocked. Defaults to false.\nOnly for form messages.\n"
+        },
+        "fields" : {
+          "type" : "array",
+          "description" : "The fields in the form.\nRequired for form and formResponse messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/Field"
+          }
+        },
+        "submitted" : {
+          "type" : "boolean",
+          "description" : "Indicates if the form was submitted. Generated automatically."
+        },
+        "quotedMessage" : {
+          "description" : "The form message a formResponse message responds to.\nRequired for formResponse messages.\n",
+          "$ref" : "#/definitions/QuotedMessage"
+        },
+        "textFallback" : {
+          "type" : "string",
+          "description" : "The text fallback displayed in channels that do not support form messages.\nOnly for formResponse messages. Generated automatically.\n"
         }
       }
     },
@@ -2619,6 +2650,115 @@
         "imageAspectRatio" : {
           "type" : "string",
           "description" : "Specifies how to display all carousel images. See [**ImageAspectRatioEnum**](Enums.md#ImageAspectRatioEnum) for available values."
+        }
+      }
+    },
+    "Field" : {
+      "type" : "object",
+      "required" : [ "label", "name", "type" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The field ID, generated automatically."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The field type. See [**FieldTypeEnum**](Enums.md#FieldTypeEnum) for available values."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the field. Each field name must be unique per form."
+        },
+        "label" : {
+          "type" : "string",
+          "description" : "The label to be displayed with the field."
+        },
+        "placeholder" : {
+          "type" : "string",
+          "description" : "The placeholder text of the field that will be rendered.\nOnly for form messages\n"
+        },
+        "minSize" : {
+          "type" : "integer",
+          "description" : "The minimum possible length of the response. Defaults to 1 if not specified.\nOnly for text fields in form messages.\n"
+        },
+        "maxSize" : {
+          "type" : "integer",
+          "description" : "The maximum possible length of the response. Defaults to 128 if not specified.\nOnly for text fields in form messages.\n"
+        },
+        "options" : {
+          "type" : "array",
+          "description" : "The field options that can be selected. The array is limited to 20 options.\nOnly for select fields in form messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/Option"
+          }
+        },
+        "selectSize" : {
+          "type" : "integer",
+          "description" : "The select size, generated automatically.\nOnly for select fields in form messages.\n"
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The text response to a text field.\nRequired for text fields in form response messages.\n"
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The email response to an email field.\nRequired for email fields in form response messages.\n"
+        },
+        "select" : {
+          "type" : "array",
+          "description" : "The options selected as a response to a select field.\nRequired for select fields in form response messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/Select"
+          }
+        }
+      }
+    },
+    "Option" : {
+      "type" : "object",
+      "required" : [ "label", "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the option. It must be unique per field."
+        },
+        "label" : {
+          "type" : "string",
+          "description" : "The label the option will be displayed with on Web Messenger."
+        }
+      }
+    },
+    "Select" : {
+      "type" : "object",
+      "required" : [ "label", "name" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The select ID, generated automatically."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the selected option."
+        },
+        "label" : {
+          "type" : "string",
+          "description" : "The label of the selected option."
+        }
+      }
+    },
+    "QuotedMessage" : {
+      "type" : "object",
+      "required" : [ "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The quoted message type. See [**QuotedMessageTypeEnum**](Enums.md#QuotedMessageTypeEnum) for available values."
+        },
+        "externalMessageId" : {
+          "type" : "string",
+          "description" : "The external message Id of the quoted message.\nOnly for quoted messages with type set to externalMessageId.\n"
+        },
+        "content" : {
+          "$ref" : "#/definitions/Message"
         }
       }
     },
@@ -2871,6 +3011,17 @@
             "$ref" : "#/definitions/Action"
           }
         },
+        "blockChatInput" : {
+          "type" : "boolean",
+          "description" : "Indicates if the Web SDK chat input should be blocked. Defaults to false.\nOnly for form messages.\n"
+        },
+        "fields" : {
+          "type" : "array",
+          "description" : "The fields in the form.\nRequired for form messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/FieldPost"
+          }
+        },
         "destination" : {
           "description" : "Specifies which channel to deliver a message to. See [list integrations](https://docs.smooch.io/rest/#list-integrations) to get integration ID and type.",
           "$ref" : "#/definitions/Destination"
@@ -2878,6 +3029,43 @@
         "override" : {
           "description" : "Specifies channel-specific overrides to use in order to bypass Smooch's message translation logic.",
           "$ref" : "#/definitions/MessageOverride"
+        }
+      }
+    },
+    "FieldPost" : {
+      "type" : "object",
+      "required" : [ "label", "name", "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The field type. See [**FieldTypeEnum**](Enums.md#FieldTypeEnum) for available values."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the field. Each field name must be unique per form."
+        },
+        "label" : {
+          "type" : "string",
+          "description" : "The label to be displayed with the field."
+        },
+        "placeholder" : {
+          "type" : "string",
+          "description" : "The placeholder text of the field that will be rendered.\nOnly for form messages\n"
+        },
+        "minSize" : {
+          "type" : "integer",
+          "description" : "The minimum possible length of the response. Defaults to 1 if not specified.\nOnly for text fields in form messages.\n"
+        },
+        "maxSize" : {
+          "type" : "integer",
+          "description" : "The maximum possible length of the response. Defaults to 128 if not specified.\nOnly for text fields in form messages.\n"
+        },
+        "options" : {
+          "type" : "array",
+          "description" : "The field options that can be selected. The array is limited to 20 options.\nOnly for select fields in form messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/Option"
+          }
         }
       }
     },

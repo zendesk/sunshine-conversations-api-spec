@@ -1,0 +1,45 @@
+type: object
+required:
+  - type
+  - name
+  - label
+properties:
+  type:
+    type: string
+    description: >-
+      The field type. See [**FieldTypeEnum**](Enums.md#FieldTypeEnum) for
+      available values.
+  name:
+    type: string
+    description: The name of the field. Each field name must be unique per form.
+  label:
+    type: string
+    description: The label to be displayed with the field.
+  placeholder:
+    type: string
+    description: |
+      The placeholder text of the field that will be rendered.
+      Only for form messages
+  minSize:
+    type: integer
+    description: >
+      The minimum possible length of the response. Defaults to 1 if not
+      specified.
+
+      Only for text fields in form messages.
+  maxSize:
+    type: integer
+    description: >
+      The maximum possible length of the response. Defaults to 128 if not
+      specified.
+
+      Only for text fields in form messages.
+  options:
+    type: array
+    items:
+      $ref: ./Option.yaml
+    description: >
+      The field options that can be selected. The array is limited to 20
+      options.
+
+      Only for select fields in form messages.
