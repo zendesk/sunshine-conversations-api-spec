@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '5.13'
+  version: '5.14'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -20,11 +20,14 @@ produces:
   - application/json
 security:
   - jwt: []
+  - basicAuth: []
 securityDefinitions:
   jwt:
     type: apiKey
     name: Authorization
     in: header
+  basicAuth:
+    type: basic
 paths:
   '/v1.1/apps/{appId}/appusers/{userId}':
     parameters:

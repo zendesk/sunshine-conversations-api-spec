@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.13",
+    "version" : "5.14",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -11,6 +11,8 @@
   "produces" : [ "application/json" ],
   "security" : [ {
     "jwt" : [ ]
+  }, {
+    "basicAuth" : [ ]
   } ],
   "paths" : {
     "/v1.1/apps/{appId}/appusers/{userId}" : {
@@ -2053,6 +2055,9 @@
       "type" : "apiKey",
       "name" : "Authorization",
       "in" : "header"
+    },
+    "basicAuth" : {
+      "type" : "basic"
     }
   },
   "definitions" : {
