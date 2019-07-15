@@ -127,3 +127,8 @@ properties:
     description: |
       Specification of a fallback language.
       (Optional) Used for *WhatsApp* integrations.
+  qrCodeUrl:
+    type: string
+    description: >
+      URL provided by LINE in the [Developer
+      Console](https://developers.line.biz/console/).

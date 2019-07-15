@@ -105,6 +105,15 @@ properties:
     type: string
     description: |
       LINE Switcher Secret.
+  qrCodeUrl:
+    type: string
+    description: >
+      URL provided by LINE in the [Developer
+      Console](https://developers.line.biz/console/).
+  lineId:
+    type: string
+    description: |
+      LINE Basic ID. Generated automatically when a `qrCodeUrl` is updated.
   botName:
     type: string
     description: |
