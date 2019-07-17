@@ -339,6 +339,14 @@ properties:
       `https`.
 
       (Optional) Used for *Web Messenger* integrations.
+  hideUnsubscribeLink:
+    type: boolean
+    description: >
+      When `true`, unsubscribe links will not be included in outbound emails. If
+      this setting is enabled, it is expected that the business is providing the
+      user a way to unsubscribe by some other means.
+
+      (Optional) Used for *mailgun* integrations.
   status:
     type: string
     description: >-

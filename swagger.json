@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.15",
+    "version" : "5.16",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3686,6 +3686,10 @@
             "type" : "string"
           }
         },
+        "hideUnsubscribeLink" : {
+          "type" : "boolean",
+          "description" : "When `true`, unsubscribe links will not be included in outbound emails. If this setting is enabled, it is expected that the business is providing the user a way to unsubscribe by some other means.\n(Optional) Used for *mailgun* integrations.\n"
+        },
         "status" : {
           "type" : "string",
           "description" : "The integration status. See [**IntegrationStatusEnum**](Enums.md#IntegrationStatusEnum) for available values. [More info](https://docs.smooch.io/#integration-status)."
@@ -3897,6 +3901,10 @@
         "qrCodeUrl" : {
           "type" : "string",
           "description" : "URL provided by LINE in the [Developer Console](https://developers.line.biz/console/).\n"
+        },
+        "hideUnsubscribeLink" : {
+          "type" : "boolean",
+          "description" : "When `true`, unsubscribe links will not be included in outbound emails. If this setting is enabled, it is expected that the business is providing the user a way to unsubscribe by some other means.\n(Optional) Used for *mailgun* integrations.\n"
         }
       }
     },
@@ -3997,6 +4005,10 @@
         "qrCodeUrl" : {
           "type" : "string",
           "description" : "URL provided by LINE in the [Developer Console](https://developers.line.biz/console/).\n"
+        },
+        "hideUnsubscribeLink" : {
+          "type" : "boolean",
+          "description" : "When `true`, unsubscribe links will not be included in outbound emails. If this setting is enabled, it is expected that the business is providing the user a way to unsubscribe by some other means.\n(Optional) Used for *mailgun* integrations.\n"
         }
       }
     },

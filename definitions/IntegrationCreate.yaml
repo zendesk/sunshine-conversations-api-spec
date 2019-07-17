@@ -276,3 +276,11 @@ properties:
     description: >
       URL provided by LINE in the [Developer
       Console](https://developers.line.biz/console/).
+  hideUnsubscribeLink:
+    type: boolean
+    description: >
+      When `true`, unsubscribe links will not be included in outbound emails. If
+      this setting is enabled, it is expected that the business is providing the
+      user a way to unsubscribe by some other means.
+
+      (Optional) Used for *mailgun* integrations.
