@@ -11,7 +11,7 @@
     "groupId": "io.smooch",
     "projectVersion": "5.16.0",
     "packageVersion": "5.16.0",
-    "gemVersion": "5.16.0",
+    "gemVersion": "5.16.1",
     "artifactVersion": "5.16.0",
     "specificationUrl": "https://github.com/smooch/smooch-api-specification"
 }
