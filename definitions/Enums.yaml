@@ -137,6 +137,7 @@ properties:
       - 'client:remove'
       - 'conversation:read'
       - 'conversation:referral'
+      - 'conversation:start'
       - 'link:failure'
       - 'link:match'
       - 'link:success'
