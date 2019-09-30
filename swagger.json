@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.16",
+    "version" : "5.18",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3019,6 +3019,10 @@
         "blockChatInput" : {
           "type" : "boolean",
           "description" : "Indicates if the Web SDK chat input should be blocked. Defaults to false.\nOnly for form messages.\n"
+        },
+        "displaySettings" : {
+          "description" : "Settings to adjust the carousel layout. See [Display Settings](https://docs.smooch.io/rest/#display-settings).",
+          "$ref" : "#/definitions/DisplaySettings"
         },
         "fields" : {
           "type" : "array",

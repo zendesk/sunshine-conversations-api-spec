@@ -62,6 +62,11 @@ properties:
     description: |
       Indicates if the Web SDK chat input should be blocked. Defaults to false.
       Only for form messages.
+  displaySettings:
+    $ref: ./DisplaySettings.yaml
+    description: >-
+      Settings to adjust the carousel layout. See [Display
+      Settings](https://docs.smooch.io/rest/#display-settings).
   fields:
     type: array
     items:
