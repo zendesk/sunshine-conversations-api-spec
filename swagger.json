@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.18",
+    "version" : "5.19",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2646,6 +2646,10 @@
           "type" : "object",
           "description" : "Extra options to pass directly to the channel API. See [Extra Channel Options](https://docs.smooch.io/rest#extra-channel-options-schema)",
           "properties" : { }
+        },
+        "openOnReceive" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if the webview should open automatically. Only one action per message can be set to true. Currently only supported on the Web Messenger."
         }
       }
     },

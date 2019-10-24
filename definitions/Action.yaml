@@ -67,3 +67,9 @@ properties:
     description: >-
       Extra options to pass directly to the channel API. See [Extra Channel
       Options](https://docs.smooch.io/rest#extra-channel-options-schema)
+  openOnReceive:
+    type: boolean
+    description: >-
+      Flag indicating if the webview should open automatically. Only one action
+      per message can be set to true. Currently only supported on the Web
+      Messenger.
