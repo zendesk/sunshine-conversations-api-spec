@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.19",
+    "version" : "5.20",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2537,6 +2537,14 @@
         "textFallback" : {
           "type" : "string",
           "description" : "The text fallback displayed in channels that do not support form messages.\nOnly for formResponse messages. Generated automatically.\n"
+        },
+        "coordinates" : {
+          "description" : "Data representing the location being sent in the message.",
+          "$ref" : "#/definitions/Coordinates"
+        },
+        "location" : {
+          "description" : "Additional information about the location being sent in the message.",
+          "$ref" : "#/definitions/Location"
         }
       }
     },
@@ -2768,6 +2776,35 @@
         },
         "content" : {
           "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "Coordinates" : {
+      "type" : "object",
+      "required" : [ "lat", "long" ],
+      "properties" : {
+        "lat" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "A floating point value representing the latitude of the location."
+        },
+        "long" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "A floating point value representing the longitude of the location."
+        }
+      }
+    },
+    "Location" : {
+      "type" : "object",
+      "properties" : {
+        "address" : {
+          "type" : "string",
+          "description" : "The location's street address."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "A name for the location."
         }
       }
     },
@@ -3042,6 +3079,14 @@
         "override" : {
           "description" : "Specifies channel-specific overrides to use in order to bypass Smooch's message translation logic.",
           "$ref" : "#/definitions/MessageOverride"
+        },
+        "coordinates" : {
+          "description" : "Data representing the location being sent in the message.",
+          "$ref" : "#/definitions/Coordinates"
+        },
+        "location" : {
+          "description" : "Additional information about the location being sent in the message.",
+          "$ref" : "#/definitions/Location"
         }
       }
     },

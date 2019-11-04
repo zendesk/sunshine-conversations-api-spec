@@ -85,3 +85,9 @@ properties:
     description: >-
       Specifies channel-specific overrides to use in order to bypass Smooch's
       message translation logic.
+  coordinates:
+    $ref: ./Coordinates.yaml
+    description: Data representing the location being sent in the message.
+  location:
+    $ref: ./Location.yaml
+    description: Additional information about the location being sent in the message.
