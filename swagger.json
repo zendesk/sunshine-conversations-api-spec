@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.20",
+    "version" : "5.21",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3591,7 +3591,7 @@
         },
         "fromAddress" : {
           "type" : "string",
-          "description" : "Email will display as coming from this address.\n(Optional) Used for *frontendEmail* integrations.\n"
+          "description" : "Email address to use as the `From` and `Reply-To` address if it must be different from `incomingAddress`.\nOnly use this option if the address that you supply is configured to forward emails to the `incomingAddress`, otherwise user replies will be lost.\nYou must also make sure that the domain is properly configured as a mail provider so as to not be flagged as spam by the user's email client. \n(Optional) Used for *mailgun* integrations.\n"
         },
         "certificate" : {
           "type" : "string",
@@ -3831,7 +3831,7 @@
         },
         "fromAddress" : {
           "type" : "string",
-          "description" : "Email will display as coming from this address.\n(Optional) Used for *frontendEmail* integrations.\n"
+          "description" : "Email address to use as the `From` and `Reply-To` address if it must be different from `incomingAddress`.\nOnly use this option if the address that you supply is configured to forward emails to the `incomingAddress`, otherwise user replies will be lost.\nYou must also make sure that the domain is properly configured as a mail provider so as to not be flagged as spam by the user's email client. \n(Optional) Used for *mailgun* integrations.\n"
         },
         "certificate" : {
           "type" : "string",
@@ -4062,6 +4062,10 @@
         "hideUnsubscribeLink" : {
           "type" : "boolean",
           "description" : "When `true`, unsubscribe links will not be included in outbound emails. If this setting is enabled, it is expected that the business is providing the user a way to unsubscribe by some other means.\n(Optional) Used for *mailgun* integrations.\n"
+        },
+        "fromAddress" : {
+          "type" : "string",
+          "description" : "Email address to use as the `From` and `Reply-To` address if it must be different from `incomingAddress`.\nOnly use this option if the address that you supply is configured to forward emails to the `incomingAddress`, otherwise user replies will be lost.\nYou must also make sure that the domain is properly configured as a mail provider so as to not be flagged as spam by the user's email client. \n(Optional) Used for *mailgun* integrations.\n"
         }
       }
     },

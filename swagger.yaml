@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '5.20'
+  version: '5.21'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
