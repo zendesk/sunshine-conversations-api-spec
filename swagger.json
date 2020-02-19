@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.22",
+    "version" : "5.23",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3145,6 +3145,12 @@
       "properties" : {
         "whatsapp" : {
           "$ref" : "#/definitions/MessageOverride_whatsapp"
+        },
+        "line" : {
+          "$ref" : "#/definitions/MessageOverride_line"
+        },
+        "messenger" : {
+          "$ref" : "#/definitions/MessageOverride_messenger"
         }
       }
     },
@@ -4484,6 +4490,24 @@
         "payload" : {
           "type" : "object",
           "description" : "The exact payload to send to WhatsApp.",
+          "properties" : { }
+        }
+      }
+    },
+    "MessageOverride_line" : {
+      "properties" : {
+        "payload" : {
+          "type" : "object",
+          "description" : "The exact payload to send to LINE.",
+          "properties" : { }
+        }
+      }
+    },
+    "MessageOverride_messenger" : {
+      "properties" : {
+        "payload" : {
+          "type" : "object",
+          "description" : "The exact payload to send to Facebook Messenger.",
           "properties" : { }
         }
       }
