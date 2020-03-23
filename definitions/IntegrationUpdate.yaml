@@ -154,3 +154,12 @@ properties:
       provider so as to not be flagged as spam by the user's email client. 
 
       (Optional) Used for *mailgun* integrations.
+  production:
+    type: boolean
+    description: >
+      Flag specifying the APN environment to connect to (`production` if true,
+      `sandbox` otherwise).
+
+      Defaults to value inferred from certificate if not specified.
+
+      (Optional) Used for *apn* integrations.

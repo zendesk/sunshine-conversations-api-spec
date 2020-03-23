@@ -127,6 +127,15 @@ properties:
     description: |
       Use the unread count of the conversation as the application badge.
       (Optional) Used for *apn* integrations.
+  production:
+    type: boolean
+    description: >
+      Flag specifying the APN environment to connect to (`production` if true,
+      `sandbox` otherwise).
+
+      Defaults to value inferred from certificate if not specified.
+
+      (Optional) Used for *apn* integrations.
   serverKey:
     type: string
     description: |
