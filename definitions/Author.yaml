@@ -1,0 +1,18 @@
+type: object
+required:
+  - role
+properties:
+  role:
+    type: string
+    description: >-
+      The role of the individual posting the message. The only accepted value is
+      "appMaker".
+  name:
+    type: string
+    description: The display name of the message author.
+  email:
+    type: string
+    description: The email address of the message author.
+  avatarUrl:
+    type: string
+    description: The URL of the desired message avatar image.

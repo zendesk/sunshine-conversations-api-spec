@@ -319,6 +319,21 @@ paths:
           description: Ok
           schema:
             $ref: ./definitions/ActivityResponse.yaml
+  '/v1/apps/{appId}/notifications':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Notification
+      description: Post a notification to an externalId.
+      operationId: postNotification
+      parameters:
+        - $ref: ./parameters/NotificationPost.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/NotificationResponse.yaml
   '/v1.1/apps/{appId}/menu':
     parameters:
       - $ref: ./parameters/AppId.yaml
