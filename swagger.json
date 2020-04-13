@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.25",
+    "version" : "5.27",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -1071,6 +1071,28 @@
         "responses" : {
           "200" : {
             "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/sdks" : {
+      "get" : {
+        "tags" : [ "App" ],
+        "description" : "Retrieve the IDs of the three SDK integrations (`android`, `ios`, and `web`) for the specified app, to be used when initializing the SDKs.",
+        "operationId" : "getSdkIds",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/GetSdkIdsResponse"
+            }
           }
         }
       }
@@ -3569,6 +3591,24 @@
         }
       }
     },
+    "GetSdkIdsResponse" : {
+      "type" : "object",
+      "required" : [ "androidIntegrationId", "iosIntegrationId", "webIntegrationId" ],
+      "properties" : {
+        "androidIntegrationId" : {
+          "type" : "string",
+          "description" : "The ID of the `android` integration, used when initializing the Android SDK."
+        },
+        "iosIntegrationId" : {
+          "type" : "string",
+          "description" : "The ID of the `ios` integration, used when initializing the iOS SDK."
+        },
+        "webIntegrationId" : {
+          "type" : "string",
+          "description" : "The ID of the `web` integration, used when initializing the Web Messenger SDK."
+        }
+      }
+    },
     "ListIntegrationsResponse" : {
       "type" : "object",
       "properties" : {
@@ -3784,6 +3824,10 @@
         "originator" : {
           "type" : "string",
           "description" : "Smooch will receive all messages sent to this phone number.\nRequired for *messagebird* integrations.\n"
+        },
+        "signingKey" : {
+          "type" : "string",
+          "description" : "The signing key of your MessageBird account. Used to validate the webhooks' origin.\n(Optional) Used for *messagebird* integrations.\n"
         },
         "brandColor" : {
           "type" : "string",
@@ -4066,6 +4110,10 @@
         "hideUnsubscribeLink" : {
           "type" : "boolean",
           "description" : "When `true`, unsubscribe links will not be included in outbound emails. If this setting is enabled, it is expected that the business is providing the user a way to unsubscribe by some other means.\n(Optional) Used for *mailgun* integrations.\n"
+        },
+        "signingKey" : {
+          "type" : "string",
+          "description" : "The signing key of your MessageBird account. Used to validate the webhooks' origin.\n(Optional) Used for *messagebird* integrations.\n"
         }
       }
     },

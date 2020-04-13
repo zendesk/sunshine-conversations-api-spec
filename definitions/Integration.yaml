@@ -253,6 +253,13 @@ properties:
     description: |
       Smooch will receive all messages sent to this phone number.
       Required for *messagebird* integrations.
+  signingKey:
+    type: string
+    description: >
+      The signing key of your MessageBird account. Used to validate the
+      webhooks' origin.
+
+      (Optional) Used for *messagebird* integrations.
   brandColor:
     type: string
     description: >

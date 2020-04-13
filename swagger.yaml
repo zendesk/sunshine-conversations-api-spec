@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '5.25'
+  version: '5.27'
   title: Smooch
   description: >-
     The Smooch API is a unified interface for powering messaging in your
@@ -573,6 +573,21 @@ paths:
       responses:
         '200':
           description: Ok
+  '/v1.1/apps/{appId}/sdks':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    get:
+      tags:
+        - App
+      description: >-
+        Retrieve the IDs of the three SDK integrations (`android`, `ios`, and
+        `web`) for the specified app, to be used when initializing the SDKs.
+      operationId: getSdkIds
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/GetSdkIdsResponse.yaml
   '/v1.1/apps/{appId}/keys':
     parameters:
       - $ref: ./parameters/AppId.yaml
