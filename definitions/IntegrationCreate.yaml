@@ -309,3 +309,18 @@ properties:
       webhooks' origin.
 
       (Optional) Used for *messagebird* integrations.
+  apiKey:
+    type: string
+    description: |
+      The public API key of your Mailgun account.
+      Required for *mailgun* integrations.
+  domain:
+    type: string
+    description: |
+      The domain used to relay email.
+      Required for *mailgun* integrations.
+  incomingAddress:
+    type: string
+    description: |
+      Smooch will receive all emails sent to this address.
+      Required for *mailgun* integrations.

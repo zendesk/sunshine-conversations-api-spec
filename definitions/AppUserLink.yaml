@@ -9,6 +9,9 @@ properties:
       The type of the channel to link. See
       [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available
       values.
+  integrationId:
+    type: string
+    description: 'The id of the integration to link, it must match the provided type.'
   phoneNumber:
     type: string
     description: >

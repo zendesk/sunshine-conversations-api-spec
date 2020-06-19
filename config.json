@@ -11,9 +11,9 @@
     "licenseName": "Apache-2.0",
     "artifactId": "api",
     "groupId": "io.smooch",
-    "projectVersion": "5.27.1",
-    "packageVersion": "5.27.1",
-    "gemVersion": "5.27.1",
-    "artifactVersion": "5.27.1",
+    "projectVersion": "5.28.0",
+    "packageVersion": "5.28.0",
+    "gemVersion": "5.28.0",
+    "artifactVersion": "5.28.0",
     "specificationUrl": "https://github.com/smooch/smooch-api-specification"
 }

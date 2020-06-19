@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.27",
+    "version" : "5.28",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -2939,6 +2939,10 @@
           "type" : "string",
           "description" : "The type of the channel to link. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
         },
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The id of the integration to link, it must match the provided type."
+        },
         "phoneNumber" : {
           "type" : "string",
           "description" : "A String of the appUser’s phone number. It must contain the + prefix and the country code.\nRequired for *messenger*, *twilio*, *messagebird* and *whatsapp* linking.\n"
@@ -4114,6 +4118,18 @@
         "signingKey" : {
           "type" : "string",
           "description" : "The signing key of your MessageBird account. Used to validate the webhooks' origin.\n(Optional) Used for *messagebird* integrations.\n"
+        },
+        "apiKey" : {
+          "type" : "string",
+          "description" : "The public API key of your Mailgun account.\nRequired for *mailgun* integrations.\n"
+        },
+        "domain" : {
+          "type" : "string",
+          "description" : "The domain used to relay email.\nRequired for *mailgun* integrations.\n"
+        },
+        "incomingAddress" : {
+          "type" : "string",
+          "description" : "Smooch will receive all emails sent to this address.\nRequired for *mailgun* integrations.\n"
         }
       }
     },
