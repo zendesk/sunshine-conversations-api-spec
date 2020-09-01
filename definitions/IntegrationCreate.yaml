@@ -324,3 +324,14 @@ properties:
     description: |
       Smooch will receive all emails sent to this address.
       Required for *mailgun* integrations.
+  apiSecret:
+    type: string
+    description: A key tied to Apple Business Chat Messaging Service Provider
+  businessId:
+    type: string
+    description: A unique ID tied to the brand using Apple Business Chat
+  mspId:
+    type: string
+    description: >-
+      A unique identifier for an Apple Business Chat partner registered as a
+      Messaging Service Provider through Apple Business Register

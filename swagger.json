@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.28",
+    "version" : "5.29",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3902,6 +3902,18 @@
         "error" : {
           "type" : "string",
           "description" : "The error causing the integration to fail. Will be present when `status` is 'error'."
+        },
+        "apiSecret" : {
+          "type" : "string",
+          "description" : "A key tied to Apple Business Chat Messaging Service Provider"
+        },
+        "businessId" : {
+          "type" : "string",
+          "description" : "A unique ID tied to the brand using Apple Business Chat"
+        },
+        "mspId" : {
+          "type" : "string",
+          "description" : "A unique identifier for an Apple Business Chat partner registered as a Messaging Service Provider through Apple Business Register"
         }
       }
     },
@@ -4130,6 +4142,18 @@
         "incomingAddress" : {
           "type" : "string",
           "description" : "Smooch will receive all emails sent to this address.\nRequired for *mailgun* integrations.\n"
+        },
+        "apiSecret" : {
+          "type" : "string",
+          "description" : "A key tied to Apple Business Chat Messaging Service Provider"
+        },
+        "businessId" : {
+          "type" : "string",
+          "description" : "A unique ID tied to the brand using Apple Business Chat"
+        },
+        "mspId" : {
+          "type" : "string",
+          "description" : "A unique identifier for an Apple Business Chat partner registered as a Messaging Service Provider through Apple Business Register"
         }
       }
     },

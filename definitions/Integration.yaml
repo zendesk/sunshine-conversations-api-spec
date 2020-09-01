@@ -378,3 +378,14 @@ properties:
     description: >-
       The error causing the integration to fail. Will be present when `status`
       is 'error'.
+  apiSecret:
+    type: string
+    description: A key tied to Apple Business Chat Messaging Service Provider
+  businessId:
+    type: string
+    description: A unique ID tied to the brand using Apple Business Chat
+  mspId:
+    type: string
+    description: >-
+      A unique identifier for an Apple Business Chat partner registered as a
+      Messaging Service Provider through Apple Business Register
