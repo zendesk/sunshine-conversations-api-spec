@@ -1,0 +1,15 @@
+allOf:
+  - $ref: "./eventSubSchema.yaml"
+  - type: object
+    properties:
+      payload:
+        type: object
+        description: The payload of the event. The contents of this object depend on the type of event.
+        properties:
+          conversation:
+            allOf:
+              - $ref: "../conversationTruncated.yaml"
+            description: The conversation from which the switchboard event was fired. On success, the payload will include an `activeSwitchboardIntegration`, representing the integration from which control is being offered, and a `pendingSwitchboardIntegration`, representing the integration being offered control.
+          metadata:
+            $ref: "../metadata.yaml"
+title: switchboard:offerControl

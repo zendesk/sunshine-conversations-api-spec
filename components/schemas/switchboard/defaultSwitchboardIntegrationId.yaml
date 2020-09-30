@@ -1,0 +1,6 @@
+type: string
+description:
+  The id of the switchboard integration that will be given control when a new
+  conversation begins. It will also be used for conversations that existed
+  before the switchboard was enabled.
+example: "5ef21b132f21af34f088530e"

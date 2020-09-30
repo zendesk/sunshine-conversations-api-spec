@@ -1,0 +1,5 @@
+type: object
+description: The exact payload to send to the channel.
+properties:
+  payload:
+    type: object

@@ -1,0 +1,16 @@
+name: filter
+in: query
+description: Contains parameters for filtering the results.
+schema:
+  type: object
+  title: conversationListFilter
+  properties:
+    userId:
+      type: string
+      description: The user's id. One of `userId` or `userExternalId` is required, but not both.
+    userExternalId:
+      type: string
+      description: The external Id of the user. One of `userId` or `userExternalId` is required, but not both.
+style: deepObject
+explode: true
+required: true

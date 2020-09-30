@@ -1,0 +1,11 @@
+type: object
+title: UserUpdateBody
+properties:
+  signedUpAt:
+    allOf:
+      - $ref: "../schemas/users/signedUpAt.yaml"
+  profile:
+    allOf:
+      - $ref: "../schemas/users/profile.yaml"
+  metadata:
+    $ref: "../schemas/metadata.yaml"

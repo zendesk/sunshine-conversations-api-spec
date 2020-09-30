@@ -1,0 +1,20 @@
+type: object
+description: The integration key.
+properties:
+  id:
+    type: string
+    description:
+      The unique ID of the API key, used when signing JWTs or accessing the
+      API using Basic Authentication.
+    example: "int_5e4b0f225aca01092928f917"
+  displayName:
+    allOf:
+      - $ref: "../schemas/displayName.yaml"
+    description: The name of the API key.
+    example: "My custom key"
+  secret:
+    type: string
+    description:
+      The secret of the API key, used when signing JWTs or accessing the API
+      using Basic Authentication
+    example: "Ck1LjzzlUzvlCTtqAdQ2z1QukuBTrN3TIx"

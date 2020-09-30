@@ -1,0 +1,6 @@
+name: conversationId
+in: query
+description: Links the attachment getting uploaded to the conversation ID.
+schema:
+  type: string
+  example: c616a583e4c240a871818541

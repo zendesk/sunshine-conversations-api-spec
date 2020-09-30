@@ -1,0 +1,6 @@
+type: object
+properties:
+  enabled:
+    $ref: "../schemas/switchboard/enabled.yaml"
+  defaultSwitchboardIntegrationId:
+    $ref: "../schemas/switchboard/defaultSwitchboardIntegrationId.yaml"

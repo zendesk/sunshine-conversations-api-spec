@@ -1,6 +1,0 @@
-name: conversationActivityBody
-in: body
-required: true
-description: Body for a triggerConversationActivity request.
-schema:
-  $ref: ./definitions/ConversationActivity.yaml

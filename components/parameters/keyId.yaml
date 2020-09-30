@@ -1,0 +1,7 @@
+name: keyId
+in: path
+description: The id of the key.
+required: true
+schema:
+  type: string
+  example: "int_5d8cff3cd55b040010928b5b"

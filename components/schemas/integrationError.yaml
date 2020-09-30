@@ -1,0 +1,7 @@
+type: object
+properties:
+  error:
+    type: string
+    description: If the integration status is error, contains a description of the problem.
+    nullable: true
+    readOnly: true

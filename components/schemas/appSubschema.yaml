@@ -1,0 +1,7 @@
+type: object
+description: The app that triggered the events.
+properties:
+  id:
+    type: string
+    description: The unique ID of the app.
+    example: "5e4af71a81966cfff3ef6550"

@@ -1,0 +1,9 @@
+type: object
+description:
+  The created messages. A single request may produce multiple messages when the shorthand
+  syntax is used to send a template message with leading text.
+properties:
+  messages:
+    type: array
+    items:
+      $ref: "../schemas/message.yaml"

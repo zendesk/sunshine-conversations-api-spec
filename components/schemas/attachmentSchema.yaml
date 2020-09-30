@@ -1,0 +1,10 @@
+type: object
+properties:
+  mediaUrl:
+    type: string
+    description: Uploaded attachment’s url
+    example: "http://smooch.io/rocks.smooch.media-dev/apps/5ec41c54fe13cc5ac404bedc/conversations/c616a583e4c240a871818541/TmYMVQUBNsQRItX4fKf4aC-T/Screen%20Shot%202020-09-02%20at%204.04.41%20PM.png"
+  mediaType:
+    type: string
+    description: Uploaded attachment's media type
+    example: "image/png"

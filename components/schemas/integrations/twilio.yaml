@@ -1,0 +1,30 @@
+allOf:
+  - $ref: "../integration.yaml"
+  - type: object
+    description: |
+      To configure a Twilio integration, acquire the required information from the user and call the Create Integration endpoint.
+    properties:
+      type:
+        type: string
+        description: The type of integration.
+        default: "twilio"
+      accountSid:
+        type: string
+        description: Twilio Account SID.
+        example: "ACa1b4c65ee0722712fab89867cb14eac7"
+      authToken:
+        type: string
+        description: Twilio Auth Token.
+        minLength: 1
+        writeOnly: true
+        example: "160c024303f53049e1e060fd67ca6aefc"
+      phoneNumberSid:
+        type: string
+        description: SID for specific phone number.
+        minLength: 1
+        example: "PN0674df0ecee0c9819bca0ff0bc0a159e"
+
+    required:
+      - accountSid
+      - authToken
+      - phoneNumberSid

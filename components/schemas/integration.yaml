@@ -1,0 +1,40 @@
+type: object
+description: The integration.
+properties:
+  id:
+    type: string
+    description: The unique ID of the integration.
+    readOnly: true
+    example: "5e4af71a81966cfff3ef6550"
+  type:
+    type: string
+    description: The type of integration.
+    example: "android"
+  status:
+    $ref: "status.yaml"
+  displayName:
+    type: string
+    description: A human-friendly name used to identify the integration.
+    example: "Channel name"
+    maxLength: 100
+    nullable: true
+required:
+  - type
+
+discriminator:
+  propertyName: type
+  mapping:
+    android: "./integrations/android.yaml"
+    apple: "./integrations/apple.yaml"
+    custom: "./integrations/custom.yaml"
+    ios: "./integrations/ios.yaml"
+    line: "./integrations/line.yaml"
+    mailgun: "./integrations/mailgun.yaml"
+    messagebird: "./integrations/messageBird.yaml"
+    messenger: "./integrations/messenger.yaml"
+    telegram: "./integrations/telegram.yaml"
+    twilio: "./integrations/twilio.yaml"
+    twitter: "./integrations/twitter.yaml"
+    viber: "./integrations/viber.yaml"
+    web: "./integrations/web.yaml"
+    whatsapp: "./integrations/whatsapp.yaml"

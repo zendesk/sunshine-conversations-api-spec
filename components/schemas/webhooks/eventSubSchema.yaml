@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The unique ID of the event. May be used to ensure that an event is not processed twice in the case of a webhook that is re-tried due to an error or timeout.
+  type:
+    type: string
+    description: The type of the event. Will match one of the subscribed triggers for your [webhook](#operation/createWebhook).
+  createdAt:
+    type: string
+    description: A timestamp signifying when the event was generated. Formatted as `YYYY-MM-DDThh:mm:ss.SSSZ`.
+example:
+  id: "0ca7d56ba7b2e081e479fe9e"
+  type: "conversation:message"
+  createdAt: "2020-02-25T18:06:37.547Z"

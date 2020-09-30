@@ -1,6 +1,0 @@
-name: appUserMergeBody
-in: body
-required: true
-description: Body for a mergeUsers request.
-schema:
-  $ref: ./definitions/AppUserMerge.yaml

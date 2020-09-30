@@ -1,0 +1,20 @@
+type: object
+properties:
+  type:
+    type: string
+    description: The type of message.
+    default: "image"
+  text:
+    type: string
+    description: The text content of the message. Optional only if actions are provided.
+  actions:
+    type: array
+    description: Array of message actions.
+    items:
+      $ref: "action.yaml"
+  mediaUrl:
+    type: string
+    format: uri
+    description: The URL for media, such as an image, attached to the message.
+required:
+  - type

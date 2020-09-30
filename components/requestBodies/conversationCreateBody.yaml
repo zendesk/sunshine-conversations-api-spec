@@ -1,0 +1,28 @@
+type: object
+title: ConversationCreateBody
+properties:
+  type:
+    $ref: "../schemas/conversationType.yaml"
+  participants:
+    type: array
+    description: |
+      The users participating in the conversation. For `personal` conversations, this field is required with a length of exactly 1. For `sdkGroup` conversations, must have a length less than or equal to 10.
+      Can be omitted to have a conversation with no participants if the type is `sdkGroup`.
+    items:
+      $ref: "../schemas/participantSubSchema.yaml"
+    maxItems: 10
+  displayName:
+    allOf:
+      - $ref: "../schemas/displayName.yaml"
+    description: |
+      A friendly name for the conversation, may be displayed to the business or
+      the user.
+    example: "My conversation"
+  description:
+    $ref: "../schemas/description.yaml"
+  iconUrl:
+    $ref: "../schemas/icon.yaml"
+  metadata:
+    $ref: "../schemas/metadata.yaml"
+required:
+  - type

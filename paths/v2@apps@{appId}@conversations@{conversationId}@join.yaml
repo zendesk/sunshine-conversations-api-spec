@@ -1,0 +1,36 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+  - $ref: "../components/parameters/conversationId.yaml"
+post:
+  tags:
+    - Participants
+  summary: Join Conversation
+  operationId: joinConversation
+  description: |
+    Adds a user to a conversation using either their userId or userExternalId. The endpoint only
+    supports adding a participant to a sdkGroup conversation.
+  security:
+    - basicAuth: [integration, app, account]
+    - bearerAuth: [integration, app, account]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/participantJoinBody.yaml"
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            type: object
+            title: ParticipantResponse
+            description: The created participant.
+            properties:
+              participant:
+                $ref: "../components/schemas/participant.yaml"
+    "400":
+      description: Too many participants
+    "404":
+      description: Conversation not found

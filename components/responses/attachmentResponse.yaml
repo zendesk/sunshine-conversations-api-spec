@@ -1,0 +1,7 @@
+type: object
+title: AttachmentResponse
+properties:
+  attachment:
+    allOf:
+      - $ref: "../schemas/attachmentSchema.yaml"
+    description: The uploaded attachment object.

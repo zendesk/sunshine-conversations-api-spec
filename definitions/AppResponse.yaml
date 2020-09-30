@@ -1,5 +1,0 @@
-type: object
-properties:
-  app:
-    $ref: ./App.yaml
-    description: The app.

@@ -1,0 +1,10 @@
+allOf:
+  - $ref: "../activityTypes.yaml"
+  - type: object
+    properties:
+      source:
+        allOf:
+          - $ref: "./sourceWebhook.yaml"
+        description: The source of the activity.
+      author:
+        $ref: "./authorWebhook.yaml"

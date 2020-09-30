@@ -1,0 +1,36 @@
+type: object
+description: When a webview actions is clicked/tapped, the provided URI will be loaded in a webview. Channels that do not support webviews will open the fallback URI instead.
+properties:
+  type:
+    type: string
+    description: The type of action.
+  uri:
+    type: string
+    format: uri
+    description: The webview URI. This is the URI that will open in the webview when clicking the button.
+  text:
+    type: string
+    description: The button text.
+  default:
+    type: boolean
+    description: Boolean value indicating whether the action is the default action for a message item in Facebook Messenger.
+  metadata:
+    $ref: "../../metadata.yaml"
+  extraChannelOptions:
+    $ref: "extraChannelOptions.yaml"
+  size:
+    type: string
+    enum: ['compact', 'tall', 'full']
+    description: The size to display a webview. Used for actions of type webview.
+  fallback:
+    type: string
+    description: The fallback uri for channels that don’t support webviews. Used for actions of type webview.
+  openOnReceive:
+    type: boolean
+    description: Boolean value indicating if the webview should open automatically. Only one action per message can be set to true. Currently only supported on the Web Messenger.
+
+required:
+  - text
+  - type
+  - uri
+  - fallback

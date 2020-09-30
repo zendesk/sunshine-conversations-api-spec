@@ -1,7 +1,0 @@
-type: object
-required:
-  - code
-properties:
-  code:
-    type: string
-    description: The code that was sent to you via SMS or phone call.

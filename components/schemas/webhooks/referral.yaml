@@ -1,0 +1,23 @@
+type: object
+properties:
+  code:
+    type: string
+    description: The referral’s identifier.
+  details:
+    type: object
+    nullable: true
+    description: Nested object containing additional information.
+    properties:
+      source:
+        type: string
+        description: The source of the referral - MESSENGER_CODE, ADS etc…
+        example: "MESSENGER_CODE"
+      type:
+        type: string
+        description: The type of referral, typically OPEN-THREAD.
+        example: "OPEN-THREAD"
+      adId:
+        type: string
+        nullable: true
+        description: If the referral came from an ad, this field will be present with the ad’s Id.
+        example: "4216212847577"

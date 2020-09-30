@@ -1,0 +1,20 @@
+type: object
+properties:
+  switchboardIntegration:
+    type: string
+    description:
+      The id or the name of the switchboard integration that will become pending.
+      Also supports the `next` keyword to offer control to the next
+      switchboard integration designated in the switchboard hierarchy
+      configuration. This cannot match the active switchboard integration.
+    example: "next"
+  metadata:
+    allOf:
+      - $ref: "../schemas/metadata.yaml"
+    description:
+      Flat object containing custom properties. Strings, numbers and booleans
+      are the only supported format that can be passed to metadata. The metadata
+      is limited to 4KB in size. The metadata object will be included in the
+      `switchboard:offerControl` and `switchboard:offerControl:failure` webhooks.
+required:
+  - switchboardIntegration

@@ -1,0 +1,20 @@
+type: object
+description: A form type message without text or actions.
+properties:
+  type:
+    type: string
+    description: The type of message.
+    default: "form"
+  blockChatInput:
+    type: boolean
+    description: true if the message should block the chat input on Web Messenger. form message only.
+  fields:
+    type: array
+    items:
+      $ref: "field.yaml"
+    description: An array of objects representing fields associated with the message. Only present in form and formResponse messages.
+    minItems: 1
+    maxItems: 20
+required:
+  - type
+  - fields

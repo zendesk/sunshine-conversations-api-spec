@@ -1,0 +1,53 @@
+post:
+  tags:
+    - Apps
+  summary: Create App
+  operationId: createApp
+  description: Creates a new app. When using [service account](#service-accounts) credentials, the service account is automatically granted access to the app.
+  security:
+    - basicAuth: [account]
+    - bearerAuth: [account]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/appCreateBody.yaml"
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/appResponse.yaml"
+    "400":
+      description: should have required property 'displayName'
+    "402":
+      description: "Your account has reached the maximum number of apps for your subscription plan"
+get:
+  tags:
+    - Apps
+  summary: List Apps
+  operationId: listApps
+  description: |
+    Lists all apps that a user is part of. This API is paginated through [cursor pagination](#section/Introduction/API-pagination-and-records-limits). 
+    ```shell
+    /v2/apps?page[after]=5e1606762556d93e9c176f69&page[size]=10
+    ```
+  security:
+    - basicAuth: [account]
+    - bearerAuth: [account]
+  parameters:
+    - $ref: "../components/parameters/pageQuery.yaml"
+    - $ref: "../components/parameters/appFilterQuery.yaml"
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/appListResponse.yaml"
+    "400":
+      description: Can supply only one of page[after] or page[before], not both
+    "403":
+      description: The serviceAccountId provided does not match supplied credentials

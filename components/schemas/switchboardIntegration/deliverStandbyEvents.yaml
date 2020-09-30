@@ -1,0 +1,4 @@
+type: boolean
+description:
+  Setting to determine if webhooks should be sent when the switchboard
+  integration is not in control of a conversation (standby status)

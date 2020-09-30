@@ -1,0 +1,40 @@
+allOf:
+  - $ref: "./conversationTruncated.yaml"
+  - type: object
+    properties:
+      isDefault:
+        type: boolean
+        description: |
+          Whether the conversation is the default conversation for the user. Will be
+          true for the first personal conversation created for the user, and false in
+          all other cases.
+        example: false
+      displayName:
+        allOf:
+          - $ref: "../schemas/displayName.yaml"
+        description: |
+          A friendly name for the conversation, may be displayed to the business or
+          the user.
+        example: "My conversation"
+      description:
+        $ref: "./description.yaml"
+      iconUrl:
+        $ref: "./icon.yaml"
+      metadata:
+        $ref: "./metadata.yaml"
+      businessLastRead:
+        type: string
+        description: |
+          A datetime string with the format YYYY-MM-DDThh:mm:ss.SSSZ
+          representing the moment the conversation was last marked as read with
+          role business.
+        nullable: true
+        example: "2020-06-23T14:33:47.492Z"
+      lastUpdatedAt:
+        type: string
+        description: |
+          A datetime string with the format YYYY-MM-DDThh:mm:ss.SSSZ
+          representing the moment the last message was received in the
+          conversation, or the creation time if no messages have been received yet.
+        nullable: true
+        example: "2020-06-26T14:33:47.120Z"

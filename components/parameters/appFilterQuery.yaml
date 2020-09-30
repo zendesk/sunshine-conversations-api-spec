@@ -1,0 +1,12 @@
+name: filter
+in: query
+description: Contains parameters for filtering the results.
+schema:
+  type: object
+  title: appListFilter
+  properties:
+    serviceAccountId:
+      type: string
+      description: When specified, lists only the apps that the service account has access to.
+style: deepObject
+explode: true

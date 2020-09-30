@@ -1,0 +1,64 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+get:
+  tags:
+    - Apps
+  summary: Get App
+  operationId: getApp
+  description: Fetches an individual app.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/appResponse.yaml"
+    "404":
+      description: App not found
+patch:
+  tags:
+    - Apps
+  summary: Update App
+  operationId: updateApp
+  description: Updates an app.
+  security:
+    - basicAuth: [account]
+    - bearerAuth: [account]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/appUpdateBody.yaml"
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/appResponse.yaml"
+    "400":
+      description: App metadata is limited to 4096 bytes in size.
+    "404":
+      description: App not found
+delete:
+  tags:
+    - Apps
+  summary: Delete App
+  operationId: deleteApp
+  description: Removes the specified app, including all its enabled integrations.
+  security:
+    - basicAuth: [account]
+    - bearerAuth: [account]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            type: object
+    "404":
+      description: App not found

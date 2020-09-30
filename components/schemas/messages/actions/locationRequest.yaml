@@ -1,0 +1,16 @@
+type: object
+description: A location request action will prompt the user to share their location.
+properties:
+  type:
+    type: string
+    description: The type of action.
+    default: "locationRequest"
+  text:
+    type: string
+    description: The button text.
+  metadata:
+    $ref: "../../metadata.yaml"
+
+required:
+  - text
+  - type

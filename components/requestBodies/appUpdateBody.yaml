@@ -1,0 +1,12 @@
+type: object
+properties:
+  displayName:
+    allOf:
+      - $ref: "../schemas/displayName.yaml"
+    nullable: false
+    description: The friendly name of the app.
+    example: "My App"
+  settings:
+    $ref: "../schemas/appSettings.yaml"
+  metadata:
+    $ref: "../schemas/metadata.yaml"

@@ -1,0 +1,7 @@
+type: object
+title: SwitchboardResponse
+properties:
+  switchboard:
+    allOf:
+      - $ref: "../schemas/switchboard.yaml"
+    description: The switchboard.

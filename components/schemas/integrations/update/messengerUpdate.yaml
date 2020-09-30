@@ -1,0 +1,8 @@
+allOf:
+  - $ref: "./integrationUpdateBase.yaml"
+  - type: object
+    properties:
+      pageAccessToken:
+        type: string
+        description: A Facebook Page Access Token.
+        example: "your_access_token"

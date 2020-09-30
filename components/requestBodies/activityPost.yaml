@@ -1,0 +1,11 @@
+allOf:
+  - type: object
+    properties:
+      author:
+        allOf:
+          - $ref: "../schemas/author.yaml"
+        description: The author of the activity.
+  - $ref: "../schemas/activityTypes.yaml"
+required:
+  - author
+  - type

@@ -1,0 +1,11 @@
+type: object
+description: List of returned participants.
+properties:
+  participants:
+    type: array
+    items:
+      $ref: "../schemas/participant.yaml"
+  meta:
+    $ref: "../schemas/meta.yaml"
+  links:
+    $ref: "../schemas/links.yaml"

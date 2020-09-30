@@ -1,0 +1,21 @@
+allOf:
+  - $ref: "./eventSubSchema.yaml"
+  - type: object
+    properties:
+      payload:
+        allOf:
+          - $ref: "./conversationMessageDeliveryPayload.yaml"
+          - type: object
+            properties:
+              error:
+                type: object
+                description: A nested object representing the error associated with the delivery failure.
+                properties:
+                  code:
+                    type: string
+                    description: A string representing the error code associated with the error.
+                  message:
+                    type: string
+                    description: The description associated with the error.
+
+title: conversation:message:delivery:failure

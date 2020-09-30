@@ -1,0 +1,37 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The unique ID of the participant.
+    example: "c93bb9c14dde8ffb94564eae"
+  userId:
+    type: string
+    description: The id of the associated user.
+    example: "42589ad070d43be9b00ff7e5"
+  unreadCount:
+    type: integer
+    description: Number of messages the user has not yet read.
+    example: 0
+  clientAssociations:
+    type: array
+    description: |
+      Represents the clients that are active in the conversation for a particular
+      user. A participant can have multiple clientAssociations in the case of
+      channel transfer, business initiated conversations, or identified users.
+      The order of the array indicates how recently a client has interacted with
+      the conversation, with the most recent client first. The first item in the
+      array is considered to be the user's primary client for that conversation,
+      and will be selected first for message delivery.
+    items:
+      $ref: "clientAssociation.yaml"
+  userExternalId:
+    type: string
+    description: The externalId of the associated user.
+    example: "your-own-id"
+    nullable: true
+  lastRead:
+    type: string
+    description: A datetime string with the format YYYY-MM-DDThh:mm:ss.SSSZ
+      representing the latest message the user has read.
+    example: "2019-01-14T18:55:12.515Z"
+    nullable: true

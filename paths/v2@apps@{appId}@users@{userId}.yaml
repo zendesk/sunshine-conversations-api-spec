@@ -1,0 +1,65 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+  - $ref: "../components/parameters/userIdOrExternalId.yaml"
+get:
+  tags:
+    - Users
+  summary: Get User
+  operationId: getUser
+  description: Fetches an individual user.
+  security:
+    - basicAuth: [app, account, integration]
+    - bearerAuth: [app, account, integration]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/userResponse.yaml"
+    "404":
+      description: User not found
+patch:
+  tags:
+    - Users
+  summary: Update User
+  operationId: updateUser
+  description: Updates a user.
+  security:
+    - basicAuth: [app, account, integration]
+    - bearerAuth: [app, account, integration]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/userUpdateBody.yaml"
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/userResponse.yaml"
+    "404":
+      description: User not found
+delete:
+  tags:
+    - Users
+  summary: Delete User
+  operationId: deleteUser
+  description:
+    Delete a user, its clients and its conversation history. The user is considered completely deleted once the `user:delete` webhook is fired.
+    To only delete a user’s personal information, see [Delete User Personal Information](#operation/deleteUserPersonalInformation).
+  security:
+    - basicAuth: [app, account, integration]
+    - bearerAuth: [app, account, integration]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            type: object
+    "404":
+      description: User not found

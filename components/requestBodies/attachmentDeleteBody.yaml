@@ -1,0 +1,8 @@
+type: object
+properties:
+  mediaUrl:
+    type: string
+    description: The media URL used for a file or image message.
+    example: "https://s3.amazonaws.com/document.pdf"
+required:
+  - mediaUrl

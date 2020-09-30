@@ -1,0 +1,47 @@
+allOf:
+  - $ref: "../integration.yaml"
+  - type: object
+    description: |
+      For LINE, each of your customers will need to manually configure a webhook in their LINE configuration page that will point to Sunshine Conversations servers. You must instruct your customers how to configure this manually on their LINE bot page.
+      Once you’ve acquired all the required information, call the Create Integration endpoint.
+      Then, using the returned integration _id, your customer must set the Callback URL field in their LINE Business Center page.
+      The URL should look like the following: `https://app.smooch.io:443/api/line/webhooks/{appId}/{integrationId}`.
+    properties:
+      type:
+        type: string
+        description: The type of integration.
+        default: "line"
+      channelId:
+        type: string
+        description: LINE Channel ID.
+        example: "1286564967"
+      channelSecret:
+        type: string
+        description: LINE Channel Secret.
+        example: "your_line_channel_secret"
+      channelAccessToken:
+        type: string
+        description: LINE Channel Access Token.
+        example: "your_line_channel_token"
+      serviceCode:
+        type: string
+        description: LINE Service Code.
+        example: "your_line_service_code"
+      switcherSecret:
+        type: string
+        description: LINE Switcher Secret.
+        minLength: 1
+        example: "your_line_switcher_secret"
+      qrCodeUrl:
+        type: string
+        description: URL provided by LINE in the [Developer Console](https://developers.line.biz/console/).
+        example: "https://qr-official.line.me/M/1O4fb8.png"
+      lineId:
+        type: string
+        description: LINE Basic ID. Is automatically set when qrCodeUrl is updated.
+        readOnly: true
+        example: "104fb8"
+
+    required:
+      - channelId
+      - channelSecret

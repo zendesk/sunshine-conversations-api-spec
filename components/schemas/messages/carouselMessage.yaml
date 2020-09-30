@@ -1,0 +1,31 @@
+type: object
+description: Carousel messages are a horizontally scrollable set of items that may each contain text, an image, and message actions. Not all messaging channels fully support carousel messages; currently only Facebook Messenger, LINE, Telegram, Viber, the Web Messenger, the Android SDK and the iOS SDK cover the full functionality. For all other platforms a carousel message is rendered as raw text. The raw text fallback does not include any images or postback message actions.
+properties:
+  type:
+    type: string
+    description: The type of message.
+    default: "carousel"
+  text: 
+    type: string
+    description: The fallback text message used when carousel messages are not supported by the channel.
+    readOnly: true
+  items:
+    type: array
+    description: An array of objects representing the items associated with the message. Only present in carousel and list type messages.
+    items:
+      $ref: "item.yaml"
+    minItems: 1
+    maxItems: 10
+  displaySettings:
+    type: object
+    description: Settings to adjust the carousel layout.
+    properties:
+      imageAspectRatio:
+        type: string
+        description: Specifies how to display all carousel images. Valid values are horizontal (default) and square. Only supported in Facebook Messenger, Web Messenger, Android SDK and iOS SDK carousels.
+        enum:
+          - horizontal
+          - square
+required:
+  - type
+  - items

@@ -1,0 +1,43 @@
+post:
+  tags:
+    - Webhooks
+  description: |
+    A webhook payload contains an array of events, which may or may not originate from the same user
+    or conversation. When processing webhook payloads, your application should take care to process
+    each event in the array. 
+  summary: Webhook Events
+  operationId: eventWebhooks
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            app:
+              $ref: "../appSubSchema.yaml"
+            webhook:
+              $ref: "../webhookSubSchema.yaml"
+            events:
+              type: array
+              description: The list of events that occurred. 
+              items:
+                anyOf:
+                  - $ref: "./conversationCreateEvent.yaml"
+                  - $ref: "./conversationMessageDeliveryChannelEvent.yaml"
+                  - $ref: "./conversationMessageDeliveryFailureEvent.yaml"
+                  - $ref: "./conversationMessageDeliveryUserEvent.yaml"
+                  - $ref: "./conversationMessageEvent.yaml"
+                  - $ref: "./conversationPostbackEvent.yaml"
+                  - $ref: "./conversationReadEvent.yaml"
+                  - $ref: "./conversationTypingEvent.yaml"
+                  - $ref: "./switchboardAcceptControl.yaml"
+                  - $ref: "./switchboardAcceptControlFailure.yaml"
+                  - $ref: "./switchboardOfferControl.yaml"
+                  - $ref: "./switchboardOfferControlFailure.yaml"
+                  - $ref: "./switchboardPassControl.yaml"
+                  - $ref: "./switchboardPassControlFailure.yaml"
+                  - $ref: "./userMergeEvent.yaml"
+  responses:
+    '200':
+      description: Ok

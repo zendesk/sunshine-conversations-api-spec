@@ -1,0 +1,3 @@
+type: string
+description: URL to be called when the webhook is triggered.
+example: "http://example.com/callback"

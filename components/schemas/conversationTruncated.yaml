@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The unique ID of the conversation.
+    example: "c93bb9c14dde8ffb94564eae"
+  type:
+    $ref: "./conversationType.yaml"
+  activeSwitchboardIntegration:
+    allOf:
+      - $ref: "./webhooks/switchboardIntegrationWebhook.yaml"
+    description: The current switchboard integration that is in control of the conversation. This field is omitted if no `activeSwitchboardIntegration` exists for the conversation.
+    nullable: true
+  pendingSwitchboardIntegration:
+    allOf:
+      - $ref: "./webhooks/switchboardIntegrationWebhook.yaml"
+    description: The switchboard integration that is awaiting control. This field is omitted if no switchboard integration has been previously offered control.
+    nullable: true

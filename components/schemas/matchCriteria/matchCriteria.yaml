@@ -1,0 +1,14 @@
+oneOf:
+  - $ref: "matchCriteriaMailgun.yaml"
+  - $ref: "matchCriteriaMessagebird.yaml"
+  - $ref: "matchCriteriaTwilio.yaml"
+  - $ref: "matchCriteriaWhatsapp.yaml"
+discriminator:
+  propertyName: type
+  mapping:
+    mailgun: "matchCriteriaMailgun.yaml"
+    messagebird: "matchCriteriaMessagebird.yaml"
+    twilio: "matchCriteriaTwilio.yaml"
+    whatsapp: "matchCriteriaWhatsapp.yaml"
+description: The set of criteria used to determine the user's identity on a third-party
+  channel. 

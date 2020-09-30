@@ -1,0 +1,11 @@
+type: object
+properties:
+  integrations:
+    type: array
+    description: List of returned integrations.
+    items:
+      $ref: "../schemas/integration.yaml"
+  meta:
+    $ref: "../schemas/meta.yaml"
+  links:
+    $ref: "../schemas/links.yaml"

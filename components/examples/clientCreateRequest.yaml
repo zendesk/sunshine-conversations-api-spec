@@ -1,0 +1,85 @@
+mailgun:
+  value:
+    matchCriteria:
+      type: mailgun
+      integrationId: 582dedf230e788746891281a
+      primary: true
+      address: steveb@channel5.com
+      subject: New message from {appName}
+    confirmation:
+      type: immediate
+      message:
+        author:
+          type: business
+          displayName: Steve
+          avatarUrl: https://www.gravatar.com/image.jpg
+        content:
+          type: text
+          text: Hello!
+        metadata:
+          lang: en-ca
+    target:
+      conversationId: 029c31f25a21b47effd7be90
+messsagebird:
+  value:
+    matchCriteria:
+      type: messsagebird
+      integrationId: 582dedf230e788746891281a
+      primary: true
+      phoneNumber: +1 212-555-2368
+    confirmation:
+      type: immediate
+      message:
+        author:
+          type: business
+          displayName: Steve
+          avatarUrl: https://www.gravatar.com/image.jpg
+        content:
+          type: text
+          text: Hello!
+        metadata:
+          lang: en-ca
+    target:
+      conversationId: 029c31f25a21b47effd7be90
+twilio:
+  value:
+    matchCriteria:
+      type: twilio
+      integrationId: 582dedf230e788746891281a
+      primary: true
+      phoneNumber: +1 212-555-2368
+    confirmation:
+      type: immediate
+      message:
+        author:
+          type: business
+          displayName: Steve
+          avatarUrl: https://www.gravatar.com/image.jpg
+        content:
+          type: text
+          text: Hello!
+        metadata:
+          lang: en-ca
+    target:
+      conversationId: 029c31f25a21b47effd7be90
+whatsapp:
+  value:
+    matchCriteria:
+      type: whatsapp
+      integrationId: 582dedf230e788746891281a
+      primary: true
+      phoneNumber: +1 212-555-2368
+    confirmation:
+      type: immediate
+      message:
+        author:
+          type: business
+          displayName: Steve
+          avatarUrl: https://www.gravatar.com/image.jpg
+        content:
+          type: text
+          text: Hello!
+        metadata:
+          lang: en-ca
+    target:
+      conversationId: 029c31f25a21b47effd7be90

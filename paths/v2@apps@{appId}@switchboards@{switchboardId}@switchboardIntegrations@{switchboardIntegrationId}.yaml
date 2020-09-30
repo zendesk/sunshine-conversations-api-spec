@@ -1,0 +1,56 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+  - $ref: "../components/parameters/switchboardId.yaml"
+  - $ref: "../components/parameters/switchboardIntegrationId.yaml"
+patch:
+  tags:
+    - Switchboard Integrations
+  summary: Update Switchboard Integration
+  operationId: updateSwitchboardIntegration
+  description: Updates a switchboard integration record.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/switchboardIntegrationUpdateBody.yaml"
+        examples:
+          $ref: "../components/examples/switchboardIntegrationRequest.yaml"
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/switchboardIntegrationResponse.yaml"
+    "404":
+      description: Enabled switchboard must have an associated default switchboardIntegration
+delete:
+  tags:
+    - Switchboard Integrations
+  summary: Delete Switchboard Integration
+  operationId: deleteSwitchboardIntegration
+  description:
+    Deletes the switchboard integration. If the deleted switchboard integration
+    had an active status for some conversations, the default switchboard
+    integration will replace it. Note that it is forbidden to delete a
+    switchboard integration if it's the default one (a new one must be chosen
+    first) or if another switchboard integration's
+    `nextSwitchboardIntegrationId` refers to it. The integration that was linked
+    to the deleted switchboard integration will start receiving all conversation
+    events, regardless of the switchboard status.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            type: object
+    "404":
+      description: Not Found

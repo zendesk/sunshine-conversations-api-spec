@@ -1,0 +1,7 @@
+type: object
+properties:
+  keys:
+    type: array
+    description: List of returned keys.
+    items:
+      $ref: "../schemas/appKey.yaml"

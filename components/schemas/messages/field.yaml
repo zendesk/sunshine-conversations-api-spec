@@ -1,0 +1,59 @@
+type: object
+description: |
+  Properties that can be expected to receive inside a form or formResponse message field.
+properties:
+  type:
+    type: string
+    description: The field type.
+    enum:
+      - email
+      - select
+      - text
+  name:
+    type: string
+    description: The name of the field. Must be unique per form or formResponse.
+    minLength: 1
+    maxLength: 128
+  label:
+    type: string
+    description: The label of the field. What the field is displayed as on Web Messenger.
+    minLength: 1
+    maxLength: 128
+  placeholder:
+    type: string
+    description: Placeholder text for the field. form message only.
+    minLength: 1
+    maxLength: 128
+  minSize:
+    type: integer
+    description: The minimum allowed length for the response for a field of type text. form message only.
+    default: 1
+    minimum: 1
+    maximum: 128
+  maxSize:
+    type: integer
+    description: The maximum allowed length for the response for a field of type text. form message only.
+    default: 128
+    minimum: 1
+    maximum: 128
+  text:
+    type: string
+    description: Specifies the response for a text field.
+    minLength: 1
+    maxLength: 128
+  email:
+    type: string
+    description: Specifies the response for a email field.
+    minLength: 1
+    maxLength: 128
+  select:
+    type: array
+    description: Array of objects representing the response for a field of type select. form and formResponse messages only.
+    items:
+      type: object
+  options:
+    $ref: "./formOptions.yaml"
+required:
+  - type
+  - name
+  - label

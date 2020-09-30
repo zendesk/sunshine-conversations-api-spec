@@ -1,0 +1,6 @@
+type: string
+description:
+  Identifier for use in control transfer protocols. Restricted to alphanumeric
+  characters, `-` and `_`.
+maxLength: 128
+example: "bot"

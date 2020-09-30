@@ -1,7 +1,0 @@
-name: deploymentConfirmCode
-in: body
-required: true
-description: |
-  Body for a confirmCode request.
-schema:
-  $ref: ./definitions/DeploymentConfirmCode.yaml

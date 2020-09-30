@@ -1,0 +1,6 @@
+type: integer
+minimum: 1
+maximum: 10
+nullable: true
+description: Number of messages to include in the message history context.
+example: 5

@@ -1,0 +1,8 @@
+type: object
+properties:
+  source:
+    type: string
+    format: binary
+
+required:
+  - source

@@ -1,0 +1,8 @@
+type: object
+properties:
+  type:
+    $ref: "clientType.yaml"
+  clientId:
+    type: string
+    description: The id of the client being referenced.
+    example: "42589ad070d43be9b00ff7e5"

@@ -1,0 +1,26 @@
+allOf:
+  - $ref: "../integration.yaml"
+  - type: object
+    description: |
+      To configure a Viber integration, acquire the Viber Public Account token from the user and call the Create Integration endpoint.
+    properties:
+      type:
+        type: string
+        description: The type of integration.
+        default: "viber"
+      token:
+        type: string
+        description: Viber Public Account token.
+        minLength: 1
+        writeOnly: true
+        example: "445da6az1s345z78-dazcczb2542zv51a-e0vc5fva17480im9"
+      uri:
+        type: string
+        description: Unique URI of the Viber account.
+        readOnly: true
+      accountId:
+        type: string
+        description: Unique ID of the Viber account.
+        readOnly: true
+    required:
+      - token

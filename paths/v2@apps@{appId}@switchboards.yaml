@@ -1,0 +1,41 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+post:
+  tags:
+    - Switchboards
+  summary: Create Switchboard
+  operationId: createSwitchboard
+  description: Create a switchboard.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/switchboardResponse.yaml"
+          examples:
+            $ref: "../components/examples/switchboardCreateResponse.yaml"
+    "404":
+      description: Not Found
+get:
+  tags:
+    - Switchboards
+  summary: List Switchboards
+  operationId: listSwitchboards
+  description: |
+    Lists all switchboards belonging to the app.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/switchboardListResponse.yaml"
+    "404":
+      description: Not Found

@@ -1,0 +1,7 @@
+type: object
+properties:
+  payload:
+    type: string
+    description: The payload associated with the postback.
+  metadata:
+    $ref: "../metadata.yaml"

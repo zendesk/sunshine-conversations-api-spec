@@ -1,0 +1,33 @@
+type: object
+description: A location type message includes the coordinates (latitude and longitude) of a location and an optional location object which can include the name and address of the location. Typically sent in response to a Location Request.
+properties:
+  type:
+    type: string
+    description: The type of message.
+    default: "location"
+  text: 
+    type: string
+    description: The fallback text message used when location messages are not supported by the channel.
+    readOnly: true
+  coordinates:
+    type: object
+    description: The coordinates of the location.
+    properties:
+      lat:
+        type: number
+        description: Global latitude.
+      long:
+        type: number
+        description: Global longitude.
+  location:
+    type: object
+    description: Information about the location.
+    properties:
+      address:
+        type: string
+        description: A string representing the address of the location.
+      name:
+        type: string
+        description: A string representing the name of the location.
+required:
+  - type

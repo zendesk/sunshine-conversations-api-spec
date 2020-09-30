@@ -1,0 +1,9 @@
+type: object
+properties:
+  displayName:
+    type: string
+    description: A human-friendly name used to identify the integration. `displayName` can be unset by changing it to `null`.
+    minLength: 1
+    maxLength: 100
+    nullable: true
+    example: "My awesome integration"

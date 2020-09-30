@@ -1,0 +1,20 @@
+allOf:
+  - $ref: "./integrationUpdateBase.yaml"
+  - type: object
+    properties:
+      serverKey:
+        type: string
+        description: Your server key from the fcm console.
+        minLength: 1
+        writeOnly: true
+        nullable: true
+        example: "<server-key>"
+      senderId:
+        type: string
+        description: Your sender id from the fcm console.
+        minLength: 1
+        nullable: true
+        example: "<sender-id>"
+      canUserCreateConversation:
+        type: boolean
+        description: Allows users to create more than one conversation on the android integration.

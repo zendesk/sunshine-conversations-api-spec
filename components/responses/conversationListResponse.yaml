@@ -1,0 +1,11 @@
+type: object
+properties:
+  conversations:
+    type: array
+    description: List of returned conversations.
+    items:
+      $ref: "../schemas/conversation.yaml"
+  meta:
+    $ref: "../schemas/meta.yaml"
+  links:
+    $ref: "../schemas/links.yaml"

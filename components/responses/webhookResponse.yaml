@@ -1,0 +1,7 @@
+type: object
+title: WebhookResponse
+properties:
+  webhook:
+    allOf:
+      - $ref: "../schemas/webhook.yaml"
+    description: The webhook.

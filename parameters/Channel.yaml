@@ -1,5 +1,0 @@
-name: channel
-in: path
-description: Name of the channel.
-required: true
-type: string

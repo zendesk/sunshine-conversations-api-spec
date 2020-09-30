@@ -1,0 +1,31 @@
+allOf:
+  - $ref: "../integration.yaml"
+  - type: object
+    description: |
+      Facebook Messenger Setup steps:
+      Take note of your Facebook app ID and secret (apps can be created at developer.facebook.com);
+      The Facebook app must have been submitted to Facebook for approval with the “manage_pages” (to receive messages through webhook) and “pages_messaging” (to send messages) permissions.
+      In order to integrate a Facebook Messenger app you must acquire a Page Access Token from your user. Once you have acquired a page access token from your user, call the Create Integration endpoint with your app secret and ID and the user’s page access token.
+    properties:
+      type:
+        type: string
+        description: The type of integration.
+        default: "messenger"
+      pageAccessToken:
+        type: string
+        description: A Facebook Page Access Token.
+        example: "your_access_token"
+      appId:
+        type: string
+        description: A Facebook App ID.
+        example: "your_facebook_app_id"
+      appSecret:
+        type: string
+        description: A Facebook App Secret.
+        writeOnly: true
+        example: "your_facebook_app_secret"
+
+    required:
+      - pageAccessToken
+      - appId
+      - appSecret

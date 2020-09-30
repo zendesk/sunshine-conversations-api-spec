@@ -1,0 +1,7 @@
+type: string
+description: The status of the integration.
+enum:
+  - inactive
+  - active
+  - error
+readOnly: true

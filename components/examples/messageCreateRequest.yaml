@@ -1,0 +1,11 @@
+request:
+  value:
+    author:
+      type: business
+      displayName: Steve
+      avatarUrl: https://www.gravatar.com/image.jpg
+    content:
+      type: text
+      text: Hello!
+    metadata:
+      lang: en-ca

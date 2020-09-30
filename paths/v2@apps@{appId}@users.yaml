@@ -1,0 +1,26 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+post:
+  tags:
+    - Users
+  summary: Create User
+  operationId: createUser
+  description: Creates a new user.
+  security:
+    - basicAuth: [account, app, integration]
+    - bearerAuth: [account, app, integration]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/userCreateBody.yaml"
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/userResponse.yaml"
+    "409":
+      description: User already exists

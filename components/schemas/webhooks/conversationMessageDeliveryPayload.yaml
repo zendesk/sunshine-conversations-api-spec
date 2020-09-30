@@ -1,0 +1,41 @@
+type: object
+description: The payload of the event. The contents of this object depend on the type of event.
+properties:
+  user:
+    allOf:
+      - $ref: "../user.yaml"
+    description: The user associated with the conversation.
+  conversation:
+    allOf:
+      - $ref: "../conversationTruncated.yaml"
+    description: The conversation in which the message was sent.
+  message:
+    type: object
+    properties:
+      id:
+        type: string
+        description: A string representing the ID of the message.
+    description: The message that was sent.
+  destination:
+    type: object
+    description: A nested object representing the destination of the message.
+    properties:
+      type:
+        type: string
+        description: An identifier for the channel to which a message was sent to. May include one of "web", "ios", "android", "messenger", "viber", "telegram", "wechat", "line", "twilio", "api", "notification", or any other channel.
+      integrationId:
+        type: string
+        description: Identifier indicating which integration the message was sent to.
+  externalMessages:
+    type: array
+    nullable: true
+    description: An array of objects representing the third-party messages associated with the event. The order of the external messages is not guaranteed to be the same across the different triggers. Note that some channels don’t expose message IDs, in which case this field will be unset.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A string representing the ID of the external message.
+  isFinalEvent:
+    type: boolean
+    description: A boolean indicating whether the webhook is the final one for the `message.id` and `destination.type` pair.

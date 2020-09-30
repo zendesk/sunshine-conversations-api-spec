@@ -1,0 +1,18 @@
+allOf:
+  - $ref: "./eventSubSchema.yaml"
+  - type: object
+    properties:
+      payload:
+        type: object
+        description: The payload of the event. The contents of this object depend on the type of event.
+        properties:
+          error:
+            type: object
+            description: Object containing details of what went wrong.
+          conversation:
+            allOf:
+              - $ref: "../conversationTruncated.yaml"
+            description: The conversation from which the switchboard event was fired.
+          metadata:
+            $ref: "../metadata.yaml"
+title: switchboard:offerControl:failure

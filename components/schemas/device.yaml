@@ -1,0 +1,45 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The unique ID of the device.
+    example: "de13bee15b51033b34162411"
+  type:
+    type: string
+    description: The type of integration that the device represents.
+    enum:
+      - android
+      - ios
+      - web
+  guid:
+    type: string
+    description: A unique identifier for the device, generated client-side by the SDK.
+  clientId:
+    type: string
+    description: The id of the client to which this device is associated.
+  status:
+    type: string
+    description: The device status. Indicates if the device will receive push notifications or not.
+    enum:
+      - active
+      - inactive
+  integrationId:
+    type: string
+    description: The ID of the integration that the device was created for.
+  lastSeen:
+    type: string
+    description: A datetime string with the format YYYY-MM-DDThh:mm:ss.SSSZ
+      representing the last time the user interacted with this device.
+  pushNotificationToken:
+    type: string
+    description: The token used for push notifications on Android and iOS devices.
+    nullable: true
+  info:
+    type: object
+    description: A flat curated object with properties that vary for each SDK platform. All
+      keys are optional and not guaranteed to be available.
+    nullable: true
+  appVersion:
+    type: string
+    description: Version of the mobile app in which the SDK is embedded. Not applicable for devices of type web.
+    nullable: true

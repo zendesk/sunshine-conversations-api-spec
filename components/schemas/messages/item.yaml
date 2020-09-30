@@ -1,0 +1,39 @@
+type: object
+properties:
+  title:
+    type: string
+    description: The title of the item.
+    minLength: 1
+    maxLength: 128
+  description:
+    type: string
+    description: The description of the item.
+    maxLength: 128
+  mediaUrl:
+    type: string
+    format: uri
+    description: The image url attached to the item.
+    maxLength: 2048
+  mediaType:
+    type: string
+    description: The MIME type for any image attached in the mediaUrl.
+    maxLength: 128
+  size:
+    type: string
+    description: The size of the image.
+    enum:
+      - compact
+      - large
+  actions:
+    type: array
+    description: An array of objects representing the actions associated with the item.
+    items:
+      $ref: "actionSubset.yaml"
+    minItems: 1
+    maxItems: 3
+  metadata:
+    $ref: "../metadata.yaml"
+
+required:
+  - title
+  - actions

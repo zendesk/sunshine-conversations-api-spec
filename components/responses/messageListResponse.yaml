@@ -1,0 +1,12 @@
+type: object
+title: MessageListResponse
+properties:
+  messages:
+    type: array
+    description: List of returned messages.
+    items:
+      $ref: "../schemas/message.yaml"
+  meta:
+    $ref: "../schemas/meta.yaml"
+  links:
+    $ref: "../schemas/links.yaml"

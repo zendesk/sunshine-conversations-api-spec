@@ -1,0 +1,9 @@
+name: limit
+in: query
+description: Limit the number of records to return.
+schema:
+  type: integer
+  default: 25
+  example: 25
+  minimum: 0
+  maximum: 100

@@ -1,5 +1,0 @@
-name: userId
-in: path
-description: Identifies the user. Can be either the smoochId or the userId.
-required: true
-type: string

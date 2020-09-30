@@ -1,0 +1,29 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+post:
+  tags:
+    - Attachments
+  summary: Delete Attachment
+  operationId: deleteAttachment
+  description: |
+    Remove an attachment uploaded to Sunshine Conversations through the Upload attachment API.
+    See [Attachments for Messages](#section/Attachments-for-Messages) to have attachments automatically deleted when deleting messages, conversations or users.
+    <aside class="notice">Note that deleted attachments can remain available on our CDN’s cache up to 15 minutes after the delete call.</aside>
+  security:
+    - basicAuth: [integration, app, account]
+    - bearerAuth: [integration, app, account]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/attachmentDeleteBody.yaml"
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            type: object
+    "404":
+      description: Attachment not found

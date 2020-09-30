@@ -1,0 +1,8 @@
+type: object
+properties:
+  lat:
+    type: number
+    description: Global latitude.
+  long:
+    type: number
+    description: Global longitude.

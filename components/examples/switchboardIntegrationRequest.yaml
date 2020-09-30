@@ -1,0 +1,7 @@
+request:
+  value:
+    name: bot
+    integrationType: zd:agentWorkspace
+    deliverStandbyEvents: true
+    nextSwitchboardIntegrationId: 5ef21b86e933b7355c11c606
+    messageHistoryCount: 5

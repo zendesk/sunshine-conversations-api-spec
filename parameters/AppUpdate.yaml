@@ -1,6 +1,0 @@
-name: appUpdateBody
-in: body
-required: true
-description: Body for an updateApp request.
-schema:
-  $ref: ./definitions/AppUpdate.yaml

@@ -1,0 +1,29 @@
+allOf:
+  - $ref: "../integration.yaml"
+  - type: object
+    properties:
+      type:
+        type: string
+        description: The type of integration.
+        default: "ios"
+      certificate:
+        type: string
+        description: The binary of your APN certificate base64 encoded.
+        minLength: 1
+        writeOnly: true
+        nullable: true
+        example: "your_APN_certificate"
+      password:
+        type: string
+        description: The password for your APN certificate.
+        writeOnly: true
+        example: "your_APN_password"
+      production:
+        type: boolean
+        description: The APN environment to connect to (Production, if true, or Sandbox). Defaults to value inferred from certificate if not specified.
+      autoUpdateBadge:
+        type: boolean
+        description: Use the unread count of the conversation as the application badge.
+      canUserCreateMoreConversations:
+        type: boolean
+        description: Allows users to create more than one conversation on the iOS integration.

@@ -1,0 +1,27 @@
+allOf:
+  - $ref: "../integration.yaml"
+  - type: object
+    description: |
+      To configure an Apple Business Chat integration, acquire the required information and call the Create Integration endpoint.
+    properties:
+      type:
+        type: string
+        description: The type of integration.
+        default: "apple"
+      businessId:
+        type: string
+        description: Apple Business Chat ID.
+        example: "2740f141-89c1-515f-07eb-1128dd73491"
+      apiSecret:
+        type: string
+        description: Your Apple API secret which is tied to your Messaging Service Provider.
+        writeOnly: true
+        example: "QLA//Z13paUYo/2tLReQa-43c5JEAASujGamiY/QTvs="
+      mspId:
+        type: string
+        description: Your Messaging Service Provider ID.
+        example: "e7e495d5-bf78-531d-baf6-7f419f7fb592"
+    required:
+      - businessId
+      - apiSecret
+      - mspId

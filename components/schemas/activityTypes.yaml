@@ -1,0 +1,10 @@
+type: object
+properties:
+  type:
+    type: string
+    description:
+      If the author type is `user`, only `conversation:read` is supported.
+    enum:
+      - conversation:read
+      - typing:start
+      - typing:stop

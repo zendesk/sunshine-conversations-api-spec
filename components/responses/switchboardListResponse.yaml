@@ -1,0 +1,7 @@
+type: object
+properties:
+  switchboards:
+    type: array
+    description: List of returned switchboards.
+    items:
+      $ref: "../schemas/switchboard.yaml"

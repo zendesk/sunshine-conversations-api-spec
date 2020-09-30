@@ -1,0 +1,6 @@
+request:
+  value:
+    author:
+      type: user
+      userId: 5963c0d619a30a2e00de36b8
+    type: conversation:read

@@ -1,0 +1,28 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+  - $ref: "../components/parameters/conversationId.yaml"
+post:
+  tags:
+    - Participants
+  summary: Leave Conversation
+  operationId: leaveConversation
+  description: |
+    Removes a user from a conversation using either their userId, userExternalId, or participantId.
+  security:
+    - basicAuth: [integration, app, account]
+    - bearerAuth: [integration, app, account]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/participantLeaveBody.yaml"
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            type: object
+    "404":
+      description: User is not a member of the conversation

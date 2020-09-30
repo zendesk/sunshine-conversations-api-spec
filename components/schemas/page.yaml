@@ -1,0 +1,21 @@
+type: object
+properties:
+  after:
+    type: string
+    description: |
+      A record id. Results will only contain the records that come after the specified record. 
+      Only one of `after` or `before` can be provided, not both.
+    example: "5e1606762556d93e9c176f69"
+  before:
+    type: string
+    description: |
+      A record id. Results will only contain the records that come before the specified record.
+      Only one of `after` or `before` can be provided, not both.
+    example: "5e1606762556d93e9c176f69"
+  size:
+    type: integer
+    description: The number of records to return.
+    default: 25
+    example: 10
+    minimum: 0
+    maximum: 100

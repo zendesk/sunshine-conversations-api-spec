@@ -1,0 +1,7 @@
+type: object
+properties:
+  switchboardIntegrations:
+    type: array
+    description: List of returned switchboard integrations.
+    items:
+      $ref: "../schemas/switchboardIntegration.yaml"

@@ -1,0 +1,47 @@
+type: object
+description: The source of the message.
+properties:
+  type:
+    type: string
+    description:
+      An identifier for the channel from which a message originated. May
+      include one of api, sdk, messenger, or any number of other
+      channels.
+    example: "ios"
+  integrationId:
+    type: string
+    description:
+      Identifier indicating which integration the message was sent from. For
+      user messages only.
+    example: "de13bee15b51033b34162411"
+    nullable: true
+  originalMessageId:
+    type: string
+    description: Message identifier assigned by the originating channel.
+    example: "5f40256af057d0000dda9bd7"
+    nullable: true
+  originalMessageTimestamp:
+    type: string
+    description: A datetime string with the format `YYYY-MM-DDThh:mm:ss.SSSZ`
+      representing when the third party channel received the message.
+    example: "2019-03-21T18:45:53.720Z"
+    nullable: true
+  client:
+    allOf:
+      - $ref: "client.yaml"
+    description:
+      The client from which the user authored the message or activity, if
+      applicable. This field is not applicable in API responses, it is used only in webhook
+      payloads if the `includeFullSource` option is enabled.
+    nullable: true
+  device:
+    allOf:
+      - $ref: "device.yaml"
+    description:
+      The device from which the user authored the message or activity, if
+      applicable. This field is not applicable in API responses, it is used only in webhook
+      payloads if the `includeFullSource` option is enabled.
+    nullable: true
+
+required:
+  - type

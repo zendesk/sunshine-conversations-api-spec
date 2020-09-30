@@ -1,0 +1,47 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+  - $ref: "../components/parameters/switchboardId.yaml"
+patch:
+  tags:
+    - Switchboards
+  summary: Update Switchboard
+  operationId: updateSwitchboard
+  description: Updates a switchboard record.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/requestBodies/switchboardUpdateBody.yaml"
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/switchboardResponse.yaml"
+    "404":
+      description: Not Found
+delete:
+  tags:
+    - Switchboards
+  summary: Delete Switchboard
+  operationId: deleteSwitchboard
+  description: Deletes the switchboard and all its switchboard integrations. The
+    integrations linked to these switchboard integrations are not deleted and
+    will start receiving all conversation events.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            type: object
+    "404":
+      description: Not Found

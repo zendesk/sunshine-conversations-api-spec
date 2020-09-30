@@ -1,9 +1,0 @@
-type: object
-required:
-  - items
-properties:
-  items:
-    type: array
-    description: A list of menu items.
-    items:
-      $ref: ./MenuItem.yaml

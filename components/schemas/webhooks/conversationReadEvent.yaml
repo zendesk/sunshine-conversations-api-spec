@@ -1,0 +1,23 @@
+allOf:
+  - $ref: "./eventSubSchema.yaml"
+  - type: object
+    properties:
+      payload:
+        type: object
+        description: The payload of the event. The contents of this object depend on the type of event.
+        properties:
+          conversation:
+            allOf:
+              - $ref: "../conversationTruncated.yaml"
+            description: The conversation in which the message was read. 
+          activity:
+            allOf:
+              - $ref: "./activity.yaml"
+              - type: object
+                properties:
+                  type: 
+                    type: string
+                    description: The type of activity.
+                    default: "conversation:read"
+            description: The activity that was sent.
+title: conversation:read

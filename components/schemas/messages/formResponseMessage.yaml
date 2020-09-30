@@ -1,0 +1,21 @@
+type: object
+description: A formResponse type message is a response to a form type message. formResponse type messages are only supported as responses to form messages on Web Messenger and cannot be sent via the API.
+properties:
+  type:
+    type: string
+    description: The type of message.
+    default: "formResponse"
+  fields:
+    type: array
+    description: Array of field objects that contain the submitted fields.
+    items:
+      $ref: "field.yaml"
+    minItems: 1
+    maxItems: 20
+  textFallback:
+    type: string
+    description: "A string containing the `label: value` of all fields, each separated by a newline character."
+    readOnly: true
+required:
+  - type
+  - fields

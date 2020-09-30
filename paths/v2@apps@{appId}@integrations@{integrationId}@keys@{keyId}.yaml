@@ -1,0 +1,36 @@
+parameters:
+  - $ref: "../components/parameters/appId.yaml"
+  - $ref: "../components/parameters/integrationId.yaml"
+  - $ref: "../components/parameters/keyId.yaml"
+get:
+  tags:
+    - CustomIntegrationApiKeys
+  summary: Get Integration Key
+  operationId: getCustomIntegrationKey
+  description: Get the specified API key.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: "../components/responses/integrationApiKeyResponse.yaml"
+delete:
+  tags:
+    - CustomIntegrationApiKeys
+  summary: Delete Integration Key
+  operationId: deleteCustomIntegrationKey
+  description: Removes an API key.
+  security:
+    - basicAuth: [app, account]
+    - bearerAuth: [app, account]
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            type: object

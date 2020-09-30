@@ -1,0 +1,18 @@
+response:
+  value:
+    messages:
+      [
+        {
+          id: 5f748c1a2b5315fc007e7977,
+          received: 2020-09-30T13:46:02.733Z,
+          author:
+            {
+              type: business,
+              displayName: Steve,
+              avatarUrl: https://www.gravatar.com/image.jpg,
+            },
+          content: { type: text, text: Hello! },
+          metadata: { lang: en-ca },
+          source: { type: api:conversations },
+        },
+      ]

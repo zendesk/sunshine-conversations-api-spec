@@ -1,0 +1,12 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The unique ID of the user.
+    example: "7494535bff5cef41a15be74d"
+  externalId:
+    type: string
+    description: |
+      An optional ID that if specified can also be used to retrieve the user.
+    example: "your-own-id"
+    nullable: true
