@@ -1,8 +1,0 @@
-type: object
-properties:
-  address:
-    type: string
-    description: The location's street address.
-  name:
-    type: string
-    description: A name for the location.

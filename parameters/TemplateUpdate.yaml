@@ -1,7 +1,0 @@
-name: templateUpdateBody
-in: body
-required: true
-description: |
-  Body for an updateTemplate request.
-schema:
-  $ref: ./definitions/TemplateUpdate.yaml

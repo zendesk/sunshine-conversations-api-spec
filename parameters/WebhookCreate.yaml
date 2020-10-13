@@ -1,7 +1,0 @@
-name: webhookCreateBody
-in: body
-required: true
-description: |
-  Body for a createWebhook request.
-schema:
-  $ref: ./definitions/WebhookCreate.yaml

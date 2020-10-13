@@ -1,9 +1,0 @@
-type: object
-required:
-  - webhooks
-properties:
-  webhooks:
-    type: array
-    items:
-      $ref: ./Webhook.yaml
-    description: The list of webhooks.

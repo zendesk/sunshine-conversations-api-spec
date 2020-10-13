@@ -1,5 +1,0 @@
-name: appId
-in: path
-description: Identifies the app.
-required: true
-type: string

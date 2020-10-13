@@ -1,6 +1,0 @@
-name: menuCreateBody
-in: body
-required: true
-description: Body for a createMenu request.
-schema:
-  $ref: ./definitions/Menu.yaml

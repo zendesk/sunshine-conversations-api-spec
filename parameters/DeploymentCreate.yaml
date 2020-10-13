@@ -1,7 +1,0 @@
-name: deploymentCreateBody
-in: body
-required: true
-description: |
-  Body for a createDeployment request.
-schema:
-  $ref: ./definitions/DeploymentCreate.yaml

@@ -1,7 +1,0 @@
-name: webhookUpdateBody
-in: body
-required: true
-description: |
-  Body for an updateWebhook request.
-schema:
-  $ref: ./definitions/WebhookUpdate.yaml

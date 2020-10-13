@@ -1,7 +1,0 @@
-type: object
-required:
-  - conversation
-properties:
-  conversation:
-    $ref: ./Conversation.yaml
-    description: The conversation.

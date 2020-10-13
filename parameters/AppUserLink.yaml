@@ -1,6 +1,0 @@
-name: appUserLinkBody
-in: body
-required: true
-description: Body for a linkAppUser request.
-schema:
-  $ref: ./definitions/AppUserLink.yaml

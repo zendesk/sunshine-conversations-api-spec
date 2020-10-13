@@ -1,7 +1,0 @@
-name: notificationPostBody
-in: body
-required: true
-description: |
-  Body for a postNotification request.
-schema:
-  $ref: ./definitions/NotificationPost.yaml
