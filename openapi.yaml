@@ -507,6 +507,54 @@ tags:
       integration to active fails. |
 
       | user:merge         | When two or more users are merged into one. |
+  - name: Sunshine Conversations Connect
+    x-displayName: Sunshine Conversations Connect
+    description: >
+      Sunshine Conversations has a rapidly growing partner ecosystem which helps
+      you unlock messaging in your product or service and lets customers find
+      you alongside complementary partners. If you're interested in becoming a
+      partner, tell us what you're building with Sunshine Conversations using
+      our [partner application](https://smooch.io/partners/) and we'll provision
+      you with everything you'll need to build your end of the OAuth flow using
+      Sunshine Conversations Connect. In the meantime the OAuth endpoints
+      detailed below can be tested by impersonating Shoplifter, a partnership we
+      built for testing purposes.
+
+
+      # Add to Sunshine Conversations Button
+
+      ```html
+
+      <a
+      href="https://app.smooch.io/oauth/authorize?client_id=shoplifter&response_type=code"><img
+      alt="Add to Sunshine Conversations" height="40" width="278"
+      src="https://cdn.smooch.io/images/add_to_sunshine_conversations.png"
+      srcset="https://cdn.smooch.io/images/add_to_sunshine_conversations.png 1x,
+      https://cdn.smooch.io/images/add_to_sunshine_conversations@2x.png
+      2x"/></a>
+
+      ```
+
+      This HTML template can be used to place an "Add to Sunshine Conversations"
+      button on your website.
+
+
+      <p class="add-to-sunshine-conversations-button">
+          <a href="https://app.smooch.io/oauth/authorize?client_id=shoplifter&response_type=code"><img alt="Add to Sunshine Conversations" height="40" width="278" src="https://cdn.smooch.io/images/add_to_sunshine_conversations.png" srcset="https://cdn.smooch.io/images/add_to_sunshine_conversations.png 1x, https://cdn.smooch.io/images/add_to_sunshine_conversations@2x.png 2x"/></a>
+      </p>
+
+
+      # Sample Application
+
+      An open source sample application implementing Sunshine Conversations
+      Connect has been created to help demonstrate how to get it working. Give
+      [Shoplifter](https://shoplifter.herokuapp.com/) a try.
+
+
+      The source code is available [here](https://github.com/smooch/shoplifter).
+  - name: OAuth Endpoints
+    x-displayName: OAuth Endpoints
+    description: "The scope of an issued access token is integration scope. This allows API calls to be made to a specific Sunshine Conversations app on behalf of an integration, identified by the integration’s clientId. The access token grants permission to get and create users and conversations associated with the app. The token also grants permission to create webhooks, however only webhooks created for the integration will be visible. An access token with integration scope cannot see or modify webhooks that were created by other integrations, for example.\n\n| API Root\t| Access\t| \n| --------  | ------- |\n| /v2/users/\\*\t| Yes\t|\n| /v2/conversations/\\*\t| Yes\t|\n| /v2/integrations/me/webhooks/\\*\t| Yes\t|\n| /v2/apps/\\*\t| No | \n"
 x-tagGroups:
   - name: Account Provisioning
     tags:
@@ -535,6 +583,10 @@ x-tagGroups:
     tags:
       - Users
       - Clients
+  - name: Sunshine Conversations Connect
+    tags:
+      - Sunshine Conversations Connect
+      - OAuth Endpoints
   - name: Changelog
     tags:
       - Changelog
@@ -712,6 +764,7 @@ paths:
                 displayName:
                   allOf:
                     - $ref: '#/components/schemas/displayName'
+                  description: The name of the API key.
                   example: Key 1
               required:
                 - displayName
@@ -910,7 +963,7 @@ paths:
   '/v2/apps/{appId}/attachments/cookie':
     parameters:
       - $ref: '#/components/parameters/appId'
-    post:
+    get:
       tags:
         - Attachments
       summary: Set Cookie
@@ -2561,6 +2614,113 @@ paths:
                   $ref: '#/components/examples/userDeletePersonalInformationResponse'
         '404':
           description: User not found
+  /oauth/authorize:
+    get:
+      tags:
+        - OAuth Endpoints
+      summary: Authorize
+      operationId: authorize
+      description: >-
+        This endpoint begins the OAuth flow. It relies on a browser session for
+        authentication. If the user is not logged in to Sunshine Conversations
+        they will be redirected to the login page. If the user has many apps,
+        they will first be prompted to select the one they wish to integrate
+        with. They will then be presented with an Allow/Deny dialog, describing
+        details of the access your integration is requesting.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/clientIdQuery'
+        - $ref: '#/components/parameters/responseTypeQuery'
+        - $ref: '#/components/parameters/stateQuery'
+        - $ref: '#/components/parameters/redirectUriQuery'
+      responses:
+        '302':
+          description: Found. Redirecting to /login
+        '404':
+          description: The provided redirect_uri does not match the client_id configuration
+  /oauth/token:
+    post:
+      tags:
+        - OAuth Endpoints
+      summary: Get Token
+      operationId: getToken
+      description: >-
+        This endpoint is used to exchange an authorization code for an access
+        token. It should only be used in server-to-server calls.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: The authorization code received via /oauth/authorize
+                  example: '658965'
+                grant_type:
+                  type: string
+                  description: Must be set to authorization_code
+                  example: '658965'
+                client_id:
+                  type: string
+                  description: Your integration’s unique identifier
+                  example: 5e4af71a81966cfff3ef6550
+                client_secret:
+                  type: string
+                  description: Your integration’s secret
+                  example: 5XJ85yjUtRcaQu_pDINblPZb
+              required:
+                - code
+                - grant_type
+                - client_id
+                - client_secret
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  access_token:
+                    type: string
+                    description: >-
+                      An access token that can now be used to call Sunshine
+                      Conversations APIs.
+                  token_type:
+                    type: string
+                    description: Bearer. All issued tokens are of this type.
+        '401':
+          description: Authorization is required
+  /oauth/authorization:
+    delete:
+      tags:
+        - OAuth Endpoints
+      summary: Revoke Access
+      operationId: revokeAccess
+      description: >
+        This endpoint is used to revoke your integration’s access to the user’s
+        Sunshine Conversations app. Revoking access means your integration will
+        no longer be able to interact with the app, and any webhooks the
+        integration had previously configured will be removed. 
+
+        Calling this endpoint is equivalent to the user removing your
+        integration manually in the Sunshine Conversations web app. Your
+        integration’s `removeUrl` (if configured) will also be called when an
+        integration is removed in this way.
+      security:
+        - basicAuth:
+            - integration
+        - bearerAuth:
+            - integration
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
 x-webhooks:
   Webhook Event:
     post:
@@ -3738,9 +3898,6 @@ components:
           type: string
           description: The type of message.
           default: file
-        text:
-          type: string
-          description: The text content of the message.
         mediaUrl:
           type: string
           format: uri
@@ -3753,8 +3910,12 @@ components:
           type: string
           description: The media type of the file.
           readOnly: true
+        text:
+          type: string
+          description: The text content of the message.
       required:
         - type
+        - mediaUrl
     formOptions:
       type: array
       description: Array of objects representing options for a field of type select.
@@ -3902,6 +4063,10 @@ components:
           type: string
           description: The type of message.
           default: image
+        mediaUrl:
+          type: string
+          format: uri
+          description: 'The URL for media, such as an image, attached to the message.'
         text:
           type: string
           description: >-
@@ -3912,12 +4077,9 @@ components:
           description: Array of message actions.
           items:
             $ref: '#/components/schemas/action'
-        mediaUrl:
-          type: string
-          format: uri
-          description: 'The URL for media, such as an image, attached to the message.'
       required:
         - type
+        - mediaUrl
     listMessage:
       type: object
       title: ListMessage
@@ -3990,6 +4152,9 @@ components:
             long:
               type: number
               description: Global longitude.
+          required:
+            - lat
+            - long
         location:
           type: object
           description: Information about the location.
@@ -4002,6 +4167,7 @@ components:
               description: A string representing the name of the location.
       required:
         - type
+        - coordinates
     content:
       oneOf:
         - $ref: '#/components/schemas/textMessage'
@@ -6377,23 +6543,60 @@ components:
       properties:
         type:
           type: string
-          description: The role of the message or activity.
+          description: The `type` of the author.
           enum:
             - business
             - user
         userId:
           type: string
-          description: The id of the user. Only supported when role is `user`.
+          description: The id of the user. Only supported when author `type` is `user`.
           example: 5963c0d619a30a2e00de36b8
         user:
           allOf:
             - $ref: '#/components/schemas/user'
           description: >-
-            Full profile of the user that authored the message or activity. It
-            is used only in webhook payloads if the `includeFullUser` option is
-            enabled.
+            The user that authored the message or activity. `profile` is
+            included in the payload if the `includeFullUser` option is enabled.
       required:
         - type
+    messageWebhook:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the message.
+          example: 5e552ef595e5206375bb835d
+        received:
+          type: string
+          description: >-
+            A datetime string with the format `YYYY-MM-DDThh:mm:ss.SSSZ`
+            representing when Sunshine Conversations received the message.
+          example: '2019-03-21T18:48:52.760Z'
+        author:
+          $ref: '#/components/schemas/authorWebhook'
+        content:
+          allOf:
+            - $ref: '#/components/schemas/content'
+          description: The content of the message.
+        source:
+          $ref: '#/components/schemas/source'
+        quotedMessage:
+          allOf:
+            - $ref: '#/components/schemas/quotedMessage'
+          description: >-
+            The quoted message is currently only available for WhatsApp and Web
+            Messenger `formResponse` messages.
+          nullable: true
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/metadata'
+          nullable: true
+        deleted:
+          type: boolean
+          description: >-
+            true if the message serves as a placeholder for one that has been
+            deleted.
+          nullable: true
     conversationMessageEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -6411,11 +6614,7 @@ components:
                   description: The conversation in which the message was sent.
                 message:
                   allOf:
-                    - $ref: '#/components/schemas/message'
-                    - type: object
-                      properties:
-                        author:
-                          $ref: '#/components/schemas/authorWebhook'
+                    - $ref: '#/components/schemas/messageWebhook'
                   description: The message that was sent.
                 recentNotifications:
                   type: array
@@ -6423,7 +6622,7 @@ components:
                     Messages sent with the Notification API since the last user
                     message.
                   items:
-                    $ref: '#/components/schemas/message'
+                    $ref: '#/components/schemas/messageWebhook'
       title: 'conversation:message'
     postbackWebhook:
       type: object
@@ -6521,9 +6720,6 @@ components:
                         type:
                           type: string
                           description: The type of activity.
-                          enum:
-                            - 'typing:start'
-                            - 'typing:stop'
                   description: The activity that was sent.
       title: 'conversation:typing'
     switchboardAcceptControl:
@@ -6883,6 +7079,42 @@ components:
       schema:
         type: string
         example: 5d8cff3cd55b040010928b5b
+    clientIdQuery:
+      name: client_id
+      in: query
+      description: Your integration’s unique identifier
+      schema:
+        type: string
+        example: 5e4af71a81966cfff3ef6550
+      required: true
+    responseTypeQuery:
+      name: response_type
+      in: query
+      description: For now the only acceptable value is code.
+      schema:
+        type: string
+        example: code
+      required: true
+    stateQuery:
+      name: state
+      in: query
+      description: >-
+        You may pass in any arbitrary string value here which will be returned
+        to you along with the code via browser redirect.
+      schema:
+        type: string
+        example: Pending
+    redirectUriQuery:
+      name: redirect_uri
+      in: query
+      description: >-
+        You may pass in a redirect_uri to determine which URI the response is
+        redirected to. This URI must be contained in the list configured by your
+        integration. If this option is not passed, the first URI present in the
+        list will be used.
+      schema:
+        type: string
+        example: 'https://example.org'
   examples:
     text:
       value:
