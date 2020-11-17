@@ -21,17 +21,17 @@ properties:
     type: string
     description: |
       Facebook Page Access Token.
-      Required for *messenger* integrations.
+      Required for *messenger* and *instagram* integrations.
   appId:
     type: string
     description: |
       Facebook App ID OR WeChat App ID.
-      Required for *messenger* and *wechat* integrations.
+      Required for *messenger*, *instagram* and *wechat* integrations.
   appSecret:
     type: string
     description: |
       Facebook Page App Secret OR WeChat App Secret.
-      Required for *messenger* and *wechat* integrations.
+      Required for *messenger*, *instagram* and *wechat* integrations.
   accessTokenUrl:
     type: string
     description: |
@@ -46,7 +46,7 @@ properties:
     type: string
     description: |
       Facebook Page App ID.
-      Returned on successful *messenger* integrations.
+      Returned on successful *messenger* and *instagram* integrations.
   accountSid:
     type: string
     description: |
@@ -220,13 +220,13 @@ properties:
   userId:
     type: string
     description: |
-      The twitter userId.
-      Returned on successful *twitter* integrations.
+      The twitter userId or Facebook userId.
+      Returned on successful *twitter* and *instagram* integrations.
   username:
     type: string
     description: |
-      The username for the account.
-      Returned on successful *twitter* and *telegram* integrations.
+      A twitter, telegram and facebook account username
+      Returned on successful *twitter*, *telegram* and *instagram* integrations.
       Required for *WhatsApp* integrations. (this usage is deprecated)
   apiKey:
     type: string
@@ -329,9 +329,15 @@ properties:
       (Optional) Used for *Web Messenger* integrations.
   businessName:
     type: string
-    description: |
-      A custom business name for the Web Messenger.
+    description: >
+      A custom business name for the Web Messenger or Instagram Business account
+      name.
+
       (Optional) Used for *Web Messenger* integrations.
+  businessUsername:
+    type: string
+    description: |
+      Instagram Business account username.
   businessIconUrl:
     type: string
     description: |
@@ -383,7 +389,9 @@ properties:
     description: A key tied to Apple Business Chat Messaging Service Provider
   businessId:
     type: string
-    description: A unique ID tied to the brand using Apple Business Chat
+    description: >
+      A unique ID tied to the brand using Apple Business Chat or the Instagram
+      Business ID
   mspId:
     type: string
     description: >-

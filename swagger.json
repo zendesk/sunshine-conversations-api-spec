@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
-    "version" : "5.29",
+    "version" : "5.30",
     "title" : "Smooch"
   },
   "host" : "api.smooch.io",
@@ -3651,15 +3651,15 @@
         },
         "pageAccessToken" : {
           "type" : "string",
-          "description" : "Facebook Page Access Token.\nRequired for *messenger* integrations.\n"
+          "description" : "Facebook Page Access Token.\nRequired for *messenger* and *instagram* integrations.\n"
         },
         "appId" : {
           "type" : "string",
-          "description" : "Facebook App ID OR WeChat App ID.\nRequired for *messenger* and *wechat* integrations.\n"
+          "description" : "Facebook App ID OR WeChat App ID.\nRequired for *messenger*, *instagram* and *wechat* integrations.\n"
         },
         "appSecret" : {
           "type" : "string",
-          "description" : "Facebook Page App Secret OR WeChat App Secret.\nRequired for *messenger* and *wechat* integrations.\n"
+          "description" : "Facebook Page App Secret OR WeChat App Secret.\nRequired for *messenger*, *instagram* and *wechat* integrations.\n"
         },
         "accessTokenUrl" : {
           "type" : "string",
@@ -3671,7 +3671,7 @@
         },
         "pageId" : {
           "type" : "string",
-          "description" : "Facebook Page App ID.\nReturned on successful *messenger* integrations.\n"
+          "description" : "Facebook Page App ID.\nReturned on successful *messenger* and *instagram* integrations.\n"
         },
         "accountSid" : {
           "type" : "string",
@@ -3803,11 +3803,11 @@
         },
         "userId" : {
           "type" : "string",
-          "description" : "The twitter userId.\nReturned on successful *twitter* integrations.\n"
+          "description" : "The twitter userId or Facebook userId.\nReturned on successful *twitter* and *instagram* integrations.\n"
         },
         "username" : {
           "type" : "string",
-          "description" : "The username for the account.\nReturned on successful *twitter* and *telegram* integrations.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
+          "description" : "A twitter, telegram and facebook account username\nReturned on successful *twitter*, *telegram* and *instagram* integrations.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
         },
         "apiKey" : {
           "type" : "string",
@@ -3874,7 +3874,11 @@
         },
         "businessName" : {
           "type" : "string",
-          "description" : "A custom business name for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+          "description" : "A custom business name for the Web Messenger or Instagram Business account name.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "businessUsername" : {
+          "type" : "string",
+          "description" : "Instagram Business account username.\n"
         },
         "businessIconUrl" : {
           "type" : "string",
@@ -3909,7 +3913,7 @@
         },
         "businessId" : {
           "type" : "string",
-          "description" : "A unique ID tied to the brand using Apple Business Chat"
+          "description" : "A unique ID tied to the brand using Apple Business Chat or the Instagram Business ID\n"
         },
         "mspId" : {
           "type" : "string",
@@ -3931,15 +3935,15 @@
         },
         "pageAccessToken" : {
           "type" : "string",
-          "description" : "Facebook Page Access Token.\nRequired for *messenger* integrations.\n"
+          "description" : "Facebook Page Access Token.\nRequired for *messenger* and *instagram* integrations.\n"
         },
         "appId" : {
           "type" : "string",
-          "description" : "Facebook App ID OR WeChat App ID.\nRequired for *messenger* and *wechat* integrations.\n"
+          "description" : "Facebook App ID OR WeChat App ID.\nRequired for *messenger*, *instagram* and *wechat* integrations.\n"
         },
         "appSecret" : {
           "type" : "string",
-          "description" : "Facebook Page App Secret OR WeChat App Secret.\nRequired for *messenger* and *wechat* integrations.\n"
+          "description" : "Facebook Page App Secret OR WeChat App Secret.\nRequired for *messenger*, *instagram* and *wechat* integrations.\n"
         },
         "accountSid" : {
           "type" : "string",
@@ -4007,7 +4011,7 @@
         },
         "username" : {
           "type" : "string",
-          "description" : "The username for the account.\nReturned on successful *twitter* and *telegram* integrations.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
+          "description" : "A twitter, telegram and facebook account username\nReturned on successful *twitter*, *telegram* and *instagram* integrations.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
         },
         "autoUpdateBadge" : {
           "type" : "boolean",
@@ -4102,7 +4106,7 @@
         },
         "businessName" : {
           "type" : "string",
-          "description" : "A custom business name for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+          "description" : "A custom business name for the Web Messenger or Instagram Business account name.\n(Optional) Used for *Web Messenger* integrations.\n"
         },
         "businessIconUrl" : {
           "type" : "string",
@@ -4149,7 +4153,7 @@
         },
         "businessId" : {
           "type" : "string",
-          "description" : "A unique ID tied to the brand using Apple Business Chat"
+          "description" : "A unique ID tied to the brand using Apple Business Chat or the Instagram Business ID\n"
         },
         "mspId" : {
           "type" : "string",
@@ -4214,7 +4218,7 @@
         },
         "businessName" : {
           "type" : "string",
-          "description" : "A custom business name for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+          "description" : "A custom business name for the Web Messenger or Instagram Business account name.\n(Optional) Used for *Web Messenger* integrations.\n"
         },
         "businessIconUrl" : {
           "type" : "string",

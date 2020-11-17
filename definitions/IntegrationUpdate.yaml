@@ -74,8 +74,10 @@ properties:
       (Optional) Used for *Web Messenger* integrations.
   businessName:
     type: string
-    description: |
-      A custom business name for the Web Messenger.
+    description: >
+      A custom business name for the Web Messenger or Instagram Business account
+      name.
+
       (Optional) Used for *Web Messenger* integrations.
   businessIconUrl:
     type: string
