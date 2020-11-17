@@ -4666,6 +4666,7 @@ components:
           android: '#/components/schemas/android'
           apple: '#/components/schemas/apple'
           custom: '#/components/schemas/custom'
+          instagram: '#/components/schemas/instagram'
           ios: '#/components/schemas/ios'
           line: '#/components/schemas/line'
           mailgun: '#/components/schemas/mailgun'
@@ -4814,6 +4815,87 @@ components:
               maxItems: 1
           required:
             - webhooks
+    instagram:
+      allOf:
+        - $ref: '#/components/schemas/integration'
+        - type: object
+          description: >
+            Instagram Direct setup steps:
+
+            Take note of your Facebook app ID and secret (apps can be created at
+            [developer.facebook.com](https://developer.facebook.com));
+
+            The Facebook app must have been submitted to Facebook for app review
+            with the "manage_pages" (to retrieve Page Access Tokens for the
+            Pages and apps that the app user administers and to set a webhook),
+            "instagram_basic", and "instagram_manage_messages" (to retrieve
+            basic Instagram account information and send messages) permissions.
+
+            In order to integrate an Instagram Direct app, you must acquire a
+            Page Access Token from your user. Once you have acquired a page
+            access token from your user, call the Create Integration endpoint
+            with your app secret and ID and the user’s page access token.
+          properties:
+            type:
+              type: string
+              description: The type of integration.
+              default: instagram
+            pageAccessToken:
+              type: string
+              description: >-
+                The Facebook Page Access Token of the Facebook page that is
+                linked to your Instagram account.
+              writeOnly: true
+              example: your_page_access_token
+            appId:
+              type: string
+              description: Your Facebook App ID.
+              example: your_facebook_app_id
+            appSecret:
+              type: string
+              description: Your Facebook App secret.
+              writeOnly: true
+              example: your_facebook_app_secret
+            businessName:
+              type: string
+              description: Your Instagram Business account name
+              readOnly: true
+              example: instagram_name
+            businessUsername:
+              type: string
+              description: Your Instagram Business unique username
+              readOnly: true
+              example: instagram_username
+            pageId:
+              type: string
+              description: >-
+                The ID of the Facebook Page linked to your Instagram Business
+                account
+              readOnly: true
+              example: '106731941223392'
+            businessId:
+              type: string
+              description: The ID of the Instagram Business account
+              readOnly: true
+              example: '17841444303043201'
+            username:
+              type: string
+              description: >-
+                The Facebook user's username. This is returned when integrating
+                through the Dashboard
+              readOnly: true
+              example: facebook_username
+            userId:
+              type: string
+              description: >-
+                The Facebook user's user ID. This is returned when integrating
+                through the Dashboard
+              readOnly: true
+              example: '100885965124932'
+          required:
+            - pageAccessToken
+            - appId
+            - appSecret
     ios:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -5044,8 +5126,9 @@ components:
             Take note of your Facebook app ID and secret (apps can be created at
             developer.facebook.com);
 
-            The Facebook app must have been submitted to Facebook for approval
-            with the “manage_pages” (to receive messages through webhook) and
+            The Facebook app must have been submitted to Facebook for app review
+            with the “manage_pages” (to retrieve Page Access Tokens for the
+            Pages, apps that the app user administers and set a webhook) and
             “pages_messaging” (to send messages) permissions.
 
             In order to integrate a Facebook Messenger app you must acquire a
@@ -5490,6 +5573,15 @@ components:
     customUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
+    instagramUpdate:
+      allOf:
+        - $ref: '#/components/schemas/integrationUpdateBase'
+        - type: object
+          properties:
+            pageAccessToken:
+              type: string
+              description: A Facebook Page Access Token.
+              example: your_access_token
     iosUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
@@ -5725,6 +5817,7 @@ components:
         - $ref: '#/components/schemas/androidUpdate'
         - $ref: '#/components/schemas/appleUpdate'
         - $ref: '#/components/schemas/customUpdate'
+        - $ref: '#/components/schemas/instagramUpdate'
         - $ref: '#/components/schemas/iosUpdate'
         - $ref: '#/components/schemas/lineUpdate'
         - $ref: '#/components/schemas/mailgunUpdate'
