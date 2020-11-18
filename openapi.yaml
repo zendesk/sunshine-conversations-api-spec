@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.1.0
+  version: 9.3.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -3825,6 +3825,12 @@ components:
           type: string
           description: The MIME type for any image attached in the mediaUrl.
           maxLength: 128
+        altText:
+          type: string
+          maxLength: 128
+          description: >-
+            An optional description of the media for accessibility purposes. The
+            field will be saved by default with the file name as the value.
         size:
           type: string
           description: The size of the image.
@@ -3910,6 +3916,12 @@ components:
           type: string
           description: The media type of the file.
           readOnly: true
+        altText:
+          type: string
+          maxLength: 128
+          description: >-
+            An optional description of the file for accessibility purposes. The
+            field will be saved by default with the file name as the value.
         text:
           type: string
           description: The text content of the message.
@@ -4067,6 +4079,12 @@ components:
           type: string
           format: uri
           description: 'The URL for media, such as an image, attached to the message.'
+        altText:
+          type: string
+          maxLength: 128
+          description: >-
+            An optional description of the image for accessibility purposes. The
+            field will be saved by default with the file name as the value.
         text:
           type: string
           description: >-
@@ -7226,6 +7244,7 @@ components:
             - title: Tacos
               description: Get your tacos today!
               mediaUrl: 'https://example.org/image.jpg'
+              altText: A giant taco
               size: compact
               actions:
                 - text: Select
@@ -7237,6 +7256,7 @@ components:
             - title: Ramen
               description: Get your ramen today!
               mediaUrl: 'https://example.org/image.jpg'
+              altText: A chicken vegetable ramen bowl
               size: compact
               actions:
                 - text: Select
@@ -7253,6 +7273,7 @@ components:
           type: file
           text: Here's our FAQ!
           mediaUrl: 'https://example.org/FAQ.pdf'
+          altText: FAQ.pdf
     form:
       value:
         author:
@@ -7281,6 +7302,7 @@ components:
           type: image
           text: Hello!
           mediaUrl: 'https://example.org/image.jpg'
+          altText: A wonderful image
     list:
       value:
         author:
@@ -7382,6 +7404,7 @@ components:
                 - title: Tacos
                   description: Get your tacos today!
                   mediaUrl: 'https://example.org/image.jpg'
+                  altText: A giant taco
                   mediaType: text/html; charset=UTF-8
                   size: compact
                   actions:
@@ -7395,6 +7418,7 @@ components:
                 - title: Ramen
                   description: Get your ramen today!
                   mediaUrl: 'https://example.org/image.jpg'
+                  altText: A chicken vegetable ramen bowl
                   mediaType: text/html; charset=UTF-8
                   size: compact
                   actions:
@@ -7419,6 +7443,7 @@ components:
               type: file
               text: Here's our FAQ!
               mediaUrl: 'https://example.org/FAQ.pdf'
+              altText: FAQ.pdf
               mediaType: application/pdf
               mediaSize: 627328
             source:
@@ -7460,6 +7485,7 @@ components:
               type: image
               text: Hello!
               mediaUrl: 'https://example.org/image.jpg'
+              altText: A wonderful image
               mediaType: image/jpg
               mediaSize: 627328
             source:
