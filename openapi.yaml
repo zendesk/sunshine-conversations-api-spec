@@ -469,6 +469,14 @@ tags:
 
       | conversation:create     | When a new conversation is created.    |
 
+      | conversation:join     | When a new participant joins a `sdkGroup`
+      conversation.    |
+
+      | conversation:leave     | When a participant leaves a `sdkGroup`
+      conversation.     |
+
+      | conversation:remove  | When a conversation is deleted. |
+
       | conversation:message  | When a new message was sent in the conversation.
       |
 
@@ -2753,6 +2761,9 @@ x-webhooks:
                   items:
                     anyOf:
                       - $ref: '#/components/schemas/conversationCreateEvent'
+                      - $ref: '#/components/schemas/conversationJoinEvent'
+                      - $ref: '#/components/schemas/conversationLeaveEvent'
+                      - $ref: '#/components/schemas/conversationRemoveEvent'
                       - $ref: >-
                           #/components/schemas/conversationMessageDeliveryChannelEvent
                       - $ref: >-
@@ -2773,6 +2784,12 @@ x-webhooks:
             examples:
               'conversation:create':
                 $ref: '#/components/examples/conversationCreateEvent'
+              'conversation:join':
+                $ref: '#/components/examples/conversationJoinEvent'
+              'conversation:leave':
+                $ref: '#/components/examples/conversationLeaveEvent'
+              'conversation:remove':
+                $ref: '#/components/examples/conversationRemoveEvent'
               'conversation:message:delivery:channel':
                 $ref: '#/components/examples/conversationMessageDeliveryChannelEvent'
               'conversation:message:delivery:failure':
@@ -4767,12 +4784,8 @@ components:
         - 'conversation:message'
       description: >-
         An array of triggers the integration is subscribed to. This property is
-        case sensitive. Current supported triggers in v2 are
-        `conversation:create`, `conversation:message:delivery:channel`,
-        `conversation:message:delivery:failure`,
-        `conversation:message:delivery:user`, `conversation:message`,
-        `conversation:read`, `conversation:typing`, `conversation:postback`, and
-        `user:merge`
+        case sensitive. [More
+        details](https://docs.smooch.io/rest/#section/Webhook-Triggers).
     includeFullUser:
       type: boolean
       description: >-
@@ -6552,6 +6565,62 @@ components:
                   description: 'Referral information, if applicable.'
                   nullable: true
       title: 'conversation:create'
+    conversationJoinEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: >-
+                The payload of the event. The contents of this object depend on
+                the type of event.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: The conversation in which the user was added.
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/userTruncated'
+                  description: The user that joined the conversation.
+      title: 'conversation:join'
+    conversationLeaveEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: >-
+                The payload of the event. The contents of this object depend on
+                the type of event.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: The conversation in which the user was removed.
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/userTruncated'
+                  description: The user that left the conversation.
+      title: 'conversation:leave'
+    conversationRemoveEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: >-
+                The payload of the event. The contents of this object depend on
+                the type of event.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: The conversation that was deleted.
+      title: 'conversation:remove'
     conversationMessageDeliveryPayload:
       type: object
       description: >-
@@ -7615,6 +7684,57 @@ components:
               source:
                 type: web
                 integrationId: 5ecff63ffc3ab25f4561c8a0
+    conversationJoinEvent:
+      value:
+        app:
+          id: 5ebee0975ac5304b664a12fa
+        webhook:
+          id: 5f4eaef81e3dcc117c7ba48a
+          version: v2
+        events:
+          - id: 5f74a0d52b5315fc007e798a
+            createdAt: 2020-09-30T15:14:29.834Z
+            type: 'conversation:join'
+            payload:
+              conversation:
+                id: f52b01137aa6c250bc7251fa
+                type: sdkGroup
+              user:
+                id: 26508c10541a4b0ff472e5e2
+                externalId: '912382197'
+    conversationLeaveEvent:
+      value:
+        app:
+          id: 5ebee0975ac5304b664a12fa
+        webhook:
+          id: 5f4eaef81e3dcc117c7ba48a
+          version: v2
+        events:
+          - id: 5f74a0d52b5315fc007e798a
+            createdAt: 2020-09-30T15:14:29.834Z
+            type: 'conversation:leave'
+            payload:
+              conversation:
+                id: f52b01137aa6c250bc7251fa
+                type: sdkGroup
+              user:
+                id: 26508c10541a4b0ff472e5e2
+                externalId: '912382197'
+    conversationRemoveEvent:
+      value:
+        app:
+          id: 5ebee0975ac5304b664a12fa
+        webhook:
+          id: 5f4eaef81e3dcc117c7ba48a
+          version: v2
+        events:
+          - id: 5f74a0d52b5315fc007e798a
+            createdAt: 2020-09-30T15:14:29.834Z
+            type: 'conversation:remove'
+            payload:
+              conversation:
+                id: f52b01137aa6c250bc7251fa
+                type: sdkGroup
     conversationMessageDeliveryChannelEvent:
       value:
         app:
