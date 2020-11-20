@@ -2540,6 +2540,10 @@
           "type" : "string",
           "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
         },
+        "altText" : {
+          "type" : "string",
+          "description" : "An optional description of the image or the file for accessibility purposes. The field will be saved by default with the file name as the value."
+        },
         "metadata" : {
           "type" : "object",
           "description" : "Flat JSON object containing any custom properties associated with the message.",
@@ -2636,6 +2640,10 @@
         "mediaUrl" : {
           "type" : "string",
           "description" : "The image URL to be shown in the carousel/list item."
+        },
+        "altText" : {
+          "type" : "string",
+          "description" : "An optional description of the media for accessibility purposes. The field will be saved by default with the file name as the value."
         },
         "size" : {
           "type" : "string",
@@ -3098,6 +3106,10 @@
         "mediaType" : {
           "type" : "string",
           "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
+        },
+        "altText" : {
+          "type" : "string",
+          "description" : "An optional description of the image or the file for accessibility purposes. The field will be saved by default with the file name as the value."
         },
         "items" : {
           "type" : "array",

@@ -11,6 +11,11 @@ properties:
   mediaUrl:
     type: string
     description: The image URL to be shown in the carousel/list item.
+  altText:
+    type: string
+    description: >-
+      An optional description of the media for accessibility purposes. The field
+      will be saved by default with the file name as the value.
   size:
     type: string
     description: >

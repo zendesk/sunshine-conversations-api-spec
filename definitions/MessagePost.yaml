@@ -45,6 +45,12 @@ properties:
     description: |
       The mediaType for the message.
       Required for image/file messages.
+  altText:
+    type: string
+    description: >-
+      An optional description of the image or the file for accessibility
+      purposes. The field will be saved by default with the file name as the
+      value.
   items:
     type: array
     items:
