@@ -4501,17 +4501,21 @@ components:
             integrationType:
               type: string
               description: >
-                The type of the integration to deliver the message to. Will
-                return an error
+                The type of the integration to deliver the message to. Can be
+                set to `none` if sending a [silent
+                message](https://docs.smooch.io/guide/sending-messages/#silent-messages).
+                Will return an error
 
                 if the user does not have a client of that type attached to the
 
                 conversation.
               example: whatsapp
       description: >-
-        The destination of the message, in the case of channel targeting. Only
-        applicable if the author role is `business` and the conversation is of
-        type `personal`.
+        The destination of the message, in the case of channel targeting or
+        sending [silent
+        messages](https://docs.smooch.io/guide/sending-messages/#silent-messages).
+        Only applicable if the author role is `business` and the conversation is
+        of type `personal`.
     messageOverridePayload:
       type: object
       description: The exact payload to send to the channel.
