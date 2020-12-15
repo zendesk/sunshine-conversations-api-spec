@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.3.0
+  version: 9.4.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -6161,6 +6161,13 @@ components:
           maxLength: 2048
           nullable: true
           example: 'https://s3.amazonaws.com/avatar.jpg'
+        locale:
+          type: string
+          description: End-user's locale information in BCP 47 format.
+          minLength: 1
+          maxLength: 64
+          nullable: true
+          example: fr-CA
     userCreateBody:
       type: object
       title: UserCreateBody
