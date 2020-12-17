@@ -3993,7 +3993,7 @@ components:
             description: The name of the field. Must be unique per field.
             minLength: 1
             maxLength: 128
-      maxItems: 20
+      maxItems: 100
     field:
       type: object
       description: >
