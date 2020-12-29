@@ -1403,7 +1403,7 @@ paths:
             - app
             - account
       parameters:
-        - $ref: '#/components/parameters/pageQuery'
+        - $ref: '#/components/parameters/pageWithoutSizeQuery'
       responses:
         '200':
           description: Ok
@@ -7228,6 +7228,31 @@ components:
         type: string
         example: 029c31f25a21b47effd7be90
       required: true
+    pageWithoutSizeQuery:
+      name: page
+      in: query
+      description: Contains parameters for applying cursor pagination.
+      schema:
+        type: object
+        properties:
+          after:
+            type: string
+            description: >
+              A record id. Results will only contain the records that come after
+              the specified record. 
+
+              Only one of `after` or `before` can be provided, not both.
+            example: 5e1606762556d93e9c176f69
+          before:
+            type: string
+            description: >
+              A record id. Results will only contain the records that come
+              before the specified record.
+
+              Only one of `after` or `before` can be provided, not both.
+            example: 5e1606762556d93e9c176f69
+      style: deepObject
+      explode: true
     messageId:
       name: messageId
       in: path
