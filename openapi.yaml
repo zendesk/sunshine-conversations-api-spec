@@ -4248,6 +4248,7 @@ components:
             [guide](https://docs.smooch.io/guide/whatsapp#sending-message-templates).
             `schema` must be set to `whatsapp`.
       required:
+        - type
         - template
     content:
       oneOf:
