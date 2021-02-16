@@ -1,4 +1,0 @@
-type: string
-nullable: true
-minLength: 1
-maxLength: 100

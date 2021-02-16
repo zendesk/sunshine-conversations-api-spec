@@ -1,7 +1,0 @@
-name: appId
-in: path
-description: Identifies the app.
-schema:
-  type: string
-  example: "5d8cff3cd55b040010928b5b"
-required: true

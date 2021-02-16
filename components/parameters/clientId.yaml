@@ -1,7 +1,0 @@
-name: clientId
-in: path
-description: The client's id.
-required: true
-schema:
-  type: string
-  example: "5d8cff3cd55b040010928b5b"

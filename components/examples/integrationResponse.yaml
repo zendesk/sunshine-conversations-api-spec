@@ -1,8 +1,0 @@
-value:
-  integration:
-    id: 5e4af71a81966cfff3ef6550
-    type: android
-    status: active
-    displayName: Android
-    serverId: <sender-id>
-    canUserCreateMoreConversations: true

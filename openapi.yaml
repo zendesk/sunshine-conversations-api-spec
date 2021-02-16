@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.4.2
+  version: 9.4.3
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -108,30 +108,19 @@ info:
     ## API Pagination and Records Limits
 
 
-    Some APIs can be paginated by providing the `offset` query string parameter.
-
-
-    The `offset` is the number of initial records to skip before picking records
-    to return (default 0).
-
-
-    The `limit` query string can also be provided to change the number of
-    records to return (maximum
-
-    100, default 25).
-
-
-    All paginated endpoints will eventually support cursor pagination and
-    `offset` based pagination support will be dropped.
-
+    All paginated endpoints support cursor-based pagination.
 
     ### Cursor Pagination
 
 
-    Some APIs are paginated through cursor pagination. Rather than providing an
-    `offset`, a `page[after]` or `page[before]` query string parameter may be
-    provided. `page[after]` and `page[before]` are cursors pointing to a record
-    id.
+    Cursor-based pagination is a common pagination strategy that avoids many of
+    the pitfalls of offset–limit pagination. It works by returning a pointer to
+    a specific item in the dataset. On subsequent requests, the server returns
+    results after the given pointer. 
+
+
+    A `page[after]` or `page[before]` query string parameter may be provided,
+    they are cursors pointing to a record id.
 
 
     The `page[after]` cursor indicates that only records **subsequent** to it
@@ -146,8 +135,8 @@ info:
     not both.
 
 
-    In cursor pagination, the equivalent to the `limit` query string is the
-    `page[size]` query string parameter.
+    In most endpoints, an optional `page[size]` query parameter may be passed to
+    control the number of records returned by the request.
 
 
     ## API Libraries
@@ -517,6 +506,17 @@ tags:
       | user:merge         | When two or more users are merged into one. |
 
 
+      ## Securing Sunshine Conversations Webhooks
+
+      When a webhook is created, a shared secret will be generated for it. The
+      secret can be used to determine the veracity of a request to your webhook
+      route. It is included as an `X-API-Key` header with each webhook request
+      sent to the target URL.
+
+      That secret is available in the response to the POST request used to
+      generate the webhook, or through a GET request to the webhook route.
+
+
       ## Retry policy
 
 
@@ -613,7 +613,7 @@ x-tagGroups:
       - Integrations
       - Webhooks
       - CustomIntegrationApiKeys
-  - name: Switchboards (EAP)
+  - name: Switchboards
     tags:
       - Switchboards
       - Switchboard Integrations
@@ -802,6 +802,7 @@ paths:
                 displayName:
                   allOf:
                     - $ref: '#/components/schemas/displayName'
+                  nullable: false
                   description: The name of the API key.
                   example: Key 1
               required:
@@ -1403,7 +1404,7 @@ paths:
             - app
             - account
       parameters:
-        - $ref: '#/components/parameters/pageWithoutSizeQuery'
+        - $ref: '#/components/parameters/pageQuery'
       responses:
         '200':
           description: Ok
@@ -2886,7 +2887,9 @@ components:
           example: 5e1606762556d93e9c176f69
         size:
           type: integer
-          description: The number of records to return.
+          description: >-
+            The number of records to return. Does not apply to the
+            `listMessages` endpoint.
           default: 25
           example: 10
           minimum: 0
@@ -4563,12 +4566,17 @@ components:
 
                 conversation.
               example: whatsapp
-      description: >-
-        The destination of the message, in the case of channel targeting or
-        sending [silent
+      description: >
+        The destination of the message, in the case of [channel
+        targeting](https://docs.smooch.io/guide/sending-messages/#targeting-a-specific-channel)
+        or sending [silent
         messages](https://docs.smooch.io/guide/sending-messages/#silent-messages).
-        Only applicable if the author role is `business` and the conversation is
-        of type `personal`.
+        Only
+
+        applicable if the author role is `business` and the conversation is of
+        type
+
+        `personal`.
     messageOverridePayload:
       type: object
       description: The exact payload to send to the channel.
@@ -4625,14 +4633,14 @@ components:
         schema:
           type: string
           description: >
-            When the `schema` is set to `whatsapp`, the message is automatically
-            converted to the Sunshine Conversations schema to be stored in the
-            conversation record. The Sunshine Conversations message schema is
-            also used in the API response.
+            When `schema` is set to `"whatsapp"`, the `content` key is expected
+            to conform to the [native WhatsApp
+            schema](https://developers.facebook.com/docs/whatsapp/api/messages/message-templates)
+            for sending message templates.
 
-            Go to [Post Message
-            API](https://docs.smooch.io/guide/whatsapp/#post-message-api) to
-            view an example.
+            For more details, consult the documentation for [sending message
+            templates on
+            WhatsApp](https://docs.smooch.io/guide/whatsapp/#sending-message-templates).
           example: whatsapp
       required:
         - author
@@ -4992,7 +5000,12 @@ components:
               default: ios
             certificate:
               type: string
-              description: The binary of your APN certificate base64 encoded.
+              description: >
+                The binary of your APN certificate base64 encoded. To base64
+                encode your certificate you can use this command in the
+                terminal:
+
+                `openssl base64 -in YOUR_CERTIFICATE.p12 | tr -d '\n'`
               minLength: 1
               writeOnly: true
               nullable: true
@@ -7254,31 +7267,6 @@ components:
         type: string
         example: 029c31f25a21b47effd7be90
       required: true
-    pageWithoutSizeQuery:
-      name: page
-      in: query
-      description: Contains parameters for applying cursor pagination.
-      schema:
-        type: object
-        properties:
-          after:
-            type: string
-            description: >
-              A record id. Results will only contain the records that come after
-              the specified record. 
-
-              Only one of `after` or `before` can be provided, not both.
-            example: 5e1606762556d93e9c176f69
-          before:
-            type: string
-            description: >
-              A record id. Results will only contain the records that come
-              before the specified record.
-
-              Only one of `after` or `before` can be provided, not both.
-            example: 5e1606762556d93e9c176f69
-      style: deepObject
-      explode: true
     messageId:
       name: messageId
       in: path
@@ -7509,7 +7497,7 @@ components:
       value:
         author:
           type: business
-        messageSchema: whatsapp
+        schema: whatsapp
         content:
           type: template
           template:
@@ -7530,6 +7518,8 @@ components:
                     text: My User Name
                   - type: text
                     text: My Agent Name
+        destination:
+          integrationType: whatsapp
     text-2:
       value:
         messages:

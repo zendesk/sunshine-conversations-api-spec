@@ -1,7 +1,0 @@
-type: string
-description:
-  Type of integration that should deliver events routed by the switchboard.
-  If referencing an OAuth integration, the clientId issued by Sunshine
-  Conversations during the OAuth partnership process will be the value of
-  integrationType.
-example: "zd:agentWorkspace"

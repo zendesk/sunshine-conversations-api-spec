@@ -1,8 +1,0 @@
-name: access
-in: query
-description: The access level for the attachment. Currently the available access levels are public and private.
-schema:
-  type: string
-  example: public
-  default: public
-required: true

@@ -1,7 +1,0 @@
-name: switchboardIntegrationId
-in: path
-description: Identifies the switchboard integration.
-schema:
-  type: string
-  example: "5d8cff3cd55b040010928b5b"
-required: true

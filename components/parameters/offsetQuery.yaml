@@ -1,7 +1,0 @@
-name: offset
-in: query
-description: The number of initial records to skip before picking records to return.
-schema:
-  type: integer
-  example: 0
-  default: 0

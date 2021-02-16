@@ -1,7 +1,0 @@
-type: object
-title: UserResponse
-properties:
-  user:
-    allOf:
-      - $ref: "../schemas/user.yaml"
-    description: The user.

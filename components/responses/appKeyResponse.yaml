@@ -1,7 +1,0 @@
-type: object
-title: AppKeyResponse
-properties:
-  key:
-    allOf:
-      - $ref: "../schemas/appKey.yaml"
-    description: The created key object.

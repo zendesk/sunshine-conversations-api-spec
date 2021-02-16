@@ -1,7 +1,0 @@
-type: object
-properties:
-  webhooks:
-    type: array
-    description: List of webhooks associated with the integration.
-    items:
-      $ref: "../schemas/webhook.yaml"

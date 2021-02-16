@@ -1,8 +1,0 @@
-allOf:
-  - $ref: "./eventSubSchema.yaml"
-  - type: object
-    properties:
-      payload:
-        $ref: "./conversationMessageDeliveryPayload.yaml"
-
-title: conversation:message:delivery:channel

@@ -1,7 +1,0 @@
-name: switchboardId
-in: path
-description: Identifies the switchboard.
-schema:
-  type: string
-  example: "5d8cff3cd55b040010928b5b"
-required: true

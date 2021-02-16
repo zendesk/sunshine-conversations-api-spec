@@ -1,7 +1,0 @@
-type: object
-title: ConversationResponse
-properties:
-  conversation:
-    allOf:
-      - $ref: "../schemas/conversation.yaml"
-    description: The conversation.

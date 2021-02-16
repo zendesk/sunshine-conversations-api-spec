@@ -1,7 +1,0 @@
-type: object
-title: AppResponse
-properties:
-  app:
-    allOf:
-      - $ref: "../schemas/app.yaml"
-    description: The app.

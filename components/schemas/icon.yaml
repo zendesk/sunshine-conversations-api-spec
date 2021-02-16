@@ -1,7 +1,0 @@
-type: string
-nullable: true
-format: uri
-minLength: 1
-maxLength: 2048
-description: "A custom conversation icon url. The image must be in either JPG, PNG, or GIF format"
-example: "https://www.gravatar.com/image.jpg"

@@ -1,7 +1,0 @@
-oneOf:
-  - $ref: "actions/buy.yaml"
-  - $ref: "actions/link.yaml"
-  - $ref: "actions/postback.yaml"
-  - $ref: "actions/webview.yaml"
-discriminator:
-  propertyName: type

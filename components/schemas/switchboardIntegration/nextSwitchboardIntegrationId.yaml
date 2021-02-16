@@ -1,5 +1,0 @@
-type: string
-description:
-  The switchboard integration id to which control of a conversation is passed /
-  offered by default.
-example: "5ef21b86e933b7355c11c606"

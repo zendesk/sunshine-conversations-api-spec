@@ -1,3 +1,0 @@
-type: string
-description: Id of the integration that should deliver events routed by the switchboard.
-example: "5ef21b86e933b7355c11c605"

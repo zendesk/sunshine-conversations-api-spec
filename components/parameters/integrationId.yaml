@@ -1,7 +1,0 @@
-name: integrationId
-in: path
-description: The id of the integration.
-schema:
-  type: string
-  example: "029c31f25a21b47effd7be90"
-required: true

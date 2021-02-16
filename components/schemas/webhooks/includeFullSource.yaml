@@ -1,3 +1,0 @@
-type: boolean
-description: A boolean specifying whether webhook payloads should include the client and device object (when applicable).
-default: false

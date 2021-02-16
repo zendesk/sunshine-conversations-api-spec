@@ -1,7 +1,0 @@
-in: path
-name: userIdOrExternalId
-description: The user's id or externalId.
-required: true
-schema:
-  type: string
-  example: "42589ad070d43be9b00ff7e5"

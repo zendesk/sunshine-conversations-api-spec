@@ -1,6 +1,0 @@
-name: for
-in: query
-description: Specifies the intended container for the attachment, to enable automatic attachment deletion (on deletion of associated message, conversation or user). For now, only message is supported. See [Attachments for Messages](#section/Attachments-for-Messages) for details.
-schema:
-  type: string
-  example: message

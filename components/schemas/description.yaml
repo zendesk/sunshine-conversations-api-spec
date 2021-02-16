@@ -1,6 +1,0 @@
-type: string
-nullable: true
-minLength: 1
-maxLength: 100
-description: "A short text describing the conversation."
-example: "Conversation between Rogers and Carl."

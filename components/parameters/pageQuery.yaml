@@ -1,7 +1,0 @@
-name: page
-in: query
-description: Contains parameters for applying cursor pagination.
-schema:
-  $ref: "../schemas/page.yaml"
-style: deepObject
-explode: true

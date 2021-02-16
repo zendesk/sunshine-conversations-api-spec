@@ -1,5 +1,0 @@
-type: object
-title: integrationResponse
-properties:
-  integration:
-    $ref: "../schemas/integration.yaml"

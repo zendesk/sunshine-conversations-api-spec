@@ -1,5 +1,0 @@
-allOf:
-  - $ref: "webhookBody.yaml"
-required:
-  - target
-  - triggers

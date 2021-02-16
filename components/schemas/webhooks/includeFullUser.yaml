@@ -1,3 +1,0 @@
-type: boolean
-description: A boolean specifying whether webhook payloads should include the complete user schema for events involving a specific user.
-default: false

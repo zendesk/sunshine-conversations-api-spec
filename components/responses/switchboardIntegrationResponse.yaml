@@ -1,7 +1,0 @@
-type: object
-title: SwitchboardIntegrationResponse
-properties:
-  switchboardIntegration:
-    allOf:
-      - $ref: "../schemas/switchboardIntegration.yaml"
-    description: The switchboard integration.
