@@ -1,5 +1,0 @@
-name: integrationId
-in: path
-description: Identifies the integration.
-required: true
-type: string

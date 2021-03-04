@@ -1,7 +1,0 @@
-type: object
-required:
-  - authCode
-properties:
-  authCode:
-    type: string
-    description: The auth code

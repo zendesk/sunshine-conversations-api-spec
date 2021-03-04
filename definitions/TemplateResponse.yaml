@@ -1,7 +1,0 @@
-type: object
-required:
-  - template
-properties:
-  template:
-    $ref: ./Template.yaml
-    description: The template.

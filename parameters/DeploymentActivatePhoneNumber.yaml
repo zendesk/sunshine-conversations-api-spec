@@ -1,7 +1,0 @@
-name: deploymentActivatePhoneNumberBody
-in: body
-required: true
-description: |
-  Body for an activatePhoneNumber request.
-schema:
-  $ref: ./definitions/DeploymentActivatePhoneNumber.yaml

@@ -1,7 +1,0 @@
-name: templateCreateBody
-in: body
-required: true
-description: |
-  Body for a createTemplate request.
-schema:
-  $ref: ./definitions/TemplateCreate.yaml
