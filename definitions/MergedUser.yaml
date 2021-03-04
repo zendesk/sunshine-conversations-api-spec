@@ -1,0 +1,5 @@
+type: object
+properties:
+  _id:
+    type: string
+    description: The `_id` of the user to merge.

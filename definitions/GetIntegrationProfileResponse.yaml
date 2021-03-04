@@ -1,0 +1,7 @@
+type: object
+properties:
+  profile:
+    type: object
+    description: >-
+      JSON object containing the integration profile. [More
+      info](https://docs.smooch.io/rest/#get-integration-profile)

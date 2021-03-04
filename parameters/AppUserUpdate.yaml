@@ -1,0 +1,6 @@
+name: appUserUpdateBody
+in: body
+required: true
+description: Body for an updateAppUser request.
+schema:
+  $ref: ./definitions/AppUserUpdate.yaml

@@ -1,0 +1,6 @@
+name: appUserPreCreateBody
+in: body
+required: true
+description: Body for a preCreateAppUser request.
+schema:
+  $ref: ./definitions/AppUserPreCreate.yaml

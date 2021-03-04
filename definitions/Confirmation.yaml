@@ -1,0 +1,15 @@
+required:
+  - type
+type: object
+properties:
+  type:
+    type: string
+    description: >-
+      The confirmation type. See
+      [**ConfirmationTypeEnum**](Enums.md#ConfirmationTypeEnum) for available
+      values.
+  message:
+    $ref: ./Message.yaml
+    description: >-
+      The message used to reach out to the user. Must be a valid message object
+      as per the post message API.

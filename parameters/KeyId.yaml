@@ -1,0 +1,5 @@
+name: keyId
+in: path
+description: Identifies the secret key.
+required: true
+type: string

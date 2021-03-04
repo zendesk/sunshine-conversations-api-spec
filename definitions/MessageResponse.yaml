@@ -1,0 +1,16 @@
+type: object
+required:
+  - message
+  - conversation
+properties:
+  message:
+    $ref: ./Message.yaml
+    description: The message.
+  extraMessages:
+    type: array
+    description: List of extra messages created.
+    items:
+      $ref: ./Message.yaml
+  conversation:
+    $ref: ./Conversation.yaml
+    description: The conversation.

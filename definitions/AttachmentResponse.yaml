@@ -1,0 +1,15 @@
+type: object
+required:
+  - mediaUrl
+  - mediaType
+properties:
+  mediaUrl:
+    type: string
+    description: |
+      The mediaUrl for the message.
+      Required for image/file messages.
+  mediaType:
+    type: string
+    description: |
+      The mediaType for the message.
+      Required for image/file messages.

@@ -1,0 +1,20 @@
+type: object
+required:
+  - type
+properties:
+  type:
+    type: string
+    description: >-
+      The quoted message type. See
+      [**QuotedMessageTypeEnum**](Enums.md#QuotedMessageTypeEnum) for available
+      values.
+  externalMessageId:
+    type: string
+    description: |
+      The external message Id of the quoted message.
+      Only for quoted messages with type set to externalMessageId.
+  content:
+    $ref: ./Message.yaml
+    desctiption: |
+      The message corresponding to the quoted message.
+      Only for quoted messages with type set to message.

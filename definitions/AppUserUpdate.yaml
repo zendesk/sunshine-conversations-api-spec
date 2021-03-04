@@ -1,0 +1,19 @@
+type: object
+properties:
+  givenName:
+    type: string
+    description: The app user's given name.
+  surname:
+    type: string
+    description: The app user's surname.
+  email:
+    type: string
+    description: The app user's email.
+  signedUpAt:
+    type: string
+    description: >-
+      A datetime string with the format *yyyy-mm-ddThh:mm:ssZ* representing the
+      moment an appUser was created.
+  properties:
+    type: object
+    description: Custom properties for the app user.

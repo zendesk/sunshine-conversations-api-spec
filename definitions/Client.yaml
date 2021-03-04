@@ -1,0 +1,58 @@
+type: object
+required:
+  - id
+  - platform
+properties:
+  id:
+    type: string
+    description: An identifier for the client. Must be globally unique.
+  status:
+    type: string
+    description: >-
+      The client status. Indicates if the client is able to receive messages or
+      not. See [**ClientStatusEnum**](Enums.md#ClientStatusEnum) for available
+      values.
+  externalId:
+    type: string
+    description: >-
+      The ID of the user on an external channel. For example, the user's phone
+      number for Twilio, or their page-scoped user ID for Facebook Messenger.
+      Applies only to non-SDK clients.
+  active:
+    type: boolean
+    description: Deprecated - use the status property instead.
+  lastSeen:
+    type: string
+    format: dateTime
+    description: The date time the client was last seen.
+  platform:
+    type: string
+    description: >-
+      The client's platform. See
+      [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available
+      values.
+  integrationId:
+    type: string
+    description: The ID of the integration that the client was created for.
+  pushNotificationToken:
+    type: string
+    description: >
+      The GCM or APN token to be used for sending push notifications to the
+      device.
+
+      Applies to only *android* and *ios* clients.
+  appVersion:
+    type: string
+    description: >-
+      A reserved string field for reporting the app version running on the
+      device.
+  displayName:
+    type: string
+    description: The client's display name.
+  info:
+    $ref: ./ClientInfo.yaml
+  raw:
+    type: object
+    description: >-
+      An Object with raw properties that vary for each client platform. All keys
+      are optional and not guaranteed to be available.

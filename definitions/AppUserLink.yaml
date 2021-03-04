@@ -1,0 +1,50 @@
+required:
+  - type
+  - confirmation
+type: object
+properties:
+  type:
+    type: string
+    description: >-
+      The type of the channel to link. See
+      [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available
+      values.
+  integrationId:
+    type: string
+    description: 'The id of the integration to link, it must match the provided type.'
+  phoneNumber:
+    type: string
+    description: >
+      A String of the appUser’s phone number. It must contain the + prefix and
+      the country code.
+
+      Required for *messenger*, *twilio*, *messagebird* and *whatsapp* linking.
+  address:
+    type: string
+    description: |
+      A String of the appUser’s email address.
+      Required for *mailgun* linking.
+  givenName:
+    type: string
+    description: >
+      A String of the appUser’s given name. Used as additional criteria to
+      increase the likelihood of a match.
+
+      (Optional) Used for *messenger* linking.
+  surname:
+    type: string
+    description: >
+      A String of the appUser’s surname. Used as additional criteria to increase
+      the likelihood of a match.
+
+      (Optional) Used for *messenger* linking.
+  subject:
+    type: string
+    description: |
+      Subject for the outgoing email.
+      (Optional) Used for *mailgun* linking.
+  confirmation:
+    $ref: ./Confirmation.yaml
+    description: >-
+      Allows you to specify the strategy used to initiate a link with the target
+      user.

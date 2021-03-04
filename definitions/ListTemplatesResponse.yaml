@@ -1,0 +1,17 @@
+type: object
+required:
+  - templates
+properties:
+  templates:
+    type: array
+    items:
+      $ref: ./Template.yaml
+    description: The list of templates.
+  hasMore:
+    type: boolean
+    description: >-
+      Flag indicating if there are more templates that are not present in the
+      response.
+  offset:
+    type: integer
+    description: The number of template records skipped in the returned list.

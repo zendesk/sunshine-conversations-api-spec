@@ -1,0 +1,120 @@
+type: object
+required:
+  - _id
+  - authorId
+  - role
+  - name
+  - text
+  - received
+  - avatarUrl
+  - type
+properties:
+  _id:
+    type: string
+    description: 'The message ID, generated automatically.'
+  authorId:
+    type: string
+    description: The ID of the message's author.
+  role:
+    type: string
+    description: >-
+      The role of the individual posting the message. See
+      [**RoleEnum**](Enums.md#RoleEnum) for available values.
+  type:
+    type: string
+    description: >-
+      The message type. See [**MessageTypeEnum**](Enums.md#MessageTypeEnum) for
+      available values.
+  source:
+    $ref: ./Source.yaml
+    description: The source of the message.
+  name:
+    type: string
+    description: The display name of the message author.
+  text:
+    type: string
+    description: |
+      The message text.
+      Required for text messages.
+  email:
+    type: string
+    description: The email address of the message author.
+  avatarUrl:
+    type: string
+    description: The URL of the desired message avatar image.
+  received:
+    type: number
+    format: double
+    description: The unix timestamp of the moment the message was received.
+  mediaUrl:
+    type: string
+    description: |
+      The mediaUrl for the message.
+      Required for image/file messages.
+  mediaType:
+    type: string
+    description: |
+      The mediaType for the message.
+      Required for image/file messages.
+  altText:
+    type: string
+    description: >-
+      An optional description of the image or the file for accessibility
+      purposes. The field will be saved by default with the file name as the
+      value.
+  metadata:
+    type: object
+    description: >-
+      Flat JSON object containing any custom properties associated with the
+      message.
+  items:
+    type: array
+    items:
+      $ref: ./MessageItem.yaml
+    description: |
+      The items in the message list.
+      Required for carousel and list messages.
+  actions:
+    type: array
+    items:
+      $ref: ./Action.yaml
+    description: The actions in the message.
+  payload:
+    type: string
+    description: 'The payload of a reply action, if applicable.'
+  displaySettings:
+    $ref: ./DisplaySettings.yaml
+    description: >-
+      Settings to adjust the carousel layout. See [Display
+      Settings](https://docs.smooch.io/rest/#display-settings).
+  blockChatInput:
+    type: boolean
+    description: |
+      Indicates if the Web SDK chat input should be blocked. Defaults to false.
+      Only for form messages.
+  fields:
+    type: array
+    items:
+      $ref: ./Field.yaml
+    description: |
+      The fields in the form.
+      Required for form and formResponse messages.
+  submitted:
+    type: boolean
+    description: Indicates if the form was submitted. Generated automatically.
+  quotedMessage:
+    $ref: ./QuotedMessage.yaml
+    description: |
+      The form message a formResponse message responds to.
+      Required for formResponse messages.
+  textFallback:
+    type: string
+    description: |
+      The text fallback displayed in channels that do not support form messages.
+      Only for formResponse messages. Generated automatically.
+  coordinates:
+    $ref: ./Coordinates.yaml
+    description: Data representing the location being sent in the message.
+  location:
+    $ref: ./Location.yaml
+    description: Additional information about the location being sent in the message.

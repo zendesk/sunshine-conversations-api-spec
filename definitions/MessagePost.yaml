@@ -1,0 +1,99 @@
+type: object
+required:
+  - role
+  - type
+properties:
+  role:
+    type: string
+    description: >-
+      The role of the individual posting the message. See
+      [**RoleEnum**](Enums.md#RoleEnum) for available values.
+  type:
+    type: string
+    description: >-
+      The message type. See [**MessageTypeEnum**](Enums.md#MessageTypeEnum) for
+      available values.
+  name:
+    type: string
+    description: The display name of the message author.
+  email:
+    type: string
+    description: The email address of the message author.
+  avatarUrl:
+    type: string
+    description: The URL of the desired message avatar image.
+  metadata:
+    type: object
+    description: >-
+      Flat JSON object containing any custom properties associated with the
+      message.
+  payload:
+    type: string
+    description: 'The payload of a reply action, if applicable.'
+  text:
+    type: string
+    description: |
+      The message text.
+      Required for text messages.
+  mediaUrl:
+    type: string
+    description: |
+      The mediaUrl for the message.
+      Required for image/file messages.
+  mediaType:
+    type: string
+    description: |
+      The mediaType for the message.
+      Required for image/file messages.
+  altText:
+    type: string
+    description: >-
+      An optional description of the image or the file for accessibility
+      purposes. The field will be saved by default with the file name as the
+      value.
+  items:
+    type: array
+    items:
+      $ref: ./MessageItem.yaml
+    description: |
+      The items in the message list.
+      Required for carousel and list messages.
+  actions:
+    type: array
+    items:
+      $ref: ./Action.yaml
+    description: The actions in the message.
+  blockChatInput:
+    type: boolean
+    description: |
+      Indicates if the Web SDK chat input should be blocked. Defaults to false.
+      Only for form messages.
+  displaySettings:
+    $ref: ./DisplaySettings.yaml
+    description: >-
+      Settings to adjust the carousel layout. See [Display
+      Settings](https://docs.smooch.io/rest/#display-settings).
+  fields:
+    type: array
+    items:
+      $ref: ./FieldPost.yaml
+    description: |
+      The fields in the form.
+      Required for form messages.
+  destination:
+    $ref: ./Destination.yaml
+    description: >-
+      Specifies which channel to deliver a message to. See [list
+      integrations](https://docs.smooch.io/rest/#list-integrations) to get
+      integration ID and type.
+  override:
+    $ref: ./MessageOverride.yaml
+    description: >-
+      Specifies channel-specific overrides to use in order to bypass Smooch's
+      message translation logic.
+  coordinates:
+    $ref: ./Coordinates.yaml
+    description: Data representing the location being sent in the message.
+  location:
+    $ref: ./Location.yaml
+    description: Additional information about the location being sent in the message.

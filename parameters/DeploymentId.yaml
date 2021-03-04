@@ -1,0 +1,5 @@
+name: deploymentId
+in: path
+description: Identifies the deployment.
+required: true
+type: string

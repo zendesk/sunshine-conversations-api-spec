@@ -1,0 +1,17 @@
+type: object
+required:
+  - _id
+  - name
+  - message
+properties:
+  _id:
+    type: string
+    description: 'The template ID, generated automatically.'
+  name:
+    type: string
+    description: >-
+      The name for the template, used when sending via
+      [shorthand](https://docs.smooch.io/guide/shorthand/#sending-template-message-with-inline-syntax).
+  message:
+    $ref: ./Message.yaml
+    description: The message sent when referencing the template via syntax.

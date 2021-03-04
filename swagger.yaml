@@ -1,0 +1,1092 @@
+swagger: '2.0'
+info:
+  version: '5.34'
+  title: Smooch
+  description: >-
+    The Smooch API is a unified interface for powering messaging in your
+    customer experiences across every channel. Our API speeds access to new
+    markets, reduces time to ship, eliminates complexity, and helps you build
+    the best experiences for your customers. For more information, visit our
+    [official documentation](https://docs.smooch.io).
+host: api.smooch.io
+schemes:
+  - https
+consumes:
+  - application/json
+definitions:
+  Enums:
+    $ref: ./definitions/Enums.yaml
+produces:
+  - application/json
+security:
+  - jwt: []
+  - basicAuth: []
+securityDefinitions:
+  jwt:
+    type: apiKey
+    name: Authorization
+    in: header
+  basicAuth:
+    type: basic
+paths:
+  '/v1.1/apps/{appId}/appusers/{userId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    get:
+      tags:
+        - AppUser
+      description: Get the specified app user.
+      operationId: getAppUser
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: ./definitions/AppUserResponse.yaml
+    put:
+      tags:
+        - AppUser
+      description: Update the specified app user.
+      operationId: updateAppUser
+      parameters:
+        - $ref: ./parameters/AppUserUpdate.yaml
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: ./definitions/AppUserResponse.yaml
+    delete:
+      tags:
+        - AppUser
+      description: Delete specified app user.
+      operationId: deleteAppUser
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/appusers':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - AppUser
+      description: Pre-create an app user.
+      operationId: preCreateAppUser
+      parameters:
+        - $ref: ./parameters/AppUserPreCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/AppUserResponse.yaml
+  '/v1.1/apps/{appId}/appusers/merge':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - AppUser
+      description: >-
+        Force the merge of two specific users, when the business has determined
+        that they represent the same person.
+      operationId: mergeUsers
+      parameters:
+        - $ref: ./parameters/AppUserMerge.yaml
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/appusers/{userId}/images':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    post:
+      tags:
+        - AppUser
+      description: Send an image message to the conversation.
+      operationId: postImageMessage
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: source
+          in: formData
+          description: Image to be uploaded
+          required: true
+          type: file
+        - name: role
+          in: formData
+          description: Role of the sender
+          required: true
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/MessageResponse.yaml
+  '/v1.1/apps/{appId}/appusers/{userId}/profile':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    delete:
+      tags:
+        - AppUser
+      description: Delete specified app user's profile.
+      operationId: deleteAppUserProfile
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AppUserResponse.yaml
+  '/v1.1/apps/{appId}/appusers/{userId}/authcode':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    get:
+      tags:
+        - AppUser
+      description: Get an auth code for facilitating a channel transfer
+      operationId: getAppUserAuthCode
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AuthCodeResponse.yaml
+  '/v1.1/apps/{appId}/appusers/{userId}/channels':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    get:
+      tags:
+        - AppUser
+      description: Get specified app user's channel entity IDs.
+      operationId: getAppUserEntityIds
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AppUserChannelsResponse.yaml
+    post:
+      tags:
+        - AppUser
+      description: Link specified app user to given channel.
+      operationId: linkAppUser
+      parameters:
+        - $ref: ./parameters/AppUserLink.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AppUserResponse.yaml
+  '/v1.1/apps/{appId}/appusers/{userId}/businesssystems':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    get:
+      tags:
+        - AppUser
+      description: Get specified app user's business system IDs.
+      operationId: getAppUserBusinessSystemIds
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AppUserBusinessSystemsResponse.yaml
+  '/v1.1/apps/{appId}/appusers/{userId}/channels/{channel}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+      - $ref: ./parameters/Channel.yaml
+    delete:
+      tags:
+        - AppUser
+      description: Unlink specified app user from given channel.
+      operationId: unlinkAppUser
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/appusers/{userId}/linkrequest':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+      - name: integrationIds
+        in: query
+        required: true
+        description: List of integration IDs
+        type: array
+        items:
+          type: string
+        minItems: 1
+        style: form
+        explode: false
+    get:
+      tags:
+        - AppUser
+      description: Fetch link requests for the specified app user.
+      operationId: getLinkRequests
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/LinkRequestResponse.yaml
+  '/v1.1/apps/{appId}/appusers/{userId}/messages':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    get:
+      tags:
+        - Conversation
+      description: Get the specified app user's messages.
+      operationId: getMessages
+      parameters:
+        - name: before
+          in: query
+          description: >-
+            Timestamp of message. The API will return 100 messages before the
+            specified timestamp (excluding any messages with the provided
+            timestamp).
+          type: string
+        - name: after
+          in: query
+          description: >-
+            Timestamp of message. The API will return 100 messages after the
+            specified timestamp (excluding any messages with the provided
+            timestamp).
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: ./definitions/GetMessagesResponse.yaml
+    post:
+      tags:
+        - Conversation
+      description: Post a message to or from the app user.
+      operationId: postMessage
+      parameters:
+        - $ref: ./parameters/MessagePost.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/MessageResponse.yaml
+    delete:
+      tags:
+        - Conversation
+      description: >
+        Clears the message history for a user, permanently deleting all
+        messages, but leaving any connections to Messaging Channels and Business
+        Systems intact. These connections allow for the conversation to continue
+        in the future, while still being associated to the same appUser.
+      operationId: deleteMessages
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/appusers/{userId}/messages/{messageId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+      - $ref: ./parameters/MessageId.yaml
+    delete:
+      tags:
+        - Conversation
+      description: Deletes a single message.
+      operationId: deleteMessage
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/appusers/{userId}/conversation/read':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    post:
+      tags:
+        - Conversation
+      description: Reset the unread count of the conversation to 0.
+      operationId: resetUnreadCount
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/appusers/{userId}/conversation/activity':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/UserId.yaml
+    post:
+      tags:
+        - Conversation
+      parameters:
+        - $ref: ./parameters/ConversationActivity.yaml
+      description: Notify Smooch when an app maker starts or stops typing a response.
+      operationId: conversationActivity
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ActivityResponse.yaml
+  '/v1/apps/{appId}/notifications':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Notification
+      description: Post a notification to an externalId.
+      operationId: postNotification
+      parameters:
+        - $ref: ./parameters/NotificationPost.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/NotificationResponse.yaml
+  '/v1.1/apps/{appId}/menu':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    get:
+      tags:
+        - Menu
+      description: Get the specified app’s menu.
+      operationId: getMenu
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+    put:
+      tags:
+        - Menu
+      description: Configure the specified app’s menu.
+      operationId: updateMenu
+      parameters:
+        - $ref: ./parameters/MenuUpdate.yaml
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+    delete:
+      tags:
+        - Menu
+      description: Remove the specified app’s menu.
+      operationId: deleteMenu
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+  /v1.1/serviceaccounts:
+    post:
+      tags:
+        - ServiceAccount
+      description: Create a new service account.
+      operationId: createServiceAccount
+      parameters:
+        - $ref: ./parameters/ServiceAccountCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/ServiceAccountResponse.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: List all service accounts configured.
+      operationId: listServiceAccounts
+      parameters:
+        - name: limit
+          in: query
+          description: The number of records to return.
+          type: integer
+          default: 25
+        - name: offset
+          in: query
+          description: >-
+            The number of initial records to skip before picking records to
+            return.
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListServiceAccountsResponse.yaml
+  '/v1.1/serviceaccounts/{serviceAccountId}':
+    parameters:
+      - $ref: ./parameters/ServiceAccountId.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: Get the specified service account.
+      operationId: getServiceAccount
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ServiceAccountResponse.yaml
+    put:
+      tags:
+        - ServiceAccount
+      description: Update the specified service account.
+      operationId: updateServiceAccount
+      parameters:
+        - $ref: ./parameters/ServiceAccountUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ServiceAccountResponse.yaml
+    delete:
+      tags:
+        - ServiceAccount
+      description: Delete the specified service account.
+      operationId: deleteServiceAccount
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/serviceaccounts/{serviceAccountId}/keys':
+    parameters:
+      - $ref: ./parameters/ServiceAccountId.yaml
+    post:
+      tags:
+        - ServiceAccount
+      description: Create a secret key for the specified service account.
+      operationId: createSecretKey
+      parameters:
+        - $ref: ./parameters/SecretKeyCreate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/SecretKeyResponse.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: List the secret keys for the specified service account.
+      operationId: listSecretKeys
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListSecretKeysResponse.yaml
+  '/v1.1/serviceaccounts/{serviceAccountId}/keys/{keyId}':
+    parameters:
+      - $ref: ./parameters/ServiceAccountId.yaml
+      - $ref: ./parameters/KeyId.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: Get the specified service account secret key.
+      operationId: getSecretKey
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/SecretKeyResponse.yaml
+    delete:
+      tags:
+        - ServiceAccount
+      description: Delete the specified service account secret key.
+      operationId: deleteSecretKey
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt':
+    parameters:
+      - $ref: ./parameters/ServiceAccountId.yaml
+      - $ref: ./parameters/KeyId.yaml
+    get:
+      tags:
+        - ServiceAccount
+      description: Get an account-scoped JWT for the specified service account secret key.
+      operationId: getJwt
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/JwtResponse.yaml
+  /v1.1/apps:
+    post:
+      tags:
+        - App
+      description: Create a new app.
+      operationId: createApp
+      parameters:
+        - $ref: ./parameters/AppCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/AppResponse.yaml
+    get:
+      tags:
+        - App
+      description: List all apps configured.
+      operationId: listApps
+      parameters:
+        - name: limit
+          in: query
+          description: The number of records to return.
+          type: integer
+          default: 25
+        - name: offset
+          in: query
+          description: >-
+            The number of initial records to skip before picking records to
+            return.
+          type: integer
+          default: 0
+        - name: serviceAccountId
+          in: query
+          description: The service account ID for which to list apps.
+          type: string
+          default: ''
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListAppsResponse.yaml
+  '/v1.1/apps/{appId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    get:
+      tags:
+        - App
+      description: Get the specified app.
+      operationId: getApp
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AppResponse.yaml
+    put:
+      tags:
+        - App
+      description: Update the specified app.
+      operationId: updateApp
+      parameters:
+        - $ref: ./parameters/AppUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/AppResponse.yaml
+    delete:
+      tags:
+        - App
+      description: Delete the specified app.
+      operationId: deleteApp
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/sdks':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    get:
+      tags:
+        - App
+      description: >-
+        Retrieve the IDs of the three SDK integrations (`android`, `ios`, and
+        `web`) for the specified app, to be used when initializing the SDKs.
+      operationId: getSdkIds
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/GetSdkIdsResponse.yaml
+  '/v1.1/apps/{appId}/keys':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - App
+      description: Create a secret key for the specified app.
+      operationId: createSecretKey
+      parameters:
+        - $ref: ./parameters/SecretKeyCreate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/SecretKeyResponse.yaml
+    get:
+      tags:
+        - App
+      description: List the secret keys for the specified app.
+      operationId: listSecretKeys
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListSecretKeysResponse.yaml
+  '/v1.1/apps/{appId}/keys/{keyId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/KeyId.yaml
+    get:
+      tags:
+        - App
+      description: Get the specified secret key.
+      operationId: getSecretKey
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/SecretKeyResponse.yaml
+    delete:
+      tags:
+        - App
+      description: Delete the specified secret key.
+      operationId: deleteSecretKey
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/keys/{keyId}/jwt':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/KeyId.yaml
+    get:
+      tags:
+        - App
+      description: Get an app-scoped JWT for the specified secret key.
+      operationId: getAppJwt
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/JwtResponse.yaml
+  '/v1.1/apps/{appId}/integrations':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Integration
+      description: Create an integration for the specified app.
+      operationId: createIntegration
+      parameters:
+        - $ref: ./parameters/IntegrationCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/IntegrationResponse.yaml
+    get:
+      tags:
+        - Integration
+      description: List integrations for the specified app.
+      operationId: listIntegrations
+      parameters:
+        - name: types
+          in: query
+          description: >
+            List of types to filter the query by.
+
+            More than one value can be specified through comma separation e.g.
+            ?types=*twilio*,*line*.
+          type: string
+        - name: limit
+          in: query
+          description: The number of records to return.
+          type: integer
+          default: 25
+        - name: offset
+          in: query
+          description: >-
+            The number of initial records to skip before picking records to
+            return.
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListIntegrationsResponse.yaml
+  '/v1.1/apps/{appId}/integrations/{integrationId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/IntegrationId.yaml
+    get:
+      tags:
+        - Integration
+      description: Get the specified integration.
+      operationId: getIntegration
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/IntegrationResponse.yaml
+    put:
+      tags:
+        - Integration
+      description: Update the specified integration.
+      operationId: updateIntegration
+      parameters:
+        - $ref: ./parameters/IntegrationUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/IntegrationResponse.yaml
+    delete:
+      tags:
+        - Integration
+      description: Delete the specified integration.
+      operationId: deleteIntegration
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/integrations/{integrationId}/menu':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/IntegrationId.yaml
+    get:
+      tags:
+        - Integration
+      description: Get the specified integration's menu.
+      operationId: getIntegrationMenu
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+    post:
+      tags:
+        - Integration
+      description: >-
+        Create the specified integration’s menu, overriding the app menu if
+        configured.
+      operationId: createIntegrationMenu
+      parameters:
+        - $ref: ./parameters/MenuCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+    put:
+      tags:
+        - Integration
+      description: Update the specified integration’s menu.
+      operationId: updateIntegrationMenu
+      parameters:
+        - $ref: ./parameters/MenuUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/MenuResponse.yaml
+    delete:
+      tags:
+        - Integration
+      description: Delete the specified integration’s menu.
+      operationId: deleteIntegrationMenu
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/integrations/{integrationId}/profile':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/IntegrationId.yaml
+    get:
+      tags:
+        - Integration
+      description: Get the specified integration’s profile.
+      operationId: getIntegrationProfile
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/GetIntegrationProfileResponse.yaml
+    put:
+      tags:
+        - Integration
+      description: Update the specified integration’s profile.
+      operationId: updateIntegrationProfile
+      parameters:
+        - $ref: ./parameters/IntegrationProfileUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/integrations/{integrationId}/profile/photo':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/IntegrationId.yaml
+    put:
+      tags:
+        - Integration
+      description: Upload a photo to be used for the the specified integration’s profile.
+      operationId: uploadIntegrationProfilePhoto
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: source
+          in: formData
+          description: Photo to be uploaded
+          required: true
+          type: file
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/UploadIntegrationProfilePhotoResponse.yaml
+  '/v1.1/apps/{appId}/webhooks':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Webhook
+      description: Create a webhook for the specified app.
+      operationId: createWebhook
+      parameters:
+        - $ref: ./parameters/WebhookCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/WebhookResponse.yaml
+    get:
+      tags:
+        - Webhook
+      description: List webhooks for the specified app.
+      operationId: listWebhooks
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListWebhooksResponse.yaml
+  '/v1.1/apps/{appId}/webhooks/{webhookId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/WebhookId.yaml
+    get:
+      tags:
+        - Webhook
+      description: Get the specified webhook.
+      operationId: getWebhook
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/WebhookResponse.yaml
+    put:
+      tags:
+        - Webhook
+      description: Update the specified webhook.
+      operationId: updateWebhook
+      parameters:
+        - $ref: ./parameters/WebhookUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/WebhookResponse.yaml
+    delete:
+      tags:
+        - Webhook
+      description: Delete the specified webhook.
+      operationId: deleteWebhook
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/attachments':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Attachments
+      description: Upload an attachment to Smooch to use in future messages.
+      operationId: uploadAttachment
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: source
+          in: formData
+          description: File to be uploaded
+          required: true
+          type: file
+        - name: access
+          in: query
+          description: Access level for the resulting file
+          required: true
+          type: string
+        - name: for
+          in: query
+          description: The intended container for the attachment
+          required: false
+          type: string
+        - name: appUserId
+          in: query
+          description: |
+            The appUserId of the user that will receive the attachment
+            Used in attachments for messages
+          required: false
+          type: string
+        - name: userId
+          in: query
+          description: |
+            The userId of the user that will receive the attachment
+            Used in attachments for messages
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/AttachmentResponse.yaml
+  '/v1.1/apps/{appId}/attachments/remove':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Attachments
+      description: Remove an attachment uploaded to Smooch.
+      operationId: removeAttachment
+      parameters:
+        - $ref: ./parameters/AttachmentRemove.yaml
+      responses:
+        '200':
+          description: Ok
+  '/v1.1/apps/{appId}/templates':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+    post:
+      tags:
+        - Template
+      description: Create a template for the specified app.
+      operationId: createTemplate
+      parameters:
+        - $ref: ./parameters/TemplateCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/TemplateResponse.yaml
+    get:
+      tags:
+        - Template
+      description: List templates for the specified app.
+      operationId: listTemplates
+      parameters:
+        - name: limit
+          in: query
+          description: The number of records to return.
+          type: integer
+          default: 25
+        - name: offset
+          in: query
+          description: >-
+            The number of initial records to skip before picking records to
+            return.
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListTemplatesResponse.yaml
+  '/v1.1/apps/{appId}/templates/{templateId}':
+    parameters:
+      - $ref: ./parameters/AppId.yaml
+      - $ref: ./parameters/TemplateId.yaml
+    get:
+      tags:
+        - Template
+      description: Get the specified template.
+      operationId: getTemplate
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/TemplateResponse.yaml
+    put:
+      tags:
+        - Template
+      description: Update the specified template.
+      operationId: updateTemplate
+      parameters:
+        - $ref: ./parameters/TemplateUpdate.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/TemplateResponse.yaml
+    delete:
+      tags:
+        - Template
+      description: Delete the specified template.
+      operationId: deleteTemplate
+      responses:
+        '200':
+          description: Ok
+  /v1.1/whatsapp/deployments:
+    post:
+      tags:
+        - Deployment
+      description: Create a WhatsApp deployment.
+      operationId: createDeployment
+      parameters:
+        - $ref: ./parameters/DeploymentCreate.yaml
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml
+    get:
+      tags:
+        - Deployment
+      description: List owned WhatsApp deployments.
+      operationId: listDeployments
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/ListDeploymentsResponse.yaml
+  '/v1.1/whatsapp/deployments/{deploymentId}':
+    parameters:
+      - $ref: ./parameters/DeploymentId.yaml
+    get:
+      tags:
+        - Deployment
+      description: Get the specified deployment.
+      operationId: getDeployment
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml
+    delete:
+      tags:
+        - Deployment
+      description: Delete the specified deployment.
+      operationId: deleteDeployment
+      responses:
+        '200':
+          description: Ok
+        '202':
+          description: Accepted
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml
+  '/v1.1/whatsapp/deployments/{deploymentId}/activate':
+    parameters:
+      - $ref: ./parameters/DeploymentId.yaml
+    post:
+      tags:
+        - Deployment
+      description: Activate a phone number on the specified deployment.
+      operationId: activatePhoneNumber
+      parameters:
+        - $ref: ./parameters/DeploymentActivatePhoneNumber.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml
+  '/v1.1/whatsapp/deployments/{deploymentId}/code/confirm':
+    parameters:
+      - $ref: ./parameters/DeploymentId.yaml
+    post:
+      tags:
+        - Deployment
+      description: Confirm code to complete phone number activation.
+      operationId: confirmCode
+      parameters:
+        - $ref: ./parameters/DeploymentConfirmCode.yaml
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: ./definitions/DeploymentResponse.yaml

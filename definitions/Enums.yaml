@@ -1,0 +1,155 @@
+type: object
+properties:
+  ActionSize:
+    type: string
+    enum:
+      - compact
+      - full
+      - tall
+  ActionType:
+    type: string
+    enum:
+      - buy
+      - link
+      - locationRequest
+      - postback
+      - reply
+      - share
+      - webview
+  BusinessSystemType:
+    type: string
+    enum:
+      - helpscout
+      - slack
+      - zendesk
+  ClientStatus:
+    type: string
+    enum:
+      - active
+      - blocked
+      - inactive
+      - pending
+  ConfirmationType:
+    type: string
+    enum:
+      - immediate
+      - userActivity
+      - prompt
+  ConversationActivityType:
+    type: string
+    enum:
+      - 'conversation:read'
+      - 'typing:start'
+      - 'typing:stop'
+  DeploymentActivationMethod:
+    type: string
+    enum:
+      - sms
+      - voice
+  DeploymentHosting:
+    type: string
+    enum:
+      - self
+      - smooch
+  DeploymentStatus:
+    type: string
+    enum:
+      - deleting
+      - error
+      - integrated
+      - pending
+      - registered
+      - starting
+      - unregistered
+  ImageAspectRatio:
+    type: string
+    enum:
+      - horizontal
+      - square
+  IntegrationStatus:
+    type: string
+    enum:
+      - active
+      - inactive
+      - error
+  IntegrationType:
+    type: string
+    enum:
+      - android
+      - api
+      - apn
+      - fcm
+      - ios
+      - line
+      - mailgun
+      - messagebird
+      - messenger
+      - telegram
+      - twilio
+      - twitter
+      - viber
+      - web
+      - wechat
+      - whatsapp
+  MenuItemType:
+    type: string
+    enum:
+      - link
+      - postback
+      - submenu
+  MessageItemSize:
+    type: string
+    enum:
+      - compact
+      - large
+  MessageType:
+    type: string
+    enum:
+      - carousel
+      - file
+      - image
+      - list
+      - location
+      - text
+      - form
+      - formResponse
+  FieldType:
+    type: string
+    enum:
+      - text
+      - email
+      - select
+  QuotedMessageType:
+    type: string
+    enum:
+      - message
+      - externalMessageId
+  Role:
+    type: string
+    enum:
+      - appMaker
+      - appUser
+  WebhookTriggers:
+    type: string
+    enum:
+      - 'appUser:delete'
+      - 'client:add'
+      - 'client:remove'
+      - 'conversation:read'
+      - 'conversation:referral'
+      - 'conversation:start'
+      - 'link:failure'
+      - 'link:match'
+      - 'link:success'
+      - 'merge:appUser'
+      - 'message:appMaker'
+      - 'message:appUser'
+      - 'message:delivery:channel'
+      - 'message:delivery:failure'
+      - 'message:delivery:user'
+      - 'notification:delivery:channel'
+      - 'notification:delivery:failure'
+      - 'notification:delivery:user'
+      - 'payment:success'
+      - postback
+      - 'typing:appUser'
