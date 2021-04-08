@@ -5307,13 +5307,22 @@ components:
               example: 160c024303f53049e1e060fd67ca6aefc
             phoneNumberSid:
               type: string
-              description: SID for specific phone number.
+              description: >-
+                SID for specific phone number. One of `messagingServiceSid` or
+                `phoneNumberSid` must be provided when creating a Twilio
+                integration.
               minLength: 1
               example: PN0674df0ecee0c9819bca0ff0bc0a159e
+            messagingServiceSid:
+              type: string
+              description: >-
+                SID for specific messaging service. One of `messagingServiceSid`
+                or `phoneNumberSid` must be provided when creating a Twilio
+                integration.
+              minLength: 1
           required:
             - accountSid
             - authToken
-            - phoneNumberSid
     twitter:
       allOf:
         - $ref: '#/components/schemas/integration'
