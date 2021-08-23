@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.4.3
+  version: 9.4.5
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -592,7 +592,7 @@ tags:
       The source code is available [here](https://github.com/smooch/shoplifter).
   - name: OAuth Endpoints
     x-displayName: OAuth Endpoints
-    description: "The scope of an issued access token is integration scope. This allows API calls to be made to a specific Sunshine Conversations app on behalf of an integration, identified by the integration’s clientId. The access token grants permission to get and create users and conversations associated with the app. The token also grants permission to create webhooks, however only webhooks created for the integration will be visible. An access token with integration scope cannot see or modify webhooks that were created by other integrations, for example.\n\n| API Root\t| Access\t| \n| --------  | ------- |\n| /v2/users/\\*\t| Yes\t|\n| /v2/conversations/\\*\t| Yes\t|\n| /v2/integrations/me/webhooks/\\*\t| Yes\t|\n| /v2/apps/\\*\t| No | \n"
+    description: "The scope of an issued access token is integration scope. This allows API calls to be made to a specific Sunshine Conversations app on behalf of an integration, identified by the integration’s clientId. The access token grants permission to get and create users and conversations associated with the app. The token also grants permission to create webhooks, however only webhooks created for the integration will be visible. An access token with integration scope cannot see or modify webhooks that were created by other integrations, for example.\n\n| API Root\t| Access\t| \n| --------  | ------- |\n| /v2/users/\\*\t| Yes\t|\n| /v2/conversations/\\*\t| Yes\t|\n| /v2/integrations/me/webhooks/\\*\t| Yes\t|\n| /v2/apps/\\*\t| No |\n"
 x-tagGroups:
   - name: Account Provisioning
     tags:
@@ -694,7 +694,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/appListResponse'
         '400':
-          description: 'Can supply only one of page[after] or page[before], not both'
+          description: Invalid page query parameters
         '403':
           description: The serviceAccountId provided does not match supplied credentials
   '/v2/apps/{appId}':
@@ -1091,6 +1091,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/conversationListResponse'
+        '400':
+          description: Invalid page query parameters
         '404':
           description: User not found
   '/v2/apps/{appId}/conversations/{conversationId}':
@@ -1265,6 +1267,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/participantListResponse'
+        '400':
+          description: Invalid page query parameters
         '404':
           description: Not found
   '/v2/apps/{appId}/conversations/{conversationId}/leave':
@@ -1700,6 +1704,8 @@ paths:
               examples:
                 success:
                   $ref: '#/components/examples/integrationListResponse'
+        '400':
+          description: Invalid query parameters
   '/v2/apps/{appId}/integrations/{integrationId}':
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -2586,6 +2592,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/clientListResponse'
+        '400':
+          description: Invalid page query parameters
   '/v2/apps/{appId}/users/{userIdOrExternalId}/clients/{clientId}':
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -2877,6 +2885,8 @@ components:
 
             Only one of `after` or `before` can be provided, not both.
           example: 5e1606762556d93e9c176f69
+          minLength: 24
+          maxLength: 24
         before:
           type: string
           description: >
@@ -2885,6 +2895,8 @@ components:
 
             Only one of `after` or `before` can be provided, not both.
           example: 5e1606762556d93e9c176f69
+          minLength: 24
+          maxLength: 24
         size:
           type: integer
           description: >-
@@ -2892,7 +2904,7 @@ components:
             `listMessages` endpoint.
           default: 25
           example: 10
-          minimum: 0
+          minimum: 1
           maximum: 100
     displayName:
       type: string
