@@ -1,0 +1,4760 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "The Smooch API is a unified interface for powering messaging in your customer experiences across every channel. Our API speeds access to new markets, reduces time to ship, eliminates complexity, and helps you build the best experiences for your customers. For more information, visit our [official documentation](https://docs.smooch.io).",
+    "version" : "5.34",
+    "title" : "Smooch"
+  },
+  "host" : "api.smooch.io",
+  "schemes" : [ "https" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "security" : [ {
+    "jwt" : [ ]
+  }, {
+    "basicAuth" : [ ]
+  } ],
+  "paths" : {
+    "/v1.1/apps/{appId}/appusers/{userId}" : {
+      "get" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Get the specified app user.",
+        "operationId" : "getAppUser",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/AppUserResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Update the specified app user.",
+        "operationId" : "updateAppUser",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "appUserUpdateBody",
+          "description" : "Body for an updateAppUser request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppUserUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/AppUserResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Delete specified app user.",
+        "operationId" : "deleteAppUser",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers" : {
+      "post" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Pre-create an app user.",
+        "operationId" : "preCreateAppUser",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "appUserPreCreateBody",
+          "description" : "Body for a preCreateAppUser request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppUserPreCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/AppUserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/merge" : {
+      "post" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Force the merge of two specific users, when the business has determined that they represent the same person.",
+        "operationId" : "mergeUsers",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "appUserMergeBody",
+          "description" : "Body for a mergeUsers request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppUserMerge"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/images" : {
+      "post" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Send an image message to the conversation.",
+        "operationId" : "postImageMessage",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "source",
+          "in" : "formData",
+          "description" : "Image to be uploaded",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "role",
+          "in" : "formData",
+          "description" : "Role of the sender",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/profile" : {
+      "delete" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Delete specified app user's profile.",
+        "operationId" : "deleteAppUserProfile",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AppUserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/authcode" : {
+      "get" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Get an auth code for facilitating a channel transfer",
+        "operationId" : "getAppUserAuthCode",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AuthCodeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/channels" : {
+      "get" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Get specified app user's channel entity IDs.",
+        "operationId" : "getAppUserEntityIds",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AppUserChannelsResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Link specified app user to given channel.",
+        "operationId" : "linkAppUser",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "appUserLinkBody",
+          "description" : "Body for a linkAppUser request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppUserLink"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AppUserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/businesssystems" : {
+      "get" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Get specified app user's business system IDs.",
+        "operationId" : "getAppUserBusinessSystemIds",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AppUserBusinessSystemsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/channels/{channel}" : {
+      "delete" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Unlink specified app user from given channel.",
+        "operationId" : "unlinkAppUser",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "channel",
+          "in" : "path",
+          "description" : "Name of the channel.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/linkrequest" : {
+      "get" : {
+        "tags" : [ "AppUser" ],
+        "description" : "Fetch link requests for the specified app user.",
+        "operationId" : "getLinkRequests",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationIds",
+          "in" : "query",
+          "description" : "List of integration IDs",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "minItems" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/LinkRequestResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/messages" : {
+      "get" : {
+        "tags" : [ "Conversation" ],
+        "description" : "Get the specified app user's messages.",
+        "operationId" : "getMessages",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "before",
+          "in" : "query",
+          "description" : "Timestamp of message. The API will return 100 messages before the specified timestamp (excluding any messages with the provided timestamp).",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "after",
+          "in" : "query",
+          "description" : "Timestamp of message. The API will return 100 messages after the specified timestamp (excluding any messages with the provided timestamp).",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/GetMessagesResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Conversation" ],
+        "description" : "Post a message to or from the app user.",
+        "operationId" : "postMessage",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "messagePostBody",
+          "description" : "Body for a postMessage request.\nAdditional arguments are necessary based on message type ([text](https://docs.smooch.io/rest/#text), [image](https://docs.smooch.io/rest/#image), [carousel](https://docs.smooch.io/rest/#carousel), [list](https://docs.smooch.io/rest/#list), [form](https://docs.smooch.io/rest/#form))\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/MessagePost"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/MessageResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Conversation" ],
+        "description" : "Clears the message history for a user, permanently deleting all messages, but leaving any connections to Messaging Channels and Business Systems intact. These connections allow for the conversation to continue in the future, while still being associated to the same appUser.\n",
+        "operationId" : "deleteMessages",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/messages/{messageId}" : {
+      "delete" : {
+        "tags" : [ "Conversation" ],
+        "description" : "Deletes a single message.",
+        "operationId" : "deleteMessage",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "messageId",
+          "in" : "path",
+          "description" : "Identifies the message.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/conversation/read" : {
+      "post" : {
+        "tags" : [ "Conversation" ],
+        "description" : "Reset the unread count of the conversation to 0.",
+        "operationId" : "resetUnreadCount",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/appusers/{userId}/conversation/activity" : {
+      "post" : {
+        "tags" : [ "Conversation" ],
+        "description" : "Notify Smooch when an app maker starts or stops typing a response.",
+        "operationId" : "conversationActivity",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Identifies the user. Can be either the smoochId or the userId.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "conversationActivityBody",
+          "description" : "Body for a triggerConversationActivity request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ConversationActivity"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ActivityResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/apps/{appId}/notifications" : {
+      "post" : {
+        "tags" : [ "Notification" ],
+        "description" : "Post a notification to an externalId.",
+        "operationId" : "postNotification",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "notificationPostBody",
+          "description" : "Body for a postNotification request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/NotificationPost"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/NotificationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/menu" : {
+      "get" : {
+        "tags" : [ "Menu" ],
+        "description" : "Get the specified app’s menu.",
+        "operationId" : "getMenu",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/MenuResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Menu" ],
+        "description" : "Configure the specified app’s menu.",
+        "operationId" : "updateMenu",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "menuUpdateBody",
+          "description" : "Body for a updateMenu request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Menu"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/MenuResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Menu" ],
+        "description" : "Remove the specified app’s menu.",
+        "operationId" : "deleteMenu",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/MenuResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/serviceaccounts" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "List all service accounts configured.",
+        "operationId" : "listServiceAccounts",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "The number of records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 25
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "The number of initial records to skip before picking records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 0
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListServiceAccountsResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Create a new service account.",
+        "operationId" : "createServiceAccount",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "serviceAccountCreateBody",
+          "description" : "Body for a createServiceAccount request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ServiceAccountCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceAccountResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/serviceaccounts/{serviceAccountId}" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Get the specified service account.",
+        "operationId" : "getServiceAccount",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceAccountResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Update the specified service account.",
+        "operationId" : "updateServiceAccount",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "serviceAccountUpdateBody",
+          "description" : "Body for an updateServiceAccount request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ServiceAccountUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ServiceAccountResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Delete the specified service account.",
+        "operationId" : "deleteServiceAccount",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/serviceaccounts/{serviceAccountId}/keys" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "List the secret keys for the specified service account.",
+        "operationId" : "listSecretKeys",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListSecretKeysResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Create a secret key for the specified service account.",
+        "operationId" : "createSecretKey",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "secretKeyCreateBody",
+          "description" : "Body for a createSecretKey request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SecretKeyCreate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/SecretKeyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/serviceaccounts/{serviceAccountId}/keys/{keyId}" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Get the specified service account secret key.",
+        "operationId" : "getSecretKey",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/SecretKeyResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Delete the specified service account secret key.",
+        "operationId" : "deleteSecretKey",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/serviceaccounts/{serviceAccountId}/keys/{keyId}/jwt" : {
+      "get" : {
+        "tags" : [ "ServiceAccount" ],
+        "description" : "Get an account-scoped JWT for the specified service account secret key.",
+        "operationId" : "getJwt",
+        "parameters" : [ {
+          "name" : "serviceAccountId",
+          "in" : "path",
+          "description" : "Identifies the service account.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/JwtResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps" : {
+      "get" : {
+        "tags" : [ "App" ],
+        "description" : "List all apps configured.",
+        "operationId" : "listApps",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "The number of records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 25
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "The number of initial records to skip before picking records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 0
+        }, {
+          "name" : "serviceAccountId",
+          "in" : "query",
+          "description" : "The service account ID for which to list apps.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListAppsResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "App" ],
+        "description" : "Create a new app.",
+        "operationId" : "createApp",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "appCreateBody",
+          "description" : "Body for a createApp request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/AppResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}" : {
+      "get" : {
+        "tags" : [ "App" ],
+        "description" : "Get the specified app.",
+        "operationId" : "getApp",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AppResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "App" ],
+        "description" : "Update the specified app.",
+        "operationId" : "updateApp",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "appUpdateBody",
+          "description" : "Body for an updateApp request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/AppResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "App" ],
+        "description" : "Delete the specified app.",
+        "operationId" : "deleteApp",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/sdks" : {
+      "get" : {
+        "tags" : [ "App" ],
+        "description" : "Retrieve the IDs of the three SDK integrations (`android`, `ios`, and `web`) for the specified app, to be used when initializing the SDKs.",
+        "operationId" : "getSdkIds",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/GetSdkIdsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/keys" : {
+      "get" : {
+        "tags" : [ "App" ],
+        "description" : "List the secret keys for the specified app.",
+        "operationId" : "listSecretKeys",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListSecretKeysResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "App" ],
+        "description" : "Create a secret key for the specified app.",
+        "operationId" : "createSecretKey",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "secretKeyCreateBody",
+          "description" : "Body for a createSecretKey request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SecretKeyCreate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/SecretKeyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/keys/{keyId}" : {
+      "get" : {
+        "tags" : [ "App" ],
+        "description" : "Get the specified secret key.",
+        "operationId" : "getSecretKey",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/SecretKeyResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "App" ],
+        "description" : "Delete the specified secret key.",
+        "operationId" : "deleteSecretKey",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/keys/{keyId}/jwt" : {
+      "get" : {
+        "tags" : [ "App" ],
+        "description" : "Get an app-scoped JWT for the specified secret key.",
+        "operationId" : "getAppJwt",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "keyId",
+          "in" : "path",
+          "description" : "Identifies the secret key.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/JwtResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/integrations" : {
+      "get" : {
+        "tags" : [ "Integration" ],
+        "description" : "List integrations for the specified app.",
+        "operationId" : "listIntegrations",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "types",
+          "in" : "query",
+          "description" : "List of types to filter the query by.\nMore than one value can be specified through comma separation e.g. ?types=*twilio*,*line*.\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "The number of records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 25
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "The number of initial records to skip before picking records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 0
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListIntegrationsResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Integration" ],
+        "description" : "Create an integration for the specified app.",
+        "operationId" : "createIntegration",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "integrationCreateBody",
+          "description" : "Body for a createIntegration request.\nAdditional arguments are necessary based on integration type. For detailed instructions, visit our [official docs](https://docs.smooch.io/rest/#create-integration)\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/IntegrationCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/IntegrationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/integrations/{integrationId}" : {
+      "get" : {
+        "tags" : [ "Integration" ],
+        "description" : "Get the specified integration.",
+        "operationId" : "getIntegration",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/IntegrationResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Integration" ],
+        "description" : "Update the specified integration.",
+        "operationId" : "updateIntegration",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "integrationUpdateBody",
+          "description" : "Body for a updateIntegration request.\nAdditional arguments are necessary based on integration type. For detailed instructions, visit our [official docs](https://docs.smooch.io/rest/#update-integration)\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/IntegrationUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/IntegrationResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Integration" ],
+        "description" : "Delete the specified integration.",
+        "operationId" : "deleteIntegration",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/integrations/{integrationId}/menu" : {
+      "get" : {
+        "tags" : [ "Integration" ],
+        "description" : "Get the specified integration's menu.",
+        "operationId" : "getIntegrationMenu",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/MenuResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Integration" ],
+        "description" : "Create the specified integration’s menu, overriding the app menu if configured.",
+        "operationId" : "createIntegrationMenu",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "menuCreateBody",
+          "description" : "Body for a createMenu request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Menu"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/MenuResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Integration" ],
+        "description" : "Update the specified integration’s menu.",
+        "operationId" : "updateIntegrationMenu",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "menuUpdateBody",
+          "description" : "Body for a updateMenu request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Menu"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/MenuResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Integration" ],
+        "description" : "Delete the specified integration’s menu.",
+        "operationId" : "deleteIntegrationMenu",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/integrations/{integrationId}/profile" : {
+      "get" : {
+        "tags" : [ "Integration" ],
+        "description" : "Get the specified integration’s profile.",
+        "operationId" : "getIntegrationProfile",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/GetIntegrationProfileResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Integration" ],
+        "description" : "Update the specified integration’s profile.",
+        "operationId" : "updateIntegrationProfile",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "integrationProfileBody",
+          "description" : "Body for a profileUpdate request.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/IntegrationProfileUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/integrations/{integrationId}/profile/photo" : {
+      "put" : {
+        "tags" : [ "Integration" ],
+        "description" : "Upload a photo to be used for the the specified integration’s profile.",
+        "operationId" : "uploadIntegrationProfilePhoto",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "integrationId",
+          "in" : "path",
+          "description" : "Identifies the integration.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "source",
+          "in" : "formData",
+          "description" : "Photo to be uploaded",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/UploadIntegrationProfilePhotoResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/webhooks" : {
+      "get" : {
+        "tags" : [ "Webhook" ],
+        "description" : "List webhooks for the specified app.",
+        "operationId" : "listWebhooks",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListWebhooksResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Webhook" ],
+        "description" : "Create a webhook for the specified app.",
+        "operationId" : "createWebhook",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "webhookCreateBody",
+          "description" : "Body for a createWebhook request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WebhookCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/WebhookResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/webhooks/{webhookId}" : {
+      "get" : {
+        "tags" : [ "Webhook" ],
+        "description" : "Get the specified webhook.",
+        "operationId" : "getWebhook",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "webhookId",
+          "in" : "path",
+          "description" : "Identifies the webhook.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/WebhookResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Webhook" ],
+        "description" : "Update the specified webhook.",
+        "operationId" : "updateWebhook",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "webhookId",
+          "in" : "path",
+          "description" : "Identifies the webhook.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "webhookUpdateBody",
+          "description" : "Body for an updateWebhook request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WebhookUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/WebhookResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Webhook" ],
+        "description" : "Delete the specified webhook.",
+        "operationId" : "deleteWebhook",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "webhookId",
+          "in" : "path",
+          "description" : "Identifies the webhook.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/attachments" : {
+      "post" : {
+        "tags" : [ "Attachments" ],
+        "description" : "Upload an attachment to Smooch to use in future messages.",
+        "operationId" : "uploadAttachment",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "source",
+          "in" : "formData",
+          "description" : "File to be uploaded",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "access",
+          "in" : "query",
+          "description" : "Access level for the resulting file",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "for",
+          "in" : "query",
+          "description" : "The intended container for the attachment",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "appUserId",
+          "in" : "query",
+          "description" : "The appUserId of the user that will receive the attachment\nUsed in attachments for messages\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "userId",
+          "in" : "query",
+          "description" : "The userId of the user that will receive the attachment\nUsed in attachments for messages\n",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/AttachmentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/attachments/remove" : {
+      "post" : {
+        "tags" : [ "Attachments" ],
+        "description" : "Remove an attachment uploaded to Smooch.",
+        "operationId" : "removeAttachment",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "attachmentRemoveBody",
+          "description" : "Body for a removeAttachment request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AttachmentRemove"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/templates" : {
+      "get" : {
+        "tags" : [ "Template" ],
+        "description" : "List templates for the specified app.",
+        "operationId" : "listTemplates",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "The number of records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 25
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "The number of initial records to skip before picking records to return.",
+          "required" : false,
+          "type" : "integer",
+          "default" : 0
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListTemplatesResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Template" ],
+        "description" : "Create a template for the specified app.",
+        "operationId" : "createTemplate",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "templateCreateBody",
+          "description" : "Body for a createTemplate request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TemplateCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/TemplateResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/apps/{appId}/templates/{templateId}" : {
+      "get" : {
+        "tags" : [ "Template" ],
+        "description" : "Get the specified template.",
+        "operationId" : "getTemplate",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "templateId",
+          "in" : "path",
+          "description" : "Identifies the template.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/TemplateResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Template" ],
+        "description" : "Update the specified template.",
+        "operationId" : "updateTemplate",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "templateId",
+          "in" : "path",
+          "description" : "Identifies the template.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "templateUpdateBody",
+          "description" : "Body for an updateTemplate request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TemplateUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/TemplateResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Template" ],
+        "description" : "Delete the specified template.",
+        "operationId" : "deleteTemplate",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "path",
+          "description" : "Identifies the app.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "templateId",
+          "in" : "path",
+          "description" : "Identifies the template.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    },
+    "/v1.1/whatsapp/deployments" : {
+      "get" : {
+        "tags" : [ "Deployment" ],
+        "description" : "List owned WhatsApp deployments.",
+        "operationId" : "listDeployments",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/ListDeploymentsResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Create a WhatsApp deployment.",
+        "operationId" : "createDeployment",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "deploymentCreateBody",
+          "description" : "Body for a createDeployment request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DeploymentCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/whatsapp/deployments/{deploymentId}" : {
+      "get" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Get the specified deployment.",
+        "operationId" : "getDeployment",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Identifies the deployment.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Delete the specified deployment.",
+        "operationId" : "deleteDeployment",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Identifies the deployment.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          },
+          "202" : {
+            "description" : "Accepted",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/whatsapp/deployments/{deploymentId}/activate" : {
+      "post" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Activate a phone number on the specified deployment.",
+        "operationId" : "activatePhoneNumber",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Identifies the deployment.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "deploymentActivatePhoneNumberBody",
+          "description" : "Body for an activatePhoneNumber request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DeploymentActivatePhoneNumber"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.1/whatsapp/deployments/{deploymentId}/code/confirm" : {
+      "post" : {
+        "tags" : [ "Deployment" ],
+        "description" : "Confirm code to complete phone number activation.",
+        "operationId" : "confirmCode",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Identifies the deployment.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "deploymentConfirmCode",
+          "description" : "Body for a confirmCode request.\n",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DeploymentConfirmCode"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/DeploymentResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "jwt" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header"
+    },
+    "basicAuth" : {
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "Enums" : {
+      "type" : "object",
+      "properties" : {
+        "ActionSize" : {
+          "type" : "string",
+          "enum" : [ "compact", "full", "tall" ]
+        },
+        "ActionType" : {
+          "type" : "string",
+          "enum" : [ "buy", "link", "locationRequest", "postback", "reply", "share", "webview" ]
+        },
+        "BusinessSystemType" : {
+          "type" : "string",
+          "enum" : [ "helpscout", "slack", "zendesk" ]
+        },
+        "ClientStatus" : {
+          "type" : "string",
+          "enum" : [ "active", "blocked", "inactive", "pending" ]
+        },
+        "ConfirmationType" : {
+          "type" : "string",
+          "enum" : [ "immediate", "userActivity", "prompt" ]
+        },
+        "ConversationActivityType" : {
+          "type" : "string",
+          "enum" : [ "conversation:read", "typing:start", "typing:stop" ]
+        },
+        "DeploymentActivationMethod" : {
+          "type" : "string",
+          "enum" : [ "sms", "voice" ]
+        },
+        "DeploymentHosting" : {
+          "type" : "string",
+          "enum" : [ "self", "smooch" ]
+        },
+        "DeploymentStatus" : {
+          "type" : "string",
+          "enum" : [ "deleting", "error", "integrated", "pending", "registered", "starting", "unregistered" ]
+        },
+        "ImageAspectRatio" : {
+          "type" : "string",
+          "enum" : [ "horizontal", "square" ]
+        },
+        "IntegrationStatus" : {
+          "type" : "string",
+          "enum" : [ "active", "inactive", "error" ]
+        },
+        "IntegrationType" : {
+          "type" : "string",
+          "enum" : [ "android", "api", "apn", "fcm", "ios", "line", "mailgun", "messagebird", "messenger", "telegram", "twilio", "twitter", "viber", "web", "wechat", "whatsapp" ]
+        },
+        "MenuItemType" : {
+          "type" : "string",
+          "enum" : [ "link", "postback", "submenu" ]
+        },
+        "MessageItemSize" : {
+          "type" : "string",
+          "enum" : [ "compact", "large" ]
+        },
+        "MessageType" : {
+          "type" : "string",
+          "enum" : [ "carousel", "file", "image", "list", "location", "text", "form", "formResponse" ]
+        },
+        "FieldType" : {
+          "type" : "string",
+          "enum" : [ "text", "email", "select" ]
+        },
+        "QuotedMessageType" : {
+          "type" : "string",
+          "enum" : [ "message", "externalMessageId" ]
+        },
+        "Role" : {
+          "type" : "string",
+          "enum" : [ "appMaker", "appUser" ]
+        },
+        "WebhookTriggers" : {
+          "type" : "string",
+          "enum" : [ "appUser:delete", "client:add", "client:remove", "conversation:read", "conversation:referral", "conversation:start", "link:failure", "link:match", "link:success", "merge:appUser", "message:appMaker", "message:appUser", "message:delivery:channel", "message:delivery:failure", "message:delivery:user", "notification:delivery:channel", "notification:delivery:failure", "notification:delivery:user", "payment:success", "postback", "typing:appUser" ]
+        }
+      }
+    },
+    "AppUserResponse" : {
+      "type" : "object",
+      "required" : [ "appUser" ],
+      "properties" : {
+        "appUser" : {
+          "description" : "The app user.",
+          "$ref" : "#/definitions/AppUser"
+        }
+      }
+    },
+    "AppUser" : {
+      "type" : "object",
+      "required" : [ "_id", "conversationStarted", "properties" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The app user's ID, generated automatically."
+        },
+        "userId" : {
+          "type" : "string",
+          "description" : "The app user's userId.\nThis ID is specified by the appMaker.\n"
+        },
+        "givenName" : {
+          "type" : "string",
+          "description" : "The app user's given name."
+        },
+        "surname" : {
+          "type" : "string",
+          "description" : "The app user's surname."
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The app user's email."
+        },
+        "signedUpAt" : {
+          "type" : "string",
+          "description" : "A datetime string with the format *yyyy-mm-ddThh:mm:ssZ* representing the moment an appUser was created."
+        },
+        "properties" : {
+          "type" : "object",
+          "description" : "Custom properties for the app user.",
+          "properties" : { }
+        },
+        "conversationStarted" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if the conversation has started for the app user."
+        },
+        "clients" : {
+          "type" : "array",
+          "description" : "List of clients associated with the app user.",
+          "items" : {
+            "$ref" : "#/definitions/Client"
+          }
+        },
+        "pendingClients" : {
+          "type" : "array",
+          "description" : "As clients, but containing linked clients which have not been confirmed yet (i.e. Twilio SMS).",
+          "items" : {
+            "$ref" : "#/definitions/Client"
+          }
+        }
+      }
+    },
+    "Client" : {
+      "type" : "object",
+      "required" : [ "id", "platform" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identifier for the client. Must be globally unique."
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The client status. Indicates if the client is able to receive messages or not. See [**ClientStatusEnum**](Enums.md#ClientStatusEnum) for available values."
+        },
+        "externalId" : {
+          "type" : "string",
+          "description" : "The ID of the user on an external channel. For example, the user's phone number for Twilio, or their page-scoped user ID for Facebook Messenger. Applies only to non-SDK clients."
+        },
+        "active" : {
+          "type" : "boolean",
+          "description" : "Deprecated - use the status property instead."
+        },
+        "lastSeen" : {
+          "type" : "string",
+          "format" : "dateTime",
+          "description" : "The date time the client was last seen."
+        },
+        "platform" : {
+          "type" : "string",
+          "description" : "The client's platform. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        },
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The ID of the integration that the client was created for."
+        },
+        "pushNotificationToken" : {
+          "type" : "string",
+          "description" : "The GCM or APN token to be used for sending push notifications to the device.\nApplies to only *android* and *ios* clients.\n"
+        },
+        "appVersion" : {
+          "type" : "string",
+          "description" : "A reserved string field for reporting the app version running on the device."
+        },
+        "displayName" : {
+          "type" : "string",
+          "description" : "The client's display name."
+        },
+        "info" : {
+          "$ref" : "#/definitions/ClientInfo"
+        },
+        "raw" : {
+          "type" : "object",
+          "description" : "An Object with raw properties that vary for each client platform. All keys are optional and not guaranteed to be available.",
+          "properties" : { }
+        }
+      }
+    },
+    "ClientInfo" : {
+      "type" : "object",
+      "properties" : {
+        "appName" : {
+          "type" : "string",
+          "description" : "Name of the app associated with the client."
+        },
+        "avatarUrl" : {
+          "type" : "string",
+          "description" : "The client's avatar URL."
+        },
+        "carrier" : {
+          "type" : "string",
+          "description" : "The client's carrier."
+        },
+        "city" : {
+          "type" : "string",
+          "description" : "The client's city."
+        },
+        "country" : {
+          "type" : "string",
+          "description" : "The client's country."
+        },
+        "deviceModel" : {
+          "type" : "string",
+          "description" : "The client's device model."
+        },
+        "devicePlatform" : {
+          "type" : "string",
+          "description" : "The client's device platform."
+        },
+        "gender" : {
+          "type" : "string",
+          "description" : "The client user's gender."
+        },
+        "isPaymentEnabled" : {
+          "type" : "boolean",
+          "description" : "Whether or not payment is enabled for client."
+        },
+        "locale" : {
+          "type" : "string",
+          "description" : "The client's locale."
+        },
+        "os" : {
+          "type" : "string",
+          "description" : "The client's OS."
+        },
+        "osVersion" : {
+          "type" : "string",
+          "description" : "The client's OS version."
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "The client's phone number."
+        },
+        "radioAccessTechnology" : {
+          "type" : "string",
+          "description" : "The client's radioAccessTechnology (Ex. HSDPA)."
+        },
+        "state" : {
+          "type" : "string",
+          "description" : "The client's state or province."
+        },
+        "timezone" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "The client's timezone offset."
+        },
+        "wifi" : {
+          "type" : "string",
+          "description" : "Whether or not the client has wifi."
+        }
+      }
+    },
+    "AppUserUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "givenName" : {
+          "type" : "string",
+          "description" : "The app user's given name."
+        },
+        "surname" : {
+          "type" : "string",
+          "description" : "The app user's surname."
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The app user's email."
+        },
+        "signedUpAt" : {
+          "type" : "string",
+          "description" : "A datetime string with the format *yyyy-mm-ddThh:mm:ssZ* representing the moment an appUser was created."
+        },
+        "properties" : {
+          "type" : "object",
+          "description" : "Custom properties for the app user.",
+          "properties" : { }
+        }
+      }
+    },
+    "AppUserPreCreate" : {
+      "type" : "object",
+      "required" : [ "userId" ],
+      "properties" : {
+        "userId" : {
+          "type" : "string",
+          "description" : "The app user's userId.\nThis ID is specified by the appMaker.\n"
+        },
+        "givenName" : {
+          "type" : "string",
+          "description" : "The app user's given name."
+        },
+        "surname" : {
+          "type" : "string",
+          "description" : "The app user's surname."
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The app user's email."
+        },
+        "signedUpAt" : {
+          "type" : "string",
+          "description" : "A datetime string with the format *yyyy-mm-ddThh:mm:ssZ* representing the moment an appUser was created."
+        },
+        "properties" : {
+          "type" : "object",
+          "description" : "Custom properties for the app user.",
+          "properties" : { }
+        }
+      }
+    },
+    "AppUserMerge" : {
+      "type" : "object",
+      "required" : [ "discarded", "surviving" ],
+      "properties" : {
+        "surviving" : {
+          "description" : "Nested object representing the user that will survive at the end of the merge",
+          "$ref" : "#/definitions/MergedUser"
+        },
+        "discarded" : {
+          "description" : "Nested object representing the user to merge into the surviving user. This user will be deleted as part of the process.",
+          "$ref" : "#/definitions/MergedUser"
+        }
+      }
+    },
+    "MergedUser" : {
+      "type" : "object",
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The `_id` of the user to merge."
+        }
+      }
+    },
+    "MessageResponse" : {
+      "type" : "object",
+      "required" : [ "conversation", "message" ],
+      "properties" : {
+        "message" : {
+          "description" : "The message.",
+          "$ref" : "#/definitions/Message"
+        },
+        "extraMessages" : {
+          "type" : "array",
+          "description" : "List of extra messages created.",
+          "items" : {
+            "$ref" : "#/definitions/Message"
+          }
+        },
+        "conversation" : {
+          "description" : "The conversation.",
+          "$ref" : "#/definitions/Conversation"
+        }
+      }
+    },
+    "Message" : {
+      "type" : "object",
+      "required" : [ "_id", "authorId", "avatarUrl", "name", "received", "role", "text", "type" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The message ID, generated automatically."
+        },
+        "authorId" : {
+          "type" : "string",
+          "description" : "The ID of the message's author."
+        },
+        "role" : {
+          "type" : "string",
+          "description" : "The role of the individual posting the message. See [**RoleEnum**](Enums.md#RoleEnum) for available values."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The message type. See [**MessageTypeEnum**](Enums.md#MessageTypeEnum) for available values."
+        },
+        "source" : {
+          "description" : "The source of the message.",
+          "$ref" : "#/definitions/Source"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The display name of the message author."
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The message text.\nRequired for text messages.\n"
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The email address of the message author."
+        },
+        "avatarUrl" : {
+          "type" : "string",
+          "description" : "The URL of the desired message avatar image."
+        },
+        "received" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "The unix timestamp of the moment the message was received."
+        },
+        "mediaUrl" : {
+          "type" : "string",
+          "description" : "The mediaUrl for the message.\nRequired for image/file messages.\n"
+        },
+        "mediaType" : {
+          "type" : "string",
+          "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
+        },
+        "altText" : {
+          "type" : "string",
+          "description" : "An optional description of the image or the file for accessibility purposes. The field will be saved by default with the file name as the value."
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the message.",
+          "properties" : { }
+        },
+        "items" : {
+          "type" : "array",
+          "description" : "The items in the message list.\nRequired for carousel and list messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/MessageItem"
+          }
+        },
+        "actions" : {
+          "type" : "array",
+          "description" : "The actions in the message.",
+          "items" : {
+            "$ref" : "#/definitions/Action"
+          }
+        },
+        "payload" : {
+          "type" : "string",
+          "description" : "The payload of a reply action, if applicable."
+        },
+        "displaySettings" : {
+          "description" : "Settings to adjust the carousel layout. See [Display Settings](https://docs.smooch.io/rest/#display-settings).",
+          "$ref" : "#/definitions/DisplaySettings"
+        },
+        "blockChatInput" : {
+          "type" : "boolean",
+          "description" : "Indicates if the Web SDK chat input should be blocked. Defaults to false.\nOnly for form messages.\n"
+        },
+        "fields" : {
+          "type" : "array",
+          "description" : "The fields in the form.\nRequired for form and formResponse messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/Field"
+          }
+        },
+        "submitted" : {
+          "type" : "boolean",
+          "description" : "Indicates if the form was submitted. Generated automatically."
+        },
+        "quotedMessage" : {
+          "description" : "The form message a formResponse message responds to.\nRequired for formResponse messages.\n",
+          "$ref" : "#/definitions/QuotedMessage"
+        },
+        "textFallback" : {
+          "type" : "string",
+          "description" : "The text fallback displayed in channels that do not support form messages.\nOnly for formResponse messages. Generated automatically.\n"
+        },
+        "coordinates" : {
+          "description" : "Data representing the location being sent in the message.",
+          "$ref" : "#/definitions/Coordinates"
+        },
+        "location" : {
+          "description" : "Additional information about the location being sent in the message.",
+          "$ref" : "#/definitions/Location"
+        }
+      }
+    },
+    "Source" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identifier used by Smooch for internal purposes."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "An identifier for the channel from which a message originated. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        },
+        "originalMessageId" : {
+          "type" : "string",
+          "description" : "Message identifier assigned by the originating channel."
+        },
+        "originalMessageTimestamp" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Message timestamp assigned by the originating channel."
+        }
+      }
+    },
+    "MessageItem" : {
+      "required" : [ "actions", "title" ],
+      "properties" : {
+        "title" : {
+          "type" : "string",
+          "description" : "The title of the message item."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "The text description, or subtitle."
+        },
+        "mediaUrl" : {
+          "type" : "string",
+          "description" : "The image URL to be shown in the carousel/list item."
+        },
+        "altText" : {
+          "type" : "string",
+          "description" : "An optional description of the media for accessibility purposes. The field will be saved by default with the file name as the value."
+        },
+        "size" : {
+          "type" : "string",
+          "description" : "The size of the image to be shown in the carousel/list item.\nOnly top item of Facebook Messenger carousel supported. See [**MessageItemSizeEnum**](Enums.md#MessageItemSizeEnum) for available values.\n"
+        },
+        "mediaType" : {
+          "type" : "string",
+          "description" : "If a *mediaUrl* was specified, the media type is defined here, for example *image/jpeg*."
+        },
+        "actions" : {
+          "type" : "array",
+          "description" : "Array of [action buttons](https://docs.smooch.io/rest/#action-buttons). At least 1 is required, a maximum of 3 are allowed.",
+          "items" : {
+            "$ref" : "#/definitions/Action"
+          }
+        }
+      }
+    },
+    "Action" : {
+      "required" : [ "text", "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The action type. See [**ActionTypeEnum**](Enums.md#ActionTypeEnum) for available values."
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The button text."
+        },
+        "payload" : {
+          "type" : "string",
+          "description" : "The payload to be sent with the resulting webhook.\nRequired for *postback* and *reply* actions.\n"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the action.",
+          "properties" : { }
+        },
+        "amount" : {
+          "type" : "integer",
+          "description" : "The amount being charged. It needs to be specified in cents and is an integer.\nRequired for *buy* actions.\n"
+        },
+        "currency" : {
+          "type" : "string",
+          "description" : "The currency of the amount being charged (USD, CAD, etc.)."
+        },
+        "default" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if the message action is the default for a message item in Facebook Messenger."
+        },
+        "iconUrl" : {
+          "type" : "string",
+          "description" : "An icon to render next to the reply option (Facebook Messenger and Web Messenger only)."
+        },
+        "uri" : {
+          "type" : "string",
+          "description" : "The action URI. This is the link that will be used in the clients when clicking the button.\nRequired for *link* and *webview* actions.\n"
+        },
+        "fallback" : {
+          "type" : "string",
+          "description" : "The webview action fallback uri. This is the link that will be used in clients that do not support webviews.\nRequired for *webview* actions.\n"
+        },
+        "size" : {
+          "type" : "string",
+          "description" : "The size used to display the webview. Allowed values are [\"compact\", \"tall\", \"full\"].\n(Optional) Used for *webview* actions. See [**ActionSizeEnum**](Enums.md#ActionSizeEnum) for available values.\n"
+        },
+        "extraChannelOptions" : {
+          "type" : "object",
+          "description" : "Extra options to pass directly to the channel API. See [Extra Channel Options](https://docs.smooch.io/rest#extra-channel-options-schema)",
+          "properties" : { }
+        },
+        "openOnReceive" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if the webview should open automatically. Only one action per message can be set to true. Currently only supported on the Web Messenger."
+        }
+      }
+    },
+    "DisplaySettings" : {
+      "type" : "object",
+      "properties" : {
+        "imageAspectRatio" : {
+          "type" : "string",
+          "description" : "Specifies how to display all carousel images. See [**ImageAspectRatioEnum**](Enums.md#ImageAspectRatioEnum) for available values."
+        }
+      }
+    },
+    "Field" : {
+      "type" : "object",
+      "required" : [ "label", "name", "type" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The field ID, generated automatically."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The field type. See [**FieldTypeEnum**](Enums.md#FieldTypeEnum) for available values."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the field. Each field name must be unique per form."
+        },
+        "label" : {
+          "type" : "string",
+          "description" : "The label to be displayed with the field."
+        },
+        "placeholder" : {
+          "type" : "string",
+          "description" : "The placeholder text of the field that will be rendered.\nOnly for form messages\n"
+        },
+        "minSize" : {
+          "type" : "integer",
+          "description" : "The minimum possible length of the response. Defaults to 1 if not specified.\nOnly for text fields in form messages.\n"
+        },
+        "maxSize" : {
+          "type" : "integer",
+          "description" : "The maximum possible length of the response. Defaults to 128 if not specified.\nOnly for text fields in form messages.\n"
+        },
+        "options" : {
+          "type" : "array",
+          "description" : "The field options that can be selected. The array is limited to 20 options.\nOnly for select fields in form messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/Option"
+          }
+        },
+        "selectSize" : {
+          "type" : "integer",
+          "description" : "The select size, generated automatically.\nOnly for select fields in form messages.\n"
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The text response to a text field.\nRequired for text fields in form response messages.\n"
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The email response to an email field.\nRequired for email fields in form response messages.\n"
+        },
+        "select" : {
+          "type" : "array",
+          "description" : "The options selected as a response to a select field.\nRequired for select fields in form response messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/Select"
+          }
+        }
+      }
+    },
+    "Option" : {
+      "type" : "object",
+      "required" : [ "label", "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the option. It must be unique per field."
+        },
+        "label" : {
+          "type" : "string",
+          "description" : "The label the option will be displayed with on Web Messenger."
+        }
+      }
+    },
+    "Select" : {
+      "type" : "object",
+      "required" : [ "label", "name" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The select ID, generated automatically."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the selected option."
+        },
+        "label" : {
+          "type" : "string",
+          "description" : "The label of the selected option."
+        }
+      }
+    },
+    "QuotedMessage" : {
+      "type" : "object",
+      "required" : [ "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The quoted message type. See [**QuotedMessageTypeEnum**](Enums.md#QuotedMessageTypeEnum) for available values."
+        },
+        "externalMessageId" : {
+          "type" : "string",
+          "description" : "The external message Id of the quoted message.\nOnly for quoted messages with type set to externalMessageId.\n"
+        },
+        "content" : {
+          "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "Coordinates" : {
+      "type" : "object",
+      "required" : [ "lat", "long" ],
+      "properties" : {
+        "lat" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "A floating point value representing the latitude of the location."
+        },
+        "long" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "A floating point value representing the longitude of the location."
+        }
+      }
+    },
+    "Location" : {
+      "type" : "object",
+      "properties" : {
+        "address" : {
+          "type" : "string",
+          "description" : "The location's street address."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "A name for the location."
+        }
+      }
+    },
+    "Conversation" : {
+      "type" : "object",
+      "required" : [ "_id", "unreadCount" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The conversation ID, generated automatically."
+        },
+        "unreadCount" : {
+          "type" : "integer",
+          "description" : "The number of unread messages in the conversation."
+        }
+      }
+    },
+    "AuthCodeResponse" : {
+      "type" : "object",
+      "required" : [ "authCode" ],
+      "properties" : {
+        "authCode" : {
+          "type" : "string",
+          "description" : "The auth code"
+        }
+      }
+    },
+    "AppUserChannelsResponse" : {
+      "type" : "object",
+      "required" : [ "channels" ],
+      "properties" : {
+        "channels" : {
+          "type" : "array",
+          "description" : "An array of objects containing the channel type and the entity id.",
+          "items" : {
+            "$ref" : "#/definitions/ChannelEntityItem"
+          }
+        }
+      }
+    },
+    "ChannelEntityItem" : {
+      "type" : "object",
+      "required" : [ "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The type of channel. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        },
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The ID of the integration."
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "The phone number for a *twilio* or *messagebird* integration"
+        },
+        "userId" : {
+          "type" : "string",
+          "description" : "The userId for a *messenger*, *viber*, *line*, *wechat* or *twitter* integration"
+        },
+        "address" : {
+          "type" : "string",
+          "description" : "The email address for a *mailgun* integration"
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "The username for a *whatsapp* integration"
+        },
+        "chatId" : {
+          "type" : "string",
+          "description" : "The chat id for a *telegram* integration"
+        }
+      }
+    },
+    "AppUserLink" : {
+      "type" : "object",
+      "required" : [ "confirmation", "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The type of the channel to link. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        },
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The id of the integration to link, it must match the provided type."
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "A String of the appUser’s phone number. It must contain the + prefix and the country code.\nRequired for *messenger*, *twilio*, *messagebird* and *whatsapp* linking.\n"
+        },
+        "address" : {
+          "type" : "string",
+          "description" : "A String of the appUser’s email address.\nRequired for *mailgun* linking.\n"
+        },
+        "givenName" : {
+          "type" : "string",
+          "description" : "A String of the appUser’s given name. Used as additional criteria to increase the likelihood of a match.\n(Optional) Used for *messenger* linking.\n"
+        },
+        "surname" : {
+          "type" : "string",
+          "description" : "A String of the appUser’s surname. Used as additional criteria to increase the likelihood of a match.\n(Optional) Used for *messenger* linking.\n"
+        },
+        "subject" : {
+          "type" : "string",
+          "description" : "Subject for the outgoing email.\n(Optional) Used for *mailgun* linking.\n"
+        },
+        "confirmation" : {
+          "description" : "Allows you to specify the strategy used to initiate a link with the target user.",
+          "$ref" : "#/definitions/Confirmation"
+        }
+      }
+    },
+    "Confirmation" : {
+      "type" : "object",
+      "required" : [ "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The confirmation type. See [**ConfirmationTypeEnum**](Enums.md#ConfirmationTypeEnum) for available values."
+        },
+        "message" : {
+          "description" : "The message used to reach out to the user. Must be a valid message object as per the post message API.",
+          "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "AppUserBusinessSystemsResponse" : {
+      "type" : "object",
+      "required" : [ "businessSystems" ],
+      "properties" : {
+        "businessSystems" : {
+          "type" : "array",
+          "description" : "An array of objects containing the business system type and the id.",
+          "items" : {
+            "$ref" : "#/definitions/BusinessSystemItem"
+          }
+        }
+      }
+    },
+    "BusinessSystemItem" : {
+      "type" : "object",
+      "required" : [ "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The type of business system. See [**BusinessSystemTypeEnum**](Enums.md#BusinessSystemTypeEnum) for available values."
+        },
+        "channelId" : {
+          "type" : "string",
+          "description" : "The channel id for a *slack* integration"
+        },
+        "ticketId" : {
+          "type" : "string",
+          "description" : "The ticket id for a *zendesk* integration"
+        },
+        "roomId" : {
+          "type" : "integer",
+          "description" : "The room id for a *hipchat* integration"
+        },
+        "conversationId" : {
+          "type" : "string",
+          "description" : "The conversation id for a *helpscout* integration"
+        }
+      }
+    },
+    "LinkRequestResponse" : {
+      "type" : "object",
+      "properties" : {
+        "linkRequests" : {
+          "type" : "array",
+          "description" : "The list of link requests.",
+          "items" : {
+            "$ref" : "#/definitions/LinkRequestResponse_linkRequests"
+          }
+        }
+      }
+    },
+    "GetMessagesResponse" : {
+      "type" : "object",
+      "properties" : {
+        "conversation" : {
+          "description" : "The conversation.",
+          "$ref" : "#/definitions/Conversation"
+        },
+        "messages" : {
+          "type" : "array",
+          "description" : "The messages.",
+          "items" : {
+            "$ref" : "#/definitions/Message"
+          }
+        },
+        "next" : {
+          "type" : "string",
+          "description" : "The URI for the next set of messages in the conversation."
+        }
+      }
+    },
+    "MessagePost" : {
+      "type" : "object",
+      "required" : [ "role", "type" ],
+      "properties" : {
+        "role" : {
+          "type" : "string",
+          "description" : "The role of the individual posting the message. See [**RoleEnum**](Enums.md#RoleEnum) for available values."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The message type. See [**MessageTypeEnum**](Enums.md#MessageTypeEnum) for available values."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The display name of the message author."
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The email address of the message author."
+        },
+        "avatarUrl" : {
+          "type" : "string",
+          "description" : "The URL of the desired message avatar image."
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the message.",
+          "properties" : { }
+        },
+        "payload" : {
+          "type" : "string",
+          "description" : "The payload of a reply action, if applicable."
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The message text.\nRequired for text messages.\n"
+        },
+        "mediaUrl" : {
+          "type" : "string",
+          "description" : "The mediaUrl for the message.\nRequired for image/file messages.\n"
+        },
+        "mediaType" : {
+          "type" : "string",
+          "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
+        },
+        "altText" : {
+          "type" : "string",
+          "description" : "An optional description of the image or the file for accessibility purposes. The field will be saved by default with the file name as the value."
+        },
+        "items" : {
+          "type" : "array",
+          "description" : "The items in the message list.\nRequired for carousel and list messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/MessageItem"
+          }
+        },
+        "actions" : {
+          "type" : "array",
+          "description" : "The actions in the message.",
+          "items" : {
+            "$ref" : "#/definitions/Action"
+          }
+        },
+        "blockChatInput" : {
+          "type" : "boolean",
+          "description" : "Indicates if the Web SDK chat input should be blocked. Defaults to false.\nOnly for form messages.\n"
+        },
+        "displaySettings" : {
+          "description" : "Settings to adjust the carousel layout. See [Display Settings](https://docs.smooch.io/rest/#display-settings).",
+          "$ref" : "#/definitions/DisplaySettings"
+        },
+        "fields" : {
+          "type" : "array",
+          "description" : "The fields in the form.\nRequired for form messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/FieldPost"
+          }
+        },
+        "destination" : {
+          "description" : "Specifies which channel to deliver a message to. See [list integrations](https://docs.smooch.io/rest/#list-integrations) to get integration ID and type.",
+          "$ref" : "#/definitions/Destination"
+        },
+        "override" : {
+          "description" : "Specifies channel-specific overrides to use in order to bypass Smooch's message translation logic.",
+          "$ref" : "#/definitions/MessageOverride"
+        },
+        "coordinates" : {
+          "description" : "Data representing the location being sent in the message.",
+          "$ref" : "#/definitions/Coordinates"
+        },
+        "location" : {
+          "description" : "Additional information about the location being sent in the message.",
+          "$ref" : "#/definitions/Location"
+        }
+      }
+    },
+    "FieldPost" : {
+      "type" : "object",
+      "required" : [ "label", "name", "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The field type. See [**FieldTypeEnum**](Enums.md#FieldTypeEnum) for available values."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the field. Each field name must be unique per form."
+        },
+        "label" : {
+          "type" : "string",
+          "description" : "The label to be displayed with the field."
+        },
+        "placeholder" : {
+          "type" : "string",
+          "description" : "The placeholder text of the field that will be rendered.\nOnly for form messages\n"
+        },
+        "minSize" : {
+          "type" : "integer",
+          "description" : "The minimum possible length of the response. Defaults to 1 if not specified.\nOnly for text fields in form messages.\n"
+        },
+        "maxSize" : {
+          "type" : "integer",
+          "description" : "The maximum possible length of the response. Defaults to 128 if not specified.\nOnly for text fields in form messages.\n"
+        },
+        "options" : {
+          "type" : "array",
+          "description" : "The field options that can be selected. The array is limited to 20 options.\nOnly for select fields in form messages.\n",
+          "items" : {
+            "$ref" : "#/definitions/Option"
+          }
+        }
+      }
+    },
+    "Destination" : {
+      "type" : "object",
+      "required" : [ "integrationId", "integrationType" ],
+      "properties" : {
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The ID of the target integration."
+        },
+        "integrationType" : {
+          "type" : "string",
+          "description" : "The type of the target integration. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        }
+      }
+    },
+    "MessageOverride" : {
+      "type" : "object",
+      "properties" : {
+        "whatsapp" : {
+          "$ref" : "#/definitions/MessageOverride_whatsapp"
+        },
+        "line" : {
+          "$ref" : "#/definitions/MessageOverride_line"
+        },
+        "messenger" : {
+          "$ref" : "#/definitions/MessageOverride_messenger"
+        }
+      }
+    },
+    "ConversationActivity" : {
+      "type" : "object",
+      "required" : [ "role", "type" ],
+      "properties" : {
+        "role" : {
+          "type" : "string",
+          "description" : "The role of the actor. Must be *appMaker*. See [**RoleEnum**](Enums.md#RoleEnum) for available values."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The type of activity to trigger. Must be either *typing:start* or *typing:stop*. See [**MessageTypeEnum**](Enums.md#MessageTypeEnum) for available values."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the app maker that starts or stops typing a response."
+        },
+        "avatarUrl" : {
+          "type" : "string",
+          "description" : "The avatar URL of the app maker that starts typing a response."
+        }
+      }
+    },
+    "ActivityResponse" : {
+      "type" : "object",
+      "required" : [ "conversation" ],
+      "properties" : {
+        "conversation" : {
+          "description" : "The conversation.",
+          "$ref" : "#/definitions/Conversation"
+        }
+      }
+    },
+    "NotificationPost" : {
+      "type" : "object",
+      "required" : [ "author", "destination", "message" ],
+      "properties" : {
+        "destination" : {
+          "description" : "The destination of the notification.",
+          "$ref" : "#/definitions/NotificationPostDestination"
+        },
+        "messageSchema" : {
+          "type" : "string",
+          "description" : "If specified, the only accepted value is `whatsapp`. To be included when sending WhatsApp message templates."
+        },
+        "author" : {
+          "description" : "An object containing role, email, name and avatarUrl.",
+          "$ref" : "#/definitions/Author"
+        },
+        "message" : {
+          "type" : "object",
+          "description" : "The notification message to send.",
+          "properties" : { }
+        }
+      }
+    },
+    "NotificationPostDestination" : {
+      "type" : "object",
+      "required" : [ "destinationId", "integrationId" ],
+      "properties" : {
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The ID of the target integration."
+        },
+        "destinationId" : {
+          "type" : "string",
+          "description" : "The external ID (channel specific) of the target user."
+        }
+      }
+    },
+    "Author" : {
+      "type" : "object",
+      "required" : [ "role" ],
+      "properties" : {
+        "role" : {
+          "type" : "string",
+          "description" : "The role of the individual posting the message. The only accepted value is \"appMaker\"."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The display name of the message author."
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The email address of the message author."
+        },
+        "avatarUrl" : {
+          "type" : "string",
+          "description" : "The URL of the desired message avatar image."
+        }
+      }
+    },
+    "NotificationResponse" : {
+      "type" : "object",
+      "properties" : {
+        "notification" : {
+          "$ref" : "#/definitions/NotificationResponse_notification"
+        }
+      }
+    },
+    "MenuResponse" : {
+      "type" : "object",
+      "required" : [ "menu" ],
+      "properties" : {
+        "menu" : {
+          "description" : "The menu.",
+          "$ref" : "#/definitions/Menu"
+        }
+      }
+    },
+    "Menu" : {
+      "type" : "object",
+      "required" : [ "items" ],
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "description" : "A list of menu items.",
+          "items" : {
+            "$ref" : "#/definitions/MenuItem"
+          }
+        }
+      }
+    },
+    "MenuItem" : {
+      "type" : "object",
+      "required" : [ "text", "type" ],
+      "properties" : {
+        "text" : {
+          "type" : "string",
+          "description" : "The button text of the menu item."
+        },
+        "uri" : {
+          "type" : "string",
+          "description" : "A valid address, like http://smooch.io. Required for a link type item."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus. See [**MenuItemTypeEnum**](Enums.md#MenuItemTypeEnum) for available values."
+        },
+        "payload" : {
+          "type" : "string",
+          "description" : "A payload for a postback. Required for a postback type item."
+        },
+        "items" : {
+          "type" : "array",
+          "description" : "A list of menu items for a submenu.",
+          "items" : {
+            "$ref" : "#/definitions/SubMenuItem"
+          }
+        }
+      }
+    },
+    "SubMenuItem" : {
+      "type" : "object",
+      "required" : [ "text", "type" ],
+      "properties" : {
+        "text" : {
+          "type" : "string",
+          "description" : "The button text of the menu item."
+        },
+        "uri" : {
+          "type" : "string",
+          "description" : "A valid address, like http://smooch.io. Required for a link type item."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Can either be link, postback, which correspond to Smooch’s link and postback actions, or submenu for nested menus. See [**MenuItemTypeEnum**](Enums.md#MenuItemTypeEnum) for available values."
+        },
+        "payload" : {
+          "type" : "string",
+          "description" : "A payload for a postback. Required for a postback type item."
+        }
+      }
+    },
+    "ListServiceAccountsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "serviceAccounts" : {
+          "type" : "array",
+          "description" : "The list of service accounts.",
+          "items" : {
+            "$ref" : "#/definitions/ServiceAccount"
+          }
+        },
+        "hasMore" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if there are more service accounts that are not present in the response."
+        },
+        "offset" : {
+          "type" : "integer",
+          "description" : "The number of service account records skipped in the returned list."
+        }
+      }
+    },
+    "ServiceAccount" : {
+      "type" : "object",
+      "required" : [ "_id", "name" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The service account's ID."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The service account's name."
+        }
+      }
+    },
+    "ServiceAccountCreate" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The service account's name."
+        }
+      }
+    },
+    "ServiceAccountResponse" : {
+      "type" : "object",
+      "properties" : {
+        "serviceAccount" : {
+          "description" : "The service account.",
+          "$ref" : "#/definitions/ServiceAccount"
+        }
+      }
+    },
+    "ServiceAccountUpdate" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The service account's name."
+        }
+      }
+    },
+    "ListSecretKeysResponse" : {
+      "type" : "object",
+      "properties" : {
+        "keys" : {
+          "type" : "array",
+          "description" : "The list of secret keys.",
+          "items" : {
+            "$ref" : "#/definitions/SecretKey"
+          }
+        }
+      }
+    },
+    "SecretKey" : {
+      "type" : "object",
+      "required" : [ "_id", "name", "secret" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The secret key ID, generated automatically."
+        },
+        "secret" : {
+          "type" : "string",
+          "description" : "The secret itself."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "A friendly identifier for the secret key."
+        }
+      }
+    },
+    "SecretKeyCreate" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "A friendly identifier for the secret key."
+        }
+      }
+    },
+    "SecretKeyResponse" : {
+      "type" : "object",
+      "properties" : {
+        "key" : {
+          "description" : "The secret key.",
+          "$ref" : "#/definitions/SecretKey"
+        }
+      }
+    },
+    "JwtResponse" : {
+      "type" : "object",
+      "properties" : {
+        "jwt" : {
+          "type" : "string",
+          "description" : "The JWT."
+        }
+      }
+    },
+    "ListAppsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "apps" : {
+          "type" : "array",
+          "description" : "The list of apps.",
+          "items" : {
+            "$ref" : "#/definitions/App"
+          }
+        },
+        "hasMore" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if there are more apps that are not present in the response."
+        },
+        "offset" : {
+          "type" : "integer",
+          "description" : "The number of app records skipped in the returned list."
+        }
+      }
+    },
+    "App" : {
+      "type" : "object",
+      "required" : [ "_id", "appToken", "name" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The app's ID."
+        },
+        "appToken" : {
+          "type" : "string",
+          "description" : "The appToken, used to initialize the Web, iOS and Android clients and to make calls to the app user facing API."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The app's name."
+        },
+        "settings" : {
+          "$ref" : "#/definitions/App_settings"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the app.",
+          "properties" : { }
+        }
+      }
+    },
+    "AppCreate" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The app's name."
+        },
+        "settings" : {
+          "$ref" : "#/definitions/App_settings"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the app.",
+          "properties" : { }
+        }
+      }
+    },
+    "AppResponse" : {
+      "type" : "object",
+      "properties" : {
+        "app" : {
+          "description" : "The app.",
+          "$ref" : "#/definitions/App"
+        }
+      }
+    },
+    "AppUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The app's name."
+        },
+        "settings" : {
+          "$ref" : "#/definitions/App_settings"
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Flat JSON object containing any custom properties associated with the app.",
+          "properties" : { }
+        }
+      }
+    },
+    "GetSdkIdsResponse" : {
+      "type" : "object",
+      "required" : [ "androidIntegrationId", "iosIntegrationId", "webIntegrationId" ],
+      "properties" : {
+        "androidIntegrationId" : {
+          "type" : "string",
+          "description" : "The ID of the `android` integration, used when initializing the Android SDK."
+        },
+        "iosIntegrationId" : {
+          "type" : "string",
+          "description" : "The ID of the `ios` integration, used when initializing the iOS SDK."
+        },
+        "webIntegrationId" : {
+          "type" : "string",
+          "description" : "The ID of the `web` integration, used when initializing the Web Messenger SDK."
+        }
+      }
+    },
+    "ListIntegrationsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "integrations" : {
+          "type" : "array",
+          "description" : "The list of integrations.",
+          "items" : {
+            "$ref" : "#/definitions/Integration"
+          }
+        },
+        "hasMore" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if there are more integrations that are not present in the response."
+        },
+        "offset" : {
+          "type" : "integer",
+          "description" : "The number of integration records skipped in the returned list."
+        }
+      }
+    },
+    "Integration" : {
+      "type" : "object",
+      "required" : [ "_id", "type" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The integration ID, generated automatically."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The integration type. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        },
+        "displayName" : {
+          "type" : "string",
+          "description" : "The integration display name.\nUsed to map a human-friendly name to an integration.\n"
+        },
+        "pageAccessToken" : {
+          "type" : "string",
+          "description" : "Facebook Page Access Token.\nRequired for *messenger* and *instagram* integrations.\n"
+        },
+        "appId" : {
+          "type" : "string",
+          "description" : "Facebook App ID OR WeChat App ID.\nRequired for *messenger*, *instagram* and *wechat* integrations.\n"
+        },
+        "appSecret" : {
+          "type" : "string",
+          "description" : "Facebook Page App Secret OR WeChat App Secret.\nRequired for *messenger*, *instagram* and *wechat* integrations.\n"
+        },
+        "accessTokenUrl" : {
+          "type" : "string",
+          "description" : "Optional endpoint to generate access tokens for WeChat.\nUsed to coordinate API access with third party systems.\n"
+        },
+        "webhookSecret" : {
+          "type" : "string",
+          "description" : "Secret to verify webhooks.\nReturned on successful *wechat* and *messagebird* integrations.\n"
+        },
+        "pageId" : {
+          "type" : "string",
+          "description" : "Facebook Page App ID.\nReturned on successful *messenger* and *instagram* integrations.\n"
+        },
+        "accountSid" : {
+          "type" : "string",
+          "description" : "Twilio Account SID.\nRequired for *twilio* integrations.\n"
+        },
+        "authToken" : {
+          "type" : "string",
+          "description" : "Twilio Auth Token.\nRequired for *twilio* integrations.\n"
+        },
+        "phoneNumberSid" : {
+          "type" : "string",
+          "description" : "SID for specific phone number.\nRequired for *twilio* integrations.\n"
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "Smooch will receive all messages sent to this phone number.\nReturned on successful *twilio* integrations.\n"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "Name on the account.\nReturned on successful *twilio* integrations.\n"
+        },
+        "token" : {
+          "type" : "string",
+          "description" : "Telegram Bot Token OR Viber Public Account token.\nRequired for *twilio* and *viber* integrations.\n"
+        },
+        "uri" : {
+          "type" : "string",
+          "description" : "The viber URI to find the account.\nReturned on successful *viber* integrations.\n"
+        },
+        "channelId" : {
+          "type" : "string",
+          "description" : "LINE Channel ID.\nRequired for *line* integrations.\n"
+        },
+        "channelSecret" : {
+          "type" : "string",
+          "description" : "LINE Channel Secret.\nRequired for *line* integrations.\n"
+        },
+        "channelAccessToken" : {
+          "type" : "string",
+          "description" : "LINE Channel Access Token.\nRequired for *line* integrations.\n"
+        },
+        "serviceCode" : {
+          "type" : "string",
+          "description" : "LINE Service Code.\n"
+        },
+        "switcherSecret" : {
+          "type" : "string",
+          "description" : "LINE Switcher Secret.\n"
+        },
+        "qrCodeUrl" : {
+          "type" : "string",
+          "description" : "URL provided by LINE in the [Developer Console](https://developers.line.biz/console/).\n"
+        },
+        "lineId" : {
+          "type" : "string",
+          "description" : "LINE Basic ID. Generated automatically when a `qrCodeUrl` is updated.\n"
+        },
+        "botName" : {
+          "type" : "string",
+          "description" : "The bot's name.\nReturned on successful *line* integrations.\n"
+        },
+        "encodingAesKey" : {
+          "type" : "string",
+          "description" : "AES Encoding Key.\n(Optional) Used for *wechat* integrations.\n"
+        },
+        "fromAddress" : {
+          "type" : "string",
+          "description" : "Email address to use as the `From` and `Reply-To` address if it must be different from `incomingAddress`.\nOnly use this option if the address that you supply is configured to forward emails to the `incomingAddress`, otherwise user replies will be lost.\nYou must also make sure that the domain is properly configured as a mail provider so as to not be flagged as spam by the user's email client. \n(Optional) Used for *mailgun* integrations.\n"
+        },
+        "certificate" : {
+          "type" : "string",
+          "description" : "The binary of your APN certificate base64 encoded.\nRequired for *apn* integrations.\n"
+        },
+        "deploymentId" : {
+          "type" : "string",
+          "description" : "Your WhatsApp deployment ID.\nRequired for *WhatsApp* integrations.\n"
+        },
+        "baseUrl" : {
+          "type" : "string",
+          "description" : "Your WhatsApp API client's URL.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
+        },
+        "hsmFallbackLanguage" : {
+          "type" : "string",
+          "description" : "Specification of a fallback language.\n(Optional) Used for *WhatsApp* integrations.\n"
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "The password for your APN certificate or WhatsApp API client.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n(Optional) Used for *apn* integrations.\n"
+        },
+        "autoUpdateBadge" : {
+          "type" : "boolean",
+          "description" : "Use the unread count of the conversation as the application badge.\n(Optional) Used for *apn* integrations.\n"
+        },
+        "production" : {
+          "type" : "boolean",
+          "description" : "Flag specifying the APN environment to connect to (`production` if true, `sandbox` otherwise).\nDefaults to value inferred from certificate if not specified.\n(Optional) Used for *apn* integrations.\n"
+        },
+        "serverKey" : {
+          "type" : "string",
+          "description" : "Your server key from the fcm console.\nRequired for *fcm* integrations.\n"
+        },
+        "senderId" : {
+          "type" : "string",
+          "description" : "Your sender id from the fcm console.\nRequired for *fcm* integrations.\n"
+        },
+        "tier" : {
+          "type" : "string",
+          "description" : "Your Twitter app’s tier. Accepted values are enterprise or premium.\n"
+        },
+        "envName" : {
+          "type" : "string",
+          "description" : "The Twitter environment name, e.g.: env-beta.\nRequired for *twitter* integrations with *premium* tier.\n"
+        },
+        "consumerKey" : {
+          "type" : "string",
+          "description" : "The consumer key for your Twitter app.\nRequired for *twitter* integrations.\n"
+        },
+        "consumerSecret" : {
+          "type" : "string",
+          "description" : "The consumer secret for your Twitter app.\nRequired for *twitter* integrations.\n"
+        },
+        "accessTokenKey" : {
+          "type" : "string",
+          "description" : "The access token key obtained from your user via oauth.\nRequired for *twitter* integrations.\n"
+        },
+        "accessTokenSecret" : {
+          "type" : "string",
+          "description" : "The access token secret obtained from your user via oauth.\nRequired for *twitter* integrations.\n"
+        },
+        "userId" : {
+          "type" : "string",
+          "description" : "The twitter userId or Facebook userId.\nReturned on successful *twitter* and *instagram* integrations.\n"
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "A twitter, telegram and facebook account username\nReturned on successful *twitter*, *telegram* and *instagram* integrations.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
+        },
+        "apiKey" : {
+          "type" : "string",
+          "description" : "The public API key of your Mailgun account.\nRequired for *mailgun* integrations.\n"
+        },
+        "domain" : {
+          "type" : "string",
+          "description" : "The domain used to relay email.\nRequired for *mailgun* integrations.\n"
+        },
+        "incomingAddress" : {
+          "type" : "string",
+          "description" : "Smooch will receive all emails sent to this address.\nRequired for *mailgun* integrations.\n"
+        },
+        "accessKey" : {
+          "type" : "string",
+          "description" : "The public API key of your MessageBird account.\nRequired for *messagebird* integrations.\n"
+        },
+        "originator" : {
+          "type" : "string",
+          "description" : "Smooch will receive all messages sent to this phone number.\nRequired for *messagebird* integrations.\n"
+        },
+        "signingKey" : {
+          "type" : "string",
+          "description" : "The signing key of your MessageBird account. Used to validate the webhooks' origin.\n(Optional) Used for *messagebird* integrations.\n"
+        },
+        "brandColor" : {
+          "type" : "string",
+          "description" : "This color will be used in the messenger header and the button or tab in idle state.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "fixedIntroPane" : {
+          "type" : "boolean",
+          "description" : "When `true`, the introduction pane will be pinned at the top of the conversation instead of scrolling with it. The default value is `false`.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "conversationColor" : {
+          "type" : "string",
+          "description" : "This color will be used for customer messages, quick replies and actions in the footer.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "actionColor" : {
+          "type" : "string",
+          "description" : "This color will be used for call-to-actions inside your messages.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "displayStyle" : {
+          "type" : "string",
+          "description" : "Choose how the messenger will appear on your website. Must be either button or tab.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonIconUrl" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of selecting your own button icon.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonWidth" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its width.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonHeight" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its height.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "integrationOrder" : {
+          "type" : "array",
+          "description" : "Array of integration IDs, order will be reflected in the Web Messenger.\nWhen set, only integrations from this list will be displayed in the Web Messenger.\nIf unset, all integrations will be displayed\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "businessName" : {
+          "type" : "string",
+          "description" : "A custom business name for the Web Messenger or Instagram Business account name.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "businessUsername" : {
+          "type" : "string",
+          "description" : "Instagram Business account username.\n"
+        },
+        "businessIconUrl" : {
+          "type" : "string",
+          "description" : "A custom business icon url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "backgroundImageUrl" : {
+          "type" : "string",
+          "description" : "A custom background url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "originWhitelist" : {
+          "type" : "array",
+          "description" : "A list of origins to whitelist.\nWhen set, only the origins from this list will be able to initialize the Web Messenger.\nIf unset, all origins are whitelisted.\nThe elements in the list should follow the serialized-origin format from RFC 6454 `scheme \"://\" host [ \":\" port ]`, where scheme is `http` or `https`.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "hideUnsubscribeLink" : {
+          "type" : "boolean",
+          "description" : "When `true`, unsubscribe links will not be included in outbound emails. If this setting is enabled, it is expected that the business is providing the user a way to unsubscribe by some other means.\n(Optional) Used for *mailgun* integrations.\n"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The integration status. See [**IntegrationStatusEnum**](Enums.md#IntegrationStatusEnum) for available values. [More info](https://docs.smooch.io/#integration-status)."
+        },
+        "error" : {
+          "type" : "string",
+          "description" : "The error causing the integration to fail. Will be present when `status` is 'error'."
+        },
+        "apiSecret" : {
+          "type" : "string",
+          "description" : "A key tied to Apple Business Chat Messaging Service Provider"
+        },
+        "businessId" : {
+          "type" : "string",
+          "description" : "A unique ID tied to the brand using Apple Business Chat or the Instagram Business ID\n"
+        },
+        "mspId" : {
+          "type" : "string",
+          "description" : "A unique identifier for an Apple Business Chat partner registered as a Messaging Service Provider through Apple Business Register"
+        }
+      }
+    },
+    "IntegrationCreate" : {
+      "type" : "object",
+      "required" : [ "type" ],
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The integration type. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        },
+        "displayName" : {
+          "type" : "string",
+          "description" : "The integration display name.\nUsed to map a human-friendly name to an integration.\n"
+        },
+        "pageAccessToken" : {
+          "type" : "string",
+          "description" : "Facebook Page Access Token.\nRequired for *messenger* and *instagram* integrations.\n"
+        },
+        "appId" : {
+          "type" : "string",
+          "description" : "Facebook App ID OR WeChat App ID.\nRequired for *messenger*, *instagram* and *wechat* integrations.\n"
+        },
+        "appSecret" : {
+          "type" : "string",
+          "description" : "Facebook Page App Secret OR WeChat App Secret.\nRequired for *messenger*, *instagram* and *wechat* integrations.\n"
+        },
+        "accountSid" : {
+          "type" : "string",
+          "description" : "Twilio Account SID.\nRequired for *twilio* integrations.\n"
+        },
+        "authToken" : {
+          "type" : "string",
+          "description" : "Twilio Auth Token.\nRequired for *twilio* integrations.\n"
+        },
+        "baseUrl" : {
+          "type" : "string",
+          "description" : "Your WhatsApp API client's URL.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
+        },
+        "hsmFallbackLanguage" : {
+          "type" : "string",
+          "description" : "Specification of a fallback language.\n(Optional) Used for *WhatsApp* integrations.\n"
+        },
+        "phoneNumberSid" : {
+          "type" : "string",
+          "description" : "SID for specific phone number.\nRequired for *twilio* integrations.\n"
+        },
+        "token" : {
+          "type" : "string",
+          "description" : "Telegram Bot Token OR Viber Public Account token.\nRequired for *twilio* and *viber* integrations.\n"
+        },
+        "channelId" : {
+          "type" : "string",
+          "description" : "LINE Channel ID.\nRequired for *line* integrations.\n"
+        },
+        "channelSecret" : {
+          "type" : "string",
+          "description" : "LINE Channel Secret.\nRequired for *line* integrations.\n"
+        },
+        "channelAccessToken" : {
+          "type" : "string",
+          "description" : "LINE Channel Access Token.\nRequired for *line* integrations.\n"
+        },
+        "deploymentId" : {
+          "type" : "string",
+          "description" : "Your WhatsApp deployment ID.\nRequired for *WhatsApp* integrations.\n"
+        },
+        "serviceCode" : {
+          "type" : "string",
+          "description" : "LINE Service Code.\n"
+        },
+        "switcherSecret" : {
+          "type" : "string",
+          "description" : "LINE Switcher Secret.\n"
+        },
+        "encodingAesKey" : {
+          "type" : "string",
+          "description" : "AES Encoding Key.\n(Optional) Used for *wechat* integrations.\n"
+        },
+        "fromAddress" : {
+          "type" : "string",
+          "description" : "Email address to use as the `From` and `Reply-To` address if it must be different from `incomingAddress`.\nOnly use this option if the address that you supply is configured to forward emails to the `incomingAddress`, otherwise user replies will be lost.\nYou must also make sure that the domain is properly configured as a mail provider so as to not be flagged as spam by the user's email client. \n(Optional) Used for *mailgun* integrations.\n"
+        },
+        "certificate" : {
+          "type" : "string",
+          "description" : "The binary of your APN certificate base64 encoded.\nRequired for *apn* integrations.\n"
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "The password for your APN certificate or WhatsApp API client.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n(Optional) Used for *apn* integrations.\n"
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "A twitter, telegram and facebook account username\nReturned on successful *twitter*, *telegram* and *instagram* integrations.\nRequired for *WhatsApp* integrations. (this usage is deprecated)\n"
+        },
+        "autoUpdateBadge" : {
+          "type" : "boolean",
+          "description" : "Use the unread count of the conversation as the application badge.\n(Optional) Used for *apn* integrations.\n"
+        },
+        "production" : {
+          "type" : "boolean",
+          "description" : "Flag specifying the APN environment to connect to (`production` if true, `sandbox` otherwise).\nDefaults to value inferred from certificate if not specified.\n(Optional) Used for *apn* integrations.\n"
+        },
+        "serverKey" : {
+          "type" : "string",
+          "description" : "Your server key from the fcm console.\nRequired for *fcm* integrations.\n"
+        },
+        "senderId" : {
+          "type" : "string",
+          "description" : "Your sender id from the fcm console.\nRequired for *fcm* integrations.\n"
+        },
+        "tier" : {
+          "type" : "string",
+          "description" : "Your Twitter app’s tier. Accepted values are enterprise or premium.\n"
+        },
+        "envName" : {
+          "type" : "string",
+          "description" : "The Twitter environment name, e.g.: env-beta.\nRequired for *twitter* integrations with *premium* tier.\n"
+        },
+        "consumerKey" : {
+          "type" : "string",
+          "description" : "The consumer key for your Twitter app.\nRequired for *twitter* integrations.\n"
+        },
+        "consumerSecret" : {
+          "type" : "string",
+          "description" : "The consumer secret for your Twitter app.\nRequired for *twitter* integrations.\n"
+        },
+        "accessTokenKey" : {
+          "type" : "string",
+          "description" : "The access token key obtained from your user via oauth.\nRequired for *twitter* integrations.\n"
+        },
+        "accessTokenSecret" : {
+          "type" : "string",
+          "description" : "The access token secret obtained from your user via oauth.\nRequired for *twitter* integrations.\n"
+        },
+        "accessTokenUrl" : {
+          "type" : "string",
+          "description" : "Optional endpoint to generate access tokens for WeChat.\nUsed to coordinate API access with third party systems.\n"
+        },
+        "accessKey" : {
+          "type" : "string",
+          "description" : "The public API key of your MessageBird account.\nRequired for *messagebird* integrations.\n"
+        },
+        "originator" : {
+          "type" : "string",
+          "description" : "Smooch will receive all messages sent to this phone number.\nRequired for *messagebird* integrations.\n"
+        },
+        "brandColor" : {
+          "type" : "string",
+          "description" : "This color will be used in the messenger header and the button or tab in idle state.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "fixedIntroPane" : {
+          "type" : "boolean",
+          "description" : "When `true`, the introduction pane will be pinned at the top of the conversation instead of scrolling with it. The default value is `false`.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "conversationColor" : {
+          "type" : "string",
+          "description" : "This color will be used for customer messages, quick replies and actions in the footer.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "actionColor" : {
+          "type" : "string",
+          "description" : "This color will be used for call-to-actions inside your messages.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "displayStyle" : {
+          "type" : "string",
+          "description" : "Choose how the messenger will appear on your website. Must be either button or tab.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonIconUrl" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of selecting your own button icon.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonWidth" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its width.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonHeight" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its height.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "integrationOrder" : {
+          "type" : "array",
+          "description" : "Array of integration IDs, order will be reflected in the Web Messenger.\nWhen set, only integrations from this list will be displayed in the Web Messenger.\nIf unset, all integrations will be displayed\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "businessName" : {
+          "type" : "string",
+          "description" : "A custom business name for the Web Messenger or Instagram Business account name.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "businessIconUrl" : {
+          "type" : "string",
+          "description" : "A custom business icon url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "backgroundImageUrl" : {
+          "type" : "string",
+          "description" : "A custom background url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "originWhitelist" : {
+          "type" : "array",
+          "description" : "A list of origins to whitelist.\nWhen set, only the origins from this list will be able to initialize the Web Messenger.\nIf unset, all origins are whitelisted.\nThe elements in the list should follow the serialized-origin format from RFC 6454 `scheme \"://\" host [ \":\" port ]`, where scheme is `http` or `https`.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "qrCodeUrl" : {
+          "type" : "string",
+          "description" : "URL provided by LINE in the [Developer Console](https://developers.line.biz/console/).\n"
+        },
+        "hideUnsubscribeLink" : {
+          "type" : "boolean",
+          "description" : "When `true`, unsubscribe links will not be included in outbound emails. If this setting is enabled, it is expected that the business is providing the user a way to unsubscribe by some other means.\n(Optional) Used for *mailgun* integrations.\n"
+        },
+        "signingKey" : {
+          "type" : "string",
+          "description" : "The signing key of your MessageBird account. Used to validate the webhooks' origin.\n(Optional) Used for *messagebird* integrations.\n"
+        },
+        "apiKey" : {
+          "type" : "string",
+          "description" : "The public API key of your Mailgun account.\nRequired for *mailgun* integrations.\n"
+        },
+        "domain" : {
+          "type" : "string",
+          "description" : "The domain used to relay email.\nRequired for *mailgun* integrations.\n"
+        },
+        "incomingAddress" : {
+          "type" : "string",
+          "description" : "Smooch will receive all emails sent to this address.\nRequired for *mailgun* integrations.\n"
+        },
+        "apiSecret" : {
+          "type" : "string",
+          "description" : "A key tied to Apple Business Chat Messaging Service Provider"
+        },
+        "businessId" : {
+          "type" : "string",
+          "description" : "A unique ID tied to the brand using Apple Business Chat or the Instagram Business ID\n"
+        },
+        "mspId" : {
+          "type" : "string",
+          "description" : "A unique identifier for an Apple Business Chat partner registered as a Messaging Service Provider through Apple Business Register"
+        }
+      }
+    },
+    "IntegrationResponse" : {
+      "type" : "object",
+      "properties" : {
+        "integration" : {
+          "description" : "The integration.",
+          "$ref" : "#/definitions/Integration"
+        }
+      }
+    },
+    "IntegrationUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "displayName" : {
+          "type" : "string",
+          "description" : "The integration display name.\nUsed to map a human-friendly name to an integration.\n"
+        },
+        "brandColor" : {
+          "type" : "string",
+          "description" : "This color will be used in the messenger header and the button or tab in idle state.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "fixedIntroPane" : {
+          "type" : "boolean",
+          "description" : "When `true`, the introduction pane will be pinned at the top of the conversation instead of scrolling with it. The default value is `false`.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "conversationColor" : {
+          "type" : "string",
+          "description" : "This color will be used for customer messages, quick replies and actions in the footer.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "actionColor" : {
+          "type" : "string",
+          "description" : "This color will be used for call-to-actions inside your messages.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "displayStyle" : {
+          "type" : "string",
+          "description" : "Choose how the messenger will appear on your website. Must be either button or tab.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonIconUrl" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of selecting your own button icon.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonWidth" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its width.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "buttonHeight" : {
+          "type" : "string",
+          "description" : "With the button style Web Messenger, you have the option of specifying its height.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "integrationOrder" : {
+          "type" : "array",
+          "description" : "Array of integration IDs, order will be reflected in the Web Messenger.\nWhen set, only integrations from this list will be displayed in the Web Messenger.\nIf unset, all integrations will be displayed\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "businessName" : {
+          "type" : "string",
+          "description" : "A custom business name for the Web Messenger or Instagram Business account name.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "businessIconUrl" : {
+          "type" : "string",
+          "description" : "A custom business icon url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "backgroundImageUrl" : {
+          "type" : "string",
+          "description" : "A custom background url for the Web Messenger.\n(Optional) Used for *Web Messenger* integrations.\n"
+        },
+        "originWhitelist" : {
+          "type" : "array",
+          "description" : "A list of origins to whitelist.\nWhen set, only the origins from this list will be able to initialize the Web Messenger.\nIf unset, all origins are whitelisted.\nThe elements in the list should follow the serialized-origin format from RFC 6454 `scheme \"://\" host [ \":\" port ]`, where scheme is `http` or `https`.\n(Optional) Used for *Web Messenger* integrations.\n",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "channelId" : {
+          "type" : "string",
+          "description" : "LINE Channel ID.\nRequired for *line* integrations.\n"
+        },
+        "channelSecret" : {
+          "type" : "string",
+          "description" : "LINE Channel Secret.\nRequired for *line* integrations.\n"
+        },
+        "serviceCode" : {
+          "type" : "string",
+          "description" : "LINE Service Code.\n"
+        },
+        "switcherSecret" : {
+          "type" : "string",
+          "description" : "LINE Switcher Secret.\n"
+        },
+        "hsmFallbackLanguage" : {
+          "type" : "string",
+          "description" : "Specification of a fallback language.\n(Optional) Used for *WhatsApp* integrations.\n"
+        },
+        "qrCodeUrl" : {
+          "type" : "string",
+          "description" : "URL provided by LINE in the [Developer Console](https://developers.line.biz/console/).\n"
+        },
+        "hideUnsubscribeLink" : {
+          "type" : "boolean",
+          "description" : "When `true`, unsubscribe links will not be included in outbound emails. If this setting is enabled, it is expected that the business is providing the user a way to unsubscribe by some other means.\n(Optional) Used for *mailgun* integrations.\n"
+        },
+        "fromAddress" : {
+          "type" : "string",
+          "description" : "Email address to use as the `From` and `Reply-To` address if it must be different from `incomingAddress`.\nOnly use this option if the address that you supply is configured to forward emails to the `incomingAddress`, otherwise user replies will be lost.\nYou must also make sure that the domain is properly configured as a mail provider so as to not be flagged as spam by the user's email client. \n(Optional) Used for *mailgun* integrations.\n"
+        },
+        "production" : {
+          "type" : "boolean",
+          "description" : "Flag specifying the APN environment to connect to (`production` if true, `sandbox` otherwise).\nDefaults to value inferred from certificate if not specified.\n(Optional) Used for *apn* integrations.\n"
+        }
+      }
+    },
+    "GetIntegrationProfileResponse" : {
+      "type" : "object",
+      "properties" : {
+        "profile" : {
+          "type" : "object",
+          "description" : "JSON object containing the integration profile. [More info](https://docs.smooch.io/rest/#get-integration-profile)",
+          "properties" : { }
+        }
+      }
+    },
+    "IntegrationProfileUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "about" : {
+          "type" : "string",
+          "description" : "Text to display in your profile's About section. Can be used as a status update. Maximum of 139 characters."
+        },
+        "address" : {
+          "type" : "string",
+          "description" : "Address of the business. Maximum of 256 characters."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of the business. Maximum of 256 characters."
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "Email address to contact the business. Maximum of 128 characters."
+        },
+        "photoUrl" : {
+          "type" : "string",
+          "description" : "URL where the business' profile photo is hosted. WhatsApp recommends an image with dimensions of 640x640 and max size of 63KB."
+        },
+        "vertical" : {
+          "type" : "string",
+          "description" : "Industry of the business. Maximum of 128 characters."
+        },
+        "websites" : {
+          "type" : "array",
+          "description" : "URLs associated with the business. Maximum of 2 websites.",
+          "items" : {
+            "type" : "string",
+            "description" : "URL associated with the business. Maximum of 256 characters."
+          }
+        }
+      }
+    },
+    "UploadIntegrationProfilePhotoResponse" : {
+      "type" : "object",
+      "required" : [ "photoUrl" ],
+      "properties" : {
+        "photoUrl" : {
+          "type" : "string",
+          "description" : "The photo URL after uploading."
+        }
+      }
+    },
+    "ListWebhooksResponse" : {
+      "type" : "object",
+      "required" : [ "webhooks" ],
+      "properties" : {
+        "webhooks" : {
+          "type" : "array",
+          "description" : "The list of webhooks.",
+          "items" : {
+            "$ref" : "#/definitions/Webhook"
+          }
+        }
+      }
+    },
+    "Webhook" : {
+      "type" : "object",
+      "required" : [ "_id", "secret", "target", "triggers" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The webhook ID, generated automatically."
+        },
+        "target" : {
+          "type" : "string",
+          "description" : "URL to be called when the webhook is triggered."
+        },
+        "triggers" : {
+          "type" : "array",
+          "description" : "An array of triggers you wish to have the webhook listen to. See [**WebhookTriggersEnum**](Enums.md#WebhookTriggersEnum) for available values.",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "secret" : {
+          "type" : "string",
+          "description" : "Secret which will be transmitted with each webhook invocation and can be used to verify the authenticity of the caller."
+        },
+        "version" : {
+          "type" : "string",
+          "description" : "The payload version of the webhook."
+        },
+        "includeClient" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the client information associated with a conversation in webhook events."
+        },
+        "includeFullAppUser" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the complete appUser schema for appUser events."
+        }
+      }
+    },
+    "WebhookCreate" : {
+      "type" : "object",
+      "required" : [ "target" ],
+      "properties" : {
+        "target" : {
+          "type" : "string",
+          "description" : "URL to be called when the webhook is triggered."
+        },
+        "triggers" : {
+          "type" : "array",
+          "description" : "An array of triggers you wish to have the webhook listen to. See [**WebhookTriggersEnum**](Enums.md#WebhookTriggersEnum) for available values.",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "includeClient" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the client information associated with a conversation in webhook events."
+        },
+        "includeFullAppUser" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the complete appUser schema for appUser events."
+        }
+      }
+    },
+    "WebhookResponse" : {
+      "type" : "object",
+      "required" : [ "webhook" ],
+      "properties" : {
+        "webhook" : {
+          "description" : "The webhook.",
+          "$ref" : "#/definitions/Webhook"
+        }
+      }
+    },
+    "WebhookUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "target" : {
+          "type" : "string",
+          "description" : "URL to be called when the webhook is triggered."
+        },
+        "triggers" : {
+          "type" : "array",
+          "description" : "An array of triggers you wish to have the webhook listen to. See [**WebhookTriggersEnum**](Enums.md#WebhookTriggersEnum) for available values.",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "includeClient" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the client information associated with a conversation in webhook events."
+        },
+        "includeFullAppUser" : {
+          "type" : "boolean",
+          "description" : "Specifies whether webhook payloads should include the complete appUser schema for appUser events."
+        }
+      }
+    },
+    "AttachmentResponse" : {
+      "type" : "object",
+      "required" : [ "mediaType", "mediaUrl" ],
+      "properties" : {
+        "mediaUrl" : {
+          "type" : "string",
+          "description" : "The mediaUrl for the message.\nRequired for image/file messages.\n"
+        },
+        "mediaType" : {
+          "type" : "string",
+          "description" : "The mediaType for the message.\nRequired for image/file messages.\n"
+        }
+      }
+    },
+    "AttachmentRemove" : {
+      "type" : "object",
+      "required" : [ "mediaUrl" ],
+      "properties" : {
+        "mediaUrl" : {
+          "type" : "string",
+          "description" : "The mediaUrl for the message.\nRequired for image/file messages.\n"
+        }
+      }
+    },
+    "ListTemplatesResponse" : {
+      "type" : "object",
+      "required" : [ "templates" ],
+      "properties" : {
+        "templates" : {
+          "type" : "array",
+          "description" : "The list of templates.",
+          "items" : {
+            "$ref" : "#/definitions/Template"
+          }
+        },
+        "hasMore" : {
+          "type" : "boolean",
+          "description" : "Flag indicating if there are more templates that are not present in the response."
+        },
+        "offset" : {
+          "type" : "integer",
+          "description" : "The number of template records skipped in the returned list."
+        }
+      }
+    },
+    "Template" : {
+      "type" : "object",
+      "required" : [ "_id", "message", "name" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The template ID, generated automatically."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name for the template, used when sending via [shorthand](https://docs.smooch.io/guide/shorthand/#sending-template-message-with-inline-syntax)."
+        },
+        "message" : {
+          "description" : "The message sent when referencing the template via syntax.",
+          "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "TemplateCreate" : {
+      "type" : "object",
+      "required" : [ "message", "name" ],
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The name for the template, used when sending via [shorthand](https://docs.smooch.io/guide/shorthand/#sending-template-message-with-inline-syntax)."
+        },
+        "message" : {
+          "description" : "The message sent when referencing the template via syntax.",
+          "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "TemplateResponse" : {
+      "type" : "object",
+      "required" : [ "template" ],
+      "properties" : {
+        "template" : {
+          "description" : "The template.",
+          "$ref" : "#/definitions/Template"
+        }
+      }
+    },
+    "TemplateUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The name for the template, used when sending via [shorthand](https://docs.smooch.io/guide/shorthand/#sending-template-message-with-inline-syntax)."
+        },
+        "message" : {
+          "description" : "The message sent when referencing the template via syntax.",
+          "$ref" : "#/definitions/Message"
+        }
+      }
+    },
+    "ListDeploymentsResponse" : {
+      "type" : "object",
+      "required" : [ "deployments" ],
+      "properties" : {
+        "deployments" : {
+          "type" : "array",
+          "description" : "The list of deployments.",
+          "items" : {
+            "$ref" : "#/definitions/Deployment"
+          }
+        }
+      }
+    },
+    "Deployment" : {
+      "type" : "object",
+      "required" : [ "_id", "hosting", "status" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "The deployment ID, generated automatically."
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The deployment status. See [**DeploymentStatusEnum**](Enums.md#DeploymentStatusEnum) for available values."
+        },
+        "hosting" : {
+          "type" : "string",
+          "description" : "The deployment hosting. See [**DeploymentHostingEnum**](Enums.md#DeploymentHostingEnum) for available values."
+        },
+        "baseUrl" : {
+          "type" : "string",
+          "description" : "The baseUrl of the deployment. Only present for `self` hosted deployments."
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "The username of the deployment. Only present for `self` hosted deployments."
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "The phoneNumber of the deployment. Only present once the deployment has been registered."
+        },
+        "callbackUrl" : {
+          "type" : "string",
+          "description" : "The URL to be called by Smooch when the status of the deployment changes."
+        },
+        "callbackSecret" : {
+          "type" : "string",
+          "description" : "The secret used to secure the callback."
+        },
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The integrationId of the integration using this deployment."
+        },
+        "appId" : {
+          "type" : "string",
+          "description" : "The appId of the integration using this deployment."
+        }
+      }
+    },
+    "DeploymentCreate" : {
+      "type" : "object",
+      "required" : [ "hosting" ],
+      "properties" : {
+        "hosting" : {
+          "type" : "string",
+          "description" : "The deployment hosting. See [**DeploymentHostingEnum**](Enums.md#DeploymentHostingEnum) for available values."
+        },
+        "baseUrl" : {
+          "type" : "string",
+          "description" : "The base URL to access your WhatsApp EC. Only provide for `self` hosted deployments."
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "The username to access your WhatsApp EC. Only provide for `self` hosted deployments."
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "The password to access your WhatsApp EC. Only provide for `self` hosted deployments."
+        },
+        "callbackUrl" : {
+          "type" : "string",
+          "description" : "The URL to be called by Smooch when the status of the deployment changes."
+        }
+      }
+    },
+    "DeploymentResponse" : {
+      "type" : "object",
+      "required" : [ "deployment" ],
+      "properties" : {
+        "deployment" : {
+          "description" : "The deployment.",
+          "$ref" : "#/definitions/Deployment"
+        }
+      }
+    },
+    "DeploymentActivatePhoneNumber" : {
+      "type" : "object",
+      "required" : [ "method", "phoneNumber", "verifiedNameCertificate" ],
+      "properties" : {
+        "phoneNumber" : {
+          "type" : "string",
+          "description" : "The phone number to send the activation code to."
+        },
+        "verifiedNameCertificate" : {
+          "type" : "string",
+          "description" : "The verified name certificate for the phone number."
+        },
+        "method" : {
+          "type" : "string",
+          "description" : "The method desired to receive the activation code. See [**DeploymentActivationMethodEnum**](Enums.md#DeploymentActivationMethodEnum) for available values."
+        }
+      }
+    },
+    "DeploymentConfirmCode" : {
+      "type" : "object",
+      "required" : [ "code" ],
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The code that was sent to you via SMS or phone call."
+        }
+      }
+    },
+    "LinkRequestResponse_linkRequests" : {
+      "required" : [ "code", "integrationId", "type", "url" ],
+      "properties" : {
+        "integrationId" : {
+          "type" : "string",
+          "description" : "The integration ID."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The integration type. See [**IntegrationTypeEnum**](Enums.md#IntegrationTypeEnum) for available values."
+        },
+        "code" : {
+          "type" : "string",
+          "description" : "The link request code."
+        },
+        "url" : {
+          "type" : "string",
+          "description" : "The link request url."
+        }
+      }
+    },
+    "MessageOverride_whatsapp" : {
+      "properties" : {
+        "payload" : {
+          "type" : "object",
+          "description" : "The exact payload to send to WhatsApp.",
+          "properties" : { }
+        }
+      }
+    },
+    "MessageOverride_line" : {
+      "properties" : {
+        "payload" : {
+          "type" : "object",
+          "description" : "The exact payload to send to LINE.",
+          "properties" : { }
+        }
+      }
+    },
+    "MessageOverride_messenger" : {
+      "properties" : {
+        "payload" : {
+          "type" : "object",
+          "description" : "The exact payload to send to Facebook Messenger.",
+          "properties" : { }
+        }
+      }
+    },
+    "NotificationResponse_notification" : {
+      "required" : [ "_id" ],
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "description" : "Automatically generated UUID used to identify the notification in Webhooks."
+        }
+      }
+    },
+    "App_settings" : {
+      "properties" : {
+        "maskCreditCardNumbers" : {
+          "type" : "boolean",
+          "description" : "Flag specifying whether credit card numbers will be automatically masked if sent through Smooch."
+        },
+        "useAnimalNames" : {
+          "type" : "boolean",
+          "description" : "Flag specifying whether animal names should be used for anonymous users."
+        },
+        "conversationRetentionSeconds" : {
+          "type" : "integer",
+          "description" : "Number of seconds of inactivity before a conversation’s messages will be automatically deleted."
+        },
+        "echoPostback" : {
+          "type" : "boolean",
+          "description" : "A boolean specifying whether a message should be added to the conversation history when a postback button is clicked."
+        },
+        "ignoreAutoConversationStart" : {
+          "type" : "boolean",
+          "description" : "A boolean specifying whether a non message event coming from a social channel will trigger a start conversation event and count as an active user conversation (AUC).<br>**Note:** Calling *startConversation()* (or equivalent) from the Android-, iOS- or Web-SDK will count as an AUC, regardless of the value of this setting."
+        }
+      },
+      "description" : "Customizable app settings."
+    }
+  }
+}

@@ -15,5 +15,12 @@
     "packageVersion": "5.34.0",
     "gemVersion": "5.34.1",
     "artifactVersion": "5.34.0",
-    "specificationUrl": "https://github.com/smooch/smooch-api-specification"
+    "specificationUrl": "https://github.com/smooch/smooch-api-specification",
+    "scmConnection": "https://github.com/zendesk/sunshine-conversations-java",
+    "scmDeveloperConnection": "https://github.com/zendesk/sunshine-conversations-java",
+    "scmUrl": "https://github.com/zendesk/sunshine-conversations-java",
+    "developerName": "Sunshine Conversations Engine",
+    "developerEmail": "sunco-eng-conversation-engine@zendesk.com",
+    "developerOrganization": "Sunshine Conversations Zendesk",
+    "developerOrganizationUrl": "smooch.io"
 }
