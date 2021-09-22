@@ -456,6 +456,19 @@ tags:
 
       | ----------------------  | -------------------------- |
 
+      | client:add     | When initiating a channel link or when an SDK client is
+      created.    |
+
+      | client:remove     | When a client is removed. This can happen
+      when:<br/>1. directly using the API<br/>2. removing the client using the
+      SDK<br/>3. transferring a client due to a channel link<br/>4. failing or
+      cancelling a channel link   |
+
+      | client:update     | When a client is updated. This can happen
+      when:<br/>1. a channel finds a user that matches the information
+      provided<br/>2. a client is activated<br/>3. a user unsubscribes from a
+      conversation or blocks the app    |
+
       | conversation:create     | When a new conversation is created.    |
 
       | conversation:join     | When a new participant joins a `sdkGroup`
@@ -2803,6 +2816,9 @@ x-webhooks:
                   description: The list of events that occurred.
                   items:
                     anyOf:
+                      - $ref: '#/components/schemas/clientAddEvent'
+                      - $ref: '#/components/schemas/clientRemoveEvent'
+                      - $ref: '#/components/schemas/clientUpdateEvent'
                       - $ref: '#/components/schemas/conversationCreateEvent'
                       - $ref: '#/components/schemas/conversationJoinEvent'
                       - $ref: '#/components/schemas/conversationLeaveEvent'
@@ -2825,6 +2841,12 @@ x-webhooks:
                       - $ref: '#/components/schemas/switchboardPassControlFailure'
                       - $ref: '#/components/schemas/userMergeEvent'
             examples:
+              'client:add':
+                $ref: '#/components/examples/clientAddEvent'
+              'client:remove':
+                $ref: '#/components/examples/clientRemoveEvent'
+              'client:update':
+                $ref: '#/components/examples/clientUpdateEvent'
               'conversation:create':
                 $ref: '#/components/examples/conversationCreateEvent'
               'conversation:join':
@@ -6258,9 +6280,8 @@ components:
           example: 7494535bff5cef41a15be74d
         externalId:
           type: string
-          description: >
-            An optional ID that if specified can also be used to retrieve the
-            user.
+          description: |
+            An optional ID that can also be used to retrieve the user.
           example: your-own-id
           nullable: true
     user:
@@ -6572,6 +6593,166 @@ components:
             applicable. This field will only be present if the
             `includeFullSource` option is enabled for the webhook
           nullable: true
+    clientAddEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: >-
+                The payload of the event. The contents of this object depend on
+                the type of event.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: >
+                    The conversation associated with the creation of the client.
+                    This field is only present
+
+                    when the reason is `channelLinking` and when attaching the
+                    client to a specific conversation.
+                  nullable: true
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/userTruncated'
+                  description: The user associated with the client.
+                client:
+                  allOf:
+                    - $ref: '#/components/schemas/client'
+                  description: The client that was just created.
+                reason:
+                  type: string
+                  description: >
+                    The reason for which the client was added.
+
+                    * `channelLinking` - The client was created as a result of
+                    initiating a channel link.
+
+                    * `sdkLogin` - The client was created as a result of logging
+                    into an SDK device.
+
+                    * `authCode` - The client was created as a result of
+                    initializing an SDK client with an `authCode`.
+                  enum:
+                    - channelLinking
+                    - sdkLogin
+                    - authCode
+                source:
+                  allOf:
+                    - $ref: '#/components/schemas/sourceWebhook'
+                  description: >-
+                    The source where this event originated from. This could be
+                    the API or an SDK device.
+      title: 'client:add'
+    clientRemoveEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: >-
+                The payload of the event. The contents of this object depend on
+                the type of event.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: >
+                    The conversation associated with the removal of the client.
+                    This field is only present
+
+                    when the reason is `theft`, `linkCancelled` or `linkFailed`.
+
+                    Note that for the `theft` reason, the conversation will not
+                    be present if it has been deleted.
+                  nullable: true
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/userTruncated'
+                  description: The user associated with the client.
+                client:
+                  allOf:
+                    - $ref: '#/components/schemas/client'
+                  description: The removed client.
+                reason:
+                  type: string
+                  description: >
+                    The reason for which the client was removed.
+
+                    * `api` - The client was removed using the API.
+
+                    * `linkCancelled` - The user cancelled a channel link.
+
+                    * `linkFailed` - The client was removed after a channel link
+                    attempt failed.
+
+                    * `sdk` - The client was removed using the SDK.
+
+                    * `theft` - The client was transferred to another user due
+                    to a channel link.
+                  enum:
+                    - api
+                    - linkCancelled
+                    - linkFailed
+                    - sdk
+                    - theft
+                error:
+                  type: object
+                  description: >-
+                    Object containing details of what went wrong. This field
+                    will only be present when the reason is `linkCancelled` or
+                    `linkFailed`.
+                  nullable: true
+                source:
+                  allOf:
+                    - $ref: '#/components/schemas/sourceWebhook'
+                  description: >-
+                    The source where this event originated from. This could be
+                    the API or an SDK device.
+      title: 'client:remove'
+    clientUpdateEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: >-
+                The payload of the event. The contents of this object depend on
+                the type of event.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: The conversation which triggered a change in the client.
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/userTruncated'
+                  description: The user associated with the client.
+                client:
+                  allOf:
+                    - $ref: '#/components/schemas/client'
+                  description: The updated client.
+                reason:
+                  type: string
+                  description: >
+                    The reason for which the client was updated.
+
+                    * `confirmed` - The client is now active and ready to use.
+
+                    * `blocked` - The user has unsubscribed from the
+                    conversation.
+
+                    * `matched` - The channel found a user that matches the
+                    information provided.
+                  enum:
+                    - confirmed
+                    - blocked
+                    - matched
+      title: 'client:update'
     referral:
       type: object
       properties:
@@ -7180,6 +7361,26 @@ components:
                         The conversation that was unified into the surviving
                         conversation object.
                   nullable: true
+                mergedClients:
+                  type: object
+                  description: >-
+                    Contains information about the clients that were merged
+                    together as a result of the operation, if applicable. If no
+                    clients were merged, this property is omitted.
+                  properties:
+                    surviving:
+                      allOf:
+                        - $ref: '#/components/schemas/client'
+                      description: >-
+                        The client that already existed before the merge
+                        started.
+                    discarded:
+                      allOf:
+                        - $ref: '#/components/schemas/client'
+                      description: >-
+                        The pending client that was discarded during the merge
+                        event.
+                  nullable: true
                 discardedMetadata:
                   allOf:
                     - $ref: '#/components/schemas/metadata'
@@ -7189,6 +7390,22 @@ components:
                     values only if the combined metadata fields exceed the 4KB
                     limit.
                   nullable: true
+                reason:
+                  type: string
+                  description: >
+                    The reason for which the users merged.
+
+                    * `api` - The users were merged using the API.
+
+                    * `channelLinking` - The users were merged as a result of
+                    initiating a channel link.
+
+                    * `sdkLogin` - The users were merged as a result of logging
+                    into an SDK device.
+                  enum:
+                    - api
+                    - channelLinking
+                    - sdkLogin
       title: 'user:merge'
   parameters:
     pageQuery:
@@ -7765,6 +7982,108 @@ components:
           profile: {}
           signedUpAt: 2020-05-21T15:53:30.197Z
           metadata: {}
+    clientAddEvent:
+      value:
+        app:
+          id: 60bf823452c2a718162f986a
+        webhook:
+          id: 612905a67821c3f206d6909f
+          version: v2
+        events:
+          - id: 61290a62c64b3af1ff868714
+            createdAt: '2021-08-27T15:53:06.744Z'
+            type: 'client:add'
+            payload:
+              conversation:
+                id: c2c8710dedf8f26ee6e9a68f
+                type: personal
+              user:
+                id: 6a2343df57be6fe0f98efc33
+              client:
+                integrationId: 60bfc8fa67951336472cc57a
+                type: twilio
+                id: 61290a4f7821c3f206d690a3
+                status: pending
+              reason: channelLinking
+              source:
+                type: web
+                integrationId: 60bf824952c2a718162f989c
+    clientRemoveEvent:
+      value:
+        app:
+          id: 60bf823452c2a718162f986a
+        webhook:
+          id: 612905a67821c3f206d6909f
+          version: v2
+        events:
+          - id: 61290a6cc64b3af1ff868715
+            createdAt: '2021-08-27T15:53:16.591Z'
+            type: 'client:remove'
+            payload:
+              user:
+                id: 6a2343df57be6fe0f98efc33
+              client:
+                integrationId: 60bfc8fa67951336472cc57a
+                type: twilio
+                externalId: '+15140000000'
+                id: 61290a4f7821c3f206d690a3
+                displayName: +1 514-000-0000
+                status: active
+                info:
+                  phoneNumber: '+15140000000'
+                  city: MONTREAL
+                  country: CA
+                  state: QC
+                raw:
+                  FromZip: ''
+                  FromState: QC
+                  FromCity: MONTREAL
+                  FromCountry: CA
+                  From: '+15140000000'
+                lastSeen: '2021-08-27T15:53:06.721Z'
+                linkedAt: '2021-08-27T15:52:47.998Z'
+              reason: sdk
+              source:
+                type: web
+                integrationId: 60bf824952c2a718162f989c
+    clientUpdateEvent:
+      value:
+        app:
+          id: 60bf823452c2a718162f986a
+        webhook:
+          id: 612905a67821c3f206d6909f
+          version: v2
+        events:
+          - id: 61290a62c64b3af1ff868714
+            createdAt: '2021-08-27T15:53:06.744Z'
+            type: 'client:update'
+            payload:
+              conversation:
+                id: c2c8710dedf8f26ee6e9a68f
+                type: personal
+              user:
+                id: 6a2343df57be6fe0f98efc33
+              client:
+                integrationId: 60bfc8fa67951336472cc57a
+                type: twilio
+                externalId: '+15140000000'
+                id: 61290a4f7821c3f206d690a3
+                displayName: +1 514-000-0000
+                status: active
+                info:
+                  phoneNumber: '+15140000000'
+                  city: MONTREAL
+                  country: CA
+                  state: QC
+                raw:
+                  FromZip: ''
+                  FromState: QC
+                  FromCity: MONTREAL
+                  FromCountry: CA
+                  From: '+15140000000'
+                lastSeen: '2021-08-27T15:53:06.721Z'
+                linkedAt: '2021-08-27T15:52:47.998Z'
+              reason: confirmed
     conversationCreateEvent:
       value:
         app:
