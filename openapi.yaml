@@ -2725,8 +2725,8 @@ paths:
                   example: '658965'
                 grant_type:
                   type: string
-                  description: Must be set to authorization_code
-                  example: '658965'
+                  description: Must be set to the string `authorization_code`
+                  example: authorization_code
                 client_id:
                   type: string
                   description: Your integration’s unique identifier
@@ -5489,85 +5489,107 @@ components:
               default: web
             brandColor:
               type: string
-              description: >-
+              description: >
                 This color will be used in the messenger header and the button
-                or tab in idle state. Must be a 3 or 6-character hexadecimal
-                color.
+                or tab
+
+                in idle state. Must be a 3 or 6-character hexadecimal color.
               default: 65758e
             fixedIntroPane:
               type: boolean
-              description: >-
+              description: >
                 When true, the introduction pane will be pinned at the top of
-                the conversation instead of scrolling with it.
+                the
+
+                conversation instead of scrolling with it.
               default: false
             conversationColor:
               type: string
-              description: >-
+              description: >
                 This color will be used for customer messages, quick replies and
+
                 actions in the footer. Must be a 3 or 6-character hexadecimal
                 color.
               default: 0099ff
             actionColor:
               type: string
-              description: >-
+              description: >
                 This color will be used for call-to-actions inside your
-                messages. Must be a 3 or 6-character hexadecimal color.
+                messages. Must
+
+                be a 3 or 6-character hexadecimal color.
               default: 0099ff
             displayStyle:
               type: string
-              description: >-
+              description: >
                 Choose how the messenger will appear on your website. Must be
-                either button or tab.
+                either
+
+                button or tab.
               default: button
             buttonIconUrl:
               type: string
-              description: >-
+              description: >
                 With the button style Web Messenger, you have the option of
-                selecting your own button icon. The image must be at least 200 x
-                200 pixels and must be in either JPG, PNG, or GIF format.
+                selecting
+
+                your own button icon. The image must be at least 200 x 200
+                pixels and
+
+                must be in either JPG, PNG, or GIF format.
               nullable: true
               example: 'https://domain.com/images/avatar.png'
             buttonWidth:
               type: string
-              description: >-
+              description: >
                 With the button style Web Messenger, you have the option of
-                specifying the button width.
+                specifying
+
+                the button width.
               default: '58'
             buttonHeight:
               type: string
-              description: >-
+              description: >
                 With the button style Web Messenger, you have the option of
-                specifying the button height.
+                specifying
+
+                the button height.
               default: '58'
             integrationOrder:
               type: array
-              description: >-
+              description: >
                 Array of integration IDs, order will be reflected in the Web
+
                 Messenger. When set, only integrations from this list will be
+
                 displayed in the Web Messenger. If unset, all integrations will
-                be displayed.
+                be
+
+                displayed.
               items:
                 type: string
               nullable: true
-              example:
-                - 59fc8466260f48003505228b
-                - 59d79780481d34002b7d3617
+              example: '["59fc8466260f48003505228b", "59d79780481d34002b7d3617"]'
             businessName:
               type: string
               description: A custom business name for the Web Messenger.
               example: Kent Shop
             businessIconUrl:
               type: string
-              description: >-
+              description: >
                 A custom business icon url for the Web Messenger. The image must
-                be at least 200 x 200 pixels and must be in either JPG, PNG, or
-                GIF format.
+                be at
+
+                least 200 x 200 pixels and must be in either JPG, PNG, or GIF
+                format.
               example: 'https://www.gravatar.com/image.jpg'
             backgroundImageUrl:
               type: string
-              description: >-
+              description: >
                 A background image url for the conversation. Image will be tiled
-                to fit the window.
+                to
+
+                fit the window.
               example: 'https://a-beautiful-tile.png'
             originWhitelist:
               type: array
@@ -5582,21 +5604,37 @@ components:
               items:
                 type: string
               nullable: true
-              example:
-                - 'https://yourdomain.com'
+              example: 'https://yourdomain.com'
             prechatCapture:
-              description: >-
+              description: >
                 Object whose properties can be set to specify the add-on’s
-                options. See the
+                options.
+
+                See the
+
                 [guide](https://docs.smooch.io/guide/web-messenger/#prechat-capture)
+
                 to learn more about Prechat Capture.
               allOf:
                 - $ref: '#/components/schemas/prechatCapture'
+            canUserSeeConversationList:
+              type: boolean
+              description: >
+                Allows users to view their list of conversations. By default,
+                the list
+
+                of conversations will be visible. *This setting only applies to
+                apps
+
+                where `settings.multiConvoEnabled` is set to `true`*.
+              example: false
             canUserCreateMoreConversations:
               type: boolean
-              description: >-
+              description: >
                 Allows users to create more than one conversation on the web
-                messenger integration.
+                messenger
+
+                integration.
     whatsapp:
       allOf:
         - $ref: '#/components/schemas/integration'
