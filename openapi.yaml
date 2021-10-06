@@ -4062,14 +4062,14 @@ components:
           maxLength: 128
         placeholder:
           type: string
-          description: Placeholder text for the field. form message only.
+          description: Placeholder text for the field. Form message only.
           minLength: 1
           maxLength: 128
         minSize:
           type: integer
           description: >-
             The minimum allowed length for the response for a field of type
-            text. form message only.
+            text. Form message only.
           default: 1
           minimum: 1
           maximum: 128
@@ -4077,7 +4077,7 @@ components:
           type: integer
           description: >-
             The maximum allowed length for the response for a field of type
-            text. form message only.
+            text. Form message only.
           default: 128
           minimum: 1
           maximum: 128
@@ -4095,7 +4095,7 @@ components:
           type: array
           description: >-
             Array of objects representing the response for a field of type
-            select. form and formResponse messages only.
+            select. Form and formResponse messages only.
           items:
             type: object
         options:
@@ -4106,7 +4106,9 @@ components:
         - label
     formMessage:
       type: object
-      description: A form type message without text or actions.
+      description: >-
+        A form type message without text or actions. Only supported in the Web
+        SDK.
       properties:
         type:
           type: string
@@ -4114,9 +4116,7 @@ components:
           default: form
         blockChatInput:
           type: boolean
-          description: >-
-            true if the message should block the chat input on Web Messenger.
-            form message only.
+          description: true if the message should block the chat input on Web Messenger.
         fields:
           type: array
           items:
