@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.4.5
+  version: 9.4.6
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -5286,6 +5286,14 @@ components:
               description: A Facebook App Secret.
               writeOnly: true
               example: your_facebook_app_secret
+            pageId:
+              type: number
+              description: A Facebook page ID.
+              example: '123212323432123'
+            pageName:
+              type: string
+              description: A Facebook page name.
+              example: An Awesome Page
           required:
             - pageAccessToken
             - appId
