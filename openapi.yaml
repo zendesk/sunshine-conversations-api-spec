@@ -3883,6 +3883,12 @@ components:
           description: Array of message actions.
           items:
             $ref: '#/components/schemas/action'
+        payload:
+          type: string
+          description: >-
+            The payload of a [reply
+            button](https://docs.smooch.io/guide/structured-messages/#reply-buttons)
+            response message.
       required:
         - type
     actionSubset:
