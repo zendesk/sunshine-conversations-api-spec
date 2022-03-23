@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.4.6
+  version: 9.6.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -517,6 +517,9 @@ tags:
       integration to active fails. |
 
       | user:merge         | When two or more users are merged into one. |
+
+      | user:update         | When a user is updated. (Currently, when a user's
+      identification is updated.)|
 
 
       ## Securing Sunshine Conversations Webhooks
@@ -2840,6 +2843,7 @@ x-webhooks:
                       - $ref: '#/components/schemas/switchboardPassControl'
                       - $ref: '#/components/schemas/switchboardPassControlFailure'
                       - $ref: '#/components/schemas/userMergeEvent'
+                      - $ref: '#/components/schemas/userUpdateEvent'
             examples:
               'client:add':
                 $ref: '#/components/examples/clientAddEvent'
@@ -2883,6 +2887,8 @@ x-webhooks:
                 $ref: '#/components/examples/switchboardPassControlFailureEvent'
               'user:merge':
                 $ref: '#/components/examples/userMergeEvent'
+              'user:update':
+                $ref: '#/components/examples/userUpdateEvent'
       responses:
         '200':
           description: Ok
@@ -7460,6 +7466,36 @@ components:
                     - channelLinking
                     - sdkLogin
       title: 'user:merge'
+    userUpdateEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: >-
+                The payload of the event. The contents of this object depend on
+                the type of event.
+              properties:
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/user'
+                  description: The updated user.
+                reason:
+                  type: string
+                  description: >
+                    The reason why the user was updated, if applicable.
+
+                    * `authentication` - An anonymous user became an
+                    [identified](https://docs.smooch.io/guide/intro-to-users/)
+                    user.
+                  enum:
+                    - authentication
+                source:
+                  allOf:
+                    - $ref: '#/components/schemas/sourceWebhook'
+                  description: The source of the creation.
+      title: 'user:update'
   parameters:
     pageQuery:
       name: page
@@ -8605,6 +8641,25 @@ components:
                   id: 1a64f7f75028fef55f815007
                   externalId: '912382198'
               reason: api
+    userUpdateEvent:
+      value:
+        app:
+          id: 5ebee0975ac5304b664a12fa
+        webhook:
+          id: 5f4eaef81e3dcc117c7ba48a
+          version: v2
+        events:
+          - id: 5f74a0d52b5315fc007e798a
+            createdAt: 2020-09-30T15:14:29.834Z
+            type: 'user:update'
+            payload:
+              user:
+                id: 26508c10541a4b0ff472e5e2
+                externalId: 9128asd219s7
+              reason: authentication
+              source:
+                type: web
+                integrationId: 5ecff63ffc3ab25f4561c8a0
 security:
   - bearerAuth:
       - app
