@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.6.0
+  version: 9.7.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -1645,6 +1645,40 @@ paths:
             application/json:
               schema:
                 type: object
+        '404':
+          description: Not Found
+  '/v2/apps/{appId}/conversations/{conversationId}/releaseControl':
+    parameters:
+      - $ref: '#/components/parameters/appId'
+      - $ref: '#/components/parameters/conversationId'
+    post:
+      tags:
+        - Switchboard Actions
+      summary: Release Control
+      operationId: releaseControl
+      description: >-
+        The releaseControl action releases the control of the conversation by
+        nullifying its switchboard state. When using integration auth scope, a
+        403 is returned if the active switchboard integration is not the
+        authenticated integration.
+      security:
+        - basicAuth:
+            - integration
+            - app
+            - account
+        - bearerAuth:
+            - integration
+            - app
+            - account
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+        '403':
+          description: Forbidden
         '404':
           description: Not Found
   '/v2/apps/{appId}/integrations':
