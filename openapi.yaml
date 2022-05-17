@@ -344,11 +344,11 @@ info:
   x-logo:
     url: sunco_logo.svg
     altText: Sunshine Conversations
-    href: 'https://smooch.io/'
+    href: https://smooch.io/
 servers:
-  - url: 'https://api.smooch.io'
+  - url: https://api.smooch.io
     description: United States server
-  - url: 'https://api.eu-1.smooch.io'
+  - url: https://api.eu-1.smooch.io
     description: European Union server
 tags:
   - name: Apps
@@ -713,7 +713,7 @@ paths:
           description: Invalid page query parameters
         '403':
           description: The serviceAccountId provided does not match supplied credentials
-  '/v2/apps/{appId}':
+  /v2/apps/{appId}:
     parameters:
       - $ref: '#/components/parameters/appId'
     get:
@@ -771,7 +771,7 @@ paths:
         - Apps
       summary: Delete App
       operationId: deleteApp
-      description: 'Removes the specified app, including all its enabled integrations.'
+      description: Removes the specified app, including all its enabled integrations.
       security:
         - basicAuth:
             - account
@@ -786,7 +786,7 @@ paths:
                 type: object
         '404':
           description: App not found
-  '/v2/apps/{appId}/keys':
+  /v2/apps/{appId}/keys:
     parameters:
       - $ref: '#/components/parameters/appId'
     post:
@@ -848,7 +848,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appKeyListResponse'
-  '/v2/apps/{appId}/keys/{keyId}':
+  /v2/apps/{appId}/keys/{keyId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/keyId'
@@ -892,7 +892,7 @@ paths:
                 type: object
         '404':
           description: App not found
-  '/v2/apps/{appId}/attachments':
+  /v2/apps/{appId}/attachments:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/accessQuery'
@@ -936,7 +936,7 @@ paths:
                 $ref: '#/components/schemas/attachmentResponse'
         '400':
           description: Bad request
-  '/v2/apps/{appId}/attachments/remove':
+  /v2/apps/{appId}/attachments/remove:
     parameters:
       - $ref: '#/components/parameters/appId'
     post:
@@ -978,7 +978,7 @@ paths:
                 type: object
         '404':
           description: Attachment not found
-  '/v2/apps/{appId}/attachments/token':
+  /v2/apps/{appId}/attachments/token:
     parameters:
       - $ref: '#/components/parameters/appId'
     post:
@@ -1015,7 +1015,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/attachmentMediaTokenResponse'
-  '/v2/apps/{appId}/attachments/cookie':
+  /v2/apps/{appId}/attachments/cookie:
     parameters:
       - $ref: '#/components/parameters/appId'
     get:
@@ -1040,7 +1040,7 @@ paths:
             application/json:
               schema:
                 type: object
-  '/v2/apps/{appId}/conversations':
+  /v2/apps/{appId}/conversations:
     parameters:
       - $ref: '#/components/parameters/appId'
     post:
@@ -1111,7 +1111,7 @@ paths:
           description: Invalid page query parameters
         '404':
           description: User not found
-  '/v2/apps/{appId}/conversations/{conversationId}':
+  /v2/apps/{appId}/conversations/{conversationId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1200,7 +1200,7 @@ paths:
             is the default.
         '404':
           description: Conversation not found
-  '/v2/apps/{appId}/conversations/{conversationId}/join':
+  /v2/apps/{appId}/conversations/{conversationId}/join:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1245,7 +1245,7 @@ paths:
           description: Too many participants
         '404':
           description: Conversation not found
-  '/v2/apps/{appId}/conversations/{conversationId}/participants':
+  /v2/apps/{appId}/conversations/{conversationId}/participants:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1287,7 +1287,7 @@ paths:
           description: Invalid page query parameters
         '404':
           description: Not found
-  '/v2/apps/{appId}/conversations/{conversationId}/leave':
+  /v2/apps/{appId}/conversations/{conversationId}/leave:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1323,7 +1323,7 @@ paths:
                 type: object
         '404':
           description: User is not a member of the conversation
-  '/v2/apps/{appId}/conversations/{conversationId}/messages':
+  /v2/apps/{appId}/conversations/{conversationId}/messages:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1458,7 +1458,7 @@ paths:
                 type: object
         '404':
           description: Not found
-  '/v2/apps/{appId}/conversations/{conversationId}/messages/{messageId}':
+  /v2/apps/{appId}/conversations/{conversationId}/messages/{messageId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1487,7 +1487,7 @@ paths:
                 type: object
         '404':
           description: Not found
-  '/v2/apps/{appId}/conversations/{conversationId}/activity':
+  /v2/apps/{appId}/conversations/{conversationId}/activity:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1524,7 +1524,7 @@ paths:
                   author:
                     type: user
                     userId: 5963c0d619a30a2e00de36b8
-                  type: 'conversation:read'
+                  type: conversation:read
       responses:
         '200':
           description: Ok
@@ -1532,7 +1532,7 @@ paths:
             application/json:
               schema:
                 type: object
-  '/v2/apps/{appId}/conversations/{conversationId}/acceptControl':
+  /v2/apps/{appId}/conversations/{conversationId}/acceptControl:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1572,7 +1572,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/v2/apps/{appId}/conversations/{conversationId}/offerControl':
+  /v2/apps/{appId}/conversations/{conversationId}/offerControl:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1611,7 +1611,7 @@ paths:
                 type: object
         '404':
           description: Not Found
-  '/v2/apps/{appId}/conversations/{conversationId}/passControl':
+  /v2/apps/{appId}/conversations/{conversationId}/passControl:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1647,7 +1647,7 @@ paths:
                 type: object
         '404':
           description: Not Found
-  '/v2/apps/{appId}/conversations/{conversationId}/releaseControl':
+  /v2/apps/{appId}/conversations/{conversationId}/releaseControl:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
@@ -1681,7 +1681,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/v2/apps/{appId}/integrations':
+  /v2/apps/{appId}/integrations:
     parameters:
       - $ref: '#/components/parameters/appId'
     post:
@@ -1756,7 +1756,7 @@ paths:
                   $ref: '#/components/examples/integrationListResponse'
         '400':
           description: Invalid query parameters
-  '/v2/apps/{appId}/integrations/{integrationId}':
+  /v2/apps/{appId}/integrations/{integrationId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/integrationId'
@@ -1845,7 +1845,7 @@ paths:
                 type: object
         '404':
           description: Integration not found
-  '/v2/apps/{appId}/integrations/{integrationId}/keys':
+  /v2/apps/{appId}/integrations/{integrationId}/keys:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/integrationId'
@@ -1916,7 +1916,7 @@ paths:
                       $ref: '#/components/schemas/apiKey'
         '400':
           description: API keys are available only for custom integrations
-  '/v2/apps/{appId}/integrations/{integrationId}/keys/{keyId}':
+  /v2/apps/{appId}/integrations/{integrationId}/keys/{keyId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/integrationId'
@@ -1961,7 +1961,7 @@ paths:
             application/json:
               schema:
                 type: object
-  '/v2/apps/{appId}/integrations/{integrationId}/webhooks':
+  /v2/apps/{appId}/integrations/{integrationId}/webhooks:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/integrationId'
@@ -2025,7 +2025,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/v2/apps/{appId}/integrations/{integrationId}/webhooks/{webhookId}':
+  /v2/apps/{appId}/integrations/{integrationId}/webhooks/{webhookId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/integrationId'
@@ -2110,7 +2110,7 @@ paths:
                 type: object
         '404':
           description: Not Found
-  '/v2/apps/{appId}/switchboards':
+  /v2/apps/{appId}/switchboards:
     parameters:
       - $ref: '#/components/parameters/appId'
     post:
@@ -2164,7 +2164,7 @@ paths:
                 $ref: '#/components/schemas/switchboardListResponse'
         '404':
           description: Not Found
-  '/v2/apps/{appId}/switchboards/{switchboardId}':
+  /v2/apps/{appId}/switchboards/{switchboardId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/switchboardId'
@@ -2221,7 +2221,7 @@ paths:
                 type: object
         '404':
           description: Not Found
-  '/v2/apps/{appId}/switchboards/{switchboardId}/switchboardIntegrations':
+  /v2/apps/{appId}/switchboards/{switchboardId}/switchboardIntegrations:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/switchboardId'
@@ -2248,7 +2248,7 @@ paths:
               request:
                 value:
                   name: bot
-                  integrationType: 'zd:agentWorkspace'
+                  integrationType: zd:agentWorkspace
                   deliverStandbyEvents: true
                   nextSwitchboardIntegrationId: 5ef21b86e933b7355c11c606
                   messageHistoryCount: 5
@@ -2286,7 +2286,7 @@ paths:
                 $ref: '#/components/schemas/switchboardIntegrationListResponse'
         '404':
           description: Switchboard not found
-  '/v2/apps/{appId}/switchboards/{switchboardId}/switchboardIntegrations/{switchboardIntegrationId}':
+  /v2/apps/{appId}/switchboards/{switchboardId}/switchboardIntegrations/{switchboardIntegrationId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/switchboardId'
@@ -2314,7 +2314,7 @@ paths:
               request:
                 value:
                   name: bot
-                  integrationType: 'zd:agentWorkspace'
+                  integrationType: zd:agentWorkspace
                   deliverStandbyEvents: true
                   nextSwitchboardIntegrationId: 5ef21b86e933b7355c11c606
                   messageHistoryCount: 5
@@ -2359,7 +2359,7 @@ paths:
                 type: object
         '404':
           description: Not Found
-  '/v2/apps/{appId}/users':
+  /v2/apps/{appId}/users:
     parameters:
       - $ref: '#/components/parameters/appId'
     post:
@@ -2392,7 +2392,7 @@ paths:
                 $ref: '#/components/schemas/userResponse'
         '409':
           description: User already exists
-  '/v2/apps/{appId}/users/{userIdOrExternalId}':
+  /v2/apps/{appId}/users/{userIdOrExternalId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
@@ -2478,7 +2478,7 @@ paths:
                 type: object
         '404':
           description: User not found
-  '/v2/apps/{appId}/users/{userIdOrExternalId}/clients':
+  /v2/apps/{appId}/users/{userIdOrExternalId}/clients:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
@@ -2517,14 +2517,14 @@ paths:
                     integrationId: 582dedf230e788746891281a
                     primary: true
                     address: steveb@channel5.com
-                    subject: 'New message from {appName}'
+                    subject: New message from {appName}
                   confirmation:
                     type: immediate
                     message:
                       author:
                         type: business
                         displayName: Steve
-                        avatarUrl: 'https://www.gravatar.com/image.jpg'
+                        avatarUrl: https://www.gravatar.com/image.jpg
                       content:
                         type: text
                         text: Hello!
@@ -2545,7 +2545,7 @@ paths:
                       author:
                         type: business
                         displayName: Steve
-                        avatarUrl: 'https://www.gravatar.com/image.jpg'
+                        avatarUrl: https://www.gravatar.com/image.jpg
                       content:
                         type: text
                         text: Hello!
@@ -2566,7 +2566,7 @@ paths:
                       author:
                         type: business
                         displayName: Steve
-                        avatarUrl: 'https://www.gravatar.com/image.jpg'
+                        avatarUrl: https://www.gravatar.com/image.jpg
                       content:
                         type: text
                         text: Hello!
@@ -2587,7 +2587,7 @@ paths:
                       author:
                         type: business
                         displayName: Steve
-                        avatarUrl: 'https://www.gravatar.com/image.jpg'
+                        avatarUrl: https://www.gravatar.com/image.jpg
                       content:
                         type: text
                         text: Hello!
@@ -2644,7 +2644,7 @@ paths:
                 $ref: '#/components/schemas/clientListResponse'
         '400':
           description: Invalid page query parameters
-  '/v2/apps/{appId}/users/{userIdOrExternalId}/clients/{clientId}':
+  /v2/apps/{appId}/users/{userIdOrExternalId}/clients/{clientId}:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
@@ -2677,7 +2677,7 @@ paths:
           description: Cannot remove a client of type 'sdk'
         '404':
           description: Client not found
-  '/v2/apps/{appId}/users/{userIdOrExternalId}/personalinformation':
+  /v2/apps/{appId}/users/{userIdOrExternalId}/personalinformation:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
@@ -2879,49 +2879,49 @@ x-webhooks:
                       - $ref: '#/components/schemas/userMergeEvent'
                       - $ref: '#/components/schemas/userUpdateEvent'
             examples:
-              'client:add':
+              client:add:
                 $ref: '#/components/examples/clientAddEvent'
-              'client:remove':
+              client:remove:
                 $ref: '#/components/examples/clientRemoveEvent'
-              'client:update':
+              client:update:
                 $ref: '#/components/examples/clientUpdateEvent'
-              'conversation:create':
+              conversation:create:
                 $ref: '#/components/examples/conversationCreateEvent'
-              'conversation:join':
+              conversation:join:
                 $ref: '#/components/examples/conversationJoinEvent'
-              'conversation:leave':
+              conversation:leave:
                 $ref: '#/components/examples/conversationLeaveEvent'
-              'conversation:remove':
+              conversation:remove:
                 $ref: '#/components/examples/conversationRemoveEvent'
-              'conversation:message:delivery:channel':
+              conversation:message:delivery:channel:
                 $ref: '#/components/examples/conversationMessageDeliveryChannelEvent'
-              'conversation:message:delivery:failure':
+              conversation:message:delivery:failure:
                 $ref: '#/components/examples/conversationMessageDeliveryFailureEvent'
-              'conversation:message:delivery:user':
+              conversation:message:delivery:user:
                 $ref: '#/components/examples/conversationMessageDeliveryUserEvent'
-              'conversation:message':
+              conversation:message:
                 $ref: '#/components/examples/conversationMessageEvent'
-              'conversation:postback':
+              conversation:postback:
                 $ref: '#/components/examples/conversationPostbackEvent'
-              'conversation:read':
+              conversation:read:
                 $ref: '#/components/examples/conversationReadEvent'
-              'conversation:typing':
+              conversation:typing:
                 $ref: '#/components/examples/conversationTypingEvent'
-              'switchboard:acceptControl':
+              switchboard:acceptControl:
                 $ref: '#/components/examples/switchboardAcceptControlEvent'
-              'switchboard:acceptControl:failure':
+              switchboard:acceptControl:failure:
                 $ref: '#/components/examples/switchboardAcceptControlFailureEvent'
-              'switchboard:offerControl':
+              switchboard:offerControl:
                 $ref: '#/components/examples/switchboardOfferControlEvent'
-              'switchboard:offerControl:failure':
+              switchboard:offerControl:failure:
                 $ref: '#/components/examples/switchboardOfferControlFailureEvent'
-              'switchboard:passControl':
+              switchboard:passControl:
                 $ref: '#/components/examples/switchboardPassControlEvent'
-              'switchboard:passControl:failure':
+              switchboard:passControl:failure:
                 $ref: '#/components/examples/switchboardPassControlFailureEvent'
-              'user:merge':
+              user:merge:
                 $ref: '#/components/examples/userMergeEvent'
-              'user:update':
+              user:update:
                 $ref: '#/components/examples/userUpdateEvent'
       responses:
         '200':
@@ -3118,20 +3118,20 @@ components:
           example: 55c8d9758590aa1900b9b9f6
     links:
       type: object
-      description: 'Previous and next page links, if they exist.'
+      description: Previous and next page links, if they exist.
       properties:
         prev:
           type: string
           description: >-
             A link to the previous page. Not specified if there are no previous
             pages.
-          example: 'https://api.smooch.io/v2/apps?page[before]=fcafad804c39a39648004af9'
+          example: https://api.smooch.io/v2/apps?page[before]=fcafad804c39a39648004af9
         next:
           type: string
           description: >-
             A link to the next page. Not specified if there are no subsequent
             pages.
-          example: 'https://api.smooch.io/v2/apps?page[after]=5ea868f862cdd24abf010b38'
+          example: https://api.smooch.io/v2/apps?page[after]=5ea868f862cdd24abf010b38
     appListResponse:
       type: object
       properties:
@@ -3250,7 +3250,7 @@ components:
         mediaUrl:
           type: string
           description: The media URL used for a file or image message.
-          example: 'https://s3.amazonaws.com/document.pdf'
+          example: https://s3.amazonaws.com/document.pdf
       required:
         - mediaUrl
     attachmentMediaTokenBody:
@@ -3310,7 +3310,7 @@ components:
         switchboard. If referencing an OAuth integration, the clientId issued by
         Sunshine Conversations during the OAuth partnership process will be the
         value of integrationType.
-      example: 'zd:agentWorkspace'
+      example: zd:agentWorkspace
     switchboardIntegrationWebhook:
       type: object
       properties:
@@ -3365,7 +3365,7 @@ components:
       description: >-
         A custom conversation icon url. The image must be in either JPG, PNG, or
         GIF format
-      example: 'https://www.gravatar.com/image.jpg'
+      example: https://www.gravatar.com/image.jpg
     conversation:
       allOf:
         - $ref: '#/components/schemas/conversationTruncated'
@@ -4042,7 +4042,7 @@ components:
         mediaUrl:
           type: string
           format: uri
-          description: 'The URL for media, such as an image, attached to the message.'
+          description: The URL for media, such as an image, attached to the message.
         mediaSize:
           type: number
           description: The size of the media.
@@ -4213,7 +4213,7 @@ components:
         mediaUrl:
           type: string
           format: uri
-          description: 'The URL for media, such as an image, attached to the message.'
+          description: The URL for media, such as an image, attached to the message.
         altText:
           type: string
           maxLength: 128
@@ -4742,11 +4742,11 @@ components:
       properties:
         type:
           type: string
-          description: 'If the author type is `user`, only `conversation:read` is supported.'
+          description: If the author type is `user`, only `conversation:read` is supported.
           enum:
-            - 'conversation:read'
-            - 'typing:start'
-            - 'typing:stop'
+            - conversation:read
+            - typing:start
+            - typing:stop
     activityPost:
       allOf:
         - type: object
@@ -4923,14 +4923,14 @@ components:
     target:
       type: string
       description: URL to be called when the webhook is triggered.
-      example: 'https://example.com/callback'
+      example: https://example.com/callback
     triggers:
       type: array
       items:
         type: string
       example:
-        - 'conversation:read'
-        - 'conversation:message'
+        - conversation:read
+        - conversation:message
       description: >-
         An array of triggers the integration is subscribed to. This property is
         case sensitive. [More
@@ -4968,7 +4968,7 @@ components:
           $ref: '#/components/schemas/triggers'
         secret:
           type: string
-          description: 'Webhook secret, used to verify the origin of incoming requests.'
+          description: Webhook secret, used to verify the origin of incoming requests.
           example: 8564b3e6a8b20a4bdb68b05ce9bc5936
         includeFullUser:
           $ref: '#/components/schemas/includeFullUser'
@@ -5166,7 +5166,7 @@ components:
               description: >-
                 URL provided by LINE in the [Developer
                 Console](https://developers.line.biz/console/).
-              example: 'https://qr-official.line.me/M/1O4fb8.png'
+              example: https://qr-official.line.me/M/1O4fb8.png
             lineId:
               type: string
               description: LINE Basic ID. Is automatically set when qrCodeUrl is updated.
@@ -5361,7 +5361,7 @@ components:
               description: Telegram Bot Token.
               minLength: 1
               writeOnly: true
-              example: '192033615:AAEuee2FS2JYKWfDlTulfygjaIGJi4s'
+              example: 192033615:AAEuee2FS2JYKWfDlTulfygjaIGJi4s
             username:
               type: string
               description: Username of the botId
@@ -5426,7 +5426,7 @@ components:
               default: twitter
             tier:
               type: string
-              description: 'Your Twitter app’s tier, sandbox, premium or enterprise.'
+              description: Your Twitter app’s tier, sandbox, premium or enterprise.
               enum:
                 - sandbox
                 - premium
@@ -5502,7 +5502,7 @@ components:
             Sets the URL of the avatar to use for the automatic reply to the
             prechat capture messages.
           default: undefined
-          example: 'https://domain.com/images/avatar.png'
+          example: https://domain.com/images/avatar.png
         enabled:
           type: boolean
           description: >-
@@ -5593,7 +5593,7 @@ components:
 
                 must be in either JPG, PNG, or GIF format.
               nullable: true
-              example: 'https://domain.com/images/avatar.png'
+              example: https://domain.com/images/avatar.png
             buttonWidth:
               type: string
               description: >
@@ -5637,7 +5637,7 @@ components:
 
                 least 200 x 200 pixels and must be in either JPG, PNG, or GIF
                 format.
-              example: 'https://www.gravatar.com/image.jpg'
+              example: https://www.gravatar.com/image.jpg
             backgroundImageUrl:
               type: string
               description: >
@@ -5645,7 +5645,7 @@ components:
                 to
 
                 fit the window.
-              example: 'https://a-beautiful-tile.png'
+              example: https://a-beautiful-tile.png
             originWhitelist:
               type: array
               description: >
@@ -5659,7 +5659,7 @@ components:
               items:
                 type: string
               nullable: true
-              example: 'https://yourdomain.com'
+              example: https://yourdomain.com
             prechatCapture:
               description: >
                 Object whose properties can be set to specify the add-on’s
@@ -5990,13 +5990,13 @@ components:
                 A custom business icon url for the Web Messenger. The image must
                 be at least 200 x 200 pixels and must be in either JPG, PNG, or
                 GIF format.
-              example: 'https://www.gravatar.com/image.jpg'
+              example: https://www.gravatar.com/image.jpg
             backgroundImageUrl:
               type: string
               description: >-
                 A background image url for the conversation. Image will be tiled
                 to fit the window.
-              example: 'https://a-beautiful-tile.png'
+              example: https://a-beautiful-tile.png
             originWhitelist:
               type: array
               description: >
@@ -6335,7 +6335,7 @@ components:
           minLength: 1
           maxLength: 2048
           nullable: true
-          example: 'https://s3.amazonaws.com/avatar.jpg'
+          example: https://s3.amazonaws.com/avatar.jpg
         locale:
           type: string
           description: End-user's locale information in BCP 47 format.
@@ -6443,7 +6443,7 @@ components:
             subject:
               type: string
               description: May be specified to set the subject for the outgoing email.
-              default: 'New message from {appName}'
+              default: New message from {appName}
           required:
             - address
     matchCriteriaMessagebird:
@@ -6644,7 +6644,7 @@ components:
             `YYYY-MM-DDThh:mm:ss.SSSZ`.
       example:
         id: 0ca7d56ba7b2e081e479fe9e
-        type: 'conversation:message'
+        type: conversation:message
         createdAt: '2020-02-25T18:06:37.547Z'
     sourceWebhook:
       type: object
@@ -6738,7 +6738,7 @@ components:
                   description: >-
                     The source where this event originated from. This could be
                     the API or an SDK device.
-      title: 'client:add'
+      title: client:add
     clientRemoveEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -6805,7 +6805,7 @@ components:
                   description: >-
                     The source where this event originated from. This could be
                     the API or an SDK device.
-      title: 'client:remove'
+      title: client:remove
     clientUpdateEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -6845,7 +6845,7 @@ components:
                     - confirmed
                     - blocked
                     - matched
-      title: 'client:update'
+      title: client:update
     referral:
       type: object
       properties:
@@ -6859,11 +6859,11 @@ components:
           properties:
             source:
               type: string
-              description: 'The source of the referral - MESSENGER_CODE, ADS etc…'
+              description: The source of the referral - MESSENGER_CODE, ADS etc…
               example: MESSENGER_CODE
             type:
               type: string
-              description: 'The type of referral, typically OPEN-THREAD.'
+              description: The type of referral, typically OPEN-THREAD.
               example: OPEN-THREAD
             adId:
               type: string
@@ -6937,9 +6937,9 @@ components:
                 referral:
                   allOf:
                     - $ref: '#/components/schemas/referral'
-                  description: 'Referral information, if applicable.'
+                  description: Referral information, if applicable.
                   nullable: true
-      title: 'conversation:create'
+      title: conversation:create
     conversationJoinEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -6959,7 +6959,7 @@ components:
                   allOf:
                     - $ref: '#/components/schemas/userTruncated'
                   description: The user that joined the conversation.
-      title: 'conversation:join'
+      title: conversation:join
     conversationLeaveEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -6979,7 +6979,7 @@ components:
                   allOf:
                     - $ref: '#/components/schemas/userTruncated'
                   description: The user that left the conversation.
-      title: 'conversation:leave'
+      title: conversation:leave
     conversationRemoveEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -6995,7 +6995,7 @@ components:
                   allOf:
                     - $ref: '#/components/schemas/conversationTruncated'
                   description: The conversation that was deleted.
-      title: 'conversation:remove'
+      title: conversation:remove
     conversationMessageDeliveryPayload:
       type: object
       description: >-
@@ -7058,7 +7058,7 @@ components:
           properties:
             payload:
               $ref: '#/components/schemas/conversationMessageDeliveryPayload'
-      title: 'conversation:message:delivery:channel'
+      title: conversation:message:delivery:channel
     conversationMessageDeliveryFailureEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7083,7 +7083,7 @@ components:
                         message:
                           type: string
                           description: The description associated with the error.
-      title: 'conversation:message:delivery:failure'
+      title: conversation:message:delivery:failure
     conversationMessageDeliveryUserEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7091,7 +7091,7 @@ components:
           properties:
             payload:
               $ref: '#/components/schemas/conversationMessageDeliveryPayload'
-      title: 'conversation:message:delivery:user'
+      title: conversation:message:delivery:user
     authorWebhook:
       type: object
       description: The author of the activity.
@@ -7178,7 +7178,7 @@ components:
                     message.
                   items:
                     $ref: '#/components/schemas/messageWebhook'
-      title: 'conversation:message'
+      title: conversation:message
     postbackWebhook:
       type: object
       properties:
@@ -7214,7 +7214,7 @@ components:
                   allOf:
                     - $ref: '#/components/schemas/sourceWebhook'
                   description: The source of the postback.
-      title: 'conversation:postback'
+      title: conversation:postback
     activity:
       allOf:
         - $ref: '#/components/schemas/activityTypes'
@@ -7249,9 +7249,9 @@ components:
                         type:
                           type: string
                           description: The type of activity.
-                          default: 'conversation:read'
+                          default: conversation:read
                   description: The activity that was sent.
-      title: 'conversation:read'
+      title: conversation:read
     conversationTypingEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7276,7 +7276,7 @@ components:
                           type: string
                           description: The type of activity.
                   description: The activity that was sent.
-      title: 'conversation:typing'
+      title: conversation:typing
     switchboardAcceptControl:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7297,7 +7297,7 @@ components:
                     the integration that has just accepted control.
                 metadata:
                   $ref: '#/components/schemas/metadata'
-      title: 'switchboard:acceptControl'
+      title: switchboard:acceptControl
     switchboardAcceptControlFailure:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7318,7 +7318,7 @@ components:
                   description: The conversation from which the switchboard event was fired.
                 metadata:
                   $ref: '#/components/schemas/metadata'
-      title: 'switchboard:acceptControl:failure'
+      title: switchboard:acceptControl:failure
     switchboardOfferControl:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7342,7 +7342,7 @@ components:
                     integration being offered control.
                 metadata:
                   $ref: '#/components/schemas/metadata'
-      title: 'switchboard:offerControl'
+      title: switchboard:offerControl
     switchboardOfferControlFailure:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7363,7 +7363,7 @@ components:
                   description: The conversation from which the switchboard event was fired.
                 metadata:
                   $ref: '#/components/schemas/metadata'
-      title: 'switchboard:offerControl:failure'
+      title: switchboard:offerControl:failure
     switchboardPassControl:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7385,7 +7385,7 @@ components:
                     integration that is now in control of the conversation.
                 metadata:
                   $ref: '#/components/schemas/metadata'
-      title: 'switchboard:passControl'
+      title: switchboard:passControl
     switchboardPassControlFailure:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7406,7 +7406,7 @@ components:
                   description: The conversation from which the switchboard event was fired.
                 metadata:
                   $ref: '#/components/schemas/metadata'
-      title: 'switchboard:passControl:failure'
+      title: switchboard:passControl:failure
     userMergeEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7499,7 +7499,7 @@ components:
                     - api
                     - channelLinking
                     - sdkLogin
-      title: 'user:merge'
+      title: user:merge
     userUpdateEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -7529,7 +7529,7 @@ components:
                   allOf:
                     - $ref: '#/components/schemas/sourceWebhook'
                   description: The source of the creation.
-      title: 'user:update'
+      title: user:update
   parameters:
     pageQuery:
       name: page
@@ -7649,7 +7649,7 @@ components:
             description: >-
               Comma-separated list of types to return. If omitted, all types are
               returned.
-            example: 'android,ios'
+            example: android,ios
       style: deepObject
       explode: true
     integrationId:
@@ -7735,7 +7735,7 @@ components:
         list will be used.
       schema:
         type: string
-        example: 'https://example.org'
+        example: https://example.org
   examples:
     text:
       value:
@@ -7753,7 +7753,7 @@ components:
           items:
             - title: Tacos
               description: Get your tacos today!
-              mediaUrl: 'https://example.org/image.jpg'
+              mediaUrl: https://example.org/image.jpg
               altText: A giant taco
               size: compact
               actions:
@@ -7762,10 +7762,10 @@ components:
                   payload: TACOS
                 - text: More info
                   type: link
-                  uri: 'https://example.org'
+                  uri: https://example.org
             - title: Ramen
               description: Get your ramen today!
-              mediaUrl: 'https://example.org/image.jpg'
+              mediaUrl: https://example.org/image.jpg
               altText: A chicken vegetable ramen bowl
               size: compact
               actions:
@@ -7774,7 +7774,7 @@ components:
                   payload: RAMEN
                 - text: More info
                   type: link
-                  uri: 'https://example.org'
+                  uri: https://example.org
     file:
       value:
         author:
@@ -7782,7 +7782,7 @@ components:
         content:
           type: file
           text: Here's our FAQ!
-          mediaUrl: 'https://example.org/FAQ.pdf'
+          mediaUrl: https://example.org/FAQ.pdf
           altText: FAQ.pdf
     form:
       value:
@@ -7811,7 +7811,7 @@ components:
         content:
           type: image
           text: Hello!
-          mediaUrl: 'https://example.org/image.jpg'
+          mediaUrl: https://example.org/image.jpg
           altText: A wonderful image
     list:
       value:
@@ -7822,7 +7822,7 @@ components:
           items:
             - title: Tacos
               description: Get your tacos today!
-              mediaUrl: 'https://example.org/image.jpg'
+              mediaUrl: https://example.org/image.jpg
               size: compact
               actions:
                 - text: Select
@@ -7830,10 +7830,10 @@ components:
                   payload: TACOS
                 - text: More info
                   type: link
-                  uri: 'https://example.org'
+                  uri: https://example.org
             - title: Ramen
               description: Get your ramen today!
-              mediaUrl: 'https://example.org/image.jpg'
+              mediaUrl: https://example.org/image.jpg
               size: compact
               actions:
                 - text: Select
@@ -7841,7 +7841,7 @@ components:
                   payload: RAMEN
                 - text: More info
                   type: link
-                  uri: 'https://example.org'
+                  uri: https://example.org
     location:
       value:
         author:
@@ -7872,7 +7872,7 @@ components:
                 parameters:
                   - type: image
                     image:
-                      link: 'https://image.jpg'
+                      link: https://image.jpg
               - type: body
                 parameters:
                   - type: text
@@ -7885,23 +7885,23 @@ components:
       value:
         messages:
           - id: 5f748c1a2b5315fc007e7977
-            received: 2020-09-30T13:46:02.733Z
+            received: '2020-09-30T13:46:02.733Z'
             author:
               type: business
-              avatarUrl: 'https://www.gravatar.com/image.jpg'
+              avatarUrl: https://www.gravatar.com/image.jpg
             content:
               type: text
               text: Hello!
             source:
-              type: 'api:conversations'
+              type: api:conversations
     carousel-2:
       value:
         messages:
           - id: 5f748c1a2b5315fc007e7977
-            received: 2020-09-30T13:46:02.733Z
+            received: '2020-09-30T13:46:02.733Z'
             author:
               type: business
-              avatarUrl: 'https://www.gravatar.com/image.jpg'
+              avatarUrl: https://www.gravatar.com/image.jpg
             content:
               type: carousel
               text: |-
@@ -7915,7 +7915,7 @@ components:
               items:
                 - title: Tacos
                   description: Get your tacos today!
-                  mediaUrl: 'https://example.org/image.jpg'
+                  mediaUrl: https://example.org/image.jpg
                   altText: A giant taco
                   mediaType: text/html; charset=UTF-8
                   size: compact
@@ -7926,10 +7926,10 @@ components:
                       uri: ''
                     - text: More info
                       type: link
-                      uri: 'https://example.org'
+                      uri: https://example.org
                 - title: Ramen
                   description: Get your ramen today!
-                  mediaUrl: 'https://example.org/image.jpg'
+                  mediaUrl: https://example.org/image.jpg
                   altText: A chicken vegetable ramen bowl
                   mediaType: text/html; charset=UTF-8
                   size: compact
@@ -7940,34 +7940,34 @@ components:
                       uri: ''
                     - text: More info
                       type: link
-                      uri: 'https://example.org'
+                      uri: https://example.org
             source:
-              type: 'api:conversations'
+              type: api:conversations
     file-2:
       value:
         messages:
           - id: 5f748c1a2b5315fc007e7977
-            received: 2020-09-30T13:46:02.733Z
+            received: '2020-09-30T13:46:02.733Z'
             author:
               type: business
-              avatarUrl: 'https://www.gravatar.com/image.jpg'
+              avatarUrl: https://www.gravatar.com/image.jpg
             content:
               type: file
               text: Here's our FAQ!
-              mediaUrl: 'https://example.org/FAQ.pdf'
+              mediaUrl: https://example.org/FAQ.pdf
               altText: FAQ.pdf
               mediaType: application/pdf
               mediaSize: 627328
             source:
-              type: 'api:conversations'
+              type: api:conversations
     form-2:
       value:
         messages:
           - id: 5f748c1a2b5315fc007e7977
-            received: 2020-09-30T13:46:02.733Z
+            received: '2020-09-30T13:46:02.733Z'
             author:
               type: business
-              avatarUrl: 'https://www.gravatar.com/image.jpg'
+              avatarUrl: https://www.gravatar.com/image.jpg
             content:
               type: form
               submitted: false
@@ -7984,32 +7984,32 @@ components:
                   label: Your email?
                   placeholder: email@example.com
             source:
-              type: 'api:conversations'
+              type: api:conversations
     image-2:
       value:
         messages:
           - id: 5f748c1a2b5315fc007e7977
-            received: 2020-09-30T13:46:02.733Z
+            received: '2020-09-30T13:46:02.733Z'
             author:
               type: business
-              avatarUrl: 'https://www.gravatar.com/image.jpg'
+              avatarUrl: https://www.gravatar.com/image.jpg
             content:
               type: image
               text: Hello!
-              mediaUrl: 'https://example.org/image.jpg'
+              mediaUrl: https://example.org/image.jpg
               altText: A wonderful image
               mediaType: image/jpg
               mediaSize: 627328
             source:
-              type: 'api:conversations'
+              type: api:conversations
     list-2:
       value:
         messages:
           - id: 5f748c1a2b5315fc007e7977
-            received: 2020-09-30T13:46:02.733Z
+            received: '2020-09-30T13:46:02.733Z'
             author:
               type: business
-              avatarUrl: 'https://www.gravatar.com/image.jpg'
+              avatarUrl: https://www.gravatar.com/image.jpg
             content:
               type: list
               text": |-
@@ -8023,7 +8023,7 @@ components:
               items:
                 - title: Tacos
                   description: Get your tacos today!
-                  mediaUrl: 'https://example.org/image.jpg'
+                  mediaUrl: https://example.org/image.jpg
                   mediaType: text/html; charset=UTF-8
                   size: compact
                   actions:
@@ -8033,10 +8033,10 @@ components:
                       uri: ''
                     - text: More info
                       type: link
-                      uri: 'https://example.org'
+                      uri: https://example.org
                 - title: Ramen
                   description: Get your ramen today!
-                  mediaUrl: 'https://example.org/image.jpg'
+                  mediaUrl: https://example.org/image.jpg
                   mediaType: text/html; charset=UTF-8
                   size: compact
                   actions:
@@ -8046,17 +8046,17 @@ components:
                       uri: ''
                     - text: More info
                       type: link
-                      uri: 'https://example.org'
+                      uri: https://example.org
             source:
-              type: 'api:conversations'
+              type: api:conversations
     location-2:
       value:
         messages:
           - id: 5f748c1a2b5315fc007e7977
-            received: 2020-09-30T13:46:02.733Z
+            received: '2020-09-30T13:46:02.733Z'
             author:
               type: business
-              avatarUrl: 'https://www.gravatar.com/image.jpg'
+              avatarUrl: https://www.gravatar.com/image.jpg
             content:
               type: location
               text: |-
@@ -8069,7 +8069,7 @@ components:
                 address: 5333 avenue Casgrain
                 name: Zendesk Montréal
             source:
-              type: 'api:conversations'
+              type: api:conversations
     integrationListResponse:
       value:
         integrations:
@@ -8103,7 +8103,7 @@ components:
           id: 6e416caac6a5e9544e3fb6d7
           externalId: your-own-id
           profile: {}
-          signedUpAt: 2020-05-21T15:53:30.197Z
+          signedUpAt: '2020-05-21T15:53:30.197Z'
           metadata: {}
     clientAddEvent:
       value:
@@ -8115,7 +8115,7 @@ components:
         events:
           - id: 61290a62c64b3af1ff868714
             createdAt: '2021-08-27T15:53:06.744Z'
-            type: 'client:add'
+            type: client:add
             payload:
               conversation:
                 id: c2c8710dedf8f26ee6e9a68f
@@ -8141,7 +8141,7 @@ components:
         events:
           - id: 61290a6cc64b3af1ff868715
             createdAt: '2021-08-27T15:53:16.591Z'
-            type: 'client:remove'
+            type: client:remove
             payload:
               user:
                 id: 6a2343df57be6fe0f98efc33
@@ -8179,7 +8179,7 @@ components:
         events:
           - id: 61290a62c64b3af1ff868714
             createdAt: '2021-08-27T15:53:06.744Z'
-            type: 'client:update'
+            type: client:update
             payload:
               conversation:
                 id: c2c8710dedf8f26ee6e9a68f
@@ -8216,8 +8216,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:create'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:create
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8243,8 +8243,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:join'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:join
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8266,8 +8266,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:leave'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:leave
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8289,8 +8289,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:remove'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:remove
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8309,8 +8309,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:message:delivery:channel'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:message:delivery:channel
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8340,8 +8340,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:message:delivery:failure'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:message:delivery:failure
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8372,8 +8372,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:message:delivery:user'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:message:delivery:user
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8403,8 +8403,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:message'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:message
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8416,10 +8416,10 @@ components:
                   integrationType: custom
               message:
                 id: 5f74c7d84a146f3abd72af1d
-                received: 2020-09-30T18:00:56.820Z
+                received: '2020-09-30T18:00:56.820Z'
                 author:
                   userId: 26508c10541a4b0ff472e5e2
-                  avatarUrl: 'https://s3.amazonaws.com/avatar.jpg'
+                  avatarUrl: https://s3.amazonaws.com/avatar.jpg
                   displayName: Steve Rogers
                   type: user
                   user:
@@ -8431,7 +8431,7 @@ components:
                 source:
                   integrationId: 5ec69c6e12dda33be985cb1a
                   originalMessageId: '374'
-                  originalMessageTimestamp: 2020-09-30T18:00:56.000Z
+                  originalMessageTimestamp: '2020-09-30T18:00:56.000Z'
                   type: telegram
     conversationPostbackEvent:
       value:
@@ -8442,8 +8442,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:postback'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:postback
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8470,8 +8470,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:read'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:read
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8482,7 +8482,7 @@ components:
                   integrationId: 5f11a650e4e987667c2051d1
                   integrationType: custom
               activity:
-                type: 'conversation:read'
+                type: conversation:read
                 author:
                   type: user
                   userId: b5a0f8de1fd4198a96faa0af
@@ -8500,8 +8500,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'conversation:typing'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: conversation:typing
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8512,7 +8512,7 @@ components:
                   integrationId: 5f11a650e4e987667c2051d1
                   integrationType: custom
               activity:
-                type: 'typing:start'
+                type: typing:start
                 author:
                   type: user
                   userId: 7283cdd6f586679a5fc43cfb
@@ -8530,8 +8530,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'switchboard:acceptControl'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: switchboard:acceptControl
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8550,8 +8550,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'switchboard:acceptControl:failure'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: switchboard:acceptControl:failure
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8573,8 +8573,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'switchboard:offerControl'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: switchboard:offerControl
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8598,8 +8598,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'switchboard:offerControl:failure'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: switchboard:offerControl:failure
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8621,8 +8621,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'switchboard:passControl'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: switchboard:passControl
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8641,8 +8641,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'switchboard:passControl:failure'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: switchboard:passControl:failure
             payload:
               conversation:
                 id: f52b01137aa6c250bc7251fa
@@ -8664,8 +8664,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'user:merge'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: user:merge
             payload:
               mergedUsers:
                 surviving:
@@ -8684,8 +8684,8 @@ components:
           version: v2
         events:
           - id: 5f74a0d52b5315fc007e798a
-            createdAt: 2020-09-30T15:14:29.834Z
-            type: 'user:update'
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: user:update
             payload:
               user:
                 id: 26508c10541a4b0ff472e5e2
