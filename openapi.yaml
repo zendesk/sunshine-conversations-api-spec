@@ -1621,8 +1621,8 @@ paths:
       summary: Pass Control
       operationId: passControl
       description: >-
-        Mark the named switchboard integration as active and transition all the
-        other switchboard integrations to standby status.
+        The passControl action marks the named switchboard integration as active
+        and transition all the other switchboard integrations to standby status.
       security:
         - basicAuth:
             - integration
