@@ -7525,7 +7525,7 @@ components:
                     [identified](https://docs.smooch.io/guide/intro-to-users/)
                     user.
 
-                    * `localeDetection` - A user's was updated as a result of
+                    * `localeDetection` - A user was updated as a result of
                     automated locale detection on messages sent.
                   enum:
                     - authentication
