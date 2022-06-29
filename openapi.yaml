@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.7.0
+  version: 9.8.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -3334,6 +3334,8 @@ components:
           example: c93bb9c14dde8ffb94564eae
         type:
           $ref: '#/components/schemas/conversationType'
+        metadata:
+          $ref: '#/components/schemas/metadata'
         activeSwitchboardIntegration:
           allOf:
             - $ref: '#/components/schemas/switchboardIntegrationWebhook'
@@ -3396,8 +3398,6 @@ components:
               $ref: '#/components/schemas/description'
             iconUrl:
               $ref: '#/components/schemas/icon'
-            metadata:
-              $ref: '#/components/schemas/metadata'
             businessLastRead:
               type: string
               description: >
@@ -8227,6 +8227,8 @@ components:
               conversation:
                 id: f52b01137aa6c250bc7251fa
                 type: personal
+                metadata:
+                  lang: en-ca
                 activeSwitchboardIntegration:
                   id: 5eecde2dcdbffb08f5c3ed37
                   name: bot
