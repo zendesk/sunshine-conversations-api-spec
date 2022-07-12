@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.8.0
+  version: 9.9.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -3067,6 +3067,11 @@ components:
             href="https://docs.smooch.io/guide/private-attachments/">Private
             Attachments</a> for more information.
           example: 64028
+        appLocalizationEnabled:
+          type: boolean
+          description: >
+            A boolean specifying whether the messages authored by the Sunshine
+            Conversations platform should be localized.
     metadata:
       type: object
       nullable: true
