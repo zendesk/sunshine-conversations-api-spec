@@ -344,7 +344,7 @@ info:
   x-logo:
     url: sunco_logo.svg
     altText: Sunshine Conversations
-    href: https://smooch.io/
+    href: https://docs.smooch.io/
 servers:
   - url: https://api.smooch.io
     description: United States server
