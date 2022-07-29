@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.10.0
+  version: 9.11.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -495,6 +495,11 @@ tags:
       |
 
       | conversation:read  | When a user has read the conversation. |
+
+      | conversation:referral | When a user is referred to a conversation. See
+      the <a
+      href="https://docs.smooch.io/guide/conversation-referrals/">conversation
+      referrals</a> guide for more details. |
 
       | conversation:typing  | When a user starts or stops typing. |
 
@@ -2870,6 +2875,7 @@ x-webhooks:
                       - $ref: '#/components/schemas/conversationMessageEvent'
                       - $ref: '#/components/schemas/conversationPostbackEvent'
                       - $ref: '#/components/schemas/conversationReadEvent'
+                      - $ref: '#/components/schemas/conversationReferralEvent'
                       - $ref: '#/components/schemas/conversationTypingEvent'
                       - $ref: '#/components/schemas/switchboardAcceptControl'
                       - $ref: '#/components/schemas/switchboardAcceptControlFailure'
@@ -2906,6 +2912,8 @@ x-webhooks:
                 $ref: '#/components/examples/conversationPostbackEvent'
               conversation:read:
                 $ref: '#/components/examples/conversationReadEvent'
+              conversation:referral:
+                $ref: '#/components/examples/conversationReferralEvent'
               conversation:typing:
                 $ref: '#/components/examples/conversationTypingEvent'
               switchboard:acceptControl:
@@ -6858,6 +6866,11 @@ components:
       title: client:update
     referral:
       type: object
+      description: >
+        Data representing a referral object when a user is referred to a
+        conversation. See the <a
+        href="https://docs.smooch.io/guide/conversation-referrals/">conversation
+        referrals</a> guide for more details.
       properties:
         code:
           type: string
@@ -7262,6 +7275,37 @@ components:
                           default: conversation:read
                   description: The activity that was sent.
       title: conversation:read
+    conversationReferralEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: >-
+                The payload of the event. The contents of this object depend on
+                the type of event.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: >-
+                    The conversation a user lands in after being referred. See
+                    the <a
+                    href="https://docs.smooch.io/guide/conversation-referrals/">conversation
+                    referrals</a> guide for more details.
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/user'
+                  description: The user associated with the conversation.
+                source:
+                  allOf:
+                    - $ref: '#/components/schemas/sourceWebhook'
+                  description: The source of the referral.
+                referral:
+                  allOf:
+                    - $ref: '#/components/schemas/referral'
+      title: conversation:referral
     conversationTypingEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -8507,6 +8551,32 @@ components:
                 source:
                   type: web
                   integrationId: 5ecff63ffc3ab25f4561c8a0
+    conversationReferralEvent:
+      value:
+        app:
+          id: 5ebee0975ac5304b664a12fa
+        webhook:
+          id: 5f4eaef81e3dcc117c7ba48a
+          version: v2
+        events:
+          - id: 5f74a0d52b5315fc007e798a
+            type: conversation:referral
+            payload:
+              conversation:
+                id: f52b01137aa6c250bc7251fa
+                type: personal
+                activeSwitchboardIntegration:
+                  id: 5eecde2dcdbffb08f5c3ed37
+                  name: bot
+                  integrationId: 5f11a650e4e987667c2051d1
+                  integrationType: custom
+              user:
+                id: 26508c10541a4b0ff472e5e2
+                externalId: 912382197
+              source:
+                type: web
+                integrationId: 5ecff63ffc3ab25f4561c8a0
+              referral: {}
     conversationTypingEvent:
       value:
         app:
