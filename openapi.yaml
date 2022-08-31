@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.11.0
+  version: 9.12.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -1628,7 +1628,17 @@ paths:
       operationId: passControl
       description: >-
         The passControl action marks the named switchboard integration as active
-        and transition all the other switchboard integrations to standby status.
+        and transitions all the other switchboard integrations to standby
+        status. The `passControl` action is idempotent if either the target
+        `switchboardIntegration` is specified explicitly by its `id` or `name`,
+        or the `next` keyword is used for the `switchboardIntegration` field,
+        and the invoking integration can be identified by its [OAuth
+        token](https://docs.smooch.io/guide/oauth/#redirect-and-acquiring-an-oauth-token)
+        or [Custom Integration API
+        Key](https://docs.smooch.io/rest/#tag/CustomIntegrationApiKeys)
+        credentials. Duplicate passControl actions using the `next` keyword and
+        their metadata are disregarded. For more information, see [Switchboard
+        passControl](https://docs.smooch.io/guide/switchboard/#pass-control).
       security:
         - basicAuth:
             - integration
