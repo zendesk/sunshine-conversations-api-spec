@@ -2155,6 +2155,8 @@ paths:
                     switchboard:
                       id: 5ef21b132f21af34f088530d
                       enabled: false
+        '400':
+          description: Only one switchboard can be created per app
         '404':
           description: Not Found
     get:
@@ -2276,7 +2278,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/switchboardIntegrationResponse'
         '400':
-          description: Only one switchboard per app can be created
+          description: Only one switchboard can be created per app
         '404':
           description: Switchboard not found
     get:
