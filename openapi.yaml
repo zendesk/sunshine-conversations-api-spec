@@ -6877,6 +6877,22 @@ components:
                     - unblocked
                     - matched
       title: client:update
+    campaign:
+      type: object
+      description: The campaign the user interacted with (if applicable).
+      properties:
+        id:
+          type: string
+          description: The unique ID of the campaign.
+          example: de13bee15b51033b34162411
+      nullable: true
+    sourceWithCampaignWebhook:
+      allOf:
+        - $ref: '#/components/schemas/sourceWebhook'
+        - type: object
+          properties:
+            campaign:
+              $ref: '#/components/schemas/campaign'
     referral:
       type: object
       description: >
@@ -6950,6 +6966,9 @@ components:
                     of a call to the startConversation API on one of the SDK
                     integrations, or a start conversation event was triggered
                     from a messaging channel.
+
+                    * `proactiveMessaging` - The conversation was created
+                    because the user interacted with a campaign.
                   enum:
                     - linkRequest
                     - message
@@ -6957,9 +6976,10 @@ components:
                     - notification
                     - prechatCapture
                     - startConversation
+                    - proactiveMessaging
                 source:
                   allOf:
-                    - $ref: '#/components/schemas/sourceWebhook'
+                    - $ref: '#/components/schemas/sourceWithCampaignWebhook'
                   description: The source of the creation.
                 user:
                   allOf:
@@ -7170,7 +7190,12 @@ components:
             - $ref: '#/components/schemas/content'
           description: The content of the message.
         source:
-          $ref: '#/components/schemas/source'
+          allOf:
+            - $ref: '#/components/schemas/source'
+            - type: object
+              properties:
+                campaign:
+                  $ref: '#/components/schemas/campaign'
         quotedMessage:
           allOf:
             - $ref: '#/components/schemas/quotedMessage'
@@ -7248,7 +7273,7 @@ components:
                   description: The user that triggered the postback.
                 source:
                   allOf:
-                    - $ref: '#/components/schemas/sourceWebhook'
+                    - $ref: '#/components/schemas/sourceWithCampaignWebhook'
                   description: The source of the postback.
       title: conversation:postback
     activity:
@@ -7313,7 +7338,7 @@ components:
                   description: The user associated with the conversation.
                 source:
                   allOf:
-                    - $ref: '#/components/schemas/sourceWebhook'
+                    - $ref: '#/components/schemas/sourceWithCampaignWebhook'
                   description: The source of the referral.
                 referral:
                   allOf:
