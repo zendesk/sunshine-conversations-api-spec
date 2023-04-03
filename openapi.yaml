@@ -442,7 +442,7 @@ tags:
 
       <aside class="notice">An app is limited to 10 webhooks. A webhook can
       subscribe to multiple trigger events. We recommend using a single webhook
-      that registers to all the events you need.</aside>
+      entry that includes all the required events.</aside>
 
 
       ## Webhook Triggers
@@ -614,7 +614,7 @@ tags:
       The source code is available [here](https://github.com/smooch/shoplifter).
   - name: OAuth Endpoints
     x-displayName: OAuth Endpoints
-    description: "The scope of an issued access token is integration scope. This allows API calls to be made to a specific Sunshine Conversations app on behalf of an integration, identified by the integration’s clientId. The access token grants permission to get and create users and conversations associated with the app. The token also grants permission to create webhooks, however only webhooks created for the integration will be visible. An access token with integration scope cannot see or modify webhooks that were created by other integrations, for example.\n\n| API\t      | Access\t|\n| --------  | ------- |\n| [/v2/apps/:appId/users/\\*](#tag/Users)\t| Yes\t|\n| [/v2/apps/:appId/conversations/\\*](#tag/Conversations)\t| Yes\t|\n| [/v2/apps/:appId/integrations/me/webhooks/\\*](#tag/Webhooks/operation/eventWebhooks)\t| Yes\t|\n| [/v2/apps/:appId/switchboards/\\*](#tag/Switchboards) | No |\n| [/v2/apps/\\*](#tag/Apps) | No |\n"
+    description: "The scope of an issued access token is integration scope. This allows API calls to be made to a specific Sunshine Conversations app on behalf of an integration, identified by the integration’s clientId. The access token grants permission to get and create users and conversations associated with the app. The token also grants permission to create webhooks, however only webhooks created for the integration will be visible. An access token with integration scope cannot see or modify webhooks that were created by other integrations, for example.\n\n| API\t      | Access\t|\n| --------  | ------- |\n| [/v2/apps/:appId/users/\\*](#tag/Users)\t| Yes\t|\n| [/v2/apps/:appId/conversations/\\*](#tag/Conversations)\t| Yes\t|\n| [/v2/apps/:appId/integrations/me/webhooks/\\*](#tag/Webhooks)\t| Yes\t|\n| [/v2/apps/:appId/switchboards/\\*](#tag/Switchboards) | No |\n| [/v2/apps/\\*](#tag/Apps) | No |\n"
 x-tagGroups:
   - name: Account Provisioning
     tags:
