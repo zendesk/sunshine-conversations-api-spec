@@ -415,7 +415,9 @@ tags:
     description: Switchboard operations
   - name: Switchboard Integrations
     x-displayName: Switchboard Integrations
-    description: Switchboard Integrations operations
+    description: >-
+      Switchboard Integrations operations <aside class="notice">A switchboard is
+      limited to 10 switchboard integrations.</aside>
   - name: Users
     x-displayName: Users
     description: This set of endpoints is used to manage users.
@@ -2278,7 +2280,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/switchboardIntegrationResponse'
         '400':
-          description: Only one switchboard can be created per app
+          description: >-
+            Switchboard has reached the max number of switchboard integrations
+            (10)
         '404':
           description: Switchboard not found
     get:
