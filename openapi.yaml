@@ -110,13 +110,14 @@ info:
 
     All paginated endpoints support cursor-based pagination.
 
+
     ### Cursor Pagination
 
 
     Cursor-based pagination is a common pagination strategy that avoids many of
     the pitfalls of offset–limit pagination. It works by returning a pointer to
     a specific item in the dataset. On subsequent requests, the server returns
-    results after the given pointer. 
+    results after the given pointer.
 
 
     A `page[after]` or `page[before]` query string parameter may be provided,
@@ -179,6 +180,22 @@ info:
 
     If your use case involves making API calls in bulk, please [contact
     us](https://smooch.io/contact).
+
+
+    ## Conversation Size Limits
+
+
+    Conversations are limited to 30,000 messages. Once you reach this maximum, a
+    `423 Locked` HTTP status code is returned when trying to post a new message.
+    To allow more messages to be sent to the affected conversation, you must
+    [delete all
+    messages](https://docs.smooch.io/rest/#operation/deleteAllMessages) to make
+    room.
+
+
+    If your use case involves conversations that could exceed this limit, please
+    [contact us](https://smooch.io/contact). We will not extend your limit, but
+    we want to understand your use case better.
 
 
     ## Request Size Limits
@@ -1395,6 +1412,13 @@ paths:
                   $ref: '#/components/examples/list-2'
                 location:
                   $ref: '#/components/examples/location-2'
+        '423':
+          description: >
+            Message limit reached
+
+            <aside class="notice">To learn more about the conversation message
+            limit, consult the section in the introduction linked <a
+            href="#section/Introduction/Conversation-Size-Limits">here</a>.</aside>
     get:
       tags:
         - Messages
