@@ -6432,6 +6432,24 @@ components:
             An optional ID that can also be used to retrieve the user.
           example: your-own-id
           nullable: true
+    identity:
+      type: object
+      description: A connected user identity, such as an email.
+      properties:
+        type:
+          type: string
+          description: The type of identity.
+          example: email
+        value:
+          type: string
+          description: The identity value.
+          minLength: 1
+          maxLength: 128
+          example: jane.doe@gmail.com
+        verification:
+          type: string
+          description: The type of verification performed on the identity.
+          example: embed
     user:
       allOf:
         - $ref: '#/components/schemas/userTruncated'
@@ -6447,6 +6465,12 @@ components:
               allOf:
                 - $ref: '#/components/schemas/metadata'
               nullable: false
+            identities:
+              description: The user's connected identities.
+              readOnly: true
+              type: array
+              items:
+                $ref: '#/components/schemas/identity'
     userResponse:
       type: object
       title: UserResponse
