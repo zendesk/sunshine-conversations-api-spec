@@ -419,6 +419,9 @@ tags:
     description: >
       This set of endpoints is used to configure and manage various front-end
       messaging channels.
+
+      <aside class="notice">An SDK integration configured on Admin Center cannot
+      be deleted.</aside>
   - name: CustomIntegrationApiKeys
     x-displayName: Custom Integration API Keys
     description: >-
@@ -1885,6 +1888,8 @@ paths:
             application/json:
               schema:
                 type: object
+        '400':
+          description: SDK integrations configured on Admin Center cannot be deleted
         '404':
           description: Integration not found
   /v2/apps/{appId}/integrations/{integrationId}/keys:
