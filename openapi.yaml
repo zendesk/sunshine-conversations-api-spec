@@ -49,8 +49,15 @@ info:
     ## Regions
 
 
-    Sunshine Conversations is available in the following regions. Each Sunshine
-    Conversations region has its own API host.
+    If you are a licensed Zendesk customer, use the following API host:
+
+
+    `https://<subdomain>.zendesk.com/sc`
+
+
+    If you are not a licensed Zendesk customer, the API host is available in the
+    following regions in order to meet your organization’s residency
+    requirements.
 
 
     | Region         | Host                       |
@@ -62,7 +69,7 @@ info:
     | European Union | https://api.eu-1.smooch.io |
 
 
-    For more information on regions, visit [the guide](/guide/regions/).
+    For more information, see [Regions](/guide/regions/).
 
 
     <aside class="notice">When configuring an API host, make sure to always use
