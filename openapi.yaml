@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.12.0
+  version: 9.14.1
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -4643,6 +4643,8 @@ components:
     quotedMessageMessage:
       title: QuotedMessageMessage
       type: object
+      required:
+        - type
       properties:
         type:
           type: string
@@ -4656,6 +4658,8 @@ components:
     quotedMessageExternalMessageId:
       title: QuotedMessageExternalMessageId
       type: object
+      required:
+        - type
       properties:
         type:
           type: string
@@ -4670,6 +4674,11 @@ components:
       oneOf:
         - $ref: '#/components/schemas/quotedMessageMessage'
         - $ref: '#/components/schemas/quotedMessageExternalMessageId'
+      discriminator:
+        propertyName: type
+        mapping:
+          message: '#/components/schemas/quotedMessageMessage'
+          externalMessageId: '#/components/schemas/quotedMessageExternalMessageId'
     messageListResponse:
       type: object
       title: MessageListResponse
