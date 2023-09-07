@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.14.1
+  version: 9.15.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -3613,10 +3613,16 @@ components:
         supported integration types, or sdk for integrations of type ios,
         android, and web.
       enum:
+        - apple
+        - gbm
+        - googlercs
+        - instagram
+        - kakao
         - line
         - mailgun
         - messagebird
         - messenger
+        - slackconnect
         - sdk
         - telegram
         - twilio
