@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 9.15.0
+  version: 10.0.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -5508,27 +5508,29 @@ components:
               default: twitter
             tier:
               type: string
-              description: Your Twitter app’s tier, sandbox, premium or enterprise.
+              description: >-
+                Your Twitter app's tier. Only "enterprise" is supported for new
+                integrations.
               enum:
-                - sandbox
-                - premium
                 - enterprise
             envName:
               type: string
               description: >-
-                The Twitter dev environments label (required for sandbox and
-                premium tiers).
+                The Twitter dev environments label. Only required / used for
+                sandbox and premium tiers.
               minLength: 1
-              example: your_env_label
+              readOnly: true
             consumerKey:
               type: string
               description: The consumer key for your Twitter app.
               minLength: 1
+              writeOnly: true
               example: your_consumer_key
             consumerSecret:
               type: string
               description: The consumer key secret for your Twitter app.
               minLength: 1
+              writeOnly: true
               example: your_consumer_secret
             accessTokenKey:
               type: string
@@ -5540,12 +5542,13 @@ components:
               type: string
               description: The access token secret obtained from your user via oauth.
               minLength: 1
+              writeOnly: true
               example: your_access_token_secret
           required:
             - tier
             - consumerKey
             - consumerSecret
-            - acceessTokenKey
+            - accessTokenKey
             - accessTokenSecret
     viber:
       allOf:
