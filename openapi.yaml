@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 10.0.0
+  version: 10.0.1
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -4287,6 +4287,15 @@ components:
           type: string
           format: uri
           description: The URL for media, such as an image, attached to the message.
+        mediaType:
+          type: string
+          description: The type of media.
+          maxLength: 128
+          readOnly: true
+        mediaSize:
+          type: number
+          description: The size of the media in bytes.
+          readOnly: true
         altText:
           type: string
           maxLength: 128
