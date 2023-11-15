@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 11.0.0
+  version: 12.0.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -377,7 +377,7 @@ servers:
 tags:
   - name: Apps
     x-displayName: Apps
-    description: "If you’re looking to enable messaging inside your product for your customers, with as much control over the experience as you’d like, you can create and control Sunshine Conversations apps programmatically using [Account Provisioning](https://docs.smooch.io/guide/intro-to-account-provisioning/).\n### Authentication\nAccount Provisioning endpoints require `account` scope. See the [authorization](#authorization) and [authentication](#authentication) sections for information.\nA user account API key (key id that starts with `act_`) can access all account provisioning routes. You can create an account key by going to your account page.\nA service account API key (key id that starts with `svc_`) may be used to manage apps, but not service accounts or service account keys.\n\n| Key Type       | Authorized Methods                                                |\n| -------------- | ----------------------------------------------------------------- |\n| act            | All Core and Account Provisioning methods.                        |\n| svc   \t       | All Core methods, App Management methods, and App Keys methods.   |\n\n### Service Accounts\nService Account schema and endpoints used for provisioning service accounts. A service account represents an API user, with its own set of credentials, that has only access to a certain subset of apps. For software makers that create apps on behalf of separate customers or businesses, service accounts can be used to generate and distribute credentials that only have access to a single business's data.\n\n### App settings\nApps have a number of optional settings that can be used to customize specific behaviors. See \nthe `settings` object described below for more information.\n"
+    description: "If you’re looking to enable messaging inside your product for your customers, with as much control over the experience as you’d like, you can create and control Sunshine Conversations apps programmatically using [Account Provisioning](https://docs.smooch.io/guide/intro-to-account-provisioning/).\n### Authentication\nAccount Provisioning endpoints require `account` scope. See the [authorization](#authorization) and [authentication](#authentication) sections for information.\nA user account API key (key id that starts with `act_`) can access all account provisioning routes. You can create an account key by going to your account page.\nA service account API key (key id that starts with `svc_`) may be used to manage apps, but not service accounts or service account keys.\n\n| Key Type       | Authorized Methods                                                |\n| -------------- | ----------------------------------------------------------------- |\n| act            | All Core and Account Provisioning methods.                        |\n| svc   \t       | All Core methods, App Management methods, and App Keys methods.   |\n\n### Service Accounts\nService Account schema and endpoints used for provisioning service accounts. A service account represents an API user, with its own set of credentials, that has only access to a certain subset of apps. For software makers that create apps on behalf of separate customers or businesses, service accounts can be used to generate and distribute credentials that only have access to a single business's data.\n\n### App settings\nApps have a number of optional settings that can be used to customize specific behaviors. See\nthe `settings` object described below for more information.\n"
   - name: App Keys
     x-displayName: App Keys
     description: >-
@@ -533,7 +533,7 @@ tags:
       | conversation:typing  | When a user starts or stops typing. |
 
       | switchboard:acceptControl | When a switchboard integration accepts
-      control of a conversation. | 
+      control of a conversation. |
 
       | switchboard:acceptControl:failure   | When control of a conversation
       fails to be accepted by a switchboard integration. |
