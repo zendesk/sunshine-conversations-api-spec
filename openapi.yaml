@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 12.0.0
+  version: 12.1.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -3611,7 +3611,7 @@ components:
       description: >-
         The type of integration that the client represents. Can be any of the
         supported integration types, or sdk for integrations of type ios,
-        android, and web.
+        android, unity and web.
       enum:
         - apple
         - gbm
@@ -4961,6 +4961,7 @@ components:
           telegram: '#/components/schemas/telegram'
           twilio: '#/components/schemas/twilio'
           twitter: '#/components/schemas/twitter'
+          unity: '#/components/schemas/unity'
           viber: '#/components/schemas/viber'
           web: '#/components/schemas/web'
           whatsapp: '#/components/schemas/whatsapp'
@@ -5578,6 +5579,22 @@ components:
             - consumerSecret
             - accessTokenKey
             - accessTokenSecret
+    unity:
+      allOf:
+        - $ref: '#/components/schemas/integration'
+        - type: object
+          properties:
+            type:
+              type: string
+              description: >
+                To configure a Unity integration, create an integration with
+                type 'unity' by calling the Create Integration endpoint.
+              default: unity
+            canUserCreateMoreConversations:
+              type: boolean
+              description: >-
+                Allows users to create more than one conversation on the Unity
+                integration.
     viber:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -6018,6 +6035,16 @@ components:
     twitterUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
+    unityUpdate:
+      allOf:
+        - $ref: '#/components/schemas/integrationUpdateBase'
+        - type: object
+          properties:
+            canUserCreateMoreConversations:
+              type: boolean
+              description: >-
+                Allows users to create more than one conversation on the Unity
+                integration.
     viberUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
@@ -6179,6 +6206,7 @@ components:
         - $ref: '#/components/schemas/telegramUpdate'
         - $ref: '#/components/schemas/twilioUpdate'
         - $ref: '#/components/schemas/twitterUpdate'
+        - $ref: '#/components/schemas/unityUpdate'
         - $ref: '#/components/schemas/viberUpdate'
         - $ref: '#/components/schemas/webUpdate'
         - $ref: '#/components/schemas/whatsAppUpdate'
