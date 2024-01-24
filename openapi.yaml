@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 12.1.0
+  version: 12.2.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -5001,6 +5001,13 @@ components:
               description: >-
                 Allows users to create more than one conversation on the android
                 integration.
+            attachmentsEnabled:
+              type: boolean
+              description: >
+                Allows users to send attachments. By default, the setting is set
+                to true. This setting can only be configured in Zendesk Admin
+                Center.
+              readOnly: true
     apple:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -5223,6 +5230,13 @@ components:
               description: >-
                 Allows users to create more than one conversation on the iOS
                 integration.
+            attachmentsEnabled:
+              type: boolean
+              description: >
+                Allows users to send attachments. By default, the setting is set
+                to true. This setting can only be configured in Zendesk Admin
+                Center.
+              readOnly: true
     line:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -5595,6 +5609,13 @@ components:
               description: >-
                 Allows users to create more than one conversation on the Unity
                 integration.
+            attachmentsEnabled:
+              type: boolean
+              description: >
+                Allows users to send attachments. By default, the setting is set
+                to true. This setting can only be configured in Zendesk Admin
+                Center.
+              readOnly: true
     viber:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -5820,6 +5841,13 @@ components:
                 messenger
 
                 integration.
+            attachmentsEnabled:
+              type: boolean
+              description: >
+                Allows users to send attachments. By default, the setting is set
+                to true. This setting can only be configured in Zendesk Admin
+                Center.
+              readOnly: true
     whatsapp:
       allOf:
         - $ref: '#/components/schemas/integration'
