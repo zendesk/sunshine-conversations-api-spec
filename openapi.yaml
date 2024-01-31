@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 12.2.0
+  version: 12.2.1
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
