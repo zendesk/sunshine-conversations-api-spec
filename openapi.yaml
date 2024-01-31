@@ -7837,7 +7837,8 @@ components:
       in: query
       description: >-
         The access level for the attachment. Currently the available access
-        levels are public and private.
+        levels are public and private. If you are a licensed Zendesk customer,
+        you must use public. Private is not supported.
       schema:
         type: string
         example: public
