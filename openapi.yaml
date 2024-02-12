@@ -4798,8 +4798,8 @@ components:
               $ref: '#/components/schemas/messageOverridePayload'
       description: >-
         A raw payload containing a message that is sent directly to a channel.
-        Messages for [Apple Business
-        Chat](https://docs.smooch.io/guide/apple-business-chat/#passthrough-api),
+        Messages for [Apple Messages for
+        Business](https://docs.smooch.io/guide/apple-business-chat/#passthrough-api),
         [Line](https://docs.smooch.io/guide/line/#passthrough-api),
         [Messenger](https://docs.smooch.io/guide/facebook-messenger/#passthrough-api),
         [Whatsapp](https://docs.smooch.io/guide/whatsapp/#passthrough-api)
@@ -5016,12 +5016,13 @@ components:
             type:
               type: string
               description: >
-                To configure an Apple Business Chat integration, acquire the
-                required information and call the Create Integration endpoint.
+                To configure an Apple Messages for Business integration, acquire
+                the required information and call the Create Integration
+                endpoint.
               default: apple
             businessId:
               type: string
-              description: Apple Business Chat ID.
+              description: Apple Messages for Business ID.
               example: 2740f141-89c1-515f-07eb-1128dd73491
             apiSecret:
               type: string
