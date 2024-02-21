@@ -781,8 +781,10 @@ paths:
       description: Updates an app.
       security:
         - basicAuth:
+            - app
             - account
         - bearerAuth:
+            - app
             - account
       requestBody:
         required: true
