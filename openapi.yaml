@@ -4995,16 +4995,44 @@ components:
             type:
               type: string
               description: >
-                To configure an android integration, first visit the [Firebase
-                Console](https://console.firebase.google.com/). Copy the
-                `serverKey` and `senderId` from the Cloud Messaging tab in the
-                settings of your project and call the create integrations
-                endpoint with this data.
+                <aside class="notice">Firebase Cloud Messaging has deprecated
+                its legacy APIs for HTTP and XMPP. Legacy credentials
+                <code>serverKey</code> and <code>senderId</code> will stop
+                working as of June 2024 and must be replaced with OAuth 2.0
+                access token based credentials.</aside>
 
-                If you would like to continue using your legacy GCM `serverKey`
-                you can also obtain it from the [Google Developer
-                Console](https://console.developers.google.com/).
+
+                To configure an android integration, first visit the [Firebase
+                Console](https://console.firebase.google.com/). 
+
+                Generate a private key from the Service accounts tab in the
+                settings. 
+
+                Copy the `project_id`, `client_email` and `private_key` from the
+                generated JSON file and call the create integrations endpoint
+                with this data.
               default: android
+            projectId:
+              type: string
+              description: Your project ID from your generated private key file.
+              minLength: 1
+              writeOnly: true
+              nullable: true
+              example: <project-id>
+            clientEmail:
+              type: string
+              description: Your client email from your generated private key file.
+              minLength: 1
+              writeOnly: true
+              nullable: true
+              example: <client-email>
+            privateKey:
+              type: string
+              description: Your private key from your generated private key file.
+              minLength: 1
+              writeOnly: true
+              nullable: true
+              example: <private-key>
             serverKey:
               type: string
               description: Your server key from the fcm console.
@@ -5012,12 +5040,14 @@ components:
               writeOnly: true
               nullable: true
               example: <server-key>
+              deprecated: true
             senderId:
               type: string
               description: Your sender id from the fcm console.
               minLength: 1
               nullable: true
               example: <sender-id>
+              deprecated: true
             canUserCreateMoreConversations:
               type: boolean
               description: >-
@@ -5970,6 +6000,27 @@ components:
         - $ref: '#/components/schemas/integrationUpdateBase'
         - type: object
           properties:
+            projectId:
+              type: string
+              description: Your project ID from your generated private key file.
+              minLength: 1
+              writeOnly: true
+              nullable: true
+              example: <project-id>
+            clientEmail:
+              type: string
+              description: Your client email from your generated private key file.
+              minLength: 1
+              writeOnly: true
+              nullable: true
+              example: <client-email>
+            privateKey:
+              type: string
+              description: Your private key from your generated private key file.
+              minLength: 1
+              writeOnly: true
+              nullable: true
+              example: <private-key>
             serverKey:
               type: string
               description: Your server key from the fcm console.
@@ -5977,12 +6028,14 @@ components:
               writeOnly: true
               nullable: true
               example: <server-key>
+              deprecated: true
             senderId:
               type: string
               description: Your sender id from the fcm console.
               minLength: 1
               nullable: true
               example: <sender-id>
+              deprecated: true
             canUserCreateMoreConversations:
               type: boolean
               description: >-
