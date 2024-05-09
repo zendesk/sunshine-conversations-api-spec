@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 12.3.1
+  version: 12.5.0
   title: Sunshine Conversations API
   termsOfService: >-
     https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
@@ -672,6 +672,7 @@ x-tagGroups:
     tags:
       - Users
       - Clients
+      - Devices
   - name: Sunshine Conversations Connect
     tags:
       - Sunshine Conversations Connect
@@ -2737,6 +2738,72 @@ paths:
           description: Cannot remove a client of type 'sdk'
         '404':
           description: Client not found
+  /v2/apps/{appId}/users/{userIdOrExternalId}/devices:
+    parameters:
+      - $ref: '#/components/parameters/appId'
+      - $ref: '#/components/parameters/userIdOrExternalId'
+    get:
+      tags:
+        - Devices
+      summary: List Devices
+      operationId: listDevices
+      description: |
+        Get all the devices for a particular user.
+        The Devices are sorted based on last seen time.
+
+        ```shell
+        /v2/apps/:appId/users/:userId/devices
+        ```
+      security:
+        - basicAuth:
+            - app
+            - account
+            - integration
+        - bearerAuth:
+            - app
+            - account
+            - integration
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clientListResponse'
+  /v2/apps/{appId}/users/{userIdOrExternalId}/devices/{deviceId}:
+    parameters:
+      - $ref: '#/components/parameters/appId'
+      - $ref: '#/components/parameters/userIdOrExternalId'
+      - $ref: '#/components/parameters/deviceId'
+    get:
+      tags:
+        - Devices
+      summary: Get Device
+      operationId: getDevice
+      description: |
+        Fetches a specific Device.
+
+        ```shell
+        /v2/apps/:appId/users/:userId
+        ```
+      security:
+        - basicAuth:
+            - app
+            - account
+            - integration
+        - bearerAuth:
+            - app
+            - account
+            - integration
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deviceResponse'
+        '404':
+          description: Device not found
   /v2/apps/{appId}/users/{userIdOrExternalId}/personalinformation:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -6871,6 +6938,14 @@ components:
         - matchCriteria
         - confirmation
         - target
+    deviceResponse:
+      type: object
+      title: deviceResponse
+      properties:
+        device:
+          allOf:
+            - $ref: '#/components/schemas/device'
+          description: The device.
     appSubSchema:
       type: object
       description: The app that triggered the events.
@@ -8035,6 +8110,14 @@ components:
       name: clientId
       in: path
       description: The client's id.
+      required: true
+      schema:
+        type: string
+        example: 5d8cff3cd55b040010928b5b
+    deviceId:
+      name: deviceId
+      in: path
+      description: The device's id.
       required: true
       schema:
         type: string
