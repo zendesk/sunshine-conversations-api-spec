@@ -80,7 +80,7 @@ info:
 
     ## Postman Collection
 
-    <a style="display:inline-block;background:url(https://run.pstmn.io/button.svg);height:30px;width: 123px;" href="https://s3.amazonaws.com/docs.smooch.io/sunco-openapi/postman_collection.json"></a>
+    <a style="display:inline-block;background:url(https://run.pstmn.io/button.svg);height:30px;width: 123px;" href="https://docs.smooch.io/sunco-openapi/postman_collection.json"></a>
 
     In addition to API libraries, Sunshine Conversations also has a Postman collection that can be used for development or testing purposes. See the [guide](https://docs.smooch.io/guide/postman-collection/) for information on how to install and use the collection in your Postman client.
 
