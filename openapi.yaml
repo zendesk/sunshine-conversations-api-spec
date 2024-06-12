@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 12.5.0
+  version: 12.5.1
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -632,8 +632,7 @@ paths:
       summary: Generate Media Token
       operationId: generateMediaJsonWebToken
       description: |
-        Generates a media JWT for a list of attachment paths. This media token is a prerequisite for setting the cookie needed to visualize a private attachment.
-        <aside class="notice">Note you have the ability to allow files using different rules, see <a href="https://docs.smooch.io/guide/private-attachments">Private Attachments</a> for more details.</aside>
+        Generates a media JWT for a list of attachment paths.
       security:
         - basicAuth:
             - app
@@ -664,7 +663,7 @@ paths:
       operationId: setCookie
       description: |
         With the media JWT retrieved, pass it in the header of the below request as it’s authorization in order to set a cookie in the user’s browser corresponding to the path within the media JWT.
-        The expiration date of this cookie will match the expiration date of the media JWT. This cookie will be needed to visualize a private attachment.
+        The expiration date of this cookie will match the expiration date of the media JWT. 
       security:
         - bearerAuth:
             - mediaToken
@@ -2595,13 +2594,11 @@ components:
           description: |
             A string specifying whether attachments should be stored in a publicly or privately accessible cloud storage.
             attachmentsAccess is set to public by default but can be modified to private.
-            See <a href="https://docs.smooch.io/guide/private-attachments/">Private Attachments</a> for more information.
           example: public
         attachmentsTokenExpirationSeconds:
           type: integer
           description: |
             Number of seconds representing the expiration time of the generated media tokens for private attachments. The JWT will be valid for 2 hours by default.
-            See See <a href="https://docs.smooch.io/guide/private-attachments/">Private Attachments</a> for more information.
           example: 64028
         appLocalizationEnabled:
           type: boolean
@@ -3517,7 +3514,7 @@ components:
             description: The name of the field. Must be unique per field.
             minLength: 1
             maxLength: 128
-      maxItems: 100
+      maxItems: 200
     formMessageField:
       allOf:
         - $ref: '#/components/schemas/field'
