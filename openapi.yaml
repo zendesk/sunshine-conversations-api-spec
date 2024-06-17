@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 12.5.1
+  version: 12.6.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -4139,6 +4139,57 @@ components:
           viber: '#/components/schemas/viber'
           web: '#/components/schemas/web'
           whatsapp: '#/components/schemas/whatsapp'
+    defaultResponderId:
+      type: object
+      title: Default Responder ID
+      properties:
+        defaultResponderId:
+          type: string
+          description: |
+            The default responder ID for the integration. This is the ID of the responder that will be used to send messages to the user.
+            For more information, refer to <a href="https://docs.smooch.io/guide/switchboard/#per-channel-default-responder">Per-channel default responder</a> guide.
+          nullable: true
+    defaultResponder:
+      type: object
+      title: Default Responder
+      properties:
+        defaultResponder:
+          type: object
+          description: |
+            The default responder object.
+            <aside class="notice">This property will only be returned in response for <code>get integration</code> and <code>list integration</code> and must not be used in the request body.</aside>
+            <aside class="notice">Response will contain only one of the following: <code>defaultResponder</code> or <code>defaultResponderId</code> but never both.</aside>
+          properties:
+            switchboardId:
+              type: string
+              description: The unique ID of the switchboard.
+              example: 5e4af71a81966cfff3ef6551
+            appId:
+              type: string
+              description: Identifies the app.
+              example: 5e4af71a81966cfff3ef6552
+            integrationId:
+              type: string
+              description: The unique ID of the integration.
+              example: 5e4af71a81966cfff3ef6550
+            integrationType:
+              type: string
+              description: The type of the integration.
+            name:
+              type: string
+              description: The name of the switchboard.
+            deliverStandbyEvents:
+              type: boolean
+              description: Indicates whether the switchboard should deliver standby events.
+            nextSwitchboardIntegrationId:
+              type: string
+              description: The unique ID of the next switchboard integration.
+            messageHistoryCount:
+              type: number
+              description: The number of messages to keep in the message history.
+            inherited:
+              type: boolean
+              description: Indicates whether the switchboard is inherited.
     android:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4197,6 +4248,8 @@ components:
               description: |
                 Allows users to send attachments. By default, the setting is set to true. This setting can only be configured in Zendesk Admin Center.
               readOnly: true
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     apple:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4224,6 +4277,8 @@ components:
             - businessId
             - apiSecret
             - mspId
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     target:
       type: string
       description: URL to be called when the webhook is triggered.
@@ -4352,6 +4407,8 @@ components:
             - pageAccessToken
             - appId
             - appSecret
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     ios:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4390,6 +4447,8 @@ components:
               description: |
                 Allows users to send attachments. By default, the setting is set to true. This setting can only be configured in Zendesk Admin Center.
               readOnly: true
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     line:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4433,6 +4492,8 @@ components:
               description: LINE Basic ID. Is automatically set when qrCodeUrl is updated.
               readOnly: true
               example: 104fb8
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     mailgun:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4472,6 +4533,8 @@ components:
             - apiKey
             - domain
             - incomingAddress
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     messagebird:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4516,6 +4579,8 @@ components:
             - accessKey
             - signingKey
             - originator
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     messenger:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4554,6 +4619,8 @@ components:
             - pageAccessToken
             - appId
             - appSecret
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     telegram:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4580,6 +4647,8 @@ components:
               readOnly: true
           required:
             - token
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     twilio:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4612,6 +4681,8 @@ components:
           required:
             - accountSid
             - authToken
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     twitter:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4662,6 +4733,8 @@ components:
             - consumerSecret
             - accessTokenKey
             - accessTokenSecret
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     unity:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4680,6 +4753,8 @@ components:
               description: |
                 Allows users to send attachments. By default, the setting is set to true. This setting can only be configured in Zendesk Admin Center.
               readOnly: true
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     viber:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4706,6 +4781,8 @@ components:
               readOnly: true
           required:
             - token
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     prechatCapture:
       type: object
       properties:
@@ -4857,6 +4934,8 @@ components:
               description: |
                 Allows users to send attachments. By default, the setting is set to true. This setting can only be configured in Zendesk Admin Center.
               readOnly: true
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     whatsapp:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -4894,6 +4973,8 @@ components:
               example: '15144441919'
           required:
             - deploymentId
+        - $ref: '#/components/schemas/defaultResponderId'
+        - $ref: '#/components/schemas/defaultResponder'
     status:
       type: string
       description: The status of the integration.
@@ -4930,6 +5011,12 @@ components:
           maxLength: 100
           nullable: true
           example: My awesome integration
+        defaultResponderId:
+          type: string
+          description: |
+            The default responder ID for the integration. This is the ID of the responder that will be used to send messages to the user.
+            For more information, refer to <a href="https://docs.smooch.io/guide/switchboard/#per-channel-default-responder">Per-channel default responder</a> guide.
+          nullable: true
     androidUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
@@ -4979,7 +5066,15 @@ components:
         - $ref: '#/components/schemas/integrationUpdateBase'
     customUpdate:
       allOf:
-        - $ref: '#/components/schemas/integrationUpdateBase'
+        - type: object
+          properties:
+            displayName:
+              type: string
+              description: A human-friendly name used to identify the integration. `displayName` can be unset by changing it to `null`.
+              minLength: 1
+              maxLength: 100
+              nullable: true
+              example: My awesome integration
     instagramUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
@@ -7017,6 +7112,7 @@ components:
             displayName: Android
             serverId: <sender-id>
             canUserCreateMoreConversations: true
+            defaultResponderId: 5e4af71a81966cfff3ef6551
         meta:
           hasMore: true
           afterCursor: 5e4af71a81966cfff3ef6550
@@ -7033,6 +7129,7 @@ components:
           displayName: Android
           serverId: <sender-id>
           canUserCreateMoreConversations: true
+          defaultResponderId: 5e4af71a81966cfff3ef6551
     userDeletePersonalInformationResponse:
       value:
         user:
