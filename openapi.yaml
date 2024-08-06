@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 12.6.2
+  version: 12.7.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -3457,6 +3457,9 @@ components:
         text:
           type: string
           description: The text content of the message.
+        attachmentId:
+          type: string
+          description: An identifier used by Sunshine Conversations for internal purposes.
       required:
         - type
         - mediaUrl
@@ -3631,6 +3634,9 @@ components:
           description: Array of message actions.
           items:
             $ref: '#/components/schemas/action'
+        attachmentId:
+          type: string
+          description: An identifier used by Sunshine Conversations for internal purposes.
       required:
         - type
         - mediaUrl
