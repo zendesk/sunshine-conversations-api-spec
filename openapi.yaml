@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 12.7.0
+  version: 12.8.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -2906,6 +2906,12 @@ components:
                 conversation, or the creation time if no messages have been received yet.
               nullable: true
               example: '2020-06-26T14:33:47.120Z'
+            createdAt:
+              type: string
+              description: |
+                A datetime string with the format YYYY-MM-DDThh:mm:ss.SSSZ
+                representing the creation time of the conversation.
+              example: '2020-06-20T11:26:07.001Z'
     conversationListResponse:
       type: object
       properties:
