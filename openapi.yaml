@@ -2247,7 +2247,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/clientListResponse'
+                $ref: '#/components/schemas/deviceListResponse'
   /v2/apps/{appId}/users/{userIdOrExternalId}/devices/{deviceId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -5779,6 +5779,14 @@ components:
         - matchCriteria
         - confirmation
         - target
+    deviceListResponse:
+      type: object
+      properties:
+        devices:
+          type: array
+          description: List of returned devices.
+          items:
+            $ref: '#/components/schemas/device'
     deviceResponse:
       type: object
       title: deviceResponse
