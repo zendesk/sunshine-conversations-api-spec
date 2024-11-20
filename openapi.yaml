@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 13.1.0
+  version: 13.2.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -3909,6 +3909,32 @@ components:
         The destination of the message, in the case of [channel targeting](https://docs.smooch.io/guide/sending-messages/#targeting-a-specific-channel) or sending [silent messages](https://docs.smooch.io/guide/sending-messages/#silent-messages). Only
         applicable if the author role is `business` and the conversation is of type
         `personal`.
+    appleMessageOverridePayload:
+      type: object
+      description: The exact payload to send to the channel.
+      properties:
+        payload:
+          type: object
+        withCapabilities:
+          type: array
+          items:
+            type: string
+            enum:
+              - LIST
+              - TIME
+              - FORM
+              - QUICK
+              - AUTH2
+          description: |
+            List of capabilities needed for the override message to be received by the end user. 
+
+            `LIST` : for list picker;
+            `TIME` : for time picker;
+            `FORM` : for form;
+            `QUICK` : for quick reply;
+            `AUTH2` : for authentication
+          example:
+            - LIST
     messageOverridePayload:
       type: object
       description: The exact payload to send to the channel.
@@ -3921,7 +3947,7 @@ components:
           title: MessageOverrideApple
           properties:
             apple:
-              $ref: '#/components/schemas/messageOverridePayload'
+              $ref: '#/components/schemas/appleMessageOverridePayload'
         - type: object
           title: MessageOverrideLine
           properties:
@@ -3937,7 +3963,7 @@ components:
           properties:
             whatsapp:
               $ref: '#/components/schemas/messageOverridePayload'
-      description: A raw payload containing a message that is sent directly to a channel. Messages for [Apple Messages for Business](https://docs.smooch.io/guide/apple-business-chat/#passthrough-api), [Line](https://docs.smooch.io/guide/line/#passthrough-api), [Messenger](https://docs.smooch.io/guide/facebook-messenger/#passthrough-api), [Whatsapp](https://docs.smooch.io/guide/whatsapp/#passthrough-api) channels are supported.
+      description: A raw payload containing a message that is sent directly to a channel. Messages for [Apple Messages for Business](https://docs.smooch.io/guide/apple-messages-for-business/#passthrough-api), [Line](https://docs.smooch.io/guide/line/#passthrough-api), [Messenger](https://docs.smooch.io/guide/facebook-messenger/#passthrough-api), [Whatsapp](https://docs.smooch.io/guide/whatsapp/#passthrough-api) channels are supported.
     messagePost:
       type: object
       properties:
@@ -4202,6 +4228,11 @@ components:
               type: string
               description: Your Messaging Service Provider ID.
               example: e7e495d5-bf78-531d-baf6-7f419f7fb592
+            authenticationMessageSecret:
+              type: string
+              description: A secret used to create the state value when sending Apple authentication 2.0 messages
+              minLength: 88
+              example: eH3Ea4329FzUGEsWkjQr1dbD1JDpn5Ygo/kbW0/f8gOQ4eHTr31bjDUcCfv3s9QaAwRgpd4sckdlSXwMOAGHBQ==
           required:
             - businessId
             - apiSecret
@@ -4993,6 +5024,13 @@ components:
     appleUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
+        - type: object
+          properties:
+            authenticationMessageSecret:
+              type: string
+              description: A secret used to create the state value when sending Apple authentication 2.0 messages
+              minLength: 88
+              example: eH3Ea4329FzUGEsWkjQr1dbD1JDpn5Ygo/kbW0/f8gOQ4eHTr31bjDUcCfv3s9QaAwRgpd4sckdlSXwMOAGHBQ==
     customUpdate:
       allOf:
         - type: object
