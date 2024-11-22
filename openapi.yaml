@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 13.2.0
+  version: 14.0.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -3209,7 +3209,6 @@ components:
           description: The type of action.
         uri:
           type: string
-          format: uri
           description: The webview URI. This is the URI that will open in the webview when clicking the button.
         text:
           type: string
@@ -5032,16 +5031,15 @@ components:
               minLength: 88
               example: eH3Ea4329FzUGEsWkjQr1dbD1JDpn5Ygo/kbW0/f8gOQ4eHTr31bjDUcCfv3s9QaAwRgpd4sckdlSXwMOAGHBQ==
     customUpdate:
-      allOf:
-        - type: object
-          properties:
-            displayName:
-              type: string
-              description: A human-friendly name used to identify the integration. `displayName` can be unset by changing it to `null`.
-              minLength: 1
-              maxLength: 100
-              nullable: true
-              example: My awesome integration
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: A human-friendly name used to identify the integration. `displayName` can be unset by changing it to `null`.
+          minLength: 1
+          maxLength: 100
+          nullable: true
+          example: My awesome integration
     instagramUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
