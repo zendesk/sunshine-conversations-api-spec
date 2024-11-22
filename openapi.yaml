@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 14.0.0
+  version: 14.1.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -1220,6 +1220,49 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+  /v2/apps/{appId}/conversations/{conversationId}/download:
+    parameters:
+      - $ref: '#/components/parameters/appId'
+      - $ref: '#/components/parameters/conversationId'
+    post:
+      tags:
+        - Conversations
+      summary: Download Message Ref
+      operationId: downloadMessageRef
+      description: When a third party channel provides a reference of a data, this API can be used to download the reference and fetch the full data. Currently, only apple channel is supported.
+      security:
+        - basicAuth:
+            - integration
+            - app
+            - account
+        - bearerAuth:
+            - integration
+            - app
+            - account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/downloadMessageRefBody'
+            examples:
+              request:
+                value:
+                  userId: 6e416caac6a5e9544e3fb6d7
+                  apple:
+                    interactiveDateRef:
+                      url: https://p61-content.icloud.com/M58C0A1A2EB62B6E899B4F28996E8DA229E1914295299C39944B2F2CA7482AE50.C01USN00
+                      bid: com.apple.messages.MSMessageExtensionBalloonPlugin:0000000000:com.apple.icloud.apps.messages.business.extension
+                      key: 00c0d1827fdc858fe7b42421de1fb289c2ee0a9463d787ce4f118506f970bd6e38
+                      signature: 81a619c81da5a01c6139219a5d20e17430c631e1eb
+                      owner: M58C0A2A1EB62B4E859B4F28996E8DA229E1914295299C39944B2F2CA7482AE50.C01USN00
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
   /v2/apps/{appId}/integrations:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -4052,6 +4095,42 @@ components:
           description: Flat object containing custom properties. Strings, numbers and booleans are the only supported format that can be passed to metadata. The metadata is limited to 4KB in size. The metadata object will be included in the `switchboard:passControl` webhook.
       required:
         - switchboardIntegration
+    downloadMessageRefBody:
+      allOf:
+        - type: object
+          properties:
+            userId:
+              type: string
+              description: The id of the user.
+              example: 5963c0d619a30a2e00de36b8
+            apple:
+              type: object
+              description: The message ref returned by Apple.
+              required:
+                - interactiveDataRef
+              properties:
+                interactiveDataRef:
+                  type: object
+                  description: interactiveDataRef can be found in the passthrough webhook.
+                  required:
+                    - url
+                    - bid
+                    - key
+                    - signature
+                    - owner
+                  properties:
+                    url:
+                      type: string
+                    bid:
+                      type: string
+                    key:
+                      type: string
+                    signature:
+                      type: string
+                    owner:
+                      type: string
+      required:
+        - userId
     integration:
       type: object
       description: The integration.
