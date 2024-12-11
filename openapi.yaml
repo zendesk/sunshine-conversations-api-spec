@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 14.1.0
+  version: 14.2.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -274,6 +274,7 @@ tags:
       | switchboard:passControl:failure | When changing a switchboard integration to active fails. |
       | user:merge         | When two or more users are merged into one. |
       | user:update         | When a user is updated. (Currently, when a user's identification is updated.)|
+      | user:remove         | When a user is deleted. |
 
       ## Securing Sunshine Conversations Webhooks
       When a webhook is created, a shared secret will be generated for it. The secret can be used to determine the veracity of a request to your webhook route. It is included as an `X-API-Key` header with each webhook request sent to the target URL.
@@ -2445,6 +2446,7 @@ x-webhooks:
                       - $ref: '#/components/schemas/switchboardPassControlFailure'
                       - $ref: '#/components/schemas/userMergeEvent'
                       - $ref: '#/components/schemas/userUpdateEvent'
+                      - $ref: '#/components/schemas/userRemoveEvent'
             examples:
               client:add:
                 $ref: '#/components/examples/clientAddEvent'
@@ -2492,6 +2494,8 @@ x-webhooks:
                 $ref: '#/components/examples/userMergeEvent'
               user:update:
                 $ref: '#/components/examples/userUpdateEvent'
+              user:remove:
+                $ref: '#/components/examples/userRemoveEvent'
       responses:
         '200':
           description: Ok
@@ -5520,6 +5524,9 @@ components:
       type: string
       description: The date at which the user signed up. Must be ISO 8601 time format `YYYY-MM-DDThh:mm:ss.sssZ`.
       example: '2020-05-21T15:53:30.197Z'
+    toBeRetained:
+      type: boolean
+      description: Flag indicating whether a user should be retained after they have passed their inactive expiry. See [creating deletion schedules for bot-only conversations](https://support.zendesk.com/hc/en-us/articles/8499219792154) for more information.
     profile:
       type: object
       description: Object hosting user profile information.
@@ -5574,6 +5581,8 @@ components:
           example: your-own-id
         signedUpAt:
           $ref: '#/components/schemas/signedUpAt'
+        toBeRetained:
+          $ref: '#/components/schemas/toBeRetained'
         profile:
           $ref: '#/components/schemas/profile'
         metadata:
@@ -5619,6 +5628,9 @@ components:
             signedUpAt:
               allOf:
                 - $ref: '#/components/schemas/signedUpAt'
+            toBeRetained:
+              allOf:
+                - $ref: '#/components/schemas/toBeRetained'
             profile:
               allOf:
                 - $ref: '#/components/schemas/profile'
@@ -5647,6 +5659,9 @@ components:
         signedUpAt:
           allOf:
             - $ref: '#/components/schemas/signedUpAt'
+        toBeRetained:
+          allOf:
+            - $ref: '#/components/schemas/toBeRetained'
         profile:
           allOf:
             - $ref: '#/components/schemas/profile'
@@ -6627,6 +6642,20 @@ components:
                     - $ref: '#/components/schemas/sourceWebhook'
                   description: The source of the creation.
       title: user:update
+    userRemoveEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: The payload of the event. The contents of this object depend on the type of event.
+              properties:
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/userTruncated'
+                  description: The user that was removed.
+      title: user:remove
   parameters:
     pageQuery:
       name: page
@@ -7807,6 +7836,21 @@ components:
               source:
                 type: web
                 integrationId: 5ecff63ffc3ab25f4561c8a0
+    userRemoveEvent:
+      value:
+        app:
+          id: 5ebee0975ac5304b664a12fa
+        webhook:
+          id: 5f4eaef81e3dcc117c7ba48a
+          version: v2
+        events:
+          - id: 6748e3b2e176d554adbc1a4f
+            createdAt: '2024-11-28T21:42:10.691Z'
+            type: user:remove
+            payload:
+              user:
+                id: 6748e3ae32378e732938e031
+                externalId: abc123
 x-tagGroups:
   - name: Account Provisioning
     tags:
