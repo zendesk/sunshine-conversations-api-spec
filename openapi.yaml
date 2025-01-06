@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 14.2.0
+  version: 14.3.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -3123,6 +3123,44 @@ components:
           description: A custom message icon URL. The image must be JPG, PNG, or GIF format.
       required:
         - type
+    ticketClosed:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of system activity that generated the message. The value of this field determines the dynamic content that is rendered to the end-user / agent when viewing this message. Each `type` value will have a set of pre-defined, localized strings that describe the activity.
+          default: ticketClosed
+        data:
+          type: object
+          description: No additional data is supplied with the "ticketClosed" activity type at this time.
+          readOnly: true
+          default: null
+      required:
+        - type
+      readOnly: true
+    transferToEmail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of system activity that generated the message. The value of this field determines the dynamic content that is rendered to the end-user / agent when viewing this message. Each `type` value will have a set of pre-defined, localized strings that describe the activity.
+          default: transferToEmail
+        data:
+          type: object
+          description: No additional data is supplied with the "transferToEmail" activity type at this time.
+          default: null
+      required:
+        - type
+      readOnly: true
+    activityMessage:
+      oneOf:
+        - $ref: '#/components/schemas/ticketClosed'
+        - $ref: '#/components/schemas/transferToEmail'
+      discriminator:
+        propertyName: type
+        mapping:
+          ticketClosed: '#/components/schemas/ticketClosed'
+          transferToEmail: '#/components/schemas/transferToEmail'
     buy:
       type: object
       properties:
@@ -3862,6 +3900,10 @@ components:
           example: '2019-03-21T18:48:52.760Z'
         author:
           $ref: '#/components/schemas/author'
+        activity:
+          allOf:
+            - $ref: '#/components/schemas/activityMessage'
+          description: Details of the system activity that generated this message. This field is used when actions taken by the system generate a persisted message to notify the user or agent of an event that occurred. For example, when a user's Ticket gets closed. This property applies only to informational text messages generated via system events.
         content:
           allOf:
             - $ref: '#/components/schemas/content'
