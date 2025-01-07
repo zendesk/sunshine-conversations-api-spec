@@ -3134,7 +3134,7 @@ components:
           type: object
           description: No additional data is supplied with the "ticketClosed" activity type at this time.
           readOnly: true
-          default: null
+          default: {}
       required:
         - type
       readOnly: true
@@ -3148,7 +3148,7 @@ components:
         data:
           type: object
           description: No additional data is supplied with the "transferToEmail" activity type at this time.
-          default: null
+          default: {}
       required:
         - type
       readOnly: true
