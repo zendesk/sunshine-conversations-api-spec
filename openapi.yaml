@@ -3129,10 +3129,10 @@ components:
         type:
           type: string
           description: The type of system activity that generated the message. The value of this field determines the dynamic content that is rendered to the end-user / agent when viewing this message. Each `type` value will have a set of pre-defined, localized strings that describe the activity.
-          default: ticketClosed
+          default: ticket:closed
         data:
           type: object
-          description: No additional data is supplied with the "ticketClosed" activity type at this time.
+          description: No additional data is supplied with the "ticket:closed" activity type at this time.
           additionalProperties: true
       required:
         - type
@@ -3143,10 +3143,10 @@ components:
         type:
           type: string
           description: The type of system activity that generated the message. The value of this field determines the dynamic content that is rendered to the end-user / agent when viewing this message. Each `type` value will have a set of pre-defined, localized strings that describe the activity.
-          default: transferToEmail
+          default: ticket:transfer:email
         data:
           type: object
-          description: No additional data is supplied with the "transferToEmail" activity type at this time.
+          description: No additional data is supplied with the "ticket:transfer:email" activity type at this time.
           additionalProperties: true
       required:
         - type
@@ -3158,8 +3158,8 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          ticketClosed: '#/components/schemas/ticketClosed'
-          transferToEmail: '#/components/schemas/transferToEmail'
+          ticket:closed: '#/components/schemas/ticketClosed'
+          ticket:transfer:email: '#/components/schemas/transferToEmail'
     buy:
       type: object
       properties:
