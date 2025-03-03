@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 14.3.5
+  version: 14.4.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -203,6 +203,8 @@ tags:
       The attachments API allows you to upload a file for the purpose of sending a message.
       Using the for parameter, you can signal to Sunshine Conversations that your upload will be used to send a message to a user.
       Knowing this, Sunshine Conversations will safely delete the attachment when the message, conversation or user is deleted.
+    x-zoas-docs:
+      ignoreCanonicalSchema: true
   - name: Conversations
     x-displayName: Conversations
     description: A stored history of messages sent to and received from a `user`. This set of endpoints is used to provision and manage conversations.
@@ -215,9 +217,13 @@ tags:
   - name: Activities
     x-displayName: Activities
     description: Notify Sunshine Conversations of different conversation activities.
+    x-zoas-docs:
+      ignoreCanonicalSchema: true
   - name: Switchboard Actions
     x-displayName: Switchboard Actions
     description: Manage which switchboard integration has control over a conversation.
+    x-zoas-docs:
+      ignoreCanonicalSchema: true
   - name: Integrations
     x-displayName: Integrations
     description: |
@@ -238,8 +244,13 @@ tags:
   - name: Clients
     x-displayName: Clients
     description: Endpoints used for provisioning [clients](https://docs.smooch.io/guide/key-concepts/#client).
+  - name: Devices
+    x-displayName: Devices
+    description: Endpoints used for fetching a user's [devices](https://docs.smooch.io/guide/key-concepts/#device).
   - name: Changelog
     description: All notable changes to the API will be referenced in the [v2 API changelog](https://docs.smooch.io/guide/v2-api-changelog/).
+    x-zoas-docs:
+      ignoreCanonicalSchema: true
   - name: Webhooks
     description: |
       Endpoints for managing webhooks associated to a Sunshine Conversations Connect integration or a custom integration. Webhooks are a fantastic way to extend the Sunshine Conversations platform beyond the built-in feature set. You can use webhooks to build your own Sunshine Conversations chat clients, to integrate more deeply with your favorite CRM, or to build a bot.
@@ -311,16 +322,20 @@ tags:
       An open source sample application implementing Sunshine Conversations Connect has been created to help demonstrate how to get it working. Give [Shoplifter](https://sunco-shoplifter.zendesk.com/) a try.
 
       The source code is available [here](https://github.com/zendesk/sunshine-conversations-shoplifter).
+    x-zoas-docs:
+      ignoreCanonicalSchema: true
   - name: OAuth Endpoints
     x-displayName: OAuth Endpoints
     description: "The scope of an issued access token is integration scope. This allows API calls to be made to a specific Sunshine Conversations app on behalf of an integration, identified by the integration’s clientId. The access token grants permission to get and create users and conversations associated with the app. The token also grants permission to create webhooks, however only webhooks created for the integration will be visible. An access token with integration scope cannot see or modify webhooks that were created by other integrations, for example.\n\n| API\t      | Access\t|\n| --------  | ------- |\n| [/v2/apps/:appId/users/\\*](#tag/Users)\t| Yes\t|\n| [/v2/apps/:appId/conversations/\\*](#tag/Conversations)\t| Yes\t|\n| [/v2/apps/:appId/integrations/me/webhooks/\\*](#tag/Webhooks)\t| Yes\t|\n| [/v2/apps/:appId/switchboards/\\*](#tag/Switchboards) | No |\n| [/v2/apps/\\*](#tag/Apps) | No |\n"
+    x-zoas-docs:
+      ignoreCanonicalSchema: true
 paths:
   /v2/apps:
     post:
       tags:
         - Apps
       summary: Create App
-      operationId: createApp
+      operationId: CreateApp
       description: Creates a new app. When using [service account](#service-accounts) credentials, the service account is automatically granted access to the app.
       security:
         - basicAuth:
@@ -340,15 +355,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/createApp'
         '400':
-          description: should have required property 'displayName'
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: should have required property 'displayName'
         '402':
-          description: Your account has reached the maximum number of apps for your subscription plan
+          description: Payment required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: payment_required
+                        title: Your account has reached the maximum number of apps for your subscription plan
     get:
       tags:
         - Apps
       summary: List Apps
-      operationId: listApps
+      operationId: ListApps
       description: |
         Lists all apps that a user is part of. This API is paginated through [cursor pagination](#section/Introduction/API-pagination-and-records-limits). 
         ```shell
@@ -369,10 +407,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listApps'
         '400':
-          description: Invalid page query parameters
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Invalid page query parameters
         '403':
-          description: The serviceAccountId provided does not match supplied credentials
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: forbidden
+                        title: The serviceAccountId provided does not match supplied credentials
   /v2/apps/{appId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -380,7 +441,7 @@ paths:
       tags:
         - Apps
       summary: Get App
-      operationId: getApp
+      operationId: GetApp
       description: Fetches an individual app.
       security:
         - basicAuth:
@@ -396,13 +457,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/getApp'
         '404':
-          description: App not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: app_not_found
+                        title: App not found
     patch:
       tags:
         - Apps
       summary: Update App
-      operationId: updateApp
+      operationId: UpdateApp
       description: Updates an app.
       security:
         - basicAuth:
@@ -424,15 +498,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/updateApp'
         '400':
-          description: App metadata is limited to 4096 bytes in size.
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: App metadata is limited to 4096 bytes in size.
         '404':
-          description: App not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: app_not_found
+                        title: App not found
     delete:
       tags:
         - Apps
       summary: Delete App
-      operationId: deleteApp
+      operationId: DeleteApp
       description: Removes the specified app, including all its enabled integrations.
       security:
         - basicAuth:
@@ -446,8 +543,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: App not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: app_not_found
+                        title: App not found
   /v2/apps/{appId}/keys:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -455,7 +565,7 @@ paths:
       tags:
         - App Keys
       summary: Create App Key
-      operationId: createAppKey
+      operationId: CreateAppKey
       description: |
         Creates an API key for the specified app. The response body will include a secret 
         as well as its corresponding id, which you can use to generate JSON Web Tokens to 
@@ -488,11 +598,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appKeyResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/createAppKey'
     get:
       tags:
         - App Keys
       summary: List App Keys
-      operationId: listAppKeys
+      operationId: ListAppKeys
       description: Lists all API keys for a given app.
       security:
         - basicAuth:
@@ -506,6 +619,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appKeyListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listAppKeys'
   /v2/apps/{appId}/keys/{keyId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -514,7 +630,7 @@ paths:
       tags:
         - App Keys
       summary: Get App Key
-      operationId: getAppKey
+      operationId: GetAppKey
       description: Returns an API key.
       security:
         - basicAuth:
@@ -528,13 +644,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appKeyResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/getAppKey'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: not_found
+                        title: Resource not found
     delete:
       tags:
         - App Keys
       summary: Delete App Key
-      operationId: deleteAppKey
+      operationId: DeleteAppKey
       description: Removes an API key.
       security:
         - basicAuth:
@@ -548,8 +677,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: App not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: app_not_found
+                        title: App not found
   /v2/apps/{appId}/attachments:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -560,7 +702,7 @@ paths:
       tags:
         - Attachments
       summary: Upload Attachment
-      operationId: uploadAttachment
+      operationId: UploadAttachment
       description: |
         Upload an attachment to Sunshine Conversations to use in future messages. Files are uploaded using the multipart/form-data content type. Use the returned mediaUrl to send a file, image or carousel message.
         <aside class="notice">Note that Sunshine Conversations limits the size and type of file you can upload to the platform. See the <a href="https://docs.smooch.io/guide/validating-files">file validation</a> guide for more details.</aside>
@@ -586,8 +728,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/attachmentResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/uploadAttachment'
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Bad request
   /v2/apps/{appId}/attachments/remove:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -595,7 +750,7 @@ paths:
       tags:
         - Attachments
       summary: Delete Attachment
-      operationId: deleteAttachment
+      operationId: DeleteAttachment
       description: |
         Remove an attachment uploaded to Sunshine Conversations through the Upload attachment API.
         See [Attachments for Messages](#section/Attachments-for-Messages) to have attachments automatically deleted when deleting messages, conversations or users.
@@ -622,8 +777,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: Attachment not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: not_found
+                        title: Attachment not found
   /v2/apps/{appId}/conversations:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -631,7 +799,7 @@ paths:
       tags:
         - Conversations
       summary: Create Conversation
-      operationId: createConversation
+      operationId: CreateConversation
       description: Create a conversation for the specified user(s).
       security:
         - basicAuth:
@@ -655,13 +823,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/conversationResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/createConversation'
         '404':
-          description: App not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: app_not_found
+                        title: App not found
     get:
       tags:
         - Conversations
       summary: List Conversations
-      operationId: listConversations
+      operationId: ListConversations
       description: |
         Lists all conversations that a user is part of. This API is paginated through [cursor pagination](#section/Introduction/API-pagination-and-records-limits).
         ```shell
@@ -686,10 +867,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/conversationListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listConversations'
         '400':
-          description: Invalid page query parameters
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Invalid page query parameters
         '404':
-          description: User not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: user_not_found
+                        title: User not found
   /v2/apps/{appId}/conversations/{conversationId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -698,7 +902,7 @@ paths:
       tags:
         - Conversations
       summary: Get Conversation
-      operationId: getConversation
+      operationId: GetConversation
       description: Fetches an individual conversation.
       security:
         - basicAuth:
@@ -716,13 +920,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/conversationResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/getConversation'
         '404':
-          description: Conversation not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
     patch:
       tags:
         - Conversations
       summary: Update Conversation
-      operationId: updateConversation
+      operationId: UpdateConversation
       description: Updates a conversation record.
       security:
         - basicAuth:
@@ -746,13 +963,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/conversationResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/updateConversation'
         '404':
-          description: Conversation not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
     delete:
       tags:
         - Conversations
       summary: Delete Conversation
-      operationId: deleteConversation
+      operationId: DeleteConversation
       description: Delete an entire conversation record, along with its messages and attachments. Note that the default conversation cannot be deleted, but the messages contained [can be](#deleteAllMessages).
       security:
         - basicAuth:
@@ -770,10 +1000,33 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '400':
-          description: Conversation c93bb9c14dde8ffb94564eae cannot be deleted because it is the default.
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Conversation c93bb9c14dde8ffb94564eae cannot be deleted because it is the default.
         '404':
-          description: Conversation not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/join:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -782,7 +1035,7 @@ paths:
       tags:
         - Participants
       summary: Join Conversation
-      operationId: joinConversation
+      operationId: JoinConversation
       description: |
         Adds a user to a conversation using either their userId or userExternalId. The endpoint only
         supports adding a participant to a sdkGroup conversation.
@@ -801,6 +1054,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/participantJoinBody'
+            examples:
+              default:
+                value:
+                  userId: 67a11490f0305f4a391e9f8a
+                  subscribeSDKClient: true
       responses:
         '201':
           description: Created
@@ -813,10 +1071,33 @@ paths:
                 properties:
                   participant:
                     $ref: '#/components/schemas/participant'
+              examples:
+                default:
+                  $ref: '#/components/examples/joinConversation'
         '400':
-          description: Too many participants
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Too many participants
         '404':
-          description: Conversation not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/participants:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -825,7 +1106,7 @@ paths:
       tags:
         - Participants
       summary: List Participants
-      operationId: listParticipants
+      operationId: ListParticipants
       description: |
         Lists all the participants of a particular conversation. This API is paginated through [cursor pagination](#section/Introduction/API-pagination-and-records-limits).
 
@@ -850,10 +1131,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/participantListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listParticipants'
         '400':
-          description: Invalid page query parameters
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Invalid page query parameters
         '404':
           description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/leave:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -862,7 +1166,7 @@ paths:
       tags:
         - Participants
       summary: Leave Conversation
-      operationId: leaveConversation
+      operationId: LeaveConversation
       description: |
         Removes a user from a conversation using either their userId, userExternalId, or participantId.
       security:
@@ -880,6 +1184,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/participantLeaveBody'
+            examples:
+              default:
+                value:
+                  userId: 67a11490f0305f4a391e9f8a
       responses:
         '200':
           description: Ok
@@ -887,8 +1195,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: User is not a member of the conversation
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: not_found
+                        title: User is not a member of the conversation
   /v2/apps/{appId}/conversations/{conversationId}/messages:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -897,7 +1218,7 @@ paths:
       tags:
         - Messages
       summary: Post Message
-      operationId: postMessage
+      operationId: PostMessage
       description: Send a message in a particular conversation.
       security:
         - basicAuth:
@@ -915,6 +1236,8 @@ paths:
             schema:
               $ref: '#/components/schemas/messagePost'
             examples:
+              default:
+                $ref: '#/components/examples/text'
               text:
                 $ref: '#/components/examples/text'
               carousel:
@@ -939,6 +1262,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/messagePostResponse'
               examples:
+                default:
+                  $ref: '#/components/examples/text-2'
                 text:
                   $ref: '#/components/examples/text-2'
                 carousel:
@@ -957,11 +1282,21 @@ paths:
           description: |
             Message limit reached
             <aside class="notice">To learn more about the conversation message limit, consult the section in the introduction linked <a href="#section/Introduction/Conversation-Size-Limits">here</a>.</aside>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: locked
+                        title: Message limit of 30000 per conversation reached.
     get:
       tags:
         - Messages
       summary: List Messages
-      operationId: listMessages
+      operationId: ListMessages
       description: |
         List all messages for a particular conversation. This API is paginated through
         [cursor pagination](#section/Introduction/API-pagination-and-records-limits), in the _backwards_ direction, with the
@@ -990,13 +1325,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/messageListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listMessages'
         '404':
-          description: Message not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: not_found
+                        title: Resource not found
     delete:
       tags:
         - Messages
       summary: Delete All Messages
-      operationId: deleteAllMessages
+      operationId: DeleteAllMessages
       description: Delete all messages of a particular conversation.
       security:
         - basicAuth:
@@ -1014,8 +1362,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
           description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/messages/{messageId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1025,7 +1386,7 @@ paths:
       tags:
         - Messages
       summary: Delete Message
-      operationId: deleteMessage
+      operationId: DeleteMessage
       description: Delete a single message of a particular conversation.
       security:
         - basicAuth:
@@ -1043,8 +1404,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
           description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/activity:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1053,7 +1427,7 @@ paths:
       tags:
         - Activities
       summary: Post Activity
-      operationId: postActivity
+      operationId: PostActivity
       description: |
         Notify Sunshine Conversations of different conversation activities. Supported activity types are:
         * Typing activity
@@ -1074,7 +1448,7 @@ paths:
             schema:
               $ref: '#/components/schemas/activityPost'
             examples:
-              request:
+              default:
                 value:
                   author:
                     type: user
@@ -1087,6 +1461,9 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
   /v2/apps/{appId}/conversations/{conversationId}/acceptControl:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1095,7 +1472,7 @@ paths:
       tags:
         - Switchboard Actions
       summary: Accept Control
-      operationId: acceptControl
+      operationId: AcceptControl
       description: The acceptControl action transfers the control of the conversation to the pending switchboard integration. When using integration auth scope, a 403 is returned if the pending switchboard integration is not the authenticated integration.
       security:
         - basicAuth:
@@ -1119,10 +1496,33 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: forbidden
+                        title: Forbidden
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/offerControl:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1131,7 +1531,7 @@ paths:
       tags:
         - Switchboard Actions
       summary: Offer Control
-      operationId: offerControl
+      operationId: OfferControl
       description: The offerControl action will invite a switchboard integration to accept control of the conversation (changing its status to pending), and trigger a webhook signal to that integration indicating that they have been offered control of the conversation. Invalidates previous offerControl actions.
       security:
         - basicAuth:
@@ -1155,8 +1555,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/passControl:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1165,7 +1578,7 @@ paths:
       tags:
         - Switchboard Actions
       summary: Pass Control
-      operationId: passControl
+      operationId: PassControl
       description: The passControl action marks the named switchboard integration as active and transitions all the other switchboard integrations to standby status. The `passControl` action is idempotent if either the target `switchboardIntegration` is specified explicitly by its `id` or `name`, or the `next` keyword is used for the `switchboardIntegration` field, and the invoking integration can be identified by its [OAuth token](https://docs.smooch.io/guide/oauth/#redirect-and-acquiring-an-oauth-token) or [Custom Integration API Key](https://docs.smooch.io/rest/#tag/CustomIntegrationApiKeys) credentials. Duplicate passControl actions using the `next` keyword and their metadata are disregarded. For more information, see [Switchboard passControl](https://docs.smooch.io/guide/switchboard/#pass-control).
       security:
         - basicAuth:
@@ -1189,8 +1602,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/releaseControl:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1199,7 +1625,7 @@ paths:
       tags:
         - Switchboard Actions
       summary: Release Control
-      operationId: releaseControl
+      operationId: ReleaseControl
       description: The releaseControl action releases the control of the conversation by nullifying its switchboard state. When using integration auth scope, a 403 is returned if the active switchboard integration is not the authenticated integration.
       security:
         - basicAuth:
@@ -1217,10 +1643,33 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: forbidden
+                        title: Forbidden
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
   /v2/apps/{appId}/conversations/{conversationId}/download:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1229,7 +1678,7 @@ paths:
       tags:
         - Conversations
       summary: Download Message Ref
-      operationId: downloadMessageRef
+      operationId: DownloadMessageRef
       description: When a third party channel provides a reference of a data, this API can be used to download the reference and fetch the full data. Currently, only apple channel is supported.
       security:
         - basicAuth:
@@ -1247,11 +1696,11 @@ paths:
             schema:
               $ref: '#/components/schemas/downloadMessageRefBody'
             examples:
-              request:
+              default:
                 value:
                   userId: 6e416caac6a5e9544e3fb6d7
                   apple:
-                    interactiveDateRef:
+                    interactiveDataRef:
                       url: https://p61-content.icloud.com/M58C0A1A2EB62B6E899B4F28996E8DA229E1914295299C39944B2F2CA7482AE50.C01USN00
                       bid: com.apple.messages.MSMessageExtensionBalloonPlugin:0000000000:com.apple.icloud.apps.messages.business.extension
                       key: 00c0d1827fdc858fe7b42421de1fb289c2ee0a9463d787ce4f118506f970bd6e38
@@ -1264,6 +1713,9 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
   /v2/apps/{appId}/integrations:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1271,7 +1723,7 @@ paths:
       tags:
         - Integrations
       summary: Create Integration
-      operationId: createIntegration
+      operationId: CreateIntegration
       description: The Create Integration endpoint allows you to provision apps with front-end messaging channels. Selecting a `custom` integration allows the creation of webhooks.
       security:
         - basicAuth:
@@ -1296,15 +1748,25 @@ paths:
                   - $ref: '#/components/schemas/integrationResponse'
                 description: The created integration.
               examples:
-                success:
-                  $ref: '#/components/examples/integrationResponse'
+                default:
+                  $ref: '#/components/examples/createIntegration'
         '400':
-          description: Invalid integration type
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Invalid integration type
     get:
       tags:
         - Integrations
       summary: List Integrations
-      operationId: listIntegrations
+      operationId: ListIntegrations
       description: |
         List available integrations. This API is paginated through [cursor pagination](#section/Introduction/API-pagination-and-records-limits).
         ```shell
@@ -1328,10 +1790,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/integrationListResponse'
               examples:
-                success:
-                  $ref: '#/components/examples/integrationListResponse'
+                default:
+                  $ref: '#/components/examples/listIntegrations'
         '400':
-          description: Invalid query parameters
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Invalid query parameters
   /v2/apps/{appId}/integrations/{integrationId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1340,7 +1812,7 @@ paths:
       tags:
         - Integrations
       summary: Get Integration
-      operationId: getIntegration
+      operationId: GetIntegration
       description: Get integration.
       security:
         - basicAuth:
@@ -1359,15 +1831,25 @@ paths:
                   - $ref: '#/components/schemas/integrationResponse'
                 description: The fetched integration.
               examples:
-                success:
-                  $ref: '#/components/examples/integrationResponse'
+                default:
+                  $ref: '#/components/examples/getIntegration'
         '404':
-          description: Integration not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: integration_not_found
+                        title: Integration not found
     patch:
       tags:
         - Integrations
       summary: Update Integration
-      operationId: updateIntegration
+      operationId: UpdateIntegration
       description: Allows you to update certain fields of existing integrations. If updating a specific property is not supported, you must delete the integration and re-create it with the new data.
       security:
         - basicAuth:
@@ -1382,6 +1864,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/integrationUpdate'
+            examples:
+              default:
+                value:
+                  displayName: My Test Integration
       responses:
         '200':
           description: Ok
@@ -1392,15 +1878,25 @@ paths:
                   - $ref: '#/components/schemas/integrationResponse'
                 description: The updated integration.
               examples:
-                success:
-                  $ref: '#/components/examples/integrationResponse'
+                default:
+                  $ref: '#/components/examples/updateIntegration'
         '404':
-          description: Integration not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: integration_not_found
+                        title: Integration not found
     delete:
       tags:
         - Integrations
       summary: Delete Integration
-      operationId: deleteIntegration
+      operationId: DeleteIntegration
       description: Delete the specified integration.
       security:
         - basicAuth:
@@ -1416,10 +1912,33 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '400':
-          description: SDK integrations configured on Admin Center cannot be deleted
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: SDK integrations configured on Admin Center cannot be deleted
         '404':
-          description: Integration not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: integration_not_found
+                        title: Integration not found
   /v2/apps/{appId}/integrations/{integrationId}/keys:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1428,7 +1947,7 @@ paths:
       tags:
         - CustomIntegrationApiKeys
       summary: Create Integration Key
-      operationId: createCustomIntegrationKey
+      operationId: CreateCustomIntegrationKey
       description: Creates an API key for the specified custom integration. The response body will include a secret as well it’s corresponding id, which you can use to generate JSON Web Tokens to securely make API calls on behalf of the integration.
       security:
         - basicAuth:
@@ -1458,11 +1977,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/integrationApiKeyResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/createIntegrationKey'
     get:
       tags:
         - CustomIntegrationApiKeys
       summary: List Integration Keys
-      operationId: listCustomIntegrationKeys
+      operationId: ListCustomIntegrationKeys
       description: Lists all API keys for a given integration.
       security:
         - basicAuth:
@@ -1485,8 +2007,21 @@ paths:
                     description: Integration keys of the supplied integration.
                     items:
                       $ref: '#/components/schemas/apiKey'
+              examples:
+                default:
+                  $ref: '#/components/examples/listIntegrationKeys'
         '400':
-          description: API keys are available only for custom integrations
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: API keys are available only for custom integrations
   /v2/apps/{appId}/integrations/{integrationId}/keys/{keyId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1496,7 +2031,7 @@ paths:
       tags:
         - CustomIntegrationApiKeys
       summary: Get Integration Key
-      operationId: getCustomIntegrationKey
+      operationId: GetCustomIntegrationKey
       description: Get the specified API key.
       security:
         - basicAuth:
@@ -1512,11 +2047,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/integrationApiKeyResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/getIntegrationKey'
     delete:
       tags:
         - CustomIntegrationApiKeys
       summary: Delete Integration Key
-      operationId: deleteCustomIntegrationKey
+      operationId: DeleteCustomIntegrationKey
       description: Removes an API key.
       security:
         - basicAuth:
@@ -1532,6 +2070,9 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
   /v2/apps/{appId}/integrations/{integrationId}/webhooks:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1540,7 +2081,7 @@ paths:
       tags:
         - Webhooks
       summary: Create Webhook
-      operationId: createWebhook
+      operationId: CreateWebhook
       description: Creates a new webhook associated with a Sunshine Conversations Connect integration or a custom integration.
       security:
         - basicAuth:
@@ -1562,17 +2103,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/webhookResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/createWebhook'
         '400':
-          description: Bad Request
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Bad request
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: forbidden
+                        title: Forbidden
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: integration_not_found
+                        title: Integration not found
     get:
       tags:
         - Webhooks
       summary: List Webhooks
-      operationId: listWebhooks
+      operationId: ListWebhooks
       description: Lists all webhooks for a given Sunshine Conversations Connect integration or custom integration.
       security:
         - basicAuth:
@@ -1588,10 +2162,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/webhookListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listWebhooks'
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: forbidden
+                        title: Forbidden
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: integration_not_found
+                        title: Integration not found
   /v2/apps/{appId}/integrations/{integrationId}/webhooks/{webhookId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1601,7 +2198,7 @@ paths:
       tags:
         - Webhooks
       summary: Get Webhook
-      operationId: getWebhook
+      operationId: GetWebhook
       description: Gets the specified webhook associated with a Sunshine Conversations Connect integration or a custom integration.
       security:
         - basicAuth:
@@ -1617,13 +2214,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/webhookResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/getWebhook'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: not_found
+                        title: Resource not found
     patch:
       tags:
         - Webhooks
       summary: Update Webhook
-      operationId: updateWebhook
+      operationId: UpdateWebhook
       description: Updates the specified webhook associated with a Sunshine Conversations Connect integration or a custom integration.
       security:
         - basicAuth:
@@ -1645,15 +2255,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/webhookResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/updateWebhook'
         '400':
-          description: Bad Request
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Bad request
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: not_found
+                        title: Resource not found
     delete:
       tags:
         - Webhooks
       summary: Delete Webhook
-      operationId: deleteWebhook
+      operationId: DeleteWebhook
       description: Deletes the specified webhook associated with a Sunshine Conversations Connect integration or a custom integration.
       security:
         - basicAuth:
@@ -1669,8 +2302,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: not_found
+                        title: Resource not found
   /v2/apps/{appId}/switchboards:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1678,7 +2324,7 @@ paths:
       tags:
         - Switchboards
       summary: Create Switchboard
-      operationId: createSwitchboard
+      operationId: CreateSwitchboard
       description: Create a switchboard.
       security:
         - basicAuth:
@@ -1695,20 +2341,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/switchboardResponse'
               examples:
-                response:
-                  value:
-                    switchboard:
-                      id: 5ef21b132f21af34f088530d
-                      enabled: false
+                default:
+                  $ref: '#/components/examples/createSwitchboard'
         '400':
-          description: Only one switchboard can be created per app
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Only one switchboard can be created per app
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: app_not_found
+                        title: App not found
     get:
       tags:
         - Switchboards
       summary: List Switchboards
-      operationId: listSwitchboards
+      operationId: ListSwitchboards
       description: |
         Lists all switchboards belonging to the app.
       security:
@@ -1725,8 +2388,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/switchboardListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listSwitchboards'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: app_not_found
+                        title: App not found
   /v2/apps/{appId}/switchboards/{switchboardId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1735,7 +2411,7 @@ paths:
       tags:
         - Switchboards
       summary: Update Switchboard
-      operationId: updateSwitchboard
+      operationId: UpdateSwitchboard
       description: Updates a switchboard record.
       security:
         - basicAuth:
@@ -1757,13 +2433,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/switchboardResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/updateSwitchboard'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: switchboard_not_found
+                        title: Switchboard not found
     delete:
       tags:
         - Switchboards
       summary: Delete Switchboard
-      operationId: deleteSwitchboard
+      operationId: DeleteSwitchboard
       description: Deletes the switchboard and all its switchboard integrations. The integrations linked to these switchboard integrations are not deleted and will start receiving all conversation events.
       security:
         - basicAuth:
@@ -1779,8 +2468,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: switchboard_not_found
+                        title: Switchboard not found
   /v2/apps/{appId}/switchboards/{switchboardId}/switchboardIntegrations:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1789,7 +2491,7 @@ paths:
       tags:
         - Switchboard Integrations
       summary: Create Switchboard Integration
-      operationId: createSwitchboardIntegration
+      operationId: CreateSwitchboardIntegration
       description: Create a switchboard integration.
       security:
         - basicAuth:
@@ -1805,7 +2507,7 @@ paths:
             schema:
               $ref: '#/components/schemas/switchboardIntegrationCreateBody'
             examples:
-              request:
+              default:
                 value:
                   name: bot
                   integrationType: zd:agentWorkspace
@@ -1819,15 +2521,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/switchboardIntegrationResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/createSwitchboardIntegration'
         '400':
-          description: Switchboard has reached the max number of switchboard integrations (10)
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: too_many_switchboard_integrations
+                        title: Switchboard has reached the max number of switchboard integrations (10)
         '404':
-          description: Switchboard not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: switchboard_not_found
+                        title: Switchboard not found
     get:
       tags:
         - Switchboard Integrations
       summary: List Switchboard Integrations
-      operationId: listSwitchboardIntegrations
+      operationId: ListSwitchboardIntegrations
       description: |
         Lists all switchboard integrations linked to the switchboard.
       security:
@@ -1844,8 +2569,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/switchboardIntegrationListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listSwitchboardIntegrations'
         '404':
-          description: Switchboard not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: switchboard_not_found
+                        title: Switchboard not found
   /v2/apps/{appId}/switchboards/{switchboardId}/switchboardIntegrations/{switchboardIntegrationId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1855,7 +2593,7 @@ paths:
       tags:
         - Switchboard Integrations
       summary: Update Switchboard Integration
-      operationId: updateSwitchboardIntegration
+      operationId: UpdateSwitchboardIntegration
       description: Updates a switchboard integration record.
       security:
         - basicAuth:
@@ -1871,10 +2609,8 @@ paths:
             schema:
               $ref: '#/components/schemas/switchboardIntegrationUpdateBody'
             examples:
-              request:
+              default:
                 value:
-                  name: bot
-                  integrationType: zd:agentWorkspace
                   deliverStandbyEvents: true
                   nextSwitchboardIntegrationId: 5ef21b86e933b7355c11c606
                   messageHistoryCount: 5
@@ -1885,13 +2621,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/switchboardIntegrationResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/updateSwitchboardIntegration'
         '404':
-          description: Enabled switchboard must have an associated default switchboardIntegration
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: switchboard_integration_not_found
+                        title: Enabled switchboard must have an associated default switchboardIntegration
     delete:
       tags:
         - Switchboard Integrations
       summary: Delete Switchboard Integration
-      operationId: deleteSwitchboardIntegration
+      operationId: DeleteSwitchboardIntegration
       description: Deletes the switchboard integration. If the deleted switchboard integration had an active status for some conversations, the default switchboard integration will replace it. Note that it is forbidden to delete a switchboard integration if it's the default one (a new one must be chosen first) or if another switchboard integration's `nextSwitchboardIntegrationId` refers to it. The integration that was linked to the deleted switchboard integration will start receiving all conversation events, regardless of the switchboard status.
       security:
         - basicAuth:
@@ -1907,8 +2656,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: Not Found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: switchboard_integration_not_found
+                        title: SwitchboardIntegration not found
   /v2/apps/{appId}/users:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1916,7 +2678,7 @@ paths:
       tags:
         - Users
       summary: Create User
-      operationId: createUser
+      operationId: CreateUser
       description: Creates a new user.
       security:
         - basicAuth:
@@ -1940,8 +2702,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/createUser'
         '409':
-          description: User already exists
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conflict
+                        title: User already exists
   /v2/apps/{appId}/users/{userIdOrExternalId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -1950,7 +2725,7 @@ paths:
       tags:
         - Users
       summary: Get User
-      operationId: getUser
+      operationId: GetUser
       description: Fetches an individual user.
       security:
         - basicAuth:
@@ -1968,13 +2743,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/getUser'
         '404':
-          description: User not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: user_not_found
+                        title: User not found
     patch:
       tags:
         - Users
       summary: Update User
-      operationId: updateUser
+      operationId: UpdateUser
       description: Updates a user.
       security:
         - basicAuth:
@@ -1998,13 +2786,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/updateUser'
         '404':
-          description: User not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: user_not_found
+                        title: User not found
     delete:
       tags:
         - Users
       summary: Delete User
-      operationId: deleteUser
+      operationId: DeleteUser
       description: Delete a user, its clients and its conversation history. The user is considered completely deleted once the `user:delete` webhook is fired. To only delete a user’s personal information, see [Delete User Personal Information](#operation/deleteUserPersonalInformation).
       security:
         - basicAuth:
@@ -2022,8 +2823,21 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '404':
-          description: User not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: user_not_found
+                        title: User not found
   /v2/apps/{appId}/users/{userIdOrExternalId}/clients:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -2032,7 +2846,7 @@ paths:
       tags:
         - Clients
       summary: Create Client
-      operationId: createClient
+      operationId: CreateClient
       description: Create a client and link it to a channel specified by the `matchCriteria.type`. Note that the client is initially created with a `pending` status. The status of the linking request can be tracked by listening to the `link:match`, `link:success` and `link:failure` webhooks (only available in v1). For more information, see [link-events](https://docs.smooch.io/rest/v1/#link-events).
       security:
         - basicAuth:
@@ -2050,91 +2864,16 @@ paths:
             schema:
               $ref: '#/components/schemas/clientCreate'
             examples:
+              default:
+                $ref: '#/components/examples/whatsapp'
               mailgun:
-                value:
-                  matchCriteria:
-                    type: mailgun
-                    integrationId: 582dedf230e788746891281a
-                    primary: true
-                    address: steveb@channel5.com
-                    subject: New message from {appName}
-                  confirmation:
-                    type: immediate
-                    message:
-                      author:
-                        type: business
-                        displayName: Steve
-                        avatarUrl: https://www.gravatar.com/image.jpg
-                      content:
-                        type: text
-                        text: Hello!
-                      metadata:
-                        lang: en-ca
-                  target:
-                    conversationId: 029c31f25a21b47effd7be90
-              messsagebird:
-                value:
-                  matchCriteria:
-                    type: messsagebird
-                    integrationId: 582dedf230e788746891281a
-                    primary: true
-                    phoneNumber: +1 212-555-2368
-                  confirmation:
-                    type: immediate
-                    message:
-                      author:
-                        type: business
-                        displayName: Steve
-                        avatarUrl: https://www.gravatar.com/image.jpg
-                      content:
-                        type: text
-                        text: Hello!
-                      metadata:
-                        lang: en-ca
-                  target:
-                    conversationId: 029c31f25a21b47effd7be90
+                $ref: '#/components/examples/mailgun'
+              messagebird:
+                $ref: '#/components/examples/messagebird'
               twilio:
-                value:
-                  matchCriteria:
-                    type: twilio
-                    integrationId: 582dedf230e788746891281a
-                    primary: true
-                    phoneNumber: +1 212-555-2368
-                  confirmation:
-                    type: immediate
-                    message:
-                      author:
-                        type: business
-                        displayName: Steve
-                        avatarUrl: https://www.gravatar.com/image.jpg
-                      content:
-                        type: text
-                        text: Hello!
-                      metadata:
-                        lang: en-ca
-                  target:
-                    conversationId: 029c31f25a21b47effd7be90
+                $ref: '#/components/examples/twilio'
               whatsapp:
-                value:
-                  matchCriteria:
-                    type: whatsapp
-                    integrationId: 582dedf230e788746891281a
-                    primary: true
-                    phoneNumber: +1 212-555-2368
-                  confirmation:
-                    type: immediate
-                    message:
-                      author:
-                        type: business
-                        displayName: Steve
-                        avatarUrl: https://www.gravatar.com/image.jpg
-                      content:
-                        type: text
-                        text: Hello!
-                      metadata:
-                        lang: en-ca
-                  target:
-                    conversationId: 029c31f25a21b47effd7be90
+                $ref: '#/components/examples/whatsapp'
       responses:
         '201':
           description: Created
@@ -2146,11 +2885,14 @@ paths:
                 properties:
                   client:
                     $ref: '#/components/schemas/client'
+              examples:
+                default:
+                  $ref: '#/components/examples/createClient'
     get:
       tags:
         - Clients
       summary: List Clients
-      operationId: listClients
+      operationId: ListClients
       description: |
         Get all the clients for a particular user, including both linked clients and pending clients.
         This API is paginated through [cursor pagination](#section/Introduction/API-pagination-and-records-limits).
@@ -2176,8 +2918,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/clientListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listClients'
         '400':
-          description: Invalid page query parameters
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Invalid page query parameters
   /v2/apps/{appId}/users/{userIdOrExternalId}/clients/{clientId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -2187,7 +2942,7 @@ paths:
       tags:
         - Clients
       summary: Remove Client
-      operationId: removeClient
+      operationId: RemoveClient
       description: Remove a particular client and unsubscribe it from all connected conversations.
       security:
         - basicAuth:
@@ -2205,10 +2960,33 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
         '400':
-          description: Cannot remove a client of type 'sdk'
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: Cannot remove a client of type 'sdk'
         '404':
-          description: Client not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: client_not_found
+                        title: Client not found
   /v2/apps/{appId}/users/{userIdOrExternalId}/devices:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -2217,14 +2995,10 @@ paths:
       tags:
         - Devices
       summary: List Devices
-      operationId: listDevices
+      operationId: ListDevices
       description: |
         Get all the devices for a particular user.
         The Devices are sorted based on last seen time.
-
-        ```shell
-        /v2/apps/:appId/users/:userId/devices
-        ```
       security:
         - basicAuth:
             - app
@@ -2241,6 +3015,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/deviceListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listDevices'
   /v2/apps/{appId}/users/{userIdOrExternalId}/devices/{deviceId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -2250,13 +3027,9 @@ paths:
       tags:
         - Devices
       summary: Get Device
-      operationId: getDevice
+      operationId: GetDevice
       description: |
         Fetches a specific Device.
-
-        ```shell
-        /v2/apps/:appId/users/:userId
-        ```
       security:
         - basicAuth:
             - app
@@ -2273,8 +3046,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/deviceResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/getDevice'
         '404':
-          description: Device not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: device_not_found
+                        title: Device not found
   /v2/apps/{appId}/users/{userIdOrExternalId}/personalinformation:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -2283,7 +3069,7 @@ paths:
       tags:
         - Users
       summary: Delete User Personal Information
-      operationId: deleteUserPersonalInformation
+      operationId: DeleteUserPersonalInformation
       description: Delete a user’s personal information. Calling this API will clear `givenName`, `surname`, `email` and `avatarUrl` and every custom property for the specified user. For every client owned by the user, it will also clear `displayName`, `avatarUrl` and any channel specific information stored in the info and raw fields. Calling this API doesn’t delete the user’s conversation history. To fully delete the user, see [Delete User](#operation/deleteUser).
       security:
         - basicAuth:
@@ -2302,16 +3088,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/userResponse'
               examples:
-                success:
-                  $ref: '#/components/examples/userDeletePersonalInformationResponse'
+                default:
+                  $ref: '#/components/examples/deleteUserPersonalInformation'
         '404':
-          description: User not found
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: user_not_found
+                        title: User not found
   /oauth/authorize:
     get:
       tags:
         - OAuth Endpoints
       summary: Authorize
-      operationId: authorize
+      operationId: Authorize
       description: This endpoint begins the OAuth flow. It relies on a browser session for authentication. If the user is not logged in to Sunshine Conversations they will be redirected to the login page. If the user has many apps, they will first be prompted to select the one they wish to integrate with. They will then be presented with an Allow/Deny dialog, describing details of the access your integration is requesting.
       security: []
       parameters:
@@ -2321,15 +3117,18 @@ paths:
         - $ref: '#/components/parameters/redirectUriQuery'
       responses:
         '302':
-          description: Found. Redirecting to /login
-        '404':
-          description: The provided redirect_uri does not match the client_id configuration
+          description: Found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Found. Redirecting to https://oauth-bridge.zendesk.com/oauth_bridge/start?response_type=code&client_id=some_id
   /oauth/token:
     post:
       tags:
         - OAuth Endpoints
       summary: Get Token
-      operationId: getToken
+      operationId: GetToken
       description: This endpoint is used to exchange an authorization code for an access token. It should only be used in server-to-server calls.
       security: []
       requestBody:
@@ -2373,14 +3172,15 @@ paths:
                   token_type:
                     type: string
                     description: Bearer. All issued tokens are of this type.
-        '401':
-          description: Authorization is required
+              examples:
+                default:
+                  $ref: '#/components/examples/getToken'
   /oauth/authorization:
     delete:
       tags:
         - OAuth Endpoints
       summary: Revoke Access
-      operationId: revokeAccess
+      operationId: RevokeAccess
       description: |
         This endpoint is used to revoke your integration’s access to the user’s Sunshine Conversations app. Revoking access means your integration will no longer be able to interact with the app, and any webhooks the integration had previously configured will be removed. 
         Calling this endpoint is equivalent to the user removing your integration manually in the Sunshine Conversations web app. Your integration’s `removeUrl` (if configured) will also be called when an integration is removed in this way.
@@ -2396,6 +3196,9 @@ paths:
             application/json:
               schema:
                 type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
 x-webhooks:
   Webhook Event:
     post:
@@ -2406,7 +3209,7 @@ x-webhooks:
         or conversation. When processing webhook payloads, your application should take care to process
         each event in the array.
       summary: Webhook Events
-      operationId: eventWebhooks
+      operationId: EventWebhooks
       requestBody:
         required: true
         content:
@@ -2585,7 +3388,7 @@ components:
           description: |
             A boolean specifying whether users are allowed to be part of several conversations.
             Enabling `multiConvo` is **irreversible**.
-          example: public
+          example: true
         appLocalizationEnabled:
           type: boolean
           description: |
@@ -2601,6 +3404,7 @@ components:
         lang: en-ca
     app:
       type: object
+      x-resourceId: Apps
       properties:
         id:
           type: string
@@ -2658,6 +3462,25 @@ components:
           $ref: '#/components/schemas/meta'
         links:
           $ref: '#/components/schemas/links'
+    error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code used for classifying similar error types
+          example: not_found
+        title:
+          type: string
+          description: Description of the error
+          example: Resource not found
+    errorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: List of errors that occurred.
+          items:
+            $ref: '#/components/schemas/error'
     appCreateBody:
       type: object
       title: AppCreateBody
@@ -2697,6 +3520,7 @@ components:
           $ref: '#/components/schemas/metadata'
     appKey:
       type: object
+      x-resourceId: App Keys
       properties:
         id:
           type: string
@@ -2741,7 +3565,7 @@ components:
           type: string
           description: |
             Uploaded attachment’s url. 
-            <aside class="notice">Note that for private attachments an authorization header is required to access the mediaUrl. See <a href="https://developer.zendesk.com/documentation/zendesk-web-widget-sdks/messaging_private_attachments/">Configuring private attachments for messaging</a> guide for more details.</aside>
+            <aside class="notice">Note that for private attachments an authorization header is required to access the mediaUrl. See [configuring private attachments for messaging](https://developer.zendesk.com/documentation/zendesk-web-widget-sdks/messaging_private_attachments/) guide for more details.</aside>
           example: https://smooch.io/rocks.smooch.media-dev/apps/5ec41c54fe13cc5ac404bedc/conversations/c616a583e4c240a871818541/TmYMVQUBNsQRItX4fKf4aC-T/Screen%20Shot%202020-09-02%20at%204.04.41%20PM.png
         mediaType:
           type: string
@@ -2837,6 +3661,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/conversationTruncated'
         - type: object
+          x-resourceId: Conversations
           properties:
             isDefault:
               type: boolean
@@ -3003,6 +3828,7 @@ components:
           example: 42589ad070d43be9b00ff7e5
     participant:
       type: object
+      x-resourceId: Participants
       properties:
         id:
           type: string
@@ -3164,6 +3990,24 @@ components:
         mapping:
           ticket:closed: '#/components/schemas/ticketClosed'
           ticket:transfer:email: '#/components/schemas/transferToEmail'
+    htmlText:
+      type: string
+      description: |-
+        HTML text content of the message. Can be provided in place of `text`. Cannot be used with `markdownText`.
+        If no `text` is provided, will be converted to `text` upon reception to be displayed on channels that do not support rich text.
+        See [rich text](https://docs.smooch.io/guide/structured-messages/rich-text) documentation for more information.
+      maxLength: 4096
+      example: <h1>Hello!</h1>
+    markdownText:
+      type: string
+      writeOnly: true
+      description: |-
+        Markdown text content of the message. Can be provided in place of `text`. Cannot be used with `htmlText`.
+        Will be converted to `htmlText` upon reception. If converted `htmlText` exceeds 4096 characters, the message will be rejected.
+        If no `text` is provided, will be converted to `text` upon reception to be displayed on channels that do not support rich text.
+        See [rich text](https://docs.smooch.io/guide/structured-messages/rich-text) documentation for more information.
+      maxLength: 4096
+      example: '# Hello!'
     buy:
       type: object
       properties:
@@ -3345,9 +4189,13 @@ components:
           default: text
         text:
           type: string
-          description: The text content of the message. Optional only if actions are provided.
+          description: The text content of the message. Required unless `actions`, `htmlText` or `markdownText` is provided.
           maxLength: 4096
           example: Hello!
+        htmlText:
+          $ref: '#/components/schemas/htmlText'
+        markdownText:
+          $ref: '#/components/schemas/markdownText'
         actions:
           type: array
           description: Array of message actions.
@@ -3453,7 +4301,7 @@ components:
           format: uri
           description: |
             The URL for media, such as an image, attached to the message.
-            <aside class="notice">Note that for private attachments an authorization header is required to access the mediaUrl. See <a href="https://developer.zendesk.com/documentation/zendesk-web-widget-sdks/messaging_private_attachments/">Configuring private attachments for messaging</a> guide for more details.</aside>
+            <aside class="notice">Note that for private attachments an authorization header is required to access the mediaUrl. See [configuring private attachments for messaging](https://developer.zendesk.com/documentation/zendesk-web-widget-sdks/messaging_private_attachments/) guide for more details.</aside>
         mediaSize:
           type: number
           description: The size of the media.
@@ -3469,6 +4317,10 @@ components:
         text:
           type: string
           description: The text content of the message.
+        htmlText:
+          $ref: '#/components/schemas/htmlText'
+        markdownText:
+          $ref: '#/components/schemas/markdownText'
         attachmentId:
           type: string
           description: An identifier used by Sunshine Conversations for internal purposes.
@@ -3626,7 +4478,7 @@ components:
           format: uri
           description: |
             The URL for media, such as an image, attached to the message.
-            <aside class="notice">Note that for private attachments an authorization header is required to access the mediaUrl. See <a href="https://developer.zendesk.com/documentation/zendesk-web-widget-sdks/messaging_private_attachments/">Configuring private attachments for messaging</a> guide for more details.</aside>
+            <aside class="notice">Note that for private attachments an authorization header is required to access the mediaUrl. See [configuring private attachments for messaging](https://developer.zendesk.com/documentation/zendesk-web-widget-sdks/messaging_private_attachments/) guide for more details.</aside>
         mediaType:
           type: string
           description: The type of media.
@@ -3642,7 +4494,11 @@ components:
           description: An optional description of the image for accessibility purposes. The field will be saved by default with the file name as the value.
         text:
           type: string
-          description: The text content of the message. Optional only if actions are provided.
+          description: The text content of the message.
+        htmlText:
+          $ref: '#/components/schemas/htmlText'
+        markdownText:
+          $ref: '#/components/schemas/markdownText'
         actions:
           type: array
           description: Array of message actions.
@@ -3761,6 +4617,7 @@ components:
           template: '#/components/schemas/templateMessage'
     client:
       type: object
+      x-resourceId: Clients
       properties:
         id:
           type: string
@@ -3817,6 +4674,7 @@ components:
           nullable: true
     device:
       type: object
+      x-resourceId: Devices
       properties:
         id:
           type: string
@@ -3896,6 +4754,7 @@ components:
         - type
     message:
       type: object
+      x-resourceId: Messages
       properties:
         id:
           type: string
@@ -4186,6 +5045,7 @@ components:
         - userId
     integration:
       type: object
+      x-resourceId: Integrations
       description: The integration.
       properties:
         id:
@@ -4326,6 +5186,13 @@ components:
               nullable: true
               example: <sender-id>
               deprecated: true
+            canUserSeeConversationList:
+              type: boolean
+              description: |
+                Allows users to view their list of conversations. By default, the list
+                of conversations will be visible. *This setting only applies to apps
+                where `settings.multiConvoEnabled` is set to `true`*.
+              example: false
             canUserCreateMoreConversations:
               type: boolean
               description: Allows users to create more than one conversation on the android integration.
@@ -4392,6 +5259,7 @@ components:
       default: false
     webhook:
       type: object
+      x-resourceId: Webhooks
       properties:
         id:
           type: string
@@ -4530,6 +5398,13 @@ components:
             autoUpdateBadge:
               type: boolean
               description: Use the unread count of the conversation as the application badge.
+            canUserSeeConversationList:
+              type: boolean
+              description: |
+                Allows users to view their list of conversations. By default, the list
+                of conversations will be visible. *This setting only applies to apps
+                where `settings.multiConvoEnabled` is set to `true`*.
+              example: false
             canUserCreateMoreConversations:
               type: boolean
               description: Allows users to create more than one conversation on the iOS integration.
@@ -4836,6 +5711,13 @@ components:
               description: |
                 To configure a Unity integration, create an integration with type 'unity' by calling the Create Integration endpoint.
               default: unity
+            canUserSeeConversationList:
+              type: boolean
+              description: |
+                Allows users to view their list of conversations. By default, the list
+                of conversations will be visible. *This setting only applies to apps
+                where `settings.multiConvoEnabled` is set to `true`*.
+              example: false
             canUserCreateMoreConversations:
               type: boolean
               description: Allows users to create more than one conversation on the Unity integration.
@@ -5149,6 +6031,13 @@ components:
               nullable: true
               example: <sender-id>
               deprecated: true
+            canUserSeeConversationList:
+              type: boolean
+              description: |
+                Allows users to view their list of conversations. By default, the list
+                of conversations will be visible. *This setting only applies to apps
+                where `settings.multiConvoEnabled` is set to `true`*.
+              example: false
             canUserCreateMoreConversations:
               type: boolean
               description: Allows users to create more than one conversation on the android integration.
@@ -5204,6 +6093,13 @@ components:
             autoUpdateBadge:
               type: boolean
               description: Use the unread count of the conversation as the application badge.
+            canUserSeeConversationList:
+              type: boolean
+              description: |
+                Allows users to view their list of conversations. By default, the list
+                of conversations will be visible. *This setting only applies to apps
+                where `settings.multiConvoEnabled` is set to `true`*.
+              example: false
             canUserCreateMoreConversations:
               type: boolean
               description: Allows users to create more than one conversation on the iOS integration.
@@ -5250,6 +6146,13 @@ components:
         - $ref: '#/components/schemas/integrationUpdateBase'
         - type: object
           properties:
+            canUserSeeConversationList:
+              type: boolean
+              description: |
+                Allows users to view their list of conversations. By default, the list
+                of conversations will be visible. *This setting only applies to apps
+                where `settings.multiConvoEnabled` is set to `true`*.
+              example: false
             canUserCreateMoreConversations:
               type: boolean
               description: Allows users to create more than one conversation on the Unity integration.
@@ -5328,6 +6231,13 @@ components:
               description: Object whose properties can be set to specify the add-on’s options. See the [guide](https://docs.smooch.io/guide/web-messenger/#prechat-capture) to learn more about Prechat Capture.
               allOf:
                 - $ref: '#/components/schemas/prechatCapture'
+            canUserSeeConversationList:
+              type: boolean
+              description: |
+                Allows users to view their list of conversations. By default, the list
+                of conversations will be visible. *This setting only applies to apps
+                where `settings.multiConvoEnabled` is set to `true`*.
+              example: false
             canUserCreateMoreConversations:
               type: boolean
               description: Allows users to create more than one conversation on the web messenger integration.
@@ -5371,6 +6281,7 @@ components:
         - $ref: '#/components/schemas/whatsAppUpdate'
     apiKey:
       type: object
+      x-resourceId: CustomIntegrationApiKeys
       description: The integration key.
       properties:
         id:
@@ -5433,6 +6344,7 @@ components:
       example: 5ef21b132f21af34f088530e
     switchboard:
       type: object
+      x-resourceId: Switchboards
       properties:
         id:
           type: string
@@ -5484,6 +6396,7 @@ components:
       example: 5
     switchboardIntegration:
       type: object
+      x-resourceId: Switchboard Integrations
       properties:
         id:
           type: string
@@ -5673,6 +6586,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/userTruncated'
         - type: object
+          x-resourceId: Users
           properties:
             signedUpAt:
               allOf:
@@ -6900,6 +7814,140 @@ components:
         type: string
         example: https://example.org
   examples:
+    listApps:
+      value:
+        apps:
+          - id: 67a0e55ef0305f4a391e9d69
+            displayName: My Test App
+            settings:
+              appLocalizationEnabled: true
+              echoPostback: false
+              maskCreditCardNumbers: true
+              multiConvoEnabled: false
+              useAnimalNames: false
+    createApp:
+      value:
+        app:
+          id: 67a0e55ef0305f4a391e9d69
+          displayName: My Test App
+          settings:
+            appLocalizationEnabled: true
+            echoPostback: false
+            maskCreditCardNumbers: true
+            multiConvoEnabled: false
+            useAnimalNames: false
+    getApp:
+      value:
+        app:
+          id: 67a0e55ef0305f4a391e9d69
+          displayName: My Test App
+          settings:
+            appLocalizationEnabled: true
+            echoPostback: false
+            maskCreditCardNumbers: true
+            multiConvoEnabled: false
+            useAnimalNames: false
+    emptyResponse:
+      value: {}
+    updateApp:
+      value:
+        app:
+          id: 67a0e55ef0305f4a391e9d69
+          displayName: My Test App
+          settings:
+            appLocalizationEnabled: true
+            echoPostback: false
+            maskCreditCardNumbers: true
+            multiConvoEnabled: false
+            useAnimalNames: false
+    listAppKeys:
+      value:
+        keys:
+          - id: app_67a0e949f0305f4a391e9d97
+            displayName: My Test Key
+            secret: 2vErhBhv81FZ5YXbC5XElVcnoNSqz0XjhqSYII4AOT3GCA5UojDCT07Z9NG_4PVzcxv-Zdd7IpeBL-RcXvfOyw
+    createAppKey:
+      value:
+        key:
+          id: app_67a0e949f0305f4a391e9d97
+          displayName: My Test Key
+          secret: 2vErhBhv81FZ5YXbC5XElVcnoNSqz0XjhqSYII4AOT3GCA5UojDCT07Z9NG_4PVzcxv-Zdd7IpeBL-RcXvfOyw
+    getAppKey:
+      value:
+        key:
+          id: app_67a0e949f0305f4a391e9d97
+          displayName: My Test Key
+          secret: 2vErhBhv81FZ5YXbC5XElVcnoNSqz0XjhqSYII4AOT3GCA5UojDCT07Z9NG_4PVzcxv-Zdd7IpeBL-RcXvfOyw
+    uploadAttachment:
+      value:
+        attachment:
+          mediaUrl: https://subdomain.zendesk.com/sc/attachments/v2/01JK699PBZ645YAFJW2RF45F0B/my_file.jpeg
+          mediaType: image/jpeg
+    listConversations:
+      value:
+        conversations:
+          - id: 67a0ecf8f0305f4a391e9db1
+            type: personal
+            isDefault: false
+            lastUpdatedAt: '2025-02-03T16:21:12.308Z'
+            createdAt: '2025-02-03T16:21:12.308Z'
+    createConversation:
+      value:
+        conversation:
+          id: 67a0ecf8f0305f4a391e9db1
+          type: personal
+          isDefault: false
+          lastUpdatedAt: '2025-02-03T16:21:12.308Z'
+          createdAt: '2025-02-03T16:21:12.308Z'
+    getConversation:
+      value:
+        conversation:
+          id: 67a0ecf8f0305f4a391e9db1
+          type: personal
+          isDefault: false
+          lastUpdatedAt: '2025-02-03T16:21:12.308Z'
+          createdAt: '2025-02-03T16:21:12.308Z'
+    updateConversation:
+      value:
+        conversation:
+          id: 67a0ecf8f0305f4a391e9db1
+          type: personal
+          isDefault: false
+          lastUpdatedAt: '2025-02-03T16:21:12.308Z'
+          createdAt: '2025-02-03T16:21:12.308Z'
+    joinConversation:
+      value:
+        participant:
+          id: 67a0ee3880e2647cbb7a9c97
+          userId: 67179a2930a150d5adc4d51f
+          unreadCount: 0
+          clientAssociations:
+            - type: sdk
+              clientId: 67a0ee38f0305f4a391e9def
+    listParticipants:
+      value:
+        participants:
+          - id: 67a0ecf880e2647cbb7a9701
+            userId: 67179a2930a150d5adc4d51f
+            unreadCount: 0
+            clientAssociations: []
+        meta:
+          hasMore: false
+    listMessages:
+      value:
+        messages:
+          - id: 67a10c0bf0305f4a391e9e51
+            received: '2025-02-03T18:33:47.466Z'
+            author:
+              type: business
+              avatarUrl: https://www.gravatar.com/avatar/00000000000000000000000000000000.png?s=200&d=mm
+            content:
+              type: text
+              text: Hello World
+            source:
+              type: api:conversations
+        meta:
+          hasMore: false
     text:
       value:
         author:
@@ -7233,41 +8281,295 @@ components:
                 name: Zendesk Montréal
             source:
               type: api:conversations
-    integrationListResponse:
+    listIntegrations:
       value:
         integrations:
           - id: 5e4af71a81966cfff3ef6550
             type: android
             status: active
-            displayName: Android
-            serverId: <sender-id>
-            canUserCreateMoreConversations: true
-            defaultResponderId: 5e4af71a81966cfff3ef6551
+            displayName: Android SDK
+            attachmentsEnabled: true
         meta:
-          hasMore: true
-          afterCursor: 5e4af71a81966cfff3ef6550
-          beforeCursor: 5e4af71a81966cfff3ef6550
-        links:
-          prev: https://api.smooch.io/v2/apps/5e4af71a81966cfff3ef6551/integrations?page[before]=5e4af71a81966cfff3ef6550
-          after: https://api.smooch.io/v2/apps/5e4af71a81966cfff3ef6551/integrations?page[after]=5e4af71a81966cfff3ef6550
-    integrationResponse:
+          hasMore: false
+    createIntegration:
       value:
         integration:
           id: 5e4af71a81966cfff3ef6550
           type: android
           status: active
-          displayName: Android
-          serverId: <sender-id>
-          canUserCreateMoreConversations: true
-          defaultResponderId: 5e4af71a81966cfff3ef6551
-    userDeletePersonalInformationResponse:
+          displayName: Android SDK
+          attachmentsEnabled: true
+    getIntegration:
+      value:
+        integration:
+          id: 5e4af71a81966cfff3ef6550
+          type: android
+          status: active
+          displayName: Android SDK
+          attachmentsEnabled: true
+    updateIntegration:
+      value:
+        integration:
+          id: 5e4af71a81966cfff3ef6550
+          type: android
+          status: active
+          displayName: Android SDK
+          attachmentsEnabled: true
+    listIntegrationKeys:
+      value:
+        keys:
+          - id: int_67a1110ef0305f4a391e9f01
+            displayName: My Test Key
+            secret: JWSooRf7mjKYQereu5ueIjxKdclNs7cdCDaT7bGHEitHFUbNxFb8C0Cwi0s7SG0vhjMDef_w5d-TVetWHanIBA
+    createIntegrationKey:
+      value:
+        key:
+          id: int_67a1110ef0305f4a391e9f01
+          displayName: My Test Key
+          secret: JWSooRf7mjKYQereu5ueIjxKdclNs7cdCDaT7bGHEitHFUbNxFb8C0Cwi0s7SG0vhjMDef_w5d-TVetWHanIBA
+    getIntegrationKey:
+      value:
+        key:
+          id: int_67a1110ef0305f4a391e9f01
+          displayName: My Test Key
+          secret: JWSooRf7mjKYQereu5ueIjxKdclNs7cdCDaT7bGHEitHFUbNxFb8C0Cwi0s7SG0vhjMDef_w5d-TVetWHanIBA
+    listWebhooks:
+      value:
+        webhooks:
+          - id: 5e554d2cac66fb73a3c01871
+            version: v2
+            target: https://example.com/callback
+            triggers:
+              - conversation:read
+              - conversation:message
+            secret: 8564b3e6a8b20a4bdb68b05ce9bc5936
+            includeFullUser: false
+            includeFullSource: false
+    createWebhook:
+      value:
+        webhook:
+          id: 5e554d2cac66fb73a3c01871
+          version: v2
+          target: https://example.com/callback
+          triggers:
+            - conversation:read
+            - conversation:message
+          secret: 8564b3e6a8b20a4bdb68b05ce9bc5936
+          includeFullUser: false
+          includeFullSource: false
+    getWebhook:
+      value:
+        webhook:
+          id: 5e554d2cac66fb73a3c01871
+          version: v2
+          target: https://example.com/callback
+          triggers:
+            - conversation:read
+            - conversation:message
+          secret: 8564b3e6a8b20a4bdb68b05ce9bc5936
+          includeFullUser: false
+          includeFullSource: false
+    updateWebhook:
+      value:
+        webhook:
+          id: 5e554d2cac66fb73a3c01871
+          version: v2
+          target: https://example.com/callback
+          triggers:
+            - conversation:read
+            - conversation:message
+          secret: 8564b3e6a8b20a4bdb68b05ce9bc5936
+          includeFullUser: false
+          includeFullSource: false
+    listSwitchboards:
+      value:
+        switchboards:
+          - id: 5ef21b132f21af34f088530d
+            enabled: false
+    createSwitchboard:
+      value:
+        switchboard:
+          id: 5ef21b132f21af34f088530d
+          enabled: false
+    updateSwitchboard:
+      value:
+        switchboard:
+          id: 5ef21b132f21af34f088530d
+          enabled: false
+    listSwitchboardIntegrations:
+      value:
+        switchboardIntegrations:
+          - id: 5ef21b86e933b7355c11c604
+            name: zd-agentWorkspace
+            integrationId: 5ef21b86e933b7355c11c605
+            integrationType: zd:agentWorkspace
+            deliverStandbyEvents: false
+    createSwitchboardIntegration:
+      value:
+        switchboardIntegration:
+          id: 5ef21b86e933b7355c11c604
+          name: zd-agentWorkspace
+          integrationId: 5ef21b86e933b7355c11c605
+          integrationType: zd:agentWorkspace
+          deliverStandbyEvents: false
+    updateSwitchboardIntegration:
+      value:
+        switchboardIntegration:
+          id: 5ef21b86e933b7355c11c604
+          name: zd-agentWorkspace
+          integrationId: 5ef21b86e933b7355c11c605
+          integrationType: zd:agentWorkspace
+          deliverStandbyEvents: false
+    createUser:
       value:
         user:
-          id: 6e416caac6a5e9544e3fb6d7
+          id: 67a11490f0305f4a391e9f8a
           externalId: your-own-id
-          profile: {}
-          signedUpAt: '2020-05-21T15:53:30.197Z'
+          signedUpAt: '2025-02-03T19:10:08.152Z'
+          hasPaymentInfo: false
+          identities: []
+          profile:
+            locale: en
+            localeOrigin: zendeskAccount
           metadata: {}
+    getUser:
+      value:
+        user:
+          id: 67a11490f0305f4a391e9f8a
+          externalId: your-own-id
+          signedUpAt: '2025-02-03T19:10:08.152Z'
+          hasPaymentInfo: false
+          identities: []
+          profile:
+            locale: en
+            localeOrigin: zendeskAccount
+          metadata: {}
+    updateUser:
+      value:
+        user:
+          id: 67a11490f0305f4a391e9f8a
+          externalId: your-own-id
+          signedUpAt: '2025-02-03T19:10:08.152Z'
+          hasPaymentInfo: false
+          identities: []
+          profile:
+            locale: en
+            localeOrigin: zendeskAccount
+          metadata: {}
+    listClients:
+      value:
+        clients:
+          - id: 67a0ee38f0305f4a391e9def
+            type: sdk
+            status: active
+            lastSeen: '2025-02-03T16:26:32.575Z'
+            linkedAt: '2025-02-03T16:26:32.575Z'
+        meta:
+          hasMore: false
+    whatsapp:
+      value:
+        matchCriteria:
+          type: whatsapp
+          integrationId: 582dedf230e788746891281a
+          primary: true
+          phoneNumber: +1 212-555-2368
+        confirmation:
+          type: immediate
+        target:
+          conversationId: 029c31f25a21b47effd7be90
+    mailgun:
+      value:
+        matchCriteria:
+          type: mailgun
+          integrationId: 582dedf230e788746891281a
+          primary: true
+          address: steveb@channel5.com
+          subject: New message from {appName}
+        confirmation:
+          type: immediate
+        target:
+          conversationId: 029c31f25a21b47effd7be90
+    messagebird:
+      value:
+        matchCriteria:
+          type: messagebird
+          integrationId: 582dedf230e788746891281a
+          primary: true
+          phoneNumber: +1 212-555-2368
+        confirmation:
+          type: immediate
+        target:
+          conversationId: 029c31f25a21b47effd7be90
+    twilio:
+      value:
+        matchCriteria:
+          type: twilio
+          integrationId: 582dedf230e788746891281a
+          primary: true
+          phoneNumber: +1 212-555-2368
+        confirmation:
+          type: immediate
+        target:
+          conversationId: 029c31f25a21b47effd7be90
+    createClient:
+      value:
+        client:
+          id: 67a11639f0305f4a391ea02d
+          integrationId: 5e8b49d936c1df272e8e1460
+          type: whatsapp
+          status: pending
+    listDevices:
+      value:
+        devices:
+          - id: 5d9b870dda96abc332625ccc
+            guid: f1c7abea2d49429db10094be820d5f80
+            clientId: 5d9b870dda96abc332625cc8
+            integrationId: 5d83a25d9916b64a83ed25e8
+            type: web
+            status: active
+            info:
+              currentTitle: My Web Page
+              currentUrl: https://example.com
+              browserLanguage: en-US
+              referrer: https://example.com
+              userAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+              URL: example.com
+              sdkVersion: '0.1'
+              vendor: zendesk
+            lastSeen: '2025-01-28T17:59:58.331Z'
+    getDevice:
+      value:
+        device:
+          id: 5d9b870dda96abc332625ccc
+          guid: f1c7abea2d49429db10094be820d5f80
+          clientId: 5d9b870dda96abc332625cc8
+          integrationId: 5d83a25d9916b64a83ed25e8
+          type: web
+          status: active
+          info:
+            currentTitle: My Web Page
+            currentUrl: https://example.com
+            browserLanguage: en-US
+            referrer: https://example.com
+            userAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+            URL: example.com
+            sdkVersion: '0.1'
+            vendor: zendesk
+          lastSeen: '2025-01-28T17:59:58.331Z'
+    deleteUserPersonalInformation:
+      value:
+        user:
+          id: 67a11490f0305f4a391e9f8a
+          externalId: your-own-id
+          signedUpAt: '2025-02-03T19:10:08.152Z'
+          hasPaymentInfo: false
+          identities: []
+          profile: {}
+          metadata: {}
+    getToken:
+      value:
+        access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFwcF82N2EyNDBlY2M0OTk3OTAzNTg0YTNjNDgiLCJhenAiOiJzaG9wbGlmdGVyIn0.eyJzY29wZSI6ImludGVncmF0aW9uIiwiYXBwSWQiOiI1Njk4ZWRiZjJhNDNiZDA4MWJlOTgyZjEiLCJpYXQiOjE3Mzg2ODY3MDF9.vm9Bn84ALC9phe-6oo9-qZtm7LiGzZPVmmQd1mpeY7Y
+        token_type: Bearer
     clientAddEvent:
       value:
         app:
@@ -7900,6 +9202,11 @@ components:
               user:
                 id: 6748e3ae32378e732938e031
                 externalId: abc123
+x-zoas-lint-defaults:
+  disable:
+    - core/snake-case-parameter-names-not-in-header
+    - core/snake-case-schema-properties
+    - core/snake-case-path-keys
 x-tagGroups:
   - name: Account Provisioning
     tags:
