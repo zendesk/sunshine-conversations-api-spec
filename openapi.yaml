@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 14.4.0
+  version: 15.0.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -251,6 +251,7 @@ tags:
     description: All notable changes to the API will be referenced in the [v2 API changelog](https://docs.smooch.io/guide/v2-api-changelog/).
     x-zoas-docs:
       ignoreCanonicalSchema: true
+      ignoreEmptyOperations: true
   - name: Webhooks
     description: |
       Endpoints for managing webhooks associated to a Sunshine Conversations Connect integration or a custom integration. Webhooks are a fantastic way to extend the Sunshine Conversations platform beyond the built-in feature set. You can use webhooks to build your own Sunshine Conversations chat clients, to integrate more deeply with your favorite CRM, or to build a bot.
@@ -324,6 +325,7 @@ tags:
       The source code is available [here](https://github.com/zendesk/sunshine-conversations-shoplifter).
     x-zoas-docs:
       ignoreCanonicalSchema: true
+      ignoreEmptyOperations: true
   - name: OAuth Endpoints
     x-displayName: OAuth Endpoints
     description: "The scope of an issued access token is integration scope. This allows API calls to be made to a specific Sunshine Conversations app on behalf of an integration, identified by the integration’s clientId. The access token grants permission to get and create users and conversations associated with the app. The token also grants permission to create webhooks, however only webhooks created for the integration will be visible. An access token with integration scope cannot see or modify webhooks that were created by other integrations, for example.\n\n| API\t      | Access\t|\n| --------  | ------- |\n| [/v2/apps/:appId/users/\\*](#tag/Users)\t| Yes\t|\n| [/v2/apps/:appId/conversations/\\*](#tag/Conversations)\t| Yes\t|\n| [/v2/apps/:appId/integrations/me/webhooks/\\*](#tag/Webhooks)\t| Yes\t|\n| [/v2/apps/:appId/switchboards/\\*](#tag/Switchboards) | No |\n| [/v2/apps/\\*](#tag/Apps) | No |\n"
@@ -1713,6 +1715,7 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: true
               examples:
                 default:
                   $ref: '#/components/examples/emptyResponse'
@@ -3400,6 +3403,7 @@ components:
         Flat object containing custom properties. Strings, numbers and booleans 
         are the only supported format that can be passed to metadata.
         The metadata is limited to 4KB in size.
+      additionalProperties: true
       example:
         lang: en-ca
     app:
@@ -4713,6 +4717,7 @@ components:
           type: object
           description: A flat curated object with properties that vary for each SDK platform. All keys are optional and not guaranteed to be available.
           nullable: true
+          additionalProperties: true
         appVersion:
           type: string
           description: Version of the mobile app in which the SDK is embedded. Not applicable for devices of type web.
@@ -5095,6 +5100,7 @@ components:
             The default responder ID for the integration. This is the ID of the responder that will be used to send messages to the user.
             For more information, refer to <a href="https://docs.smooch.io/guide/switchboard/#per-channel-default-responder">Per-channel default responder</a> guide.
           nullable: true
+          writeOnly: true
     defaultResponder:
       type: object
       title: Default Responder
@@ -5102,18 +5108,14 @@ components:
         defaultResponder:
           type: object
           description: |
-            The default responder object.
-            <aside class="notice">This property will only be returned in response for <code>get integration</code> and <code>list integration</code> and must not be used in the request body.</aside>
-            <aside class="notice">Response will contain only one of the following: <code>defaultResponder</code> or <code>defaultResponderId</code> but never both.</aside>
+            The default responder for the integration. This is the responder that will be used to send messages to the user.
+            For more information, refer to the <a href="https://docs.smooch.io/guide/switchboard/#per-channel-default-responder">Per-channel default responder</a> guide.
+          nullable: true
+          readOnly: true
           properties:
-            switchboardId:
+            name:
               type: string
-              description: The unique ID of the switchboard.
-              example: 5e4af71a81966cfff3ef6551
-            appId:
-              type: string
-              description: Identifies the app.
-              example: 5e4af71a81966cfff3ef6552
+              description: The name of the switchboard integration.
             integrationId:
               type: string
               description: The unique ID of the integration.
@@ -5121,21 +5123,19 @@ components:
             integrationType:
               type: string
               description: The type of the integration.
-            name:
-              type: string
-              description: The name of the switchboard.
             deliverStandbyEvents:
               type: boolean
               description: Indicates whether the switchboard should deliver standby events.
             nextSwitchboardIntegrationId:
               type: string
               description: The unique ID of the next switchboard integration.
+              nullable: true
             messageHistoryCount:
               type: number
               description: The number of messages to keep in the message history.
             inherited:
               type: boolean
-              description: Indicates whether the switchboard is inherited.
+              description: Indicates whether the default responder is inherited from the switchboard's global config or not. Returns `false` if a per-channel responder override has been set for this integration, and `true` otherwise.
     android:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -5322,6 +5322,7 @@ components:
               type: string
               description: The Facebook Page Access Token of the Facebook page that is linked to your Instagram account.
               writeOnly: true
+              nullable: true
               example: your_page_access_token
             appId:
               type: string
@@ -5331,6 +5332,7 @@ components:
               type: string
               description: Your Facebook App secret.
               writeOnly: true
+              nullable: true
               example: your_facebook_app_secret
             businessName:
               type: string
@@ -5475,6 +5477,7 @@ components:
               description: The public API key of your Mailgun account.
               minLength: 1
               writeOnly: true
+              nullable: true
               example: key-f265hj32f0sd897lqd2j5keb96784043
             domain:
               type: string
@@ -5524,12 +5527,14 @@ components:
               description: The public API key of your MessageBird account.
               minLength: 1
               writeOnly: true
+              nullable: true
               example: 9V2iJmd93kFJ390L9495JCl11
             signingKey:
               type: string
               description: The signing key of your MessageBird account. Used to validate the webhooks' origin.
               minLength: 1
               writeOnly: true
+              nullable: true
               example: Uu6N09Lkdji3820DJIO89I39sl9dJ
             originator:
               type: string
@@ -5563,6 +5568,7 @@ components:
             pageAccessToken:
               type: string
               description: A Facebook Page Access Token.
+              nullable: true
               example: your_access_token
             appId:
               type: string
@@ -5572,6 +5578,7 @@ components:
               type: string
               description: A Facebook App Secret.
               writeOnly: true
+              nullable: true
               example: your_facebook_app_secret
             pageId:
               type: number
@@ -5602,6 +5609,7 @@ components:
               description: Telegram Bot Token.
               minLength: 1
               writeOnly: true
+              nullable: true
               example: 192033615:AAEuee2FS2JYKWfDlTulfygjaIGJi4s
             username:
               type: string
@@ -5634,6 +5642,7 @@ components:
               description: Twilio Auth Token.
               minLength: 1
               writeOnly: true
+              nullable: true
               example: 160c024303f53049e1e060fd67ca6aefc
             phoneNumberSid:
               type: string
@@ -5680,6 +5689,7 @@ components:
               description: The consumer key secret for your Twitter app.
               minLength: 1
               writeOnly: true
+              nullable: true
               example: your_consumer_secret
             accessTokenKey:
               type: string
@@ -5692,6 +5702,7 @@ components:
               description: The access token secret obtained from your user via oauth.
               minLength: 1
               writeOnly: true
+              nullable: true
               example: your_access_token_secret
           required:
             - tier
@@ -5743,6 +5754,7 @@ components:
               description: Viber Public Account token.
               minLength: 1
               writeOnly: true
+              nullable: true
               example: 445da6az1s345z78-dazcczb2542zv51a-e0vc5fva17480im9
             uri:
               type: string
@@ -5919,10 +5931,6 @@ components:
               description: |
                 To configure a WhatsApp integration, use your WhatsApp API Client connection information. Sunshine Conversations can provide WhatsApp API Client hosting for approved brands. See our [WhatsApp guide](https://docs.smooch.io/guide/whatsapp/#whatsapp-api-client) for more details on WhatsApp API Client hosting.
               default: whatsapp
-            deploymentId:
-              type: string
-              description: The Id of the deployment. The integrationId and the appId will be added to the deployment. Additionally, the deployment’s status will be set to integrated.
-              example: 55c8d9758590aa1900b9b9aa
             hsmFallbackLanguage:
               type: string
               description: Specify a fallback language to use when sending WhatsApp message template using the short hand syntax. Defaults to en_US. See WhatsApp documentation for more info.
@@ -5944,8 +5952,6 @@ components:
               readOnly: true
               nullable: true
               example: '15144441919'
-          required:
-            - deploymentId
         - $ref: '#/components/schemas/defaultResponderId'
         - $ref: '#/components/schemas/defaultResponder'
     status:
@@ -6387,6 +6393,7 @@ components:
       type: string
       description: The switchboard integration id to which control of a conversation is passed / offered by default.
       example: 5ef21b86e933b7355c11c606
+      nullable: true
     messageHistoryCount:
       type: integer
       minimum: 1
@@ -6446,9 +6453,7 @@ components:
             - $ref: '#/components/schemas/deliverStandbyEvents'
           default: true
         nextSwitchboardIntegrationId:
-          allOf:
-            - $ref: '#/components/schemas/nextSwitchboardIntegrationId'
-          nullable: true
+          $ref: '#/components/schemas/nextSwitchboardIntegrationId'
         messageHistoryCount:
           $ref: '#/components/schemas/messageHistoryCount'
       required:
@@ -6477,9 +6482,7 @@ components:
         deliverStandbyEvents:
           $ref: '#/components/schemas/deliverStandbyEvents'
         nextSwitchboardIntegrationId:
-          allOf:
-            - $ref: '#/components/schemas/nextSwitchboardIntegrationId'
-          nullable: true
+          $ref: '#/components/schemas/nextSwitchboardIntegrationId'
         messageHistoryCount:
           $ref: '#/components/schemas/messageHistoryCount'
     signedUpAt:
@@ -8013,8 +8016,6 @@ components:
               name: email_address
               label: Your email?
               placeholder: email@example.com
-        destination:
-          integrationType: web
     image:
       value:
         author:
@@ -8090,8 +8091,6 @@ components:
                     text: My User Name
                   - type: text
                     text: My Agent Name
-        destination:
-          integrationType: whatsapp
     text-2:
       value:
         messages:
@@ -8288,7 +8287,6 @@ components:
             type: android
             status: active
             displayName: Android SDK
-            attachmentsEnabled: true
         meta:
           hasMore: false
     createIntegration:
@@ -8298,7 +8296,6 @@ components:
           type: android
           status: active
           displayName: Android SDK
-          attachmentsEnabled: true
     getIntegration:
       value:
         integration:
@@ -8306,7 +8303,6 @@ components:
           type: android
           status: active
           displayName: Android SDK
-          attachmentsEnabled: true
     updateIntegration:
       value:
         integration:
@@ -8314,7 +8310,6 @@ components:
           type: android
           status: active
           displayName: Android SDK
-          attachmentsEnabled: true
     listIntegrationKeys:
       value:
         keys:
@@ -9202,6 +9197,9 @@ components:
               user:
                 id: 6748e3ae32378e732938e031
                 externalId: abc123
+x-zendesk-owner:
+  name: SunCo Engine
+  channel: '#sunco-engine'
 x-zoas-lint-defaults:
   disable:
     - core/snake-case-parameter-names-not-in-header
