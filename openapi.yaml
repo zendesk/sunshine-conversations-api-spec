@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 15.0.1
+  version: 15.1.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -6566,6 +6566,12 @@ components:
           description: |
             An optional ID that can also be used to retrieve the user.
           example: your-own-id
+          nullable: true
+        zendeskId:
+          type: string
+          description: |
+            The ID that links a messaging user to its core Zendesk user counterpart. This ID can be used to fetch the core user record via the Zendesk Support API.
+          example: '30045042291606'
           nullable: true
     identity:
       type: object
