@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 15.1.0
+  version: 15.2.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -6616,6 +6616,10 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/identity'
+            authenticated:
+              description: Whether or not the user has authenticated, either via JWT or via the Help Center
+              readOnly: true
+              type: boolean
     userResponse:
       type: object
       title: UserResponse
