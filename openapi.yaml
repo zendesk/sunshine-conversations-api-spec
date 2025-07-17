@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 15.5.1
+  version: 15.5.2
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -258,32 +258,33 @@ tags:
       ## Webhook Triggers
       When a webhook trigger is triggered, a POST request will be made to the URL configured in your webhook object along with a JSON payload specific for the event type.
 
-      | Trigger                 | Description                       |
-      | ----------------------  | -------------------------- |
-      | client:add     | When initiating a channel link or when an SDK client is created.    |
-      | client:remove     | When a client is removed. This can happen when:<br/>1. directly using the API<br/>2. removing the client using the SDK<br/>3. transferring a client due to a channel link<br/>4. failing or cancelling a channel link   |
-      | client:update     | When a client is updated. This can happen when:<br/>1. a channel finds a user that matches the information provided<br/>2. a client is activated<br/>3. a user unsubscribes from a conversation or blocks the app    |
-      | conversation:create     | When a new conversation is created.    |
-      | conversation:join     | When a new participant joins a `sdkGroup` conversation.    |
-      | conversation:leave     | When a participant leaves a `sdkGroup` conversation.     |
-      | conversation:remove  | When a conversation is deleted. |
-      | conversation:message  | When a new message was sent in the conversation. |
-      | conversation:message:delivery:channel  | When a message is successfully delivered to a channel. |
-      | conversation:message:delivery:failure  | When a new message fails to be delivered in the conversation. |
-      | conversation:message:delivery:user  | When a new message is successfully delivered to a user. |
-      | conversation:postback  | When a user clicks on a postback action button. |
-      | conversation:read  | When a user has read the conversation. |
-      | conversation:referral | When a user is referred to a conversation. See the <a href="https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/conversation-referrals/">conversation referrals</a> guide for more details. |
-      | conversation:typing  | When a user starts or stops typing. |
-      | switchboard:acceptControl | When a switchboard integration accepts control of a conversation. |
-      | switchboard:acceptControl:failure   | When control of a conversation fails to be accepted by a switchboard integration. |
-      | switchboard:offerControl  | When a switchboard integration has been offered control of the conversation. |
-      | switchboard:offerControl:failure | When control of a conversation can't be offered to another switchboard integration. |
-      | switchboard:passControl | When a switchboard integration gives control of the conversation to another switchboard integration. |
-      | switchboard:passControl:failure | When changing a switchboard integration to active fails. |
-      | user:merge         | When two or more users are merged into one. |
-      | user:update         | When a user is updated. (Currently, when a user's identification is updated.)|
-      | user:remove         | When a user is deleted. |
+      | Trigger                               | Description                                                          |
+      | ------------------------------------- | -------------------------------------------------------------------- |
+      | client:add                            | When initiating a channel link or when an SDK client is created.     |
+      | client:remove                         | When a client is removed. This can happen when:<br/>1. directly using the API<br/>2. removing the client using the SDK<br/>3. transferring a client due to a channel link<br/>4. failing or cancelling a channel link |
+      | client:update                         | When a client is updated. This can happen when:<br/>1. a channel finds a user that matches the information provided<br/>2. a client is activated<br/>3. a user unsubscribes from a conversation or blocks the app |
+      | conversation:create                   | When a new conversation is created.                                  |
+      | conversation:join                     | When a new participant joins a `sdkGroup` conversation.              |
+      | conversation:leave                    | When a participant leaves a `sdkGroup` conversation.                 |
+      | conversation:remove                   | When a conversation is deleted.                                      |
+      | conversation:message                  | When a new message was sent in the conversation.                     |
+      | conversation:message:delivery:channel | When a message is successfully delivered to a channel.               |
+      | conversation:message:delivery:failure | When a new message fails to be delivered in the conversation.        |
+      | conversation:message:delivery:user    | When a new message is successfully delivered to a user.              |
+      | conversation:postback                 | When a user clicks on a postback action button.                      |
+      | conversation:read                     | When a user has read the conversation.                               |
+      | conversation:referral                 | When a user is referred to a conversation. See the <a href="https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/conversation-referrals/">conversation referrals</a> guide for more details. |
+      | conversation:typing                   | When a user starts or stops typing.                                  |
+      | switchboard:acceptControl             | When a switchboard integration accepts control of a conversation.    |
+      | switchboard:acceptControl:failure     | When control of a conversation fails to be accepted by a switchboard integration. |
+      | switchboard:offerControl              | When a switchboard integration has been offered control of the conversation. |
+      | switchboard:offerControl:failure      | When control of a conversation can't be offered to another switchboard integration. |
+      | switchboard:passControl               | When a switchboard integration gives control of the conversation to another switchboard integration. |
+      | switchboard:passControl:failure       | When changing a switchboard integration to active fails.             |
+      | switchboard:releaseControl            | When a switchboard integration releases control of the conversation. |
+      | user:merge                            | When two or more users are merged into one.                          |
+      | user:update                           | When a user is updated. (Currently, when a user's identification is updated.)|
+      | user:remove                           | When a user is deleted.                                              |
 
       ## Securing Sunshine Conversations Webhooks
       When a webhook is created, a shared secret will be generated for it. The secret can be used to determine the veracity of a request to your webhook route. It is included as an `X-API-Key` header with each webhook request sent to the target URL.
@@ -3310,6 +3311,7 @@ x-webhooks:
                       - $ref: '#/components/schemas/switchboardOfferControlFailure'
                       - $ref: '#/components/schemas/switchboardPassControl'
                       - $ref: '#/components/schemas/switchboardPassControlFailure'
+                      - $ref: '#/components/schemas/switchboardReleaseControl'
                       - $ref: '#/components/schemas/userMergeEvent'
                       - $ref: '#/components/schemas/userUpdateEvent'
                       - $ref: '#/components/schemas/userRemoveEvent'
@@ -3356,6 +3358,8 @@ x-webhooks:
                 $ref: '#/components/examples/switchboardPassControlEvent'
               switchboard:passControl:failure:
                 $ref: '#/components/examples/switchboardPassControlFailureEvent'
+              switchboard:releaseControl:
+                $ref: '#/components/examples/switchboardReleaseControlEvent'
               user:merge:
                 $ref: '#/components/examples/userMergeEvent'
               user:update:
@@ -7635,6 +7639,22 @@ components:
                 metadata:
                   $ref: '#/components/schemas/metadata'
       title: switchboard:passControl:failure
+    switchboardReleaseControl:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: The payload of the event. The contents of this object depend on the type of event.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: The conversation from which the switchboard event was fired. The payload will omit `activeSwitchboardIntegration`, representing that no switchboard integration is in control of the conversation.
+                metadata:
+                  $ref: '#/components/schemas/metadata'
+      title: switchboard:releaseControl
     userMergeEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -9298,6 +9318,21 @@ components:
               error:
                 code: switchboard_invalid_target
                 message: Switchboard invalid target
+    switchboardReleaseControlEvent:
+      value:
+        app:
+          id: 5ebee0975ac5304b664a12fa
+        webhook:
+          id: 5f4eaef81e3dcc117c7ba48a
+          version: v2
+        events:
+          - id: 5f74a0d52b5315fc007e798a
+            createdAt: '2020-09-30T15:14:29.834Z'
+            type: switchboard:releaseControl
+            payload:
+              conversation:
+                id: f52b01137aa6c250bc7251fa
+                type: personal
     userMergeEvent:
       value:
         app:
