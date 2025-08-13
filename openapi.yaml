@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 15.5.2
+  version: 15.6.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -50,7 +50,7 @@ info:
 
     ## API Version
 
-    The latest version of the API is v2. Version v1.1 is still supported and you can continue using it but we encourage you to upgrade to the latest version. To learn more about API versioning at Sunshine Conversations, including instructions on how to upgrade to the latest version, [visit our docs](https://docs.smooch.io/guide/versioning).
+    The latest version of the API is v2. Version v1.1 is still supported and you can continue using it but we encourage you to upgrade to the latest version. To learn more about API versioning at Sunshine Conversations, including instructions on how to upgrade to the latest version, [visit our docs](https://developer.zendesk.com/documentation/conversations/references/api-versioning/).
 
     ## API Pagination and Records Limits
 
@@ -78,7 +78,7 @@ info:
 
     <a style="display:inline-block;background:url(https://run.pstmn.io/button.svg);height:30px;width: 123px;" href="https://docs.smooch.io/sunco-openapi/postman_collection.json"></a>
 
-    In addition to API libraries, Sunshine Conversations also has a Postman collection that can be used for development or testing purposes. See the [guide](https://docs.smooch.io/guide/postman-collection/) for information on how to install and use the collection in your Postman client.
+    In addition to API libraries, Sunshine Conversations also has a Postman collection that can be used for development or testing purposes. See the [guide](https://developer.zendesk.com/documentation/conversations/references/openapi-specification/) for information on how to install and use the collection in your Postman client.
 
     ## Rate Limits
 
@@ -103,7 +103,7 @@ info:
 
     ## Authorization
 
-    This is an overview of how authorization works with the Sunshine Conversations API. Sunshine Conversations allows basic authentication or JSON Web Tokens (JWTs) as authentication methods for server-to-server calls. [See below](/#section/Introduction/Authentication) for more details.
+    This is an overview of how authorization works with the Sunshine Conversations API. Sunshine Conversations allows basic authentication or JSON Web Tokens (JWTs) as authentication methods for server-to-server calls. [See below](#section/Introduction/Authentication) for more details.
 
     There are three authorization scopes available for the v2 API: `integration`, `app`, and `account`.
 
@@ -171,7 +171,7 @@ info:
   x-logo:
     url: sunco_logo.svg
     altText: Sunshine Conversations
-    href: https://docs.smooch.io/
+    href: https://developer.zendesk.com/documentation/conversations/
 servers:
   - url: https://api.smooch.io
     description: United States server
@@ -187,7 +187,7 @@ security:
 tags:
   - name: Apps
     x-displayName: Apps
-    description: "If you're looking to enable messaging inside your product for your customers, with as much control over the experience as you'd like, you can create and control Sunshine Conversations apps programmatically using [Account Provisioning](https://docs.smooch.io/guide/intro-to-account-provisioning/).\n### Authentication\nAccount Provisioning endpoints require `account` scope. See the [authorization](/#section/Introduction/Authorization) and [authentication](/#section/Introduction/Authentication) sections for information.\nA user account API key (key id that starts with `act_`) can access all account provisioning routes. You can create an account key by going to your account page.\nA service account API key (key id that starts with `svc_`) may be used to manage apps, but not service accounts or service account keys.\n\n| Key Type       | Authorized Methods                                                |\n| -------------- | ----------------------------------------------------------------- |\n| act            | All Core and Account Provisioning methods.                        |\n| svc   \t       | All Core methods, App Management methods, and App Keys methods.   |\n\n### Service Accounts\nService Account schema and endpoints used for provisioning service accounts. A service account represents an API user, with its own set of credentials, that has only access to a certain subset of apps. For software makers that create apps on behalf of separate customers or businesses, service accounts can be used to generate and distribute credentials that only have access to a single business's data.\n\n### App settings\nApps have a number of optional settings that can be used to customize specific behaviors. See\nthe `settings` object described below for more information.\n"
+    description: "If you're looking to enable messaging inside your product for your customers, with as much control over the experience as you'd like, you can create and control Sunshine Conversations apps programmatically using [Account Provisioning](https://docs.smooch.io/guide/intro-to-account-provisioning/).\n### Authentication\nAccount Provisioning endpoints require `account` scope. See the [authorization](#section/Introduction/Authorization) and [authentication](#section/Introduction/Authentication) sections for information.\nA user account API key (key id that starts with `act_`) can access all account provisioning routes. You can create an account key by going to your account page.\nA service account API key (key id that starts with `svc_`) may be used to manage apps, but not service accounts or service account keys.\n\n| Key Type       | Authorized Methods                                                |\n| -------------- | ----------------------------------------------------------------- |\n| act            | All Core and Account Provisioning methods.                        |\n| svc   \t       | All Core methods, App Management methods, and App Keys methods.   |\n\n### Service Accounts\nService Account schema and endpoints used for provisioning service accounts. A service account represents an API user, with its own set of credentials, that has only access to a certain subset of apps. For software makers that create apps on behalf of separate customers or businesses, service accounts can be used to generate and distribute credentials that only have access to a single business's data.\n\n### App settings\nApps have a number of optional settings that can be used to customize specific behaviors. See\nthe `settings` object described below for more information.\n"
   - name: App Keys
     x-displayName: App Keys
     description: This set of endpoints is used to provision and revoke API keys for a Sunshine Conversations app. An app can have a maximum of 10 keys.
@@ -244,11 +244,6 @@ tags:
   - name: Devices
     x-displayName: Devices
     description: Endpoints used for fetching a user's [devices](https://developer.zendesk.com/documentation/conversations/getting-started/key-concepts/#device).
-  - name: Changelog
-    description: All notable changes to the API will be referenced in the [v2 API changelog](https://docs.smooch.io/guide/v2-api-changelog/).
-    x-zoas-docs:
-      ignoreCanonicalSchema: true
-      ignoreEmptyOperations: true
   - name: Webhooks
     description: |
       Endpoints for managing webhooks associated to a Sunshine Conversations Connect integration or a custom integration. Webhooks are a fantastic way to extend the Sunshine Conversations platform beyond the built-in feature set. You can use webhooks to build your own Sunshine Conversations chat clients, to integrate more deeply with your favorite CRM, or to build a bot.
@@ -683,7 +678,7 @@ paths:
       operationId: UploadAttachment
       description: |
         Upload an attachment to Sunshine Conversations to use in future messages. Files are uploaded using the multipart/form-data content type. Use the returned mediaUrl to send a file, image or carousel message.
-        <aside class="notice">Note that Sunshine Conversations limits the size and type of file you can upload to the platform. See the <a href="https://docs.smooch.io/guide/validating-files">file validation</a> guide for more details.</aside>
+        <aside class="notice">Note that Sunshine Conversations limits the size and type of file you can upload to the platform. See the <a href="https://support.zendesk.com/hc/en-us/articles/8435939957914#topic_v1r_rwr_mdc">file validation</a> guide for more details.</aside>
       security:
         - basicAuth:
             - integration
@@ -1557,7 +1552,7 @@ paths:
         - Switchboard Actions
       summary: Pass Control
       operationId: PassControl
-      description: The passControl action marks the named switchboard integration as active and transitions all the other switchboard integrations to standby status. The `passControl` action is idempotent if either the target `switchboardIntegration` is specified explicitly by its `id` or `name`, or the `next` keyword is used for the `switchboardIntegration` field, and the invoking integration can be identified by its [OAuth token](https://docs.smooch.io/guide/oauth/#redirect-and-acquiring-an-oauth-token) or [Custom Integration API Key](https://docs.smooch.io/rest/#tag/CustomIntegrationApiKeys) credentials. Duplicate passControl actions using the `next` keyword and their metadata are disregarded. For more information, see [Switchboard passControl](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/switchboard/#pass-control).
+      description: The passControl action marks the named switchboard integration as active and transitions all the other switchboard integrations to standby status. The `passControl` action is idempotent if either the target `switchboardIntegration` is specified explicitly by its `id` or `name`, or the `next` keyword is used for the `switchboardIntegration` field, and the invoking integration can be identified by its [OAuth token](https://developer.zendesk.com/documentation/conversations/how-to-guides/building-a-marketplace-bot/) or [Custom Integration API Key](https://docs.smooch.io/rest/#tag/CustomIntegrationApiKeys) credentials. Duplicate passControl actions using the `next` keyword and their metadata are disregarded. For more information, see [Switchboard passControl](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/switchboard/#pass-control).
       security:
         - basicAuth:
             - integration
@@ -1701,6 +1696,52 @@ paths:
               examples:
                 default:
                   $ref: '#/components/examples/emptyResponse'
+  /v2/apps/{appId}/conversations/{conversationId}/conversionEvents:
+    parameters:
+      - $ref: '#/components/parameters/appId'
+      - $ref: '#/components/parameters/conversationId'
+    post:
+      tags:
+        - Conversations
+      summary: Post Conversion Events
+      operationId: PostConversionEvents
+      description: This API can be used to track your end user's interactions with third party channels.
+      security:
+        - basicAuth:
+            - integration
+            - app
+            - account
+        - bearerAuth:
+            - integration
+            - app
+            - account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/conversionEventsBody'
+            examples:
+              default:
+                value:
+                  instagram:
+                    payload:
+                      data:
+                        - action_source: business_messaging
+                          event_name: TestEvent
+                          event_time: 1752161233
+                          messaging_channel: instagram
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              examples:
+                default:
+                  $ref: '#/components/examples/conversionEvents'
   /v2/apps/{appId}/integrations:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -4677,7 +4718,7 @@ components:
           description: When set to true, the chat input will be disabled on supported client implementations when the message is the most recent one in the history. Can be used for guided flows or to temporarily disable the user's ability to send messages in the conversation.
         template:
           type: object
-          description: The whatsapp template message to send. For more information, consult the [guide](https://docs.smooch.io/guide/whatsapp#sending-message-templates). `schema` must be set to `whatsapp`.
+          description: The whatsapp template message to send. For more information, consult the [guide](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/message-overrides/#template-messages). `schema` must be set to `whatsapp`.
       required:
         - type
         - template
@@ -5007,7 +5048,7 @@ components:
           properties:
             whatsapp:
               $ref: '#/components/schemas/messageOverridePayload'
-      description: A raw payload containing a message that is sent directly to a channel. Messages for [Apple Messages for Business](https://docs.smooch.io/guide/apple-messages-for-business/#passthrough-api), [Line](https://docs.smooch.io/guide/line/#passthrough-api), [Messenger](https://docs.smooch.io/guide/facebook-messenger/#passthrough-api), [Whatsapp](https://docs.smooch.io/guide/whatsapp/#passthrough-api) channels are supported.
+      description: A raw payload containing a message that is sent directly to a channel. See [message overrides](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/message-overrides/) for more information.
     messagePost:
       type: object
       properties:
@@ -5029,7 +5070,7 @@ components:
           type: string
           description: |
             When `schema` is set to `"whatsapp"`, the `content` key is expected to conform to the [native WhatsApp schema](https://developers.facebook.com/docs/whatsapp/api/messages/message-templates) for sending message templates.
-            For more details, consult the documentation for [sending message templates on WhatsApp](https://docs.smooch.io/guide/whatsapp/#sending-message-templates).
+            For more details, consult the documentation for [sending message templates on WhatsApp](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/message-overrides/#template-messages).
           example: whatsapp
       required:
         - author
@@ -5152,6 +5193,40 @@ components:
                       type: string
       required:
         - userId
+    metaConversionEvent:
+      type: object
+      description: The conversion event data expected by Meta.
+      required:
+        - payload
+      properties:
+        payload:
+          type: object
+          description: The payload to be sent to Meta's conversion events API. Should contain the exact structure expected by [Meta's Conversions API](https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event) except for the `user_data` field, which will be provided by Zendesk.
+          required:
+            - data
+          properties:
+            data:
+              type: array
+              description: The array of conversion events to be sent to Meta's conversion events API.
+              items:
+                type: object
+    conversionEventsBody:
+      oneOf:
+        - type: object
+          title: MessengerConversionEventsBody
+          properties:
+            messenger:
+              $ref: '#/components/schemas/metaConversionEvent'
+        - type: object
+          title: InstagramConversionEventsBody
+          properties:
+            instagram:
+              $ref: '#/components/schemas/metaConversionEvent'
+        - type: object
+          title: WhatsAppConversionEventsBody
+          properties:
+            whatsapp:
+              $ref: '#/components/schemas/metaConversionEvent'
     integration:
       type: object
       x-resourceId: Integrations
@@ -7619,6 +7694,12 @@ components:
                   description: The conversation from which the switchboard event was fired. On success, the payload will include an `activeSwitchboardIntegration`, representing the switchboard integration that is now in control of the conversation.
                 metadata:
                   $ref: '#/components/schemas/metadata'
+                reason:
+                  type: string
+                  description: Reason for the pass control action, if applicable.
+                  enum:
+                    - ticketClosed
+                    - transferToEmail
       title: switchboard:passControl
     switchboardPassControlFailure:
       allOf:
@@ -7654,6 +7735,12 @@ components:
                   description: The conversation from which the switchboard event was fired. The payload will omit `activeSwitchboardIntegration`, representing that no switchboard integration is in control of the conversation.
                 metadata:
                   $ref: '#/components/schemas/metadata'
+                reason:
+                  type: string
+                  description: Reason for the release control action, if applicable.
+                  enum:
+                    - ticketClosed
+                    - transferToEmail
       title: switchboard:releaseControl
     userMergeEvent:
       allOf:
@@ -8427,6 +8514,11 @@ components:
                 name: Zendesk Montréal
             source:
               type: api:conversations
+    conversionEvents:
+      value:
+        conversionEvents:
+          datasetId: 1234567890123456
+          eventsReceived: 1
     listIntegrations:
       value:
         integrations:
