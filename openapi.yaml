@@ -4058,6 +4058,8 @@ components:
       properties:
         type:
           type: string
+          enum:
+            - ticket:closed
           description: The type of system activity that generated the message. The value of this field determines the dynamic content that is rendered to the end-user / agent when viewing this message. Each `type` value will have a set of pre-defined, localized strings that describe the activity.
           default: ticket:closed
         data:
@@ -4072,6 +4074,8 @@ components:
       properties:
         type:
           type: string
+          enum:
+            - ticket:transfer:email
           description: The type of system activity that generated the message. The value of this field determines the dynamic content that is rendered to the end-user / agent when viewing this message. Each `type` value will have a set of pre-defined, localized strings that describe the activity.
           default: ticket:transfer:email
         data:
