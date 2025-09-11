@@ -1728,8 +1728,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/conversionEventsResponse'
               examples:
                 default:
                   $ref: '#/components/examples/conversionEvents'
@@ -5196,7 +5195,7 @@ components:
       properties:
         payload:
           type: object
-          description: The payload to be sent to Meta's conversion events API. Should contain the exact structure expected by [Meta's Conversions API](https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event) except for the `user_data` field, which will be provided by Zendesk.
+          description: The payload to be sent to Meta's conversion events API. Should contain the exact structure expected by [Meta's Conversions API](https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event) except for the `user_data` and `messaging_channel` fields, which will be provided by Zendesk.
           required:
             - data
           properties:
@@ -5222,6 +5221,22 @@ components:
           properties:
             whatsapp:
               $ref: '#/components/schemas/metaConversionEvent'
+    conversionEvents:
+      type: object
+      description: Details about the conversion events that were processed.
+      properties:
+        datasetId:
+          type: string
+          description: The ID of the dataset that the conversion events were sent to.
+        eventsReceived:
+          type: integer
+          description: The number of conversion events that were received and processed.
+    conversionEventsResponse:
+      type: object
+      title: ConversionEventsResponse
+      properties:
+        conversionEvents:
+          $ref: '#/components/schemas/conversionEvents'
     integration:
       type: object
       x-resourceId: Integrations
