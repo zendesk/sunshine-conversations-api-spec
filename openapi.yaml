@@ -2657,7 +2657,7 @@ paths:
         - Switchboard Integrations
       summary: Delete Switchboard Integration
       operationId: DeleteSwitchboardIntegration
-      description: Deletes the switchboard integration. If the deleted switchboard integration had an active status for some conversations, the default switchboard integration will replace it. Note that it is forbidden to delete a switchboard integration if it's the default one (a new one must be chosen first) or if another switchboard integration's `nextSwitchboardIntegrationId` refers to it. The integration that was linked to the deleted switchboard integration will start receiving all conversation events, regardless of the switchboard status.
+      description: Deletes the switchboard integration. If the deleted switchboard integration had an active status for some conversations, the active switchboard integration will be re-selected following the <a href="https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/switchboard/#default-integration-assignment">default integration assignment</a> rules to replace it next time the conversation has activity. Note that it is forbidden to delete a switchboard integration if it's the default one (a new one must be chosen first) or if another switchboard integration's `nextSwitchboardIntegrationId` refers to it. The integration that was linked to the deleted switchboard integration will start receiving all conversation events, regardless of the switchboard status.
       security:
         - basicAuth:
             - app
@@ -6535,7 +6535,7 @@ components:
       description: Whether the switchboard is enabled. Allows creating the switchboard in a disabled state so that messages don't get lost or misrouted during switchboard configuration. When a switchboard is disabled, integrations linked to the switchboard will receive all events.
     defaultSwitchboardIntegrationId:
       type: string
-      description: The id of the switchboard integration that will be given control when a new conversation begins. It will also be used for conversations that existed before the switchboard was enabled.
+      description: The id of the switchboard integration that will be given control when a new conversation begins. It will also be used for conversations that existed before the switchboard was enabled. In some cases, the `defaultResponderId` of a specific integration will take precedence over this field. For more information, refer to the <a href="https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/switchboard/#default-integration-assignment">Switchboard guide</a>.
       example: 5ef21b132f21af34f088530e
     switchboard:
       type: object
