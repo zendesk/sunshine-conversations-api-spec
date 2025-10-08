@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.0.0
+  version: 17.0.1
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -162,12 +162,12 @@ info:
     altText: Sunshine Conversations
     href: https://developer.zendesk.com/documentation/conversations/
 servers:
+  - url: https://{subdomain}.zendesk.com/sc
+    description: Your Zendesk subdomain
   - url: https://api.smooch.io
     description: United States server (for legacy Sunshine Conversations only)
   - url: https://api.eu-1.smooch.io
     description: European Union server (for legacy Sunshine Conversations only)
-  - url: https://{subdomain}.zendesk.com/sc
-    description: Your Zendesk subdomain
 security:
   - bearerAuth:
       - app
