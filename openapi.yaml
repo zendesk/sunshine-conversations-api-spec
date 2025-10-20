@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.0.1
+  version: 17.0.2
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -260,6 +260,7 @@ tags:
       | conversation:postback                 | When a user clicks on a postback action button.                      |
       | conversation:read                     | When a user has read the conversation.                               |
       | conversation:referral                 | When a user is referred to a conversation. See the <a href="https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/conversation-referrals/">conversation referrals</a> guide for more details. |
+      | passthrough:messaging                 | When a message is received with information that should be forwarded as-is. |
       | conversation:typing                   | When a user starts or stops typing.                                  |
       | switchboard:acceptControl             | When a switchboard integration accepts control of a conversation.    |
       | switchboard:acceptControl:failure     | When control of a conversation fails to be accepted by a switchboard integration. |
