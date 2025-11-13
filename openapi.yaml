@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.0.2
+  version: 17.1.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -4915,6 +4915,14 @@ components:
           type: boolean
           description: true if the message serves as a placeholder for one that has been deleted.
           nullable: true
+        references:
+          type: array
+          description: Array of references to external content that were included with this message.
+          items:
+            $ref: '#/components/schemas/reference'
+          minItems: 1
+          maxItems: 10
+          nullable: true
     quotedMessageMessage:
       title: QuotedMessageMessage
       type: object
@@ -4950,6 +4958,31 @@ components:
         mapping:
           message: '#/components/schemas/quotedMessageMessage'
           externalMessageId: '#/components/schemas/quotedMessageExternalMessageId'
+    reference:
+      type: object
+      x-resourceId: MessageReferences
+      description: List of references that can be used to link to the sources of a bot answer.
+      properties:
+        uri:
+          type: string
+          format: uri
+          maxLength: 2048
+          description: The URI of the referenced content.
+          example: https://example.com/article/123
+        title:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Optional title for the reference.
+          example: How to integrate messaging APIs
+        description:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: Optional description of the referenced content.
+          example: A comprehensive guide to messaging API integration
+      required:
+        - uri
     messageListResponse:
       type: object
       title: MessageListResponse
