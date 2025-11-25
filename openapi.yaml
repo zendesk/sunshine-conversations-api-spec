@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.1.0
+  version: 17.2.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -2734,6 +2734,37 @@ paths:
                     errors:
                       - code: conflict
                         title: User already exists
+    get:
+      tags:
+        - Users
+      summary: List Users
+      operationId: ListUsers
+      description: |
+        Lists users by their email identity. The `identities.email` filter parameter is required, and it will match users based on emails found in the `identities` array. This endpoint will not match against emails stored in `profile.email`.
+        ```shell
+        /v2/apps/:appId/users?filter[identities.email]=sue@example.org
+        ```
+      security:
+        - basicAuth:
+            - account
+            - app
+            - integration
+        - bearerAuth:
+            - account
+            - app
+            - integration
+      parameters:
+        - $ref: '#/components/parameters/userFilterQuery'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userListResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/listUsers'
   /v2/apps/{appId}/users/{userIdOrExternalId}:
     parameters:
       - $ref: '#/components/parameters/appId'
@@ -6708,6 +6739,29 @@ components:
           $ref: '#/components/schemas/nextSwitchboardIntegrationId'
         messageHistoryCount:
           $ref: '#/components/schemas/messageHistoryCount'
+    userTruncated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the user.
+          example: 7494535bff5cef41a15be74d
+        authenticated:
+          description: Whether or not the user has authenticated, either via JWT or via the Help Center
+          readOnly: true
+          type: boolean
+        externalId:
+          type: string
+          description: |
+            An optional ID that can also be used to retrieve the user.
+          example: your-own-id
+          nullable: true
+        zendeskId:
+          type: string
+          description: |
+            The ID that links a messaging user to its core Zendesk user counterpart. This ID can be used to fetch the core user record via the Zendesk Support API.
+          example: '30045042291606'
+          nullable: true
     signedUpAt:
       type: string
       description: The date at which the user signed up. Must be ISO 8601 time format `YYYY-MM-DDThh:mm:ss.sssZ`.
@@ -6756,50 +6810,6 @@ components:
           maxLength: 64
           nullable: true
           example: fr-CA
-    userCreateBody:
-      type: object
-      title: UserCreateBody
-      properties:
-        externalId:
-          type: string
-          minLength: 1
-          maxLength: 1024
-          description: |
-            A unique identifier for the user. The `externalId` can be used to link a user to the same conversation [across multiple devices](https://developer.zendesk.com/documentation/conversations/messaging-platform/users/authenticating-users/).
-          example: your-own-id
-        signedUpAt:
-          $ref: '#/components/schemas/signedUpAt'
-        toBeRetained:
-          $ref: '#/components/schemas/toBeRetained'
-        profile:
-          $ref: '#/components/schemas/profile'
-        metadata:
-          $ref: '#/components/schemas/metadata'
-      required:
-        - externalId
-    userTruncated:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the user.
-          example: 7494535bff5cef41a15be74d
-        authenticated:
-          description: Whether or not the user has authenticated, either via JWT or via the Help Center
-          readOnly: true
-          type: boolean
-        externalId:
-          type: string
-          description: |
-            An optional ID that can also be used to retrieve the user.
-          example: your-own-id
-          nullable: true
-        zendeskId:
-          type: string
-          description: |
-            The ID that links a messaging user to its core Zendesk user counterpart. This ID can be used to fetch the core user record via the Zendesk Support API.
-          example: '30045042291606'
-          nullable: true
     identity:
       type: object
       description: A connected user identity, such as an email.
@@ -6843,6 +6853,35 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/identity'
+    userListResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          description: List of returned users.
+          items:
+            $ref: '#/components/schemas/user'
+    userCreateBody:
+      type: object
+      title: UserCreateBody
+      properties:
+        externalId:
+          type: string
+          minLength: 1
+          maxLength: 1024
+          description: |
+            A unique identifier for the user. The `externalId` can be used to link a user to the same conversation [across multiple devices](https://developer.zendesk.com/documentation/conversations/messaging-platform/users/authenticating-users/).
+          example: your-own-id
+        signedUpAt:
+          $ref: '#/components/schemas/signedUpAt'
+        toBeRetained:
+          $ref: '#/components/schemas/toBeRetained'
+        profile:
+          $ref: '#/components/schemas/profile'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+      required:
+        - externalId
     userResponse:
       type: object
       title: UserResponse
@@ -8031,6 +8070,21 @@ components:
         type: string
         example: 5d8cff3cd55b040010928b5b
       required: true
+    userFilterQuery:
+      name: filter
+      in: query
+      description: Contains parameters for filtering the results.
+      schema:
+        type: object
+        title: userListFilter
+        properties:
+          identities.email:
+            type: string
+            description: The user's email. Will match users based on emails found in the `identities` array. This parameter will not match against emails stored in `profile.email`.
+            required: true
+      style: deepObject
+      explode: true
+      required: true
     userIdOrExternalId:
       in: path
       name: userIdOrExternalId
@@ -8698,6 +8752,22 @@ components:
           integrationId: 5ef21b86e933b7355c11c605
           integrationType: zd:agentWorkspace
           deliverStandbyEvents: false
+    listUsers:
+      value:
+        users:
+          - id: 67a11490f0305f4a391e9f8a
+            externalId: your-own-id
+            zendeskId: '35436'
+            signedUpAt: '2025-02-03T19:10:08.152Z'
+            hasPaymentInfo: false
+            identities:
+              - type: email
+                value: sue@example.org
+                verification: sso
+            profile:
+              locale: en
+              localeOrigin: zendeskAccount
+            metadata: {}
     createUser:
       value:
         user:
