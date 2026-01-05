@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.2.0
+  version: 17.2.1
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -5191,12 +5191,6 @@ components:
           type: string
           description: The id or the name of the switchboard integration that will become active. May also use the `next` keyword to transfer control to the next switchboard integration designated in the switchboard hierarchy configuration
           example: next
-        reason:
-          type: string
-          description: Reason for the pass control action.
-          enum:
-            - ticketClosed
-            - transferToEmail
         metadata:
           allOf:
             - $ref: '#/components/schemas/metadata'
@@ -5206,12 +5200,6 @@ components:
     releaseControlBody:
       type: object
       properties:
-        reason:
-          type: string
-          description: Reason for the release control action.
-          enum:
-            - ticketClosed
-            - transferToEmail
         metadata:
           allOf:
             - $ref: '#/components/schemas/metadata'
