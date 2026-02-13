@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.3.0
+  version: 17.4.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -4509,6 +4509,12 @@ components:
           description: Array of objects representing the response for a field of type select. Form and formResponse messages only.
           items:
             type: object
+        format:
+          type: string
+          enum:
+            - integer
+            - decimal
+          description: Specifies the format for a text field.
       required:
         - type
         - name
