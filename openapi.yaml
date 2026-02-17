@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.4.0
+  version: 17.5.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -3480,38 +3480,38 @@ components:
         conversationRetentionSeconds:
           type: integer
           description: |
-            Number of seconds of inactivity before a conversation’s messages 
-            will be automatically deleted. See 
+            Number of seconds of inactivity before a conversation’s messages
+            will be automatically deleted. See
             [Conversation Retention Seconds](https://docs.smooch.io/guide/creating-and-managing-apps/#conversation-retention-seconds)
             for more information.
           minimum: 0
         maskCreditCardNumbers:
           type: boolean
           description: |
-            A boolean specifying whether credit card numbers should be masked 
+            A boolean specifying whether credit card numbers should be masked
             when sent through Sunshine Conversations.
         useAnimalNames:
           type: boolean
           description: |
-            A boolean specifying whether animal names should be used for 
-            unnamed users. See the 
+            A boolean specifying whether animal names should be used for
+            unnamed users. See the
             [user naming guide](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/receiving-messages/#message-author-name)
             for details.
         echoPostback:
           type: boolean
           description: |
-            A boolean specifying whether a message should be added to the conversation 
-            history when a postback button is clicked. See 
+            A boolean specifying whether a message should be added to the conversation
+            history when a postback button is clicked. See
             [Echo Postbacks](https://docs.smooch.io/guide/creating-and-managing-apps/#echo-postbacks)
             for more information.
         ignoreAutoConversationStart:
           type: boolean
           description: |
-            A boolean specifying whether a non message event coming from a channel will 
-            trigger a 
+            A boolean specifying whether a non message event coming from a channel will
+            trigger a
             [start conversation](https://developer.zendesk.com/api-reference/conversations/#section/Webhook-Triggers)
             event and count as a monthly active user (MAU).
-            <aside class="notice"><strong>Note:</strong> Calling <code>startConversation()</code> (or equivalent) from the Android, 
+            <aside class="notice"><strong>Note:</strong> Calling <code>startConversation()</code> (or equivalent) from the Android,
             iOS or Web SDK will count as a MAU, regardless of the value of this setting.</aside>
         multiConvoEnabled:
           type: boolean
@@ -3523,6 +3523,16 @@ components:
           type: boolean
           description: |
             A boolean specifying whether the messages authored by the Sunshine Conversations platform should be localized.
+        endSessionEnabled:
+          type: boolean
+          description: |
+            A boolean specifying whether users can manually end (close) their conversation session via an "End Session" button on SDK.
+            <aside class="notice"><strong>Note:</strong> <code>multiConvo</code> is required to enable</aside>
+        disableConversationReopen:
+          type: boolean
+          description: |
+            A boolean specifying whether users can reopen conversations that have been ended.
+            <aside class="notice"><strong>Note:</strong> <code>multiConvo</code> is required to enable</aside>
     metadata:
       type: object
       nullable: true
@@ -4120,15 +4130,33 @@ components:
       required:
         - type
       readOnly: true
+    endedByUser:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - conversation:endedByUser
+          description: The type of system activity that generated the message. The value of this field determines the dynamic content that is rendered to the end-user / agent when viewing this message. Each `type` value will have a set of pre-defined, localized strings that describe the activity.
+          default: conversation:endedByUser
+        data:
+          type: object
+          description: No additional data is supplied with the "conversation:endedByUser" activity type at this time.
+          additionalProperties: true
+      required:
+        - type
+      readOnly: true
     activityMessage:
       oneOf:
         - $ref: '#/components/schemas/ticketClosed'
         - $ref: '#/components/schemas/transferToEmail'
+        - $ref: '#/components/schemas/endedByUser'
       discriminator:
         propertyName: type
         mapping:
           ticket:closed: '#/components/schemas/ticketClosed'
           ticket:transfer:email: '#/components/schemas/transferToEmail'
+          conversation:endedByUser: '#/components/schemas/endedByUser'
     htmlText:
       type: string
       description: |-
