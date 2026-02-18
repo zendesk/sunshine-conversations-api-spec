@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.5.0
+  version: 17.6.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -4592,7 +4592,7 @@ components:
               $ref: '#/components/schemas/formOptions'
     formMessage:
       type: object
-      description: A form type message without text or actions. Only supported in the Web SDK.
+      description: A form type message.
       properties:
         type:
           type: string
@@ -4612,6 +4612,9 @@ components:
           description: An array of objects representing fields associated with the message. Only present in form and formResponse messages.
           minItems: 1
           maxItems: 20
+        text:
+          type: string
+          description: An optional text to display above form links on social channels.
       required:
         - type
         - fields
