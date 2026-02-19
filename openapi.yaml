@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.6.0
+  version: 17.7.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -421,7 +421,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/appResponse'
+                $ref: '#/components/schemas/appResponseWithSubdomain'
               examples:
                 default:
                   $ref: '#/components/examples/getApp'
@@ -3209,7 +3209,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/appResponse'
+                $ref: '#/components/schemas/appResponseWithSubdomain'
   /oauth/authorize:
     get:
       tags:
@@ -3645,6 +3645,23 @@ components:
         app:
           allOf:
             - $ref: '#/components/schemas/app'
+          description: The app.
+    appSubdomain:
+      type: object
+      x-resourceId: Apps
+      properties:
+        subdomain:
+          type: string
+          description: The subdomain of the app.
+          example: test-domain
+    appResponseWithSubdomain:
+      type: object
+      title: AppResponse
+      properties:
+        app:
+          allOf:
+            - $ref: '#/components/schemas/app'
+            - $ref: '#/components/schemas/appSubdomain'
           description: The app.
     appUpdateBody:
       type: object
