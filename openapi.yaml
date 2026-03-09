@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.7.0
+  version: 17.8.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -745,6 +745,18 @@ paths:
               examples:
                 default:
                   $ref: '#/components/examples/emptyResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: bad_request
+                        title: 'Unsupported media URL for attachment deletion: https://badhost.com/image.png'
         '404':
           description: Not found
           content:
