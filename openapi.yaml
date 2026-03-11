@@ -5676,6 +5676,18 @@ components:
               description: The Facebook user's user ID. This is returned when integrating through the Dashboard
               readOnly: true
               example: '100885965124932'
+            storyRepliesEnabled:
+              type: boolean
+              description: |
+                When true, a message is generated when a user replies to your business story
+                with text or a reaction.
+              default: true
+            storyMentionsEnabled:
+              type: boolean
+              description: |
+                When true, a <a href="https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/conversation-referrals/">referral event</a> is generated when a user mentions your business
+                in their own story.
+              default: true
           required:
             - pageAccessToken
             - appId
@@ -6388,6 +6400,16 @@ components:
               type: string
               description: A Facebook Page Access Token.
               example: your_access_token
+            storyRepliesEnabled:
+              type: boolean
+              description: |
+                When true, a message is generated when a user replies to your business story
+                with text or a reaction.
+            storyMentionsEnabled:
+              type: boolean
+              description: |
+                When true, a <a href="https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/conversation-referrals/">referral event</a> is generated when a user mentions your business
+                in their own story.
     iosUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
