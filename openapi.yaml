@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.8.0
+  version: 17.9.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -5803,6 +5803,11 @@ components:
               writeOnly: true
               nullable: true
               example: key-f265hj32f0sd897lqd2j5keb96784043
+            signingKey:
+              type: string
+              description: The webhook signing key of your Mailgun account. If not specified, the `apiKey` will be used for webhook signature validation instead. You must include this if your Mailgun signing key and API key have different values.
+              minLength: 1
+              example: 12d99f5a15355c180971bed7494d578b093c958f57766f3fe750761baed12345
             domain:
               type: string
               description: The domain used to relay email. This domain must be configured and verified in your Mailgun account.
