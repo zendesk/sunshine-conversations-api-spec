@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.10.1
+  version: 17.10.2
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -1441,16 +1441,16 @@ paths:
               examples:
                 default:
                   $ref: '#/components/examples/emptyResponse'
-  /v2/apps/{appId}/conversations/{conversationId}/acceptControl:
+  /v2/apps/{appId}/conversations/{conversationId}/passControl:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
     post:
       tags:
         - Switchboard Actions
-      summary: Accept Control
-      operationId: AcceptControl
-      description: The acceptControl action transfers the control of the conversation to the pending switchboard integration. When using integration auth scope, a 403 is returned if the pending switchboard integration is not the authenticated integration.
+      summary: Pass Control
+      operationId: PassControl
+      description: The passControl action marks the selected switchboard integration as active and transitions all the other switchboard integrations to standby status. For information about the idempotency of this API, see the [switchboard guide](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/switchboard/#pass-control).
       security:
         - basicAuth:
             - integration
@@ -1465,7 +1465,59 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/acceptControlBody'
+              $ref: '#/components/schemas/passControlBody'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                default:
+                  $ref: '#/components/examples/emptyResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+              examples:
+                default:
+                  value:
+                    errors:
+                      - code: conversation_not_found
+                        title: Conversation not found
+  /v2/apps/{appId}/conversations/{conversationId}/releaseControl:
+    parameters:
+      - $ref: '#/components/parameters/appId'
+      - $ref: '#/components/parameters/conversationId'
+    post:
+      tags:
+        - Switchboard Actions
+      summary: Release Control
+      operationId: ReleaseControl
+      description: |
+        The releaseControl action releases the control of the conversation by nullifying its switchboard state. For more
+        information, see the [switchboard guide](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/switchboard/#release-control).
+
+        When using integration auth scope, a 403 is returned if the authenticated integration is not currently active in the
+        switchboard.
+      security:
+        - basicAuth:
+            - integration
+            - app
+            - account
+        - bearerAuth:
+            - integration
+            - app
+            - account
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/releaseControlBody'
       responses:
         '200':
           description: Ok
@@ -1547,16 +1599,16 @@ paths:
                     errors:
                       - code: conversation_not_found
                         title: Conversation not found
-  /v2/apps/{appId}/conversations/{conversationId}/passControl:
+  /v2/apps/{appId}/conversations/{conversationId}/acceptControl:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/conversationId'
     post:
       tags:
         - Switchboard Actions
-      summary: Pass Control
-      operationId: PassControl
-      description: The passControl action marks the named switchboard integration as active and transitions all the other switchboard integrations to standby status. The `passControl` action is idempotent if either the target `switchboardIntegration` is specified explicitly by its `id` or `name`, or the `next` keyword is used for the `switchboardIntegration` field, and the invoking integration can be identified by its [OAuth token](https://developer.zendesk.com/documentation/conversations/how-to-guides/building-a-marketplace-bot/) or [Custom Integration API Key](https://developer.zendesk.com/api-reference/conversations/#tag/CustomIntegrationApiKeys) credentials. Duplicate passControl actions using the `next` keyword and their metadata are disregarded. For more information, see [Switchboard passControl](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/switchboard/#pass-control).
+      summary: Accept Control
+      operationId: AcceptControl
+      description: The acceptControl action transfers the control of the conversation to the pending switchboard integration. When using integration auth scope, a 403 is returned if the pending switchboard integration is not the authenticated integration.
       security:
         - basicAuth:
             - integration
@@ -1571,54 +1623,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/passControlBody'
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: object
-              examples:
-                default:
-                  $ref: '#/components/examples/emptyResponse'
-        '404':
-          description: Not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errorResponse'
-              examples:
-                default:
-                  value:
-                    errors:
-                      - code: conversation_not_found
-                        title: Conversation not found
-  /v2/apps/{appId}/conversations/{conversationId}/releaseControl:
-    parameters:
-      - $ref: '#/components/parameters/appId'
-      - $ref: '#/components/parameters/conversationId'
-    post:
-      tags:
-        - Switchboard Actions
-      summary: Release Control
-      operationId: ReleaseControl
-      description: The releaseControl action releases the control of the conversation by nullifying its switchboard state. When using integration auth scope, a 403 is returned if the active switchboard integration is not the authenticated integration.
-      security:
-        - basicAuth:
-            - integration
-            - app
-            - account
-        - bearerAuth:
-            - integration
-            - app
-            - account
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/releaseControlBody'
+              $ref: '#/components/schemas/acceptControlBody'
       responses:
         '200':
           description: Ok
@@ -5234,32 +5239,18 @@ components:
       required:
         - author
         - type
-    acceptControlBody:
-      type: object
-      properties:
-        metadata:
-          allOf:
-            - $ref: '#/components/schemas/metadata'
-          description: Flat object containing custom properties. Strings, numbers and booleans are the only supported format that can be passed to metadata. The metadata is limited to 4KB in size. The metadata object will be included in the `switchboard:acceptControl` and `switchboard:acceptControl:failure` webhooks.
-    offerControlBody:
-      type: object
-      properties:
-        switchboardIntegration:
-          type: string
-          description: The id or the name of the switchboard integration that will become pending. Also supports the `next` keyword to offer control to the next switchboard integration designated in the switchboard hierarchy configuration. This cannot match the active switchboard integration.
-          example: next
-        metadata:
-          allOf:
-            - $ref: '#/components/schemas/metadata'
-          description: Flat object containing custom properties. Strings, numbers and booleans are the only supported format that can be passed to metadata. The metadata is limited to 4KB in size. The metadata object will be included in the `switchboard:offerControl` and `switchboard:offerControl:failure` webhooks.
-      required:
-        - switchboardIntegration
     passControlBody:
       type: object
       properties:
         switchboardIntegration:
           type: string
-          description: The id or the name of the switchboard integration that will become active. May also use the `next` keyword to transfer control to the next switchboard integration designated in the switchboard hierarchy configuration
+          description: |
+            The switchboard integration that will become active. May be referenced by its `id`, `name`, or `integrationType`,
+            in that order of precedence. In case of ambiguity (for example, if the `custom` type is specified, but more than
+            one are present in the switchboard), an error will be raised.
+
+            The `next` keyword may also be used to transfer control to the next switchboard integration designated in the
+            switchboard configuration, without having to know what it is.
           example: next
         metadata:
           allOf:
@@ -5274,6 +5265,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/metadata'
           description: Flat object containing custom properties. Strings, numbers and booleans are the only supported format that can be passed to metadata. The metadata is limited to 4KB in size. The metadata object will be included in the `switchboard:releaseControl` webhook.
+    offerControlBody:
+      type: object
+      properties:
+        switchboardIntegration:
+          type: string
+          description: |
+            The switchboard integration that will become pending. May be referenced by its `id`, `name`, or `integrationType`,
+            in that order of precedence. In case of ambiguity (for example, if the `custom` type is specified, but more than
+            one are present in the switchboard), an error will be raised.
+
+            The `next` keyword may also be used to offer control to the next switchboard integration designated in the
+            switchboard configuration, without having to know what it is.
+
+            This cannot match the active switchboard integration.
+          example: next
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/metadata'
+          description: Flat object containing custom properties. Strings, numbers and booleans are the only supported format that can be passed to metadata. The metadata is limited to 4KB in size. The metadata object will be included in the `switchboard:offerControl` and `switchboard:offerControl:failure` webhooks.
+      required:
+        - switchboardIntegration
+    acceptControlBody:
+      type: object
+      properties:
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/metadata'
+          description: Flat object containing custom properties. Strings, numbers and booleans are the only supported format that can be passed to metadata. The metadata is limited to 4KB in size. The metadata object will be included in the `switchboard:acceptControl` and `switchboard:acceptControl:failure` webhooks.
     downloadMessageRefBody:
       allOf:
         - type: object
