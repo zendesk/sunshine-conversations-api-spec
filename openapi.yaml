@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.10.2
+  version: 17.11.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -7017,8 +7017,6 @@ components:
           $ref: '#/components/schemas/profile'
         metadata:
           $ref: '#/components/schemas/metadata'
-      required:
-        - externalId
     userResponse:
       type: object
       title: UserResponse
