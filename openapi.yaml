@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.11.0
+  version: 17.12.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -2772,6 +2772,7 @@ paths:
             - integration
       parameters:
         - $ref: '#/components/parameters/userFilterQuery'
+        - $ref: '#/components/parameters/brandIdQuery'
       responses:
         '200':
           description: OK
@@ -2786,6 +2787,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
+      - $ref: '#/components/parameters/brandIdQuery'
     get:
       tags:
         - Users
@@ -2907,6 +2909,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
+      - $ref: '#/components/parameters/brandIdQuery'
     post:
       tags:
         - Clients
@@ -3003,6 +3006,7 @@ paths:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
       - $ref: '#/components/parameters/clientId'
+      - $ref: '#/components/parameters/brandIdQuery'
     delete:
       tags:
         - Clients
@@ -3056,6 +3060,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
+      - $ref: '#/components/parameters/brandIdQuery'
     get:
       tags:
         - Devices
@@ -3088,6 +3093,7 @@ paths:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
       - $ref: '#/components/parameters/deviceId'
+      - $ref: '#/components/parameters/brandIdQuery'
     get:
       tags:
         - Devices
@@ -3130,6 +3136,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/appId'
       - $ref: '#/components/parameters/userIdOrExternalId'
+      - $ref: '#/components/parameters/brandIdQuery'
     delete:
       tags:
         - Users
@@ -6899,6 +6906,11 @@ components:
             The ID that links a messaging user to its core Zendesk user counterpart. This ID can be used to fetch the core user record via the Zendesk Support API.
           example: '30045042291606'
           nullable: true
+        brandId:
+          type: string
+          description: The user's brandId if the user is brand-separated.
+          example: '9477922990333'
+          nullable: true
     signedUpAt:
       type: string
       description: The date at which the user signed up. Must be ISO 8601 time format `YYYY-MM-DDThh:mm:ss.sssZ`.
@@ -7009,6 +7021,14 @@ components:
           description: |
             A unique identifier for the user. The `externalId` can be used to link a user to the same conversation [across multiple devices](https://developer.zendesk.com/documentation/conversations/messaging-platform/users/authenticating-users/).
           example: your-own-id
+        brandId:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 24
+          description: |
+            If creating a brand-separated user, their brandId.
+          example: '9477922990333'
         signedUpAt:
           $ref: '#/components/schemas/signedUpAt'
         toBeRetained:
@@ -8220,6 +8240,13 @@ components:
       style: deepObject
       explode: true
       required: true
+    brandIdQuery:
+      name: brandId
+      in: query
+      description: Identifies the brand. Provide this when querying a brand-separated user by externalId or identity.
+      schema:
+        type: string
+        example: '9477922990333'
     userIdOrExternalId:
       in: path
       name: userIdOrExternalId
@@ -8893,6 +8920,7 @@ components:
           - id: 67a11490f0305f4a391e9f8a
             externalId: your-own-id
             zendeskId: '35436'
+            brandId: '9477922990333'
             signedUpAt: '2025-02-03T19:10:08.152Z'
             hasPaymentInfo: false
             identities:
@@ -8908,6 +8936,7 @@ components:
         user:
           id: 67a11490f0305f4a391e9f8a
           externalId: your-own-id
+          brandId: '9477922990333'
           signedUpAt: '2025-02-03T19:10:08.152Z'
           hasPaymentInfo: false
           identities: []
@@ -8921,6 +8950,7 @@ components:
           id: 67a11490f0305f4a391e9f8a
           externalId: your-own-id
           zendeskId: '35436'
+          brandId: '9477922990333'
           signedUpAt: '2025-02-03T19:10:08.152Z'
           hasPaymentInfo: false
           identities: []
@@ -8933,6 +8963,7 @@ components:
         user:
           id: 67a11490f0305f4a391e9f8a
           externalId: your-own-id
+          brandId: '9477922990333'
           signedUpAt: '2025-02-03T19:10:08.152Z'
           hasPaymentInfo: false
           identities: []
@@ -9045,6 +9076,7 @@ components:
         user:
           id: 67a11490f0305f4a391e9f8a
           externalId: your-own-id
+          brandId: '9477922990333'
           signedUpAt: '2025-02-03T19:10:08.152Z'
           hasPaymentInfo: false
           identities: []
