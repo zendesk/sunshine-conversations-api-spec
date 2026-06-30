@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.12.0
+  version: 17.12.1
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -4128,6 +4128,15 @@ components:
           description: The externalId of the user. Only supported when `type` is user.
           writeOnly: true
           example: your-own-id
+        brandId:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 24
+          description: |
+            The brandId of the user. Required when `userExternalId` is used and the target user is brand-separated, and should be omitted otherwise.
+          example: '9477922990333'
+          writeOnly: true
         displayName:
           type: string
           description: The display name of the message author.
