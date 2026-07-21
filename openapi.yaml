@@ -5043,7 +5043,7 @@ components:
           items:
             $ref: '#/components/schemas/reference'
           minItems: 1
-          maxItems: 10
+          maxItems: 20
           nullable: true
     quotedMessageMessage:
       title: QuotedMessageMessage
@@ -5103,8 +5103,41 @@ components:
           maxLength: 256
           description: Optional description of the referenced content.
           example: A comprehensive guide to messaging API integration
+        iconUrl:
+          type: string
+          format: uri
+          pattern: ^https://
+          maxLength: 2048
+          description: Optional icon URL for the reference source. If provided explicitly, this value takes precedence. When not provided, auto-populated for recognized sources (Box, Google Drive, Notion, Confluence, Slack, Teams, SharePoint, Seismic, Guru, Coda).
+          example: https://example.com/favicon.png
+        positions:
+          type: array
+          items:
+            type: integer
+            minimum: 0
+          minItems: 1
+          maxItems: 20
+          description: Character offsets in the input text field where this reference's citation marker should be inserted. Positions must be relative to the text field provided in the request (text, markdownText, or htmlText). When positions are present, only one text field may be provided. Positions must not exceed the length of the input text. The system recomputes positions relative to the final htmlText for internal processing.
+          example:
+            - 42
+            - 128
+        source:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Provider or brand name (e.g., "Confluence", "Slack", "Google Drive"). Displayed as-is without translation. Required when sourceType is present.
+          example: Confluence
+        sourceType:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Type of the source resource. Must be one of the recognized values - File, Folder, Page, Database, Blog, Content, Collection, Card, Document, Row, Message. Determines the card layout for rendering. Requires source to be present.
+          example: Page
       required:
         - uri
+      dependencies:
+        sourceType:
+          - source
     messageListResponse:
       type: object
       title: MessageListResponse
