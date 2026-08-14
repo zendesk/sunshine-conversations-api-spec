@@ -5108,7 +5108,7 @@ components:
           format: uri
           pattern: ^https://
           maxLength: 2048
-          description: Optional icon URL for the reference source. If provided explicitly, this value takes precedence. When not provided, auto-populated for recognized sources (Box, Google Drive, Notion, Confluence, Slack, Teams, SharePoint, Seismic, Guru, Coda).
+          description: Optional icon URL for the reference source. Must point to a `.png` image; the URL path has to end in `.png`, and any other format is rejected. If provided explicitly, this value takes precedence. When not provided, auto-populated for recognized sources (Box, Google Drive, Notion, Confluence, Slack, Teams, SharePoint, Seismic, Guru, Coda).
           example: https://example.com/favicon.png
         positions:
           type: array
@@ -5131,8 +5131,53 @@ components:
           type: string
           minLength: 1
           maxLength: 128
-          description: Type of the source resource. Must be one of the recognized values - File, Folder, Page, Database, Blog, Content, Collection, Card, Document, Row, Message. Determines the card layout for rendering. Requires source to be present.
+          description: Type of the source resource. Must be one of the recognized values - File, Page, Blog, Collection, Card, Document, Row, Article, Message. Determines the card layout for rendering. Requires source to be present. The extended metadata fields below are only accepted alongside a compatible sourceType, and are all rejected when sourceType is absent.
           example: Page
+        path:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Location of the content within the source system, such as a breadcrumb trail or folder path. Only valid when sourceType is a document type (File, Page, Blog, Collection, Card, Document, Row, Article). Rejected when sourceType is Message or absent.
+          example: Engineering / Runbooks / Deploying
+        lastUpdatedBy:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Display name of the person who last updated the referenced content. Only valid when sourceType is a document type (File, Page, Blog, Collection, Card, Document, Row, Article). Rejected when sourceType is Message or absent. Stored and returned on the message.
+          example: Ada Lovelace
+        lastUpdatedAt:
+          type: string
+          format: date-time
+          minLength: 1
+          maxLength: 128
+          description: When the referenced content was last updated. Only valid when sourceType is a document type (File, Page, Blog, Collection, Card, Document, Row, Article). Rejected when sourceType is Message or absent. Stored and returned on the message; whether it is displayed depends on the channel.
+          example: '2026-01-15T10:00:00.000Z'
+        channel:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Name of the channel the referenced message was posted in, without a leading "#". Only valid when sourceType is Message. Rejected for every other sourceType and when sourceType is absent.
+          example: support-general
+        channelType:
+          type: string
+          enum:
+            - Public
+            - Private
+          description: Visibility of the channel the referenced message was posted in. Only valid when sourceType is Message. Rejected for every other sourceType and when sourceType is absent. Defaults to being treated as Public when omitted.
+          example: Public
+        snippet:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Short excerpt of the referenced message. Only valid when sourceType is Message. Rejected for every other sourceType and when sourceType is absent.
+          example: We refund within 30 days of purchase.
+        sentAt:
+          type: string
+          format: date-time
+          minLength: 1
+          maxLength: 128
+          description: When the referenced message was sent. Only valid when sourceType is Message. Rejected for every other sourceType and when sourceType is absent. Stored and returned on the message; whether it is displayed depends on the channel.
+          example: '2026-01-15T10:00:00.000Z'
       required:
         - uri
       dependencies:
