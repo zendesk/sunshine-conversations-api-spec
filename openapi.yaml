@@ -5101,7 +5101,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: Optional description of the referenced content.
+          description: Optional description of the referenced content. When sourceType is Message, provide a short excerpt of the referenced message here; it is displayed as the message snippet on the card.
           example: A comprehensive guide to messaging API integration
         iconUrl:
           type: string
@@ -5165,12 +5165,6 @@ components:
             - Private
           description: Visibility of the channel the referenced message was posted in. Only valid when sourceType is Message. Rejected for every other sourceType and when sourceType is absent. Defaults to being treated as Public when omitted.
           example: Public
-        snippet:
-          type: string
-          minLength: 1
-          maxLength: 128
-          description: Short excerpt of the referenced message. Only valid when sourceType is Message. Rejected for every other sourceType and when sourceType is absent.
-          example: We refund within 30 days of purchase.
         sentAt:
           type: string
           format: date-time
