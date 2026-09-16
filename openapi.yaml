@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.12.1
+  version: 17.13.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -3948,6 +3948,17 @@ components:
           $ref: '#/components/schemas/icon'
         metadata:
           $ref: '#/components/schemas/metadata'
+        activeSwitchboardIntegrationId:
+          type: string
+          nullable: true
+          minLength: 1
+          description: |
+            Id of the switchboard integration to be put in control of the conversation, if desired.
+
+            May be used to ignore the switchboard's global default responder and assign the conversation to a specific switchboard integration instead. If not supplied, the switchboard's global default responder will be used.
+
+            See [conversational control model](https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/switchboard/#conversational-control-model) for more information on the switchboard.
+          example: 6aa816f37dda622416bf8f73
       required:
         - type
     conversationResponse:
