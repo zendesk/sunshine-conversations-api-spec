@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.13.0
+  version: 17.13.1
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -2758,6 +2758,8 @@ paths:
       operationId: ListUsers
       description: |
         Lists users by their email identity. The `identities.email` filter parameter is required, and it will match users based on emails found in the `identities` array. This endpoint will not match against emails stored in `profile.email`.
+
+        Only owned email identities are eligible for lookup. Users whose matching email identity is shared are not returned, even if the email matches.
         ```shell
         /v2/apps/:appId/users?filter[identities.email]=sue@example.org
         ```
@@ -8327,7 +8329,7 @@ components:
         properties:
           identities.email:
             type: string
-            description: The user's email. Will match users based on emails found in the `identities` array. This parameter will not match against emails stored in `profile.email`.
+            description: The user's email. Will match users based on emails found in the `identities` array. This parameter will not match against emails stored in `profile.email`. Only owned email identities are eligible for lookup. Users whose matching email identity is shared are not returned, even if the email matches.
             required: true
       style: deepObject
       explode: true
