@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.13.1
+  version: 17.13.2
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -260,6 +260,7 @@ tags:
       | conversation:postback                 | When a user clicks on a postback action button.                      |
       | conversation:read                     | When a user has read the conversation.                               |
       | conversation:referral                 | When a user is referred to a conversation. See the <a href="https://developer.zendesk.com/documentation/conversations/messaging-platform/programmable-conversations/conversation-referrals/">conversation referrals</a> guide for more details. |
+      | conversation:subroutine               | When a conversation subroutine completes or fails. For email verification, `payload.subroutine` contains `type: verifyEmail`, a status of `completed` or `failed`, and an optional failure reason (`maxAttempts`, `expired`, or `unexpectedError`). |
       | passthrough:messaging                 | When a message is received with information that should be forwarded as-is. |
       | conversation:typing                   | When a user starts or stops typing. This trigger applies only to end users, not agents.                       |
       | switchboard:acceptControl             | When a switchboard integration accepts control of a conversation.    |
@@ -3393,6 +3394,7 @@ x-webhooks:
                       - $ref: '#/components/schemas/conversationPostbackEvent'
                       - $ref: '#/components/schemas/conversationReadEvent'
                       - $ref: '#/components/schemas/conversationReferralEvent'
+                      - $ref: '#/components/schemas/conversationSubroutineEvent'
                       - $ref: '#/components/schemas/conversationTypingEvent'
                       - $ref: '#/components/schemas/switchboardAcceptControl'
                       - $ref: '#/components/schemas/switchboardAcceptControlFailure'
@@ -3433,6 +3435,8 @@ x-webhooks:
                 $ref: '#/components/examples/conversationReadEvent'
               conversation:referral:
                 $ref: '#/components/examples/conversationReferralEvent'
+              conversation:subroutine:
+                $ref: '#/components/examples/conversationSubroutineEvent'
               conversation:typing:
                 $ref: '#/components/examples/conversationTypingEvent'
               switchboard:acceptControl:
@@ -3779,6 +3783,21 @@ components:
         - personal
         - sdkGroup
       example: personal
+    conversationSubroutine:
+      type: object
+      description: |
+        The currently active subroutine on the conversation. Omitted when no subroutine is active.
+      readOnly: true
+      properties:
+        type:
+          type: string
+          description: The type of subroutine running on the conversation (e.g., `verifyEmail`).
+        status:
+          type: string
+          description: Conversation responses expose only active subroutines. Terminal outcomes are sent by the conversation:subroutine webhook (e.g., `completed` or `failed`).
+      example:
+        type: verifyEmail
+        status: active
     name:
       type: string
       description: Identifier for use in control transfer protocols. Restricted to alphanumeric characters, `-` and `_`.
@@ -3814,8 +3833,14 @@ components:
           example: c93bb9c14dde8ffb94564eae
         type:
           $ref: '#/components/schemas/conversationType'
+        brandId:
+          type: string
+          description: The brand associated with the conversation. Omitted when the conversation has no brand.
+          example: '9477922990333'
         metadata:
           $ref: '#/components/schemas/metadata'
+        subroutine:
+          $ref: '#/components/schemas/conversationSubroutine'
         activeSwitchboardIntegration:
           allOf:
             - $ref: '#/components/schemas/switchboardIntegrationWebhook'
@@ -7918,6 +7943,41 @@ components:
                   allOf:
                     - $ref: '#/components/schemas/referral'
       title: conversation:referral
+    conversationSubroutineEvent:
+      allOf:
+        - $ref: '#/components/schemas/eventSubSchema'
+        - type: object
+          properties:
+            payload:
+              type: object
+              description: The outcome of a conversation subroutine. This event is sent when the subroutine completes or fails.
+              properties:
+                conversation:
+                  allOf:
+                    - $ref: '#/components/schemas/conversationTruncated'
+                  description: The conversation in which the subroutine ran.
+                user:
+                  allOf:
+                    - $ref: '#/components/schemas/user'
+                  description: The user associated with the conversation.
+                source:
+                  allOf:
+                    - $ref: '#/components/schemas/sourceWebhook'
+                  description: The source of the user's subroutine response.
+                subroutine:
+                  type: object
+                  description: The subroutine's terminal outcome.
+                  properties:
+                    type:
+                      type: string
+                      description: The type of subroutine that ran (e.g., `verifyEmail`).
+                    status:
+                      type: string
+                      description: Whether the subroutine completed successfully or failed (e.g., `completed` or `failed`).
+                    reason:
+                      type: string
+                      description: An optional failure reason. Only present when the subroutine failed (e.g., `maxAttempts`, `expired`, or `unexpectedError`).
+      title: conversation:subroutine
     conversationTypingEvent:
       allOf:
         - $ref: '#/components/schemas/eventSubSchema'
@@ -9620,6 +9680,30 @@ components:
                 type: web
                 integrationId: 5ecff63ffc3ab25f4561c8a0
               referral: {}
+    conversationSubroutineEvent:
+      value:
+        app:
+          id: 5ebee0975ac5304b664a12fa
+        webhook:
+          id: 5f4eaef81e3dcc117c7ba48a
+          version: v2
+        events:
+          - id: 5f74a0d52b5315fc007e798a
+            type: conversation:subroutine
+            createdAt: '2020-09-30T15:00:00.000Z'
+            payload:
+              conversation:
+                id: f52b01137aa6c250bc7251fa
+                type: personal
+              user:
+                id: 26508c10541a4b0ff472e5e2
+                authenticated: true
+              source:
+                type: web
+                integrationId: 5ecff63ffc3ab25f4561c8a0
+              subroutine:
+                type: verifyEmail
+                status: completed
     conversationTypingEvent:
       value:
         app:
