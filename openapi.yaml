@@ -4030,6 +4030,7 @@ components:
         - messenger
         - slackconnect
         - sdk
+        - teams
         - telegram
         - twilio
         - twitter
