@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.13.2
+  version: 17.14.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -6155,6 +6155,22 @@ components:
         - $ref: '#/components/schemas/defaultResponderId'
         - $ref: '#/components/schemas/defaultResponder'
         - $ref: '#/components/schemas/showAIDisclaimer'
+    xChatPin:
+      type: object
+      properties:
+        xChatPin:
+          type: string
+          description: The PIN for X's (formerly Twitter) encrypted chat.
+          minLength: 1
+          writeOnly: true
+          example: '1234'
+    xChatProvisioned:
+      type: object
+      properties:
+        xChatProvisioned:
+          type: boolean
+          description: Whether X's (formerly Twitter) encrypted chat has been provisioned for this integration.
+          readOnly: true
     twitter:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -6210,6 +6226,8 @@ components:
         - $ref: '#/components/schemas/defaultResponderId'
         - $ref: '#/components/schemas/defaultResponder'
         - $ref: '#/components/schemas/showAIDisclaimer'
+        - $ref: '#/components/schemas/xChatPin'
+        - $ref: '#/components/schemas/xChatProvisioned'
     unity:
       allOf:
         - $ref: '#/components/schemas/integration'
@@ -6665,6 +6683,7 @@ components:
     twitterUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
+        - $ref: '#/components/schemas/xChatPin'
     unityUpdate:
       allOf:
         - $ref: '#/components/schemas/integrationUpdateBase'
