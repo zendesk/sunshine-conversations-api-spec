@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 17.14.0
+  version: 17.15.0
   title: Sunshine Conversations API
   termsOfService: https://www.zendesk.com/company/customers-partners/master-subscription-agreement/
   description: |
@@ -2937,6 +2937,8 @@ paths:
             examples:
               default:
                 $ref: '#/components/examples/whatsapp'
+              apple:
+                $ref: '#/components/examples/apple'
               mailgun:
                 $ref: '#/components/examples/mailgun'
               messagebird:
@@ -5261,6 +5263,30 @@ components:
       properties:
         payload:
           type: object
+          description: |
+            The payload to send to the channel. For Invitation Messages, it carries the
+            invitation template parameters (see `invitation`). Requires the business to be
+            enabled for Invitation Messages by Apple and the `sunco_apple_invitation_messages`
+            feature flag.
+          properties:
+            invitation:
+              type: object
+              description: |
+                Invitation Messages template parameters (branded Yes/No prompt). The customer's
+                acceptance confirms the link.
+              properties:
+                brandName:
+                  type: string
+                  description: The business name displayed on the invitation.
+                brandLogo:
+                  type: string
+                  description: A base64-encoded PNG (no data-URI prefix), 200 kB or smaller decoded. A square image is recommended.
+                referenceId:
+                  type: string
+                  description: Optional business context (e.g. a case number). Defaults to the pending client's id.
+                locale:
+                  type: string
+                  description: The invitation's rendering language. Defaults to `en-us`.
         withCapabilities:
           type: array
           items:
@@ -7229,6 +7255,25 @@ components:
       required:
         - type
         - integrationId
+    matchCriteriaApple:
+      allOf:
+        - $ref: '#/components/schemas/matchCriteriaBase'
+        - type: object
+          description: The set of criteria used to determine the user's identity on the Apple Messages for Business channel.
+          properties:
+            type:
+              type: string
+              description: The channel type.
+              default: apple
+            phoneNumber:
+              type: string
+              description: |
+                The user's phone number. It must contain the + prefix and the country code.
+                Examples of valid phone numbers: +1 212-555-2368, +12125552368, +1 212 555 2368.
+                Examples of invalid phone numbers: 212 555 2368, 1 212 555 2368.
+              example: '+15550001234'
+          required:
+            - phoneNumber
     matchCriteriaMailgun:
       allOf:
         - $ref: '#/components/schemas/matchCriteriaBase'
@@ -7308,6 +7353,7 @@ components:
             - phoneNumber
     matchCriteria:
       oneOf:
+        - $ref: '#/components/schemas/matchCriteriaApple'
         - $ref: '#/components/schemas/matchCriteriaMailgun'
         - $ref: '#/components/schemas/matchCriteriaMessagebird'
         - $ref: '#/components/schemas/matchCriteriaTwilio'
@@ -7315,6 +7361,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          apple: '#/components/schemas/matchCriteriaApple'
           mailgun: '#/components/schemas/matchCriteriaMailgun'
           messagebird: '#/components/schemas/matchCriteriaMessagebird'
           twilio: '#/components/schemas/matchCriteriaTwilio'
@@ -9164,6 +9211,26 @@ components:
           phoneNumber: +1 212-555-2368
         confirmation:
           type: immediate
+        target:
+          conversationId: 029c31f25a21b47effd7be90
+    apple:
+      value:
+        matchCriteria:
+          type: apple
+          integrationId: 5f3f7e3e8b4a3a0017b3e3e5
+          phoneNumber: +1 212-555-2368
+        confirmation:
+          type: prompt
+          message:
+            type: text
+            text: 'Zendesk: you have a new reply'
+            override:
+              apple:
+                payload:
+                  invitation:
+                    brandName: Zendesk
+                    brandLogo: <base64-encoded PNG, no data-URI prefix, 200 kB or smaller decoded>
+                    locale: en-us
         target:
           conversationId: 029c31f25a21b47effd7be90
     mailgun:
